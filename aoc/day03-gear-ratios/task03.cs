@@ -205,13 +205,24 @@
 
                             if (counter == 2 && Dimension2(filePath, i, j))
                             {
-                                totalSum -= int.Parse(linesList[i][j].ToString());
+                                string lastChar = linesList[i][j].ToString();
+                                string secondLastChar = linesList[i][j - 1].ToString();
+
+                                string combination = secondLastChar + lastChar;
+
+                                totalSum -= int.Parse(combination);
                                 counter = 0;
                             }
 
                             if (counter == 3 && Dimension3(filePath, i, j))
                             {
-                                totalSum = totalSum - int.Parse(linesList[i][j].ToString());
+                                string lastChar = linesList[i][j].ToString();
+                                string secondLastChar = linesList[i][j - 1].ToString();
+                                string thirdLastChar = linesList[i][j - 2].ToString();
+
+                                string combination = thirdLastChar + secondLastChar + lastChar;
+
+                                totalSum -= int.Parse(combination);
                                 counter = 0;
                             }
                             counter = 0;
@@ -232,5 +243,12 @@
             return linesList;
         }
 
+        //public int NumberConverter(string filePath, int length)
+        //{
+        //    if (length == 1)
+        //    {
+        //        return 
+        //    }
+        //}
     }
 }

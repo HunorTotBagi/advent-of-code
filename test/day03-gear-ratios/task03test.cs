@@ -162,6 +162,17 @@ namespace test.day03_gear_ratios
             return new Schematic();
         }
 
+        //[Theory]
+        //[InlineData("135", 3, 135)]
+        //[InlineData("4", 1, 135)]
+        //[InlineData("74", 3, 74)]
+        //public void Should_return_converted_number(string numbers, int length, int expected)
+        //{
+        //    // Act
+        //    int result = newSchematic.NumberConverter(numbers, length);
 
+        //    // Assert
+        //    result.Should().Be(expected);
+        //}
     }
 }
