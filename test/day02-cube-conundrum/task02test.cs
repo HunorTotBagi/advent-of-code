@@ -6,14 +6,9 @@ namespace test.day02_cube_conundrum
 {
     public class task02test
     {
-        private static Bag CreateBag()
-        {
-            return new Bag();
-        }
-
         Bag newBag = CreateBag();
 
-        Dictionary<string, int> loadedBag = new Dictionary<string, int>()
+        Dictionary<string, int> availableCubes = new Dictionary<string, int>()
         {
             { "red", 12 },
             { "green", 13 },
@@ -112,7 +107,7 @@ namespace test.day02_cube_conundrum
         public void Should_return_bool_based_on_wether_game_segment_is_possible(string input, int segmentIndex, bool expectedResult)
         {
             // Act
-            bool result = newBag.IsGameSegmentPossible(input, segmentIndex, loadedBag);
+            bool result = newBag.IsGameSegmentPossible(input, segmentIndex, availableCubes);
 
             // Assert
             result.Should().Be(expectedResult);
@@ -127,7 +122,7 @@ namespace test.day02_cube_conundrum
         public void Should_return_game_id_if_possible(string input, int expected)
         {
             // Act
-            int result = newBag.IsGamePossible(input, loadedBag);
+            int result = newBag.IsGamePossible(input, availableCubes);
 
             // Assert
             result.Should().Be(expected);
@@ -163,18 +158,23 @@ namespace test.day02_cube_conundrum
             result.Should().Be(expected);
         }
 
-        [Fact]
-        public void Should_return_power_of_the_cube_added_up()
+        [Theory]
+        [InlineData("game.txt", 66016)]
+        public void Should_return_power_of_the_cube_added_up(string fileName, int expected)
         {
             // Arrange
-            string filePath = "C:\\Users\\htotbagi\\OneDrive - j&s-soft GmbH\\Dokumente\\C#-10-fundamentals\\advent-of-code\\src\\data\\game.txt";
-            int expected = 66016;
+            var filePath = AppDomain.CurrentDomain.BaseDirectory + "../../../../aoc/day02-cube-conundrum/data/" + fileName;
 
             // Act
             int result = newBag.CalculateSumOfCubePowers(filePath);
 
             // Assert
             result.Should().Be(expected);
+        }
+
+        private static Bag CreateBag()
+        {
+            return new Bag();
         }
     }
 }

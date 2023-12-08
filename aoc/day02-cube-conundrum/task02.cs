@@ -15,25 +15,7 @@ namespace src.day02_cube_conundrum
                     return result;
                 }
             }
-
             return -1;
-        }
-
-        public List<string> ReadFileToList(string filePath)
-        {
-            List<string> linesList = new List<string>();
-
-            try
-            {
-                string[] lines = File.ReadAllLines(filePath);
-                linesList.AddRange(lines);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"An error occurred: {ex.Message}");
-            }
-
-            return linesList;
         }
 
         public string GetCubesString(string input)
@@ -51,9 +33,9 @@ namespace src.day02_cube_conundrum
         {
             List<string> result = new List<string>();
 
-            string cubeWithoutEmptySapces = GetCubesWithoutEmptySpaces(input);
+            string cubesWithoutEmptySapces = GetCubesWithoutEmptySpaces(input);
 
-            string[] segmentArray = cubeWithoutEmptySapces.Split(';');
+            string[] segmentArray = cubesWithoutEmptySapces.Split(';');
 
             for (int i = 0; i < segmentArray.Length; i++)
             {
@@ -62,13 +44,13 @@ namespace src.day02_cube_conundrum
             return result;
         }
 
-        public string GetSegmentByIndex(string input, int i)
+        public string GetSegmentByIndex(string input, int index)
         {
             List<string> cubesStringSegments = GetCubesStringSegments(input);
-            return cubesStringSegments[i];
+            return cubesStringSegments[index];
         }
 
-        public Dictionary<string, int> CreateDictionaryOutOfSegment(string input, int index)
+        public Dictionary<string, int> CreateDictionaryOutOfSegment(string input, int segmentIndex)
         {
             Dictionary<string, int> resultDictionary = new Dictionary<string, int>()
             {
@@ -77,7 +59,7 @@ namespace src.day02_cube_conundrum
                 {"blue", 0 }
             };
 
-            string firstSegment = GetSegmentByIndex(input, index);
+            string firstSegment = GetSegmentByIndex(input, segmentIndex);
 
             string[] parts = firstSegment.Split(',');
 
@@ -115,7 +97,7 @@ namespace src.day02_cube_conundrum
             return resultDictionary;
         }
 
-        public bool IsGameSegmentPossible(string input, int index, Dictionary<string, int> loadedBag)
+        public bool IsGameSegmentPossible(string input, int index, Dictionary<string, int> availableCubes)
         {
             Dictionary<string, int> createdDictionary = CreateDictionaryOutOfSegment(input, index);
 
@@ -123,28 +105,26 @@ namespace src.day02_cube_conundrum
 
             foreach (string color in colorsToCheck)
             {
-                if (createdDictionary.TryGetValue(color, out int createdDictionaryValue) && loadedBag.TryGetValue(color, out int loadedBagValue))
+                if (createdDictionary.TryGetValue(color, out int createdDictionaryValue) && availableCubes.TryGetValue(color, out int loadedBagValue))
                 {
                     if (createdDictionaryValue > loadedBagValue)
                         return false;
                 }
             }
-
             return true;
         }
 
-        public int IsGamePossible(string input, Dictionary<string, int> loadedBag)
+        public int IsGamePossible(string input, Dictionary<string, int> availableCubes)
         {
             List<string> cubesStringSegments = GetCubesStringSegments(input);
 
             for (int i = 0; i < cubesStringSegments.Count; i++)
             {
-                if (!IsGameSegmentPossible(input, i, loadedBag))
+                if (!IsGameSegmentPossible(input, i, availableCubes))
                 {
                     return 0;
                 }
             }
-
             return GetGameId(input);
         }
 
@@ -185,29 +165,37 @@ namespace src.day02_cube_conundrum
 
         public int CalculatePowerOfCubes(string input)
         {
-            List<int> maximumColors = GetMaximumValuePerColor(input);
+            List<int> maxColorValues = GetMaximumValuePerColor(input);
             int result = 1;
 
-            for (int i = 0; i < maximumColors.Count; i++)
+            for (int i = 0; i < maxColorValues.Count; i++)
             {
-                result *= maximumColors[i];
+                result *= maxColorValues[i];
             }
-
             return result;
         }
 
         public int CalculateSumOfCubePowers(string filePath)
         {
-            List<string> games = ReadFileToList(filePath);
+            List<string> gameLines = ReadFileToList(filePath);
 
             int result = 0;
 
-            foreach (string lines in games)
+            foreach (string lines in gameLines)
             {
                 result += CalculatePowerOfCubes(lines);
             }
-
             return result;
+        }
+
+        public List<string> ReadFileToList(string filePath)
+        {
+            List<string> linesList = new List<string>();
+
+            string[] lines = File.ReadAllLines(filePath);
+            linesList.AddRange(lines);
+
+            return linesList;
         }
     }
 }
