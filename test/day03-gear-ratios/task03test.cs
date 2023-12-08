@@ -145,7 +145,7 @@ namespace test.day03_gear_ratios
 
         [Theory]
         [InlineData("engineSchematic.txt", 4361)]
-        [InlineData("realSchematics.txt", 4361)]
+        [InlineData("realSchematics.txt", 544433)]
         public void Should_return_correct_sum(string fileName, int expected)
         {
             // Arrange
