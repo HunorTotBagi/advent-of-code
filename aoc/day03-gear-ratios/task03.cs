@@ -23,32 +23,6 @@
             return extendedMatrix;
         }
 
-        public int SummUpAllNumbersInSchematic(string filePath)
-        {
-            List<string> documents = ReadFileToList(filePath);
-
-            return SumNumberGroupsInGrid(documents);
-        }
-
-        static int SumNumberGroupsInGrid(List<string> grid)
-        {
-            int sum = 0;
-
-            foreach (var row in grid)
-            {
-                string[] numberGroups = row.Split(new[]  { '!',  '%',    '&'  , '(', ')',   '/',   '*', '.', '@', '+', '$', '#' }, StringSplitOptions.RemoveEmptyEntries);
-
-                foreach (var group in numberGroups)
-                {
-                    if (int.TryParse(group, out int groupValue))
-                    {
-                        sum += groupValue;
-                    }
-                }
-            }
-            return sum;
-        }
-
         public bool IsTheNumberFirst(List<string> extendedSchema, int i, int j)
         {
             if (extendedSchema[i - 1][j] == '.' &&
@@ -82,65 +56,6 @@
                 return true;
             }
             return false;
-        }
-
-        public int IsAPartNumber(List<string> extendedSchema)
-        {
-            int rows = extendedSchema.Count;
-            int columns = extendedSchema[0].Length;
-
-            for (int i = 1; i < rows - 1; i++)
-            {
-                for (int j = 1; j < columns - 1; j++)
-                {
-                    if (IsTheNumberFirst(extendedSchema, i, j))
-                    {
-                        int k = 0;
-                        while (char.IsDigit(extendedSchema[i][j + 1]))
-                        {
-                            if (IsTheNumberMiddle(extendedSchema, i, j + k + 1))
-                            {
-                                return 1;
-                            }
-                            else
-                            {
-                                return 0;
-                            }
-                        }
-                    }
-                }
-            }
-            return 1;
-        }
-
-        public List<int> GetLenghtOfAllNumbers(string filePath)
-        {
-            List<string> data = ReadFileToList(filePath);
-            int rows = data.Count;
-            int columns = data[0].Length;
-            int counter = 0;
-            List<int> result = new List<int>();
-
-            for (int i = 1; i < rows - 1; i++)
-            {
-                for (int j = 1; j < columns - 1; j++)
-                {
-                    if (char.IsDigit(data[i][j]))
-                    {
-                        counter += 1;
-                    }
-                    else
-                    {
-                        if (counter != 0)
-                        {
-                            result.Add(counter);
-                        }
-                        counter = 0;
-                    }
-                }
-            }
-
-            return result;
         }
 
         public bool Dimension1(string filePath, int i, int j)
@@ -187,9 +102,9 @@
 
             int counter = 0;
 
-            for (int i = 0; i < row; i++)
+            for (int i = 1; i < row - 1; i++)
             {
-                for (int j = 0; j < col; j++)
+                for (int j = 1; j < col - 1; j++)
                 {
                     if (char.IsDigit(linesList[i][j]))
                     {
@@ -242,13 +157,5 @@
 
             return linesList;
         }
-
-        //public int NumberConverter(string filePath, int length)
-        //{
-        //    if (length == 1)
-        //    {
-        //        return 
-        //    }
-        //}
     }
 }

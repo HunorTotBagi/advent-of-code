@@ -8,21 +8,6 @@ namespace test.day03_gear_ratios
         Schematic newSchematic = CreateSchematic();
 
         [Theory]
-        [InlineData("engineSchematic.txt", 4533)]
-        [InlineData("engineFirstRow.txt", 581)]
-        public void Should_return_summ_of_all_numbers_in_schema(string fileName, int expected)
-        {
-            // Arrange
-            var filePath = AppDomain.CurrentDomain.BaseDirectory + "../../../../aoc/day03-gear-ratios/data/" + fileName;
-
-            // Act
-            int result = newSchematic.SummUpAllNumbersInSchematic(filePath);
-
-            // Assert
-            result.Should().Be(expected);
-        }
-
-        [Theory]
         [InlineData("singleDigit.txt", "singleDigitExtended.txt")]
         [InlineData("doubleDigit.txt", "doubleDigitExtended.txt")]
         [InlineData("trippleDigit.txt", "trippleDigitExtended.txt")]
@@ -41,65 +26,50 @@ namespace test.day03_gear_ratios
             result.Should().BeEquivalentTo(expected);
         }
 
-        //[Fact]
-        //public void Is_the_number_first()
-        //{
-        //    // Arrange
-        //    string filePath = "C:\\Users\\htotbagi\\OneDrive - j&s-soft GmbH\\Dokumente\\C#-10-fundamentals\\advent-of-code\\Day03Src\\files\\trippleDigitExtended.txt";
-        //    var extendedSchema = newSchematic.ReadFileToList(filePath);
-        //    int i = 1;
-        //    int j = 1;
+        [Theory]
+        [InlineData("trippleDigitExtended.txt", 1, 1)]
+        public void Is_the_number_first(string fileName, int rowIndex, int colIndex)
+        {
+            // Arrange
+            var filePath = AppDomain.CurrentDomain.BaseDirectory + "../../../../aoc/day03-gear-ratios/data/" + fileName;
+            var extendedSchema = newSchematic.ReadFileToList(filePath);
 
-        //    // Act
-        //    bool result = newSchematic.IsTheNumberFirst(extendedSchema, i, j);
+            // Act
+            bool result = newSchematic.IsTheNumberFirst(extendedSchema, rowIndex, colIndex);
 
-        //    // Assert
-        //    result.Should().BeTrue();
-        //}
+            // Assert
+            result.Should().BeTrue();
+        }
 
-        //[Fact]
-        //public void Is_the_number_middle()
-        //{
-        //    string filePath = "C:\\Users\\htotbagi\\OneDrive - j&s-soft GmbH\\Dokumente\\C#-10-fundamentals\\advent-of-code\\Day03Src\\files\\trippleDigitExtended.txt";
-        //    var extendedSchema = newSchematic.ReadFileToList(filePath);
-        //    int i = 1;
-        //    int j = 2;
+        [Theory]
+        [InlineData("trippleDigitExtended.txt", 1, 2)]
+        public void Is_the_number_middle(string fileName, int rowIndex, int colIndex)
+        {
+            // Arrange
+            var filePath = AppDomain.CurrentDomain.BaseDirectory + "../../../../aoc/day03-gear-ratios/data/" + fileName;
+            var extendedSchema = newSchematic.ReadFileToList(filePath);
 
-        //    bool result = newSchematic.IsTheNumberMiddle(extendedSchema, i, j);
+            // Act
+            bool result = newSchematic.IsTheNumberMiddle(extendedSchema, rowIndex, colIndex);
 
-        //    result.Should().BeTrue();
-        //}
+            // Assert
+            result.Should().BeTrue();
+        }
 
-        //[Fact]
-        //public void Is_the_number_last()
-        //{
-        //    string filePath = "C:\\Users\\htotbagi\\OneDrive - j&s-soft GmbH\\Dokumente\\C#-10-fundamentals\\advent-of-code\\Day03Src\\files\\trippleDigitExtended.txt";
-        //    var extendedSchema = newSchematic.ReadFileToList(filePath);
-        //    int i = 1;
-        //    int j = 3;
+        [Theory]
+        [InlineData("trippleDigitExtended.txt", 1, 3)]
+        public void Is_the_number_last(string fileName, int rowIndex, int colIndex)
+        {
+            // Arrange
+            var filePath = AppDomain.CurrentDomain.BaseDirectory + "../../../../aoc/day03-gear-ratios/data/" + fileName;
+            var extendedSchema = newSchematic.ReadFileToList(filePath);
 
-        //    bool result = newSchematic.IsTheNumberLast(extendedSchema, i, j);
+            // Act
+            bool result = newSchematic.IsTheNumberLast(extendedSchema, rowIndex, colIndex);
 
-        //    result.Should().BeTrue();
-        //}
-
-        //[Fact]
-        //public void Should_return_lenght_off_all_numbers()
-        //{
-        //    // Arrange
-        //    string filePath = "C:\\Users\\htotbagi\\OneDrive - j&s-soft GmbH\\Dokumente\\C#-10-fundamentals\\advent-of-code\\Day03Src\\files\\engineSchematicsExtended.txt";
-        //    List<int> expected = new List<int>
-        //    {
-        //        3, 3, 2, 3, 3, 2, 3, 3, 3, 3
-        //    };
-
-        //    // Act
-        //    List<int> result = newSchematic.GetLenghtOfAllNumbers(filePath);
-
-        //    result.Should().Equal(expected);
-
-        //    // Assert
-        //}
+            // Assert
+            result.Should().BeTrue();
+        }
 
         [Theory]
         [InlineData("singleDigit.txt", 1, 1)]
@@ -162,18 +132,5 @@ namespace test.day03_gear_ratios
         {
             return new Schematic();
         }
-
-        //[Theory]
-        //[InlineData("135", 3, 135)]
-        //[InlineData("4", 1, 135)]
-        //[InlineData("74", 3, 74)]
-        //public void Should_return_converted_number(string numbers, int length, int expected)
-        //{
-        //    // Act
-        //    int result = newSchematic.NumberConverter(numbers, length);
-
-        //    // Assert
-        //    result.Should().Be(expected);
-        //}
     }
 }
