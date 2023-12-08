@@ -23,6 +23,8 @@ namespace test.day03_gear_ratios
 
         [Theory]
         [InlineData("singleDigit.txt", "singleDigitExtended.txt")]
+        [InlineData("doubleDigit.txt", "doubleDigitExtended.txt")]
+        [InlineData("trippleDigit.txt", "trippleDigitExtended.txt")]
         public void Should_extend_given_file_with_dots(string firstFileName, string secondFileName)
         {
             // Arrange
@@ -32,7 +34,7 @@ namespace test.day03_gear_ratios
             var expected = newSchematic.ReadFileToList(secondFilePath);
 
             // Act
-            List<string> result = newSchematic.ExtendSchematic(firstFilePath);
+            List<string> result = newSchematic.ExtendSchematicWithDots(firstFilePath);
 
             // Assert
             result.Should().BeEquivalentTo(expected);
@@ -98,53 +100,47 @@ namespace test.day03_gear_ratios
         //    // Assert
         //}
 
-        //[Fact]
-        //public void single_digit_all_points_around()
-        //{
-        //    // Arrange
-        //    string path = "C:\\Users\\htotbagi\\OneDrive - j&s-soft GmbH\\Dokumente\\C#-10-fundamentals\\advent-of-code\\Day03Src\\files\\singleDigitExtended.txt";
-        //    int i = 1;
-        //    int j = 1;
+        [Theory]
+        [InlineData("singleDigitExtended.txt", 1, 1)]
+        public void single_digit_all_points_around(string fileName, int rowIndex, int columnIndex)
+        {
+            // Arrange
+            var filePath = AppDomain.CurrentDomain.BaseDirectory + "../../../../aoc/day03-gear-ratios/data/" + fileName;
 
+            // Act
+            bool result = newSchematic.Dimension1(filePath, rowIndex, columnIndex);
 
-        //    // Act
-        //    bool result = newSchematic.Dimension1(path, i, j);
+            // Assert
+            result.Should().BeTrue();
+        }
 
-        //    // Assert
-        //    result.Should().BeTrue();
-        //}
+        [Theory]
+        [InlineData("doubleDigitExtended.txt", 1, 2)]
+        public void double_digit_all_points_around(string fileName, int rowIndex, int columnIndex)
+        {
+            // Arrange
+            var filePath = AppDomain.CurrentDomain.BaseDirectory + "../../../../aoc/day03-gear-ratios/data/" + fileName;
 
-        //[Fact]
-        //public void double_digit_all_points_around()
-        //{
-        //    // Arrange
-        //    string path = "C:\\Users\\htotbagi\\OneDrive - j&s-soft GmbH\\Dokumente\\C#-10-fundamentals\\advent-of-code\\Day03Src\\files\\doubleDigitExtended.txt";
-        //    int i = 1;
-        //    int j = 2;
+            // Act
+            bool result = newSchematic.Dimension2(filePath, rowIndex, columnIndex);
 
+            // Assert
+            result.Should().BeTrue();
+        }
 
-        //    // Act
-        //    bool result = newSchematic.Dimension2(path, i, j);
+        [Theory]
+        [InlineData("trippleDigitExtended.txt", 1, 3)]
+        public void tripple_digit_all_points_around(string fileName, int rowIndex, int columnIndex)
+        {
+            // Arrange
+            var filePath = AppDomain.CurrentDomain.BaseDirectory + "../../../../aoc/day03-gear-ratios/data/" + fileName;
 
-        //    // Assert
-        //    result.Should().BeTrue();
-        //}
+            // Act
+            bool result = newSchematic.Dimension3(filePath, rowIndex, columnIndex);
 
-        //[Fact]
-        //public void triple_digit_all_points_around()
-        //{
-        //    // Arrange
-        //    string path = "C:\\Users\\htotbagi\\OneDrive - j&s-soft GmbH\\Dokumente\\C#-10-fundamentals\\advent-of-code\\Day03Src\\files\\trippleDigitExtended.txt";
-        //    int i = 1;
-        //    int j = 3;
-
-
-        //    // Act
-        //    bool result = newSchematic.Dimension3(path, i, j);
-
-        //    // Assert
-        //    result.Should().BeTrue();
-        //}
+            // Assert
+            result.Should().BeTrue();
+        }
 
         private static Schematic CreateSchematic()
         {

@@ -2,7 +2,7 @@
 {
     public class Schematic
     {
-        public List<string> ExtendSchematic(string filePath)
+        public List<string> ExtendSchematicWithDots(string filePath)
         {
             List<string> matrix = ReadFileToList(filePath);
 
@@ -25,9 +25,9 @@
 
         public int SummUpAllNumbersInSchematic(string filePath)
         {
-            List<string> documents2 = ReadFileToList(filePath);
+            List<string> documents = ReadFileToList(filePath);
 
-            return SumNumberGroupsInGrid(documents2);
+            return SumNumberGroupsInGrid(documents);
         }
 
         static int SumNumberGroupsInGrid(List<string> grid)
@@ -46,7 +46,6 @@
                     }
                 }
             }
-
             return sum;
         }
 
