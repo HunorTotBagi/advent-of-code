@@ -142,9 +142,25 @@ namespace test.day03_gear_ratios
             result.Should().BeTrue();
         }
 
+        [Theory]
+        [InlineData("engineFirstRow.txt")]
+        public void Should_return_correct_sum(string fileName)
+        {
+            // Arrange
+            var filePath = AppDomain.CurrentDomain.BaseDirectory + "../../../../aoc/day03-gear-ratios/data/" + fileName;
+
+            // Act
+            int result = newSchematic.GetFinalResult(filePath);
+
+            // Assert
+            result.Should().Be(467);
+        }
+
         private static Schematic CreateSchematic()
         {
             return new Schematic();
         }
+
+
     }
 }

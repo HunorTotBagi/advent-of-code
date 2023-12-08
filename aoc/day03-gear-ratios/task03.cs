@@ -1,4 +1,7 @@
-﻿namespace test.day03_gear_ratios
+﻿using System;
+using System.Diagnostics.Metrics;
+
+namespace test.day03_gear_ratios
 {
     public class Schematic
     {
@@ -48,11 +51,6 @@
             }
             return sum;
         }
-
-        //public bool CheckLeft(List<string> extendedSchema, int i)
-        //{
-        //    throw new NotImplementedException();
-        //}
 
         public bool IsTheNumberFirst(List<string> extendedSchema, int i, int j)
         {
@@ -180,6 +178,49 @@
             }
             return false; ;
         }
+
+        public int GetFinalResult(string filePath)
+        {
+            List<string> linesList = ReadFileToList(filePath);
+
+            int row = linesList.Count();
+            int col = linesList[0].Length;
+
+            int totalSum = SummUpAllNumbersInSchematic(filePath);
+
+            int counter = 0;
+
+            for (int i = 1; i < row - 1; i++)
+            {
+                for (int j = 1; j < col - 1; j++)
+                {
+                    if (char.IsDigit(linesList[i][j]))
+                    {
+                        counter++;
+
+                        if (!char.IsDigit(linesList[i][j+1]))
+                        {
+                            if (counter == 1 && Dimension1(filePath, i, j))
+                            {
+                                totalSum -= int.Parse(linesList[i][j].ToString()); 
+                            }
+
+                            if (counter == 2 && Dimension2(filePath, i, j))
+                            {
+                                totalSum -= int.Parse(linesList[i][j].ToString());
+                            }
+
+                            if (counter == 3 && Dimension3(filePath, i, j))
+                            {
+                                totalSum -= int.Parse(linesList[i][j].ToString());
+                            }
+                        }
+                    }
+                }
+            }
+            return totalSum;
+        }
+
         public List<string> ReadFileToList(string filePath)
         {
             List<string> linesList = new List<string>();
@@ -189,5 +230,6 @@
 
             return linesList;
         }
+
     }
 }
