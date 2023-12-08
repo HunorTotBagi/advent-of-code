@@ -8,8 +8,9 @@ namespace test.day03_gear_ratios
         Schematic newSchematic = CreateSchematic();
 
         [Theory]
-        [InlineData("engineSchematic.txt")]
-        public void Should_return_summ_of_all_numbers_in_schema(string fileName)
+        [InlineData("engineSchematic.txt", 4533)]
+        [InlineData("engineFirstRow.txt", 581)]
+        public void Should_return_summ_of_all_numbers_in_schema(string fileName, int expected)
         {
             // Arrange
             var filePath = AppDomain.CurrentDomain.BaseDirectory + "../../../../aoc/day03-gear-ratios/data/" + fileName;
@@ -18,7 +19,7 @@ namespace test.day03_gear_ratios
             int result = newSchematic.SummUpAllNumbersInSchematic(filePath);
 
             // Assert
-            result.Should().Be(4533);
+            result.Should().Be(expected);
         }
 
         [Theory]

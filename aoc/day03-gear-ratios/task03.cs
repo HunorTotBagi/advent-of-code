@@ -1,7 +1,4 @@
-﻿using System;
-using System.Diagnostics.Metrics;
-
-namespace test.day03_gear_ratios
+﻿namespace test.day03_gear_ratios
 {
     public class Schematic
     {
@@ -198,22 +195,26 @@ namespace test.day03_gear_ratios
                     {
                         counter++;
 
-                        if (!char.IsDigit(linesList[i][j+1]))
+                        if (!char.IsDigit(linesList[i][j + 1]))
                         {
                             if (counter == 1 && Dimension1(filePath, i, j))
                             {
-                                totalSum -= int.Parse(linesList[i][j].ToString()); 
+                                totalSum -= int.Parse(linesList[i][j].ToString());
+                                counter = 0;
                             }
 
                             if (counter == 2 && Dimension2(filePath, i, j))
                             {
                                 totalSum -= int.Parse(linesList[i][j].ToString());
+                                counter = 0;
                             }
 
                             if (counter == 3 && Dimension3(filePath, i, j))
                             {
-                                totalSum -= int.Parse(linesList[i][j].ToString());
+                                totalSum = totalSum - int.Parse(linesList[i][j].ToString());
+                                counter = 0;
                             }
+                            counter = 0;
                         }
                     }
                 }
