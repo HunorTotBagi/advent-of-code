@@ -13,7 +13,7 @@ namespace test.day9
         public void Should(string fileName)
         {
             // Arrange
-            var filePath = AppDomain.CurrentDomain.BaseDirectory + "../../../../aoc/day08-haunted-wasteland/data/" + fileName;
+            var filePath = AppDomain.CurrentDomain.BaseDirectory + "../../../../aoc/day09/data/" + fileName;
 
             // Act
 
