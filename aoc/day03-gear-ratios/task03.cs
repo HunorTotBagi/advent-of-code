@@ -97,9 +97,7 @@
 
             int row = linesList.Count();
             int col = linesList[0].Length;
-
             int totalSum = 0;
-
             int counter = 0;
 
             for (int i = 1; i < row - 1; i++)
@@ -114,27 +112,19 @@
                         {
                             if (counter == 1 && !Dimension1(filePath, i, j))
                             {
-                                totalSum += int.Parse(linesList[i][j].ToString());
+                                string combination = linesList[i][j].ToString();
+                                totalSum += int.Parse(combination);
                             }
 
                             if (counter == 2 && !Dimension2(filePath, i, j))
                             {
-                                string lastChar = linesList[i][j].ToString();
-                                string secondLastChar = linesList[i][j - 1].ToString();
-
-                                string combination = secondLastChar + lastChar;
-
+                                string combination = ConvertToDoubleNumber(linesList, i, j);
                                 totalSum += int.Parse(combination);
                             }
 
                             if (counter == 3 && !Dimension3(filePath, i, j))
                             {
-                                string lastChar = linesList[i][j].ToString();
-                                string secondLastChar = linesList[i][j - 1].ToString();
-                                string thirdLastChar = linesList[i][j - 2].ToString();
-
-                                string combination = thirdLastChar + secondLastChar + lastChar;
-
+                                string combination = ConvertToTripleNumber(linesList, i, j);
                                 totalSum += int.Parse(combination);
                             }
                             counter = 0;
@@ -143,6 +133,25 @@
                 }
             }
             return totalSum;
+        }
+
+        private static string ConvertToDoubleNumber(List<string> linesList, int i, int j)
+        {
+            string lastChar = linesList[i][j].ToString();
+            string secondLastChar = linesList[i][j - 1].ToString();
+
+            string combination = secondLastChar + lastChar;
+            return combination;
+        }
+
+        private static string ConvertToTripleNumber(List<string> linesList, int i, int j)
+        {
+            string lastChar = linesList[i][j].ToString();
+            string secondLastChar = linesList[i][j - 1].ToString();
+            string thirdLastChar = linesList[i][j - 2].ToString();
+
+            string combination = thirdLastChar + secondLastChar + lastChar;
+            return combination;
         }
 
         public List<string> ReadFileToList(string filePath)
