@@ -90,7 +90,6 @@ namespace test.day08_haunted_wasteland
             // Arrange
             var filePath = AppDomain.CurrentDomain.BaseDirectory + "../../../../aoc/day08-haunted-wasteland/data/" + fileName;
 
-
             // Act
             string result = newNetwork.GetFinalLocation(nextIteration, filePath);
 

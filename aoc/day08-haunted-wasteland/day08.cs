@@ -2,101 +2,80 @@
 {
     public class Network
     {
-        public List<string> ReadFileToList(string filePath)
-        {
-            List<string> linesList = new List<string>();
-
-            try
-            {
-                string[] lines = File.ReadAllLines(filePath);
-                linesList.AddRange(lines);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"An error occurred: {ex.Message}");
-            }
-
-            return linesList;
-        }
-
         public string GetDirections(string filePath)
         {
-            string firstLine = File.ReadLines(filePath).First();
-            return firstLine;
+            string initialDirection = File.ReadLines(filePath).First();
+            return initialDirection;
         }
 
         public List<List<string>> GetNodes(string filePath)
         {
-            List<List<string>> result = new List<List<string>>();
-            List<string> data = ReadFileToList(filePath);
+            List<List<string>> nodeList = new List<List<string>>();
+            List<string> fileLines = ReadFileToList(filePath);
 
-            for (int i = 2; i < data.Count; i++)
+            for (int i = 2; i < fileLines.Count; i++)
             {
-                List<string> helper = new List<string>
+                List<string> nodeDetails = new List<string>
                 {
-                    data[i].Substring(0, 3),
-                    data[i].Substring(7, 3),
-                    data[i].Substring(12, 3)
+                    fileLines[i].Substring(0, 3),
+                    fileLines[i].Substring(7, 3),
+                    fileLines[i].Substring(12, 3)
                 };
 
-                result.Add(helper);
+                nodeList.Add(nodeDetails);
             }
-
-            return result;
+            return nodeList;
         }
 
         public string GetNextDestionation(int index, string input, string filePath)
         {
-            List<List<string>> data = GetNodes(filePath);
+            List<List<string>> nodeList = GetNodes(filePath);
 
             if (input == "L")
             {
-                return data[index][1];
+                return nodeList[index][1];
             }
             else
             {
-                return data[index][2];
+                return nodeList[index][2];
             }
         }
 
         public string GetFinalLocation(string nextIteration, string filePath)
         {
-            List<List<string>> data = GetNodes(filePath);
+            List<List<string>> nodeList = GetNodes(filePath);
             string directions = GetDirections(filePath);
 
-            for (int i = 0; i < directions.Length; i++)
+            for (int directionIndex = 0; directionIndex < directions.Length; directionIndex++)
             {
-                string direction = char.ToString(directions[i]);
+                string direction = char.ToString(directions[directionIndex]);
 
-                for (int j = 0; j < data.Count; j++)
+                for (int nodeIndex = 0; nodeIndex < nodeList.Count; nodeIndex++)
                 {
-                    if (nextIteration == data[j][0])
+                    if (nextIteration == nodeList[nodeIndex][0])
                     {
-                        nextIteration = GetNextDestionation(j, direction, filePath);
+                        nextIteration = GetNextDestionation(nodeIndex, direction, filePath);
                         break;
                     }
                 }
             }
-
             return nextIteration;
         }
 
         public int GetNumberOfSteps(string filePath)
         {
-            List<List<string>> data = GetNodes(filePath);
-
             string startLocation = "AAA";
             string destinationEnd = "ZZZ";
 
             string directions = GetDirections(filePath);
 
-            int length = directions.Length;
+            int directionsLength = directions.Length;
             string currentLocation = startLocation;
 
-            int iterations = 1;
+            int stepCount = 1;
             while (currentLocation != destinationEnd)
             {
-                if (iterations == 1)
+                if (stepCount == 1)
                 {
                     currentLocation = GetFinalLocation(startLocation, filePath);
                 }
@@ -110,55 +89,51 @@
                     break;
                 }
 
-                iterations++;
+                stepCount++;
             }
-
-            int result = length * iterations;
+            int result = directionsLength * stepCount;
             return result;
         }
 
-        public int GetNumberOfStepsPart2(string startLocation, string filePath)
+        public int GetNumberOfStepsForGhosts(string startNode, string filePath)
         {
-            List<List<string>> data = GetNodes(filePath);
-
             string directions = GetDirections(filePath);
 
-            int length = directions.Length;
-            string currentLocation = startLocation;
+            int directionsLength = directions.Length;
+            string currentNode = startNode;
 
             int iterations = 1;
-            while (currentLocation[2] != 'Z')
+            while (currentNode[2] != 'Z')
             {
                 if (iterations == 1)
                 {
-                    currentLocation = GetFinalLocation(startLocation, filePath);
+                    currentNode = GetFinalLocation(startNode, filePath);
                 }
                 else
                 {
-                    currentLocation = GetFinalLocation(currentLocation, filePath);
+                    currentNode = GetFinalLocation(currentNode, filePath);
                 }
 
-                if (currentLocation[2] == 'Z')
+                if (currentNode[2] == 'Z')
                 {
                     break;
                 }
 
                 iterations++;
             }
-
-            int result = length * iterations;
+            int result = directionsLength * iterations;
             return result;
         }
 
-        public ulong GetGCD(ulong a, ulong b)
+        public ulong GetGCD(ulong firstNumber, ulong secondNumber)
         {
-            while (b != 0)
+            while (secondNumber != 0)
             {
-                ulong temp = b;
-                b = a % b;
-                a = temp;
+                ulong temp = secondNumber;
+                secondNumber = firstNumber % secondNumber;
+                firstNumber = temp;
             }
-            return a;
+            return firstNumber;
         }
 
         public ulong GetLCM(ulong firstNumber, ulong secondNumber)
@@ -168,46 +143,55 @@
 
         public List<string> GetNodesThatEndOnA(string filePath)
         {
-            List<List<string>> data = GetNodes(filePath);
+            List<List<string>> nodeList = GetNodes(filePath);
 
-            List<string> result = new List<string>();
+            List<string> nodesEndingOnA = new List<string>();
 
-            for (int i = 0; i < data.Count; i++)
+            for (int i = 0; i < nodeList.Count; i++)
             {
-                if (data[i][0][2] == 'A')
+                if (nodeList[i][0][2] == 'A')
                 {
-                    result.Add(data[i][0]);
+                    nodesEndingOnA.Add(nodeList[i][0]);
                 }
             }
-
-            return result;
+            return nodesEndingOnA;
         }
 
         public List<int> GetIndividualNumbers(string filePath)
         {
-            List<string> data = GetNodesThatEndOnA(filePath);
-            List<int> result = new List<int>();
+            List<string> nodesEndingOnA = GetNodesThatEndOnA(filePath);
+            List<int> individualStepCounts = new List<int>();
 
-            foreach (string node in data)
+            foreach (string node in nodesEndingOnA)
             {
-                result.Add(GetNumberOfStepsPart2(node, filePath));
+                individualStepCounts.Add(GetNumberOfStepsForGhosts(node, filePath));
             }
 
-            return result;
+            return individualStepCounts;
         }
 
         public ulong GetLCMFinalAnswer(string filePath)
         {
-            List<int> numbers = GetIndividualNumbers(filePath);
+            List<int> stepCounts = GetIndividualNumbers(filePath);
 
-            ulong lcmResult = (ulong)numbers[0];
+            ulong finalLCMResult = (ulong)stepCounts[0];
 
-            for (int i = 1; i < numbers.Count; i++)
+            for (int i = 1; i < stepCounts.Count; i++)
             {
-                lcmResult = (ulong)GetLCM(lcmResult, (ulong)numbers[i]);
+                finalLCMResult = (ulong)GetLCM(finalLCMResult, (ulong)stepCounts[i]);
             }
 
-            return lcmResult;
+            return finalLCMResult;
+        }
+
+        public List<string> ReadFileToList(string filePath)
+        {
+            List<string> linesList = new List<string>();
+
+            string[] lines = File.ReadAllLines(filePath);
+            linesList.AddRange(lines);
+
+            return linesList;
         }
     }
 }
