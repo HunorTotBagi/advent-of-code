@@ -8,9 +8,6 @@ namespace Tests
     {
         Document newDocument = CreateCalculator();
 
-        List<string> spelledNumbers = new List<string>() { "one", "two", "three", "four", "five", "six", "seven", "eight", "nine",
-                                                            "1", "2", "3", "4", "5", "6", "7", "8", "9" };
-
         [Theory]
         [InlineData("1abc2", "1")]
         [InlineData("3asd4", "3")]
@@ -83,7 +80,7 @@ namespace Tests
         public void FinalTest(string fileName, int expected)
         {
             // Arrange
-            var filePath = AppDomain.CurrentDomain.BaseDirectory + "../../../../Day04Src/data/" + fileName;
+            var filePath = AppDomain.CurrentDomain.BaseDirectory + "../../../../aoc/day01-trebuchet/data/" + fileName;
 
             // Act
             int result = newDocument.SummAllUp(filePath);
