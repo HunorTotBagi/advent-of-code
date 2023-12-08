@@ -115,7 +115,6 @@
                             if (counter == 1 && !Dimension1(filePath, i, j))
                             {
                                 totalSum += int.Parse(linesList[i][j].ToString());
-                                counter = 0;
                             }
 
                             if (counter == 2 && !Dimension2(filePath, i, j))
@@ -126,7 +125,6 @@
                                 string combination = secondLastChar + lastChar;
 
                                 totalSum += int.Parse(combination);
-                                counter = 0;
                             }
 
                             if (counter == 3 && !Dimension3(filePath, i, j))
@@ -138,7 +136,6 @@
                                 string combination = thirdLastChar + secondLastChar + lastChar;
 
                                 totalSum += int.Parse(combination);
-                                counter = 0;
                             }
                             counter = 0;
                         }
