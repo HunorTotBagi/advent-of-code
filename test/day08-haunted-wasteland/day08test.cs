@@ -9,11 +9,14 @@ namespace test.day08_haunted_wasteland
         Network newNetwork = CreateNetwork();
 
         [Theory]
-        [InlineData("C:\\Users\\htotbagi\\OneDrive - j&s-soft GmbH\\Dokumente\\C#-10-fundamentals\\advent-of-code\\code\\day08\\data\\example1.txt", "RL")]
-        [InlineData("C:\\Users\\htotbagi\\OneDrive - j&s-soft GmbH\\Dokumente\\C#-10-fundamentals\\advent-of-code\\code\\day08\\data\\example2.txt", "LLR")]
-        [InlineData("C:\\Users\\htotbagi\\OneDrive - j&s-soft GmbH\\Dokumente\\C#-10-fundamentals\\advent-of-code\\code\\day08\\data\\realNetwork.txt", "LRRLRRRLLRRRLRRRLLRRLRRRLRRLRRLRLRLRLRLRLLRRRLRRLRLRRRLRRRLRLRRRLRLRRLRRRLRRRLRLLRRRLRLLLRLRRRLRLRRLRRLLLLRRLRRLRLRLRRLRLRRLRRRLRRRLRLRLRRLLLLRRLRLRRLLRRRLRLRLRLRRRLRLLLRLRLRRRLRLRRRLRRRLRRRLLRRLRRRLRRRLRRRLRRRLRLLRRRLRLRRRLRLRLRRRLRRLRRLLRRRLRRRLRRRLRLRLRLRRLRRRLRRLRLRLRLRRRR")]
-        public void Should_return_directions(string filePath, string expected)
+        [InlineData("example1.txt", "RL")]
+        [InlineData("example2.txt", "LLR")]
+        [InlineData("realNetwork.txt", "LRRLRRRLLRRRLRRRLLRRLRRRLRRLRRLRLRLRLRLRLLRRRLRRLRLRRRLRRRLRLRRRLRLRRLRRRLRRRLRLLRRRLRLLLRLRRRLRLRRLRRLLLLRRLRRLRLRLRRLRLRRLRRRLRRRLRLRLRRLLLLRRLRLRRLLRRRLRLRLRLRRRLRLLLRLRLRRRLRLRRRLRRRLRRRLLRRLRRRLRRRLRRRLRRRLRLLRRRLRLRRRLRLRLRRRLRRLRRLLRRRLRRRLRRRLRLRLRLRRLRRRLRRLRLRLRLRRRR")]
+        public void Should_return_directions(string fileName, string expected)
         {
+            // Arrange
+            var filePath = AppDomain.CurrentDomain.BaseDirectory + "../../../../aoc/day08-haunted-wasteland/data/" + fileName;
+
             // Act
             var result = newNetwork.GetDirections(filePath);
 
@@ -22,10 +25,12 @@ namespace test.day08_haunted_wasteland
         }
 
         [Theory]
-        [InlineData("C:\\Users\\htotbagi\\OneDrive - j&s-soft GmbH\\Dokumente\\C#-10-fundamentals\\advent-of-code\\code\\day08\\data\\example1.txt")]
-        public void Should_return_nodes(string filePath)
+        [InlineData("example1.txt")]
+        public void Should_return_nodes(string fileName)
         {
             // Arrange
+            var filePath = AppDomain.CurrentDomain.BaseDirectory + "../../../../aoc/day08-haunted-wasteland/data/" + fileName;
+
             List<List<string>> expected = new List<List<string>>
             {
                 new List<string>{"AAA", "BBB", "CCC"},
@@ -45,12 +50,12 @@ namespace test.day08_haunted_wasteland
         }
 
         [Theory]
-        [InlineData(0, "R", "CCC")]
-        [InlineData(2, "L", "ZZZ")]
-        public void Should_return_correct_way(int index, string input, string expected)
+        [InlineData("example1.txt", 0, "R", "CCC")]
+        [InlineData("example1.txt", 2, "L", "ZZZ")]
+        public void Should_return_correct_way(string fileName, int index, string input, string expected)
         {
             // Arrange
-            string filePath = "C:\\Users\\htotbagi\\OneDrive - j&s-soft GmbH\\Dokumente\\C#-10-fundamentals\\advent-of-code\\code\\day08\\data\\example1.txt";
+            var filePath = AppDomain.CurrentDomain.BaseDirectory + "../../../../aoc/day08-haunted-wasteland/data/" + fileName;
 
             // Act
             string result = newNetwork.GetNextDestionation(index, input, filePath);
@@ -60,14 +65,14 @@ namespace test.day08_haunted_wasteland
         }
 
         [Theory]
-        [InlineData(0, "L", "BBB")]
-        [InlineData(1, "L", "AAA")]
-        [InlineData(0, "R", "BBB")]
-        [InlineData(1, "R", "ZZZ")]
-        public void Should_return_correct_way2(int index, string input, string expected)
+        [InlineData("example2.txt", 0, "L", "BBB")]
+        [InlineData("example2.txt", 1, "L", "AAA")]
+        [InlineData("example2.txt", 0, "R", "BBB")]
+        [InlineData("example2.txt", 1, "R", "ZZZ")]
+        public void Should_return_correct_way2(string fileName, int index, string input, string expected)
         {
             // Arrange
-            string filePath = "C:\\Users\\htotbagi\\OneDrive - j&s-soft GmbH\\Dokumente\\C#-10-fundamentals\\advent-of-code\\code\\day08\\data\\example2.txt";
+            var filePath = AppDomain.CurrentDomain.BaseDirectory + "../../../../aoc/day08-haunted-wasteland/data/" + fileName;
 
             // Act
             string result = newNetwork.GetNextDestionation(index, input, filePath);
@@ -77,11 +82,15 @@ namespace test.day08_haunted_wasteland
         }
 
         [Theory]
-        [InlineData("C:\\Users\\htotbagi\\OneDrive - j&s-soft GmbH\\Dokumente\\C#-10-fundamentals\\advent-of-code\\code\\day08\\data\\example1.txt", "AAA", "ZZZ")]
-        [InlineData("C:\\Users\\htotbagi\\OneDrive - j&s-soft GmbH\\Dokumente\\C#-10-fundamentals\\advent-of-code\\code\\day08\\data\\example2.txt", "AAA", "BBB")]
-        [InlineData("C:\\Users\\htotbagi\\OneDrive - j&s-soft GmbH\\Dokumente\\C#-10-fundamentals\\advent-of-code\\code\\day08\\data\\example2.txt", "BBB", "ZZZ")]
-        public void Should_return_final_path(string filePath, string nextIteration, string expected)
+        [InlineData("example1.txt", "AAA", "ZZZ")]
+        [InlineData("example2.txt", "AAA", "BBB")]
+        [InlineData("example2.txt", "BBB", "ZZZ")]
+        public void Should_return_final_path(string fileName, string nextIteration, string expected)
         {
+            // Arrange
+            var filePath = AppDomain.CurrentDomain.BaseDirectory + "../../../../aoc/day08-haunted-wasteland/data/" + fileName;
+
+
             // Act
             string result = newNetwork.GetFinalLocation(nextIteration, filePath);
 
@@ -90,11 +99,14 @@ namespace test.day08_haunted_wasteland
         }
 
         [Theory]
-        [InlineData("C:\\Users\\htotbagi\\OneDrive - j&s-soft GmbH\\Dokumente\\C#-10-fundamentals\\advent-of-code\\code\\day08\\data\\example1.txt", 2)]
-        [InlineData("C:\\Users\\htotbagi\\OneDrive - j&s-soft GmbH\\Dokumente\\C#-10-fundamentals\\advent-of-code\\code\\day08\\data\\example2.txt", 6)]
-        [InlineData("C:\\Users\\htotbagi\\OneDrive - j&s-soft GmbH\\Dokumente\\C#-10-fundamentals\\advent-of-code\\code\\day08\\data\\realNetwork.txt", 16897)]
-        public void Should_return_final_number_of_steps(string filePath, int expected)
+        [InlineData("example1.txt", 2)]
+        [InlineData("example2.txt", 6)]
+        [InlineData("realNetwork.txt", 16897)]
+        public void Should_return_final_number_of_steps(string fileName, int expected)
         {
+            // Arrange
+            var filePath = AppDomain.CurrentDomain.BaseDirectory + "../../../../aoc/day08-haunted-wasteland/data/" + fileName;
+
             // Act
             int result = newNetwork.GetNumberOfSteps(filePath);
 
@@ -108,37 +120,34 @@ namespace test.day08_haunted_wasteland
         [InlineData(356, 242, 2)]
         public void Should_return_gcd(ulong firstNumber, ulong secondNumber, ulong expected)
         {
+            // Act
             ulong result = newNetwork.GetGCD(firstNumber, secondNumber);
 
+            // Assert
             result.Should().Be(expected);
         }
 
         [Theory]
-        [InlineData(10, 15, 30)]
         [InlineData(4, 5, 20)]
+        [InlineData(10, 15, 30)]
         [InlineData(18, 24, 72)]
+
         public void Should_return_lcm(ulong firstNumber, ulong secondNumber, ulong expected)
         {
+            // Act
             ulong result = newNetwork.GetLCM(firstNumber, secondNumber);
 
+            // Assert
             result.Should().Be(expected);
         }
 
         [Theory]
-        [InlineData("C:\\Users\\htotbagi\\OneDrive - j&s-soft GmbH\\Dokumente\\C#-10-fundamentals\\advent-of-code\\code\\day08\\data\\realNetwork.txt")]
-        public void Should_return_all_nodes_that_ends_with_A(string filePath)
+        [InlineData("realNetwork.txt")]
+        public void Should_return_all_nodes_that_ends_with_A(string fileName)
         {
             // Arrange
-            List<string> expected = new List<string>
-            {
-                "MCA",
-                "AAA",
-                "DCA",
-                "LGA",
-                "NLA",
-                "VPA"
-            };
-
+            var filePath = AppDomain.CurrentDomain.BaseDirectory + "../../../../aoc/day08-haunted-wasteland/data/" + fileName;
+            List<string> expected = new List<string> { "MCA", "AAA", "DCA", "LGA", "NLA", "VPA" };
 
             // Act
             List<string> result = newNetwork.GetNodesThatEndOnA(filePath);
@@ -148,15 +157,12 @@ namespace test.day08_haunted_wasteland
         }
 
         [Theory]
-        [InlineData("C:\\Users\\htotbagi\\OneDrive - j&s-soft GmbH\\Dokumente\\C#-10-fundamentals\\advent-of-code\\code\\day08\\data\\realNetwork.txt")]
-        public void Should_return_result_for_all_nodes_that_end_with_A(string filePath)
+        [InlineData("realNetwork.txt")]
+        public void Should_return_result_for_all_nodes_that_end_with_A(string fileName)
         {
             // Arrange
-            List<int> expected = new List<int>
-            {
-                16343,16897,20221,18559,11911,21883
-            };
-
+            var filePath = AppDomain.CurrentDomain.BaseDirectory + "../../../../aoc/day08-haunted-wasteland/data/" + fileName;
+            List<int> expected = new List<int> { 16343, 16897, 20221, 18559, 11911, 21883 };
 
             // Act
             List<int> result = newNetwork.GetIndividualNumbers(filePath);
@@ -166,9 +172,12 @@ namespace test.day08_haunted_wasteland
         }
 
         [Theory]
-        [InlineData("C:\\Users\\htotbagi\\OneDrive - j&s-soft GmbH\\Dokumente\\C#-10-fundamentals\\advent-of-code\\code\\day08\\data\\realNetwork.txt")]
-        public void Should_for_puzzle2_lcm(string filePath)
+        [InlineData("realNetwork.txt")]
+        public void Should_for_puzzle2_lcm(string fileName)
         {
+            // Arrange
+            var filePath = AppDomain.CurrentDomain.BaseDirectory + "../../../../aoc/day08-haunted-wasteland/data/" + fileName;
+
             // Act
             ulong result = newNetwork.GetLCMFinalAnswer(filePath);
 
