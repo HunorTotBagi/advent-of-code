@@ -36,7 +36,7 @@
 
             foreach (var row in grid)
             {
-                string[] numberGroups = row.Split(new[] { '*', '.', '+', '$', '#' }, StringSplitOptions.RemoveEmptyEntries);
+                string[] numberGroups = row.Split(new[]  { '!',  '%',    '&'  , '(', ')',   '/',   '*', '.', '@', '+', '$', '#' }, StringSplitOptions.RemoveEmptyEntries);
 
                 foreach (var group in numberGroups)
                 {
@@ -145,7 +145,7 @@
 
         public bool Dimension1(string filePath, int i, int j)
         {
-            List<string> matrix = ReadFileToList(filePath);
+            List<string> matrix = ExtendSchematicWithDots(filePath);
 
             if (IsTheNumberFirst(matrix, i, j) && IsTheNumberLast(matrix, i, j))
             {
@@ -156,7 +156,7 @@
 
         public bool Dimension2(string filePath, int i, int j)
         {
-            List<string> matrix = ReadFileToList(filePath);
+            List<string> matrix = ExtendSchematicWithDots(filePath);
 
             if (IsTheNumberFirst(matrix, i, j - 1) && IsTheNumberLast(matrix, i, j))
             {
@@ -167,7 +167,7 @@
 
         public bool Dimension3(string filePath, int i, int j)
         {
-            List<string> matrix = ReadFileToList(filePath);
+            List<string> matrix = ExtendSchematicWithDots(filePath);
 
             if (IsTheNumberFirst(matrix, i, j - 2) && IsTheNumberMiddle(matrix, i, j - 1) && IsTheNumberLast(matrix, i, j))
             {
@@ -178,18 +178,18 @@
 
         public int GetFinalResult(string filePath)
         {
-            List<string> linesList = ReadFileToList(filePath);
+            List<string> linesList = ExtendSchematicWithDots(filePath);
 
             int row = linesList.Count();
             int col = linesList[0].Length;
 
-            int totalSum = SummUpAllNumbersInSchematic(filePath);
+            int totalSum = 0;
 
             int counter = 0;
 
-            for (int i = 1; i < row - 1; i++)
+            for (int i = 0; i < row; i++)
             {
-                for (int j = 1; j < col - 1; j++)
+                for (int j = 0; j < col; j++)
                 {
                     if (char.IsDigit(linesList[i][j]))
                     {
@@ -197,24 +197,24 @@
 
                         if (!char.IsDigit(linesList[i][j + 1]))
                         {
-                            if (counter == 1 && Dimension1(filePath, i, j))
+                            if (counter == 1 && !Dimension1(filePath, i, j))
                             {
-                                totalSum -= int.Parse(linesList[i][j].ToString());
+                                totalSum += int.Parse(linesList[i][j].ToString());
                                 counter = 0;
                             }
 
-                            if (counter == 2 && Dimension2(filePath, i, j))
+                            if (counter == 2 && !Dimension2(filePath, i, j))
                             {
                                 string lastChar = linesList[i][j].ToString();
                                 string secondLastChar = linesList[i][j - 1].ToString();
 
                                 string combination = secondLastChar + lastChar;
 
-                                totalSum -= int.Parse(combination);
+                                totalSum += int.Parse(combination);
                                 counter = 0;
                             }
 
-                            if (counter == 3 && Dimension3(filePath, i, j))
+                            if (counter == 3 && !Dimension3(filePath, i, j))
                             {
                                 string lastChar = linesList[i][j].ToString();
                                 string secondLastChar = linesList[i][j - 1].ToString();
@@ -222,7 +222,7 @@
 
                                 string combination = thirdLastChar + secondLastChar + lastChar;
 
-                                totalSum -= int.Parse(combination);
+                                totalSum += int.Parse(combination);
                                 counter = 0;
                             }
                             counter = 0;

@@ -102,7 +102,7 @@ namespace test.day03_gear_ratios
         //}
 
         [Theory]
-        [InlineData("singleDigitExtended.txt", 1, 1)]
+        [InlineData("singleDigit.txt", 1, 1)]
         public void single_digit_all_points_around(string fileName, int rowIndex, int columnIndex)
         {
             // Arrange
@@ -116,7 +116,7 @@ namespace test.day03_gear_ratios
         }
 
         [Theory]
-        [InlineData("doubleDigitExtended.txt", 1, 2)]
+        [InlineData("doubleDigit.txt", 1, 2)]
         public void double_digit_all_points_around(string fileName, int rowIndex, int columnIndex)
         {
             // Arrange
@@ -130,7 +130,7 @@ namespace test.day03_gear_ratios
         }
 
         [Theory]
-        [InlineData("trippleDigitExtended.txt", 1, 3)]
+        [InlineData("trippleDigit.txt", 1, 3)]
         public void tripple_digit_all_points_around(string fileName, int rowIndex, int columnIndex)
         {
             // Arrange
@@ -144,8 +144,9 @@ namespace test.day03_gear_ratios
         }
 
         [Theory]
-        [InlineData("engineFirstRow.txt")]
-        public void Should_return_correct_sum(string fileName)
+        [InlineData("engineSchematic.txt", 4361)]
+        [InlineData("realSchematics.txt", 4361)]
+        public void Should_return_correct_sum(string fileName, int expected)
         {
             // Arrange
             var filePath = AppDomain.CurrentDomain.BaseDirectory + "../../../../aoc/day03-gear-ratios/data/" + fileName;
@@ -154,7 +155,7 @@ namespace test.day03_gear_ratios
             int result = newSchematic.GetFinalResult(filePath);
 
             // Assert
-            result.Should().Be(467);
+            result.Should().Be(expected);
         }
 
         private static Schematic CreateSchematic()
