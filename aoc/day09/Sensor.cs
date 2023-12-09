@@ -8,20 +8,20 @@ namespace src.day09
 {
     public class Sensor
     {
-        public List<long> GetNumberListBasedOnIndex(string filePath, int index)
+        public List<int> GetNumberListBasedOnIndex(string filePath, int index)
         {
             List<string> data = ReadFileToList(filePath);
 
             return ExtractNumbers(data[index]);
         }
-        public List<long> ExtractNumbers(string inputString)
+        public List<int> ExtractNumbers(string inputString)
         {
             string[] numberStrings = inputString.Split(' ');
 
-            List<long> numbers = new List<long>();
+            List<int> numbers = new List<int>();
             foreach (string numberString in numberStrings)
             {
-                if (long.TryParse(numberString, out long number))
+                if (int.TryParse(numberString, out int number))
                 {
                     numbers.Add(number);
                 }
@@ -41,27 +41,25 @@ namespace src.day09
             return linesList;
         }
 
-        public List<long> GetNextRowCalculation(List<long> stringRow)
+        public List<int> GetNextRowCalculation(List<int> stringRow)
         {
-            List<long> result = new List<long>();
+            List<int> result = new List<int>();
 
             for (int i = 0; i < stringRow.Count - 1; i++)
             {
-                long diff = stringRow[i + 1] - stringRow[i];
+                int diff = stringRow[i + 1] - stringRow[i];
                 result.Add(diff);
             }
 
             return result;
         }
 
-        public List<List<long>> GetAllDifferencesForThatRow(string filePath, int index)
+        public List<List<int>> GetAllDifferencesForThatRow(string filePath, List<int> row)
         {
-            List<List<long>> storage = new List<List<long>>();
-
-            List<long> row = GetNumberListBasedOnIndex(filePath, index);
+            List<List<int>> storage = new List<List<int>>();
 
             storage.Add(row);
-            long rowSum = row.Sum();
+            int rowSum = row.Sum();
 
             while (rowSum != 0)
             {
@@ -73,7 +71,7 @@ namespace src.day09
             return storage;
         }
 
-        public long AddStepsToAsALastElement(List<List<long>> input)
+        public int AddStepsToAsALastElement(List<List<int>> input)
         {
             input[^1].Add(0);
 
@@ -84,18 +82,69 @@ namespace src.day09
             return input[0].Last();
         }
 
-        public long CalcFinal(string filePath)
+        public int CalcFinal(string filePath)
         {
-            List<string> data = ReadFileToList(filePath);
-            long result = 0;
+            List<List<int>> data = newExtractor(filePath);
+            
+            int result = 0;
 
             for (int i = 0; i < data.Count; i++)
             {
-                List<List<long>> holder = GetAllDifferencesForThatRow(filePath, i);
+                List<List<int>> holder = GetAllDifferencesForThatRow(filePath, data[i]);
 
                 result += AddStepsToAsALastElement(holder);
             }
             return result;
+        }
+
+        public List<List<int>> newExtractor(string filePath)
+        {
+            List<List<int>> dataList = ReadDataFromFile(filePath);
+
+            return dataList;
+        }
+
+        static List<List<int>> ReadDataFromFile(string filePath)
+        {
+            List<List<int>> dataList = new List<List<int>>();
+
+            try
+            {
+                using (StreamReader sr = new StreamReader(filePath))
+                {
+                    while (!sr.EndOfStream)
+                    {
+                        string line = sr.ReadLine();
+                        if (!string.IsNullOrWhiteSpace(line))
+                        {
+                            List<int> values = new List<int>();
+
+                            string[] tokens = line.Split(' ');
+                            foreach (string token in tokens)
+                            {
+                                if (int.TryParse(token, out int value))
+                                {
+                                    values.Add(value);
+                                }
+                                else
+                                {
+                                    // Handle the case where a non-integer value is encountered.
+                                    Console.WriteLine("Invalid data format: " + token);
+                                }
+                            }
+
+                            dataList.Add(values);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle exceptions, e.g., file not found, access denied, etc.
+                Console.WriteLine("Error reading file: " + ex.Message);
+            }
+
+            return dataList;
         }
     }
 }
