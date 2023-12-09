@@ -7,11 +7,11 @@ namespace src.day09
 {
     public class Sensor
     {
-        public List<ulong> GetNumberListBasedOnIndex(string filePath, ulong index)
+        public List<ulong> GetNumberListBasedOnIndex(string filePath, int index)
         {
             List<string> data = ReadFileToList(filePath);
 
-            string row = data[(int)index];
+            string row = data[index];
 
             List<ulong> result = new List<ulong>();
 
@@ -66,7 +66,7 @@ namespace src.day09
             return result;
         }
 
-        public List<List<ulong>> GetAllDifferencesForThatRow(string filePath, ulong index)
+        public List<List<ulong>> GetAllDifferencesForThatRow(string filePath, int index)
         {
             List<List<ulong>> storage = new List<List<ulong>>();
 
@@ -74,13 +74,58 @@ namespace src.day09
 
             storage.Add(row);
 
-            while (storage[storage.Count - 1][2] != 0)
+            while (SumOfLastRow(storage) != 0)
             {
 
                 storage.Add(GetNextRowCalculation(storage[storage.Count - 1]));
             }
 
             return storage;
+        }
+
+        private static ulong SumOfLastRow(List<List<ulong>> storage)
+        {
+            ulong result = 0;
+            for (int i = 0; i < storage.Count; i++)
+            {
+                for (int j = 0; j < storage[i].Count; j++)
+                {
+                    result += storage[i][j];    
+                }
+            }
+
+            return result;
+        }
+
+        public ulong AddStepsToAsALastElement(List<List<ulong>> input)
+        {
+            // Add a new zero to the end of the last list
+            input[input.Count - 1].Add(0);
+
+            // Iterate over the lists from the bottom up
+            for (int i = input.Count - 1; i >= 1; i--)
+            {
+                input[i - 1].Add(input[i - 1].Last() + input[i].Last());
+
+            }
+
+            return input[0].Last();
+        }
+
+        public ulong CalcFinal(string filePath)
+        {
+            List<string> data = ReadFileToList(filePath);
+            ulong result = 0;
+
+            for (int i = 0; i < data.Count; i++)
+            {
+                List<List<ulong>> holder = GetAllDifferencesForThatRow(filePath, i);
+
+                var asd = AddStepsToAsALastElement(holder);
+                result += asd;
+            }
+
+            return result;
         }
     }
 }
