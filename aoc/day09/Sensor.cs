@@ -2,6 +2,7 @@
 using System;
 using System.Linq;
 using System.Reflection;
+using System.Text.RegularExpressions;
 
 namespace src.day09
 {
@@ -21,25 +22,21 @@ namespace src.day09
         }
         public List<ulong> ExtractNumbers(string input)
         {
-            List<ulong> result = new List<ulong>();
+            List<ulong> ulongList = new List<ulong>();
+            Regex regex = new Regex(@"[+-]?\d+(\.\d+)?");
 
-            // Split the input string based on whitespace
-            string[] numberStrings = input.Split(new char[] { ' ', '\t', '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
+            MatchCollection matches = regex.Matches(input);
 
-            // Convert each string to ulong and add to the result list
-            foreach (string numberString in numberStrings)
+            foreach (Match match in matches)
             {
-                if (ulong.TryParse(numberString, out ulong number))
+                if (ulong.TryParse(match.Value, out ulong result))
                 {
-                    result.Add(number);
+                    ulongList.Add(result);
                 }
-                else
-                {
-                    Console.WriteLine($"Failed to parse '{numberString}' as ulong.");
-                }
+                // If you want to handle potential overflow or other errors, you can add appropriate logic here.
             }
 
-            return result;
+            return ulongList;
         }
 
 
@@ -74,27 +71,13 @@ namespace src.day09
 
             storage.Add(row);
 
-            while (SumOfLastRow(storage) != 0)
+            while (storage[storage.Count - 1].Last() != 0)
             {
 
                 storage.Add(GetNextRowCalculation(storage[storage.Count - 1]));
             }
 
             return storage;
-        }
-
-        private static ulong SumOfLastRow(List<List<ulong>> storage)
-        {
-            ulong result = 0;
-            for (int i = 0; i < storage.Count; i++)
-            {
-                for (int j = 0; j < storage[i].Count; j++)
-                {
-                    result += storage[i][j];    
-                }
-            }
-
-            return result;
         }
 
         public ulong AddStepsToAsALastElement(List<List<ulong>> input)

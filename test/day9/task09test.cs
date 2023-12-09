@@ -123,6 +123,19 @@ namespace test.day9
             result.Should().Be(expected);
         }
 
+        [Theory]
+        [InlineData("realFile.txt")]
+        public void asdawdwd(string fileName)
+        {
+            var filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "../../../../aoc/day09/data/", fileName);
+
+            ulong expected = 114;
+
+            ulong result = newSensor.CalcFinal(filePath);
+
+            result.Should().Be(expected);
+        }
+
         private static Sensor CreateSensor()
         {
             return new Sensor();
