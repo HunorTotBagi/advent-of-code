@@ -1,4 +1,5 @@
-﻿using FluentAssertions;
+﻿using System;
+using FluentAssertions;
 using src.day09;
 using Xunit;
 
@@ -69,9 +70,6 @@ namespace test.day9
                 new List<long>{ 2 ,  3 ,  4,   5  , 6 },
                 new List<long>{ 1 ,  1 ,  1,   1 },
                 new List<long>{ 0  , 0  , 0 }
-
-
-
             };
 
             List<List<long>> result = newSensor.GetAllDifferencesForThatRow(filePath, index);
@@ -81,17 +79,11 @@ namespace test.day9
 
         [Theory]
         [InlineData("exampleFile.txt")]
-        public void asdasdasd(string fileName)
+        public void aaaaaaaaaaaa(string fileName)
         {
             var filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "../../../../aoc/day09/data/", fileName);
 
-            List<List<long>> input = new List<List<long>>
-            {
-                new List<long>{ 0,   3 ,  6 ,  9 , 12 , 15 },
-                new List<long>{ 3  , 3  , 3 ,  3  , 3 },
-                new List<long>{ 0, 0, 0, 0 },
-
-            };
+            List<List<long>> input = newSensor.GetAllDifferencesForThatRow(filePath, 0);
 
             long expected = 18;
 

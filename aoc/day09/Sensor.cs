@@ -12,13 +12,7 @@ namespace src.day09
         {
             List<string> data = ReadFileToList(filePath);
 
-            string row = data[index];
-
-            List<long> result = new List<long>();
-
-            result = ExtractNumbers(row);
-
-            return result;
+            return ExtractNumbers(data[index]);
         }
         public List<long> ExtractNumbers(string inputString)
         {
@@ -81,16 +75,12 @@ namespace src.day09
 
         public long AddStepsToAsALastElement(List<List<long>> input)
         {
-            // Add a new zero to the end of the last list
-            input[input.Count - 1].Add(0);
+            input[^1].Add(0);
 
-            // Iterate over the lists from the bottom up
             for (int i = input.Count - 1; i >= 1; i--)
             {
                 input[i - 1].Add(input[i - 1].Last() + input[i].Last());
-
             }
-
             return input[0].Last();
         }
 
@@ -103,10 +93,8 @@ namespace src.day09
             {
                 List<List<long>> holder = GetAllDifferencesForThatRow(filePath, i);
 
-                var asd = AddStepsToAsALastElement(holder);
-                result += asd;
+                result += AddStepsToAsALastElement(holder);
             }
-
             return result;
         }
     }
