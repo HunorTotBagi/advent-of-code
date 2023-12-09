@@ -1,5 +1,4 @@
-﻿using System.Runtime.CompilerServices;
-using FluentAssertions;
+﻿using FluentAssertions;
 using src.day09;
 using Xunit;
 
@@ -11,14 +10,14 @@ namespace test.day9
 
         [Theory]
         [InlineData("exampleFile.txt", 0)]
-        public void Should_get_row(string fileName, int index)
+        public void Should_get_row_based_on_index(string fileName, int index)
         {
             // Arrange
-            List<ulong> expected = new List<ulong> { 0, 3, 6, 9, 12, 15 };
+            List<long> expected = new List<long> { 0, 3, 6, 9, 12, 15 };
             var filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "../../../../aoc/day09/data/", fileName);
 
             // Act
-            List<ulong> result = newSensor.GetNumberListBasedOnIndex(filePath, index);
+            List<long> result = newSensor.GetNumberListBasedOnIndex(filePath, index);
 
             // Assert
             result.Should().BeEquivalentTo(expected);
@@ -28,11 +27,11 @@ namespace test.day9
         public void Should_get_next_row_calc()
         {
             // Arrange
-            List<ulong> input = new List<ulong> { 0, 3, 6, 9, 12, 15 };
-            List<ulong> expected = new List<ulong> { 3, 3, 3, 3, 3 };
+            List<long> input = new List<long> { 0, 3, 6, 9, 12, 15 };
+            List<long> expected = new List<long> { 3, 3, 3, 3, 3 };
 
             // Act
-            List<ulong> result = newSensor.GetNextRowCalculation(input);
+            List<long> result = newSensor.GetNextRowCalculation(input);
 
             // Assert
             result.Should().BeEquivalentTo(expected);
@@ -45,15 +44,14 @@ namespace test.day9
             var filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "../../../../aoc/day09/data/", fileName);
             int index = 0;
 
-            List<List<ulong>> expected = new List<List<ulong>>
+            List<List<long>> expected = new List<List<long>>
             {
-                new List<ulong>{ 0,   3 ,  6 ,  9 , 12 , 15 },
-                new List<ulong>{ 3  , 3  , 3 ,  3  , 3 },
-                new List<ulong>{ 0, 0, 0, 0 },
-
+                new List<long>{ 0, 3, 6, 9, 12, 15 },
+                new List<long>{ 3, 3, 3, 3, 3 },
+                new List<long>{ 0, 0, 0, 0 },
             };
 
-            List<List<ulong>> result = newSensor.GetAllDifferencesForThatRow(filePath, index);
+            List<List<long>> result = newSensor.GetAllDifferencesForThatRow(filePath, index);
 
             result.Should().BeEquivalentTo(expected);
         }
@@ -65,18 +63,18 @@ namespace test.day9
             var filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "../../../../aoc/day09/data/", fileName);
             int index = 1;
 
-            List<List<ulong>> expected = new List<List<ulong>>
+            List<List<long>> expected = new List<List<long>>
             {
-                new List<ulong>{ 1,   3 ,  6  ,10,  15 , 21},
-                new List<ulong>{ 2 ,  3 ,  4,   5  , 6 },
-                new List<ulong>{ 1 ,  1 ,  1,   1 },
-                new List<ulong>{ 0  , 0  , 0 }
+                new List<long>{ 1,   3 ,  6  ,10,  15 , 21},
+                new List<long>{ 2 ,  3 ,  4,   5  , 6 },
+                new List<long>{ 1 ,  1 ,  1,   1 },
+                new List<long>{ 0  , 0  , 0 }
 
 
 
             };
 
-            List<List<ulong>> result = newSensor.GetAllDifferencesForThatRow(filePath, index);
+            List<List<long>> result = newSensor.GetAllDifferencesForThatRow(filePath, index);
 
             result.Should().BeEquivalentTo(expected);
         }
@@ -87,25 +85,17 @@ namespace test.day9
         {
             var filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "../../../../aoc/day09/data/", fileName);
 
-            List<List<ulong>> input = new List<List<ulong>>
+            List<List<long>> input = new List<List<long>>
             {
-                new List<ulong>{ 0,   3 ,  6 ,  9 , 12 , 15 },
-                new List<ulong>{ 3  , 3  , 3 ,  3  , 3 },
-                new List<ulong>{ 0, 0, 0, 0 },
+                new List<long>{ 0,   3 ,  6 ,  9 , 12 , 15 },
+                new List<long>{ 3  , 3  , 3 ,  3  , 3 },
+                new List<long>{ 0, 0, 0, 0 },
 
             };
 
-            //List<List<ulong>> expected = new List<List<ulong>>
-            //{
-            //    new List<ulong>{ 0,   3 ,  6 ,  9 , 12 , 15, 18 },
-            //    new List<ulong>{ 3  , 3  , 3 ,  3  , 3 , 3},
-            //    new List<ulong>{ 0, 0, 0, 0 ,0},
+            long expected = 18;
 
-            //};
-
-            ulong expected = 18;
-
-            ulong result = newSensor.AddStepsToAsALastElement(input);
+            long result = newSensor.AddStepsToAsALastElement(input);
 
             result.Should().Be(expected);
         }
@@ -116,9 +106,9 @@ namespace test.day9
         {
             var filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "../../../../aoc/day09/data/", fileName);
 
-            ulong expected = 114;
+            long expected = 114;
 
-            ulong result = newSensor.CalcFinal(filePath);
+            long result = newSensor.CalcFinal(filePath);
 
             result.Should().Be(expected);
         }
@@ -129,9 +119,9 @@ namespace test.day9
         {
             var filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "../../../../aoc/day09/data/", fileName);
 
-            ulong expected = 114;
+            long expected = 114;
 
-            ulong result = newSensor.CalcFinal(filePath);
+            long result = newSensor.CalcFinal(filePath);
 
             result.Should().Be(expected);
         }

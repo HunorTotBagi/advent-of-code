@@ -8,35 +8,32 @@ namespace src.day09
 {
     public class Sensor
     {
-        public List<ulong> GetNumberListBasedOnIndex(string filePath, int index)
+        public List<long> GetNumberListBasedOnIndex(string filePath, int index)
         {
             List<string> data = ReadFileToList(filePath);
 
             string row = data[index];
 
-            List<ulong> result = new List<ulong>();
+            List<long> result = new List<long>();
 
             result = ExtractNumbers(row);
 
             return result;
         }
-        public List<ulong> ExtractNumbers(string input)
+        public List<long> ExtractNumbers(string inputString)
         {
-            List<ulong> ulongList = new List<ulong>();
-            Regex regex = new Regex(@"[+-]?\d+(\.\d+)?");
+            string[] numberStrings = inputString.Split(' ');
 
-            MatchCollection matches = regex.Matches(input);
-
-            foreach (Match match in matches)
+            List<long> numbers = new List<long>();
+            foreach (string numberString in numberStrings)
             {
-                if (ulong.TryParse(match.Value, out ulong result))
+                if (long.TryParse(numberString, out long number))
                 {
-                    ulongList.Add(result);
+                    numbers.Add(number);
                 }
-                // If you want to handle potential overflow or other errors, you can add appropriate logic here.
             }
 
-            return ulongList;
+            return numbers;
         }
 
 
@@ -50,37 +47,39 @@ namespace src.day09
             return linesList;
         }
 
-        public List<ulong> GetNextRowCalculation(List<ulong> stringRow)
+        public List<long> GetNextRowCalculation(List<long> stringRow)
         {
-            List<ulong> result = new List<ulong>();
+            List<long> result = new List<long>();
 
             for (int i = 0; i < stringRow.Count - 1; i++)
             {
-                ulong diff = stringRow[i + 1] - stringRow[i];
+                long diff = stringRow[i + 1] - stringRow[i];
                 result.Add(diff);
             }
 
             return result;
         }
 
-        public List<List<ulong>> GetAllDifferencesForThatRow(string filePath, int index)
+        public List<List<long>> GetAllDifferencesForThatRow(string filePath, int index)
         {
-            List<List<ulong>> storage = new List<List<ulong>>();
+            List<List<long>> storage = new List<List<long>>();
 
-            List<ulong> row = GetNumberListBasedOnIndex(filePath, index);
+            List<long> row = GetNumberListBasedOnIndex(filePath, index);
 
             storage.Add(row);
+            long rowSum = row.Sum();
 
-            while (storage[storage.Count - 1].Last() != 0)
+            while (rowSum != 0)
             {
 
-                storage.Add(GetNextRowCalculation(storage[storage.Count - 1]));
+                storage.Add(GetNextRowCalculation(storage[^1]));
+                rowSum = storage[^1].Sum();
             }
 
             return storage;
         }
 
-        public ulong AddStepsToAsALastElement(List<List<ulong>> input)
+        public long AddStepsToAsALastElement(List<List<long>> input)
         {
             // Add a new zero to the end of the last list
             input[input.Count - 1].Add(0);
@@ -95,14 +94,14 @@ namespace src.day09
             return input[0].Last();
         }
 
-        public ulong CalcFinal(string filePath)
+        public long CalcFinal(string filePath)
         {
             List<string> data = ReadFileToList(filePath);
-            ulong result = 0;
+            long result = 0;
 
             for (int i = 0; i < data.Count; i++)
             {
-                List<List<ulong>> holder = GetAllDifferencesForThatRow(filePath, i);
+                List<List<long>> holder = GetAllDifferencesForThatRow(filePath, i);
 
                 var asd = AddStepsToAsALastElement(holder);
                 result += asd;
