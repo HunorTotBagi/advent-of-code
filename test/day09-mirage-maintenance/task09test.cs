@@ -120,7 +120,7 @@ namespace test.day9
         }
 
         [Fact]
-        public void Should_add_correct_step0()
+        public void Should_extrapolate_0()
         {
             // Arrange
             var firstRow = newSensor.newExtractor(filePath1)[0];
@@ -128,14 +128,14 @@ namespace test.day9
             int expected = 18;
 
             // Act
-            int result = newSensor.AddStepsToAsALastElement(input);
+            int result = newSensor.Extrapolate(input);
 
             // Assert
             result.Should().Be(expected);
         }
 
         [Fact]
-        public void Should_add_correct_step1()
+        public void Should_extrapolate_1()
         {
             // Arrange
             var firstRow = newSensor.newExtractor(filePath1)[1];
@@ -143,14 +143,14 @@ namespace test.day9
             int expected = 28;
 
             // Act
-            int result = newSensor.AddStepsToAsALastElement(input);
+            int result = newSensor.Extrapolate(input);
 
             // Assert
             result.Should().Be(expected);
         }
 
         [Fact]
-        public void Should_add_correct_step2()
+        public void Should_extrapolate_2()
         {
             // Arrange
             var firstRow = newSensor.newExtractor(filePath1)[2];
@@ -158,14 +158,14 @@ namespace test.day9
             int expected = 68;
 
             // Act
-            int result = newSensor.AddStepsToAsALastElement(input);
+            int result = newSensor.Extrapolate(input);
 
             // Assert
             result.Should().Be(expected);
         }
 
         [Fact]
-        public void Should_ReveerseHistory_step0()
+        public void Should_extrapolate_backwards_0()
         {
             // Arrange
             var firstRow = newSensor.newExtractor(filePath1)[0];
@@ -173,14 +173,14 @@ namespace test.day9
             int expected = -3;
 
             // Act
-            int result = newSensor.ReverseHistory(input);
+            int result = newSensor.ExtrapolateBackwards(input);
 
             // Assert
             result.Should().Be(expected);
         }
 
         [Fact]
-        public void Should_ReveerseHistory_step1()
+        public void Should_extrapolate_backwards_1()
         {
             // Arrange
             var firstRow = newSensor.newExtractor(filePath1)[1];
@@ -188,14 +188,14 @@ namespace test.day9
             int expected = 0;
 
             // Act
-            int result = newSensor.ReverseHistory(input);
+            int result = newSensor.ExtrapolateBackwards(input);
 
             // Assert
             result.Should().Be(expected);
         }
 
         [Fact]
-        public void Should_ReveerseHistory_step2()
+        public void Should_extrapolate_backwards_2()
         {
             // Arrange
             var firstRow = newSensor.newExtractor(filePath1)[2];
@@ -203,7 +203,7 @@ namespace test.day9
             int expected = 5;
 
             // Act
-            int result = newSensor.ReverseHistory(input);
+            int result = newSensor.ExtrapolateBackwards(input);
 
             // Assert
             result.Should().Be(expected);
@@ -216,7 +216,7 @@ namespace test.day9
             int expected = 114;
 
             // Act
-            int result = newSensor.CalcFinal(filePath1);
+            int result = newSensor.GetNextNumberInTheSequence(filePath1);
 
             // Assert
             result.Should().Be(expected);
@@ -229,7 +229,7 @@ namespace test.day9
             int expected = 1581679977;
 
             // Act
-            int result = newSensor.CalcFinal(filePath2);
+            int result = newSensor.GetNextNumberInTheSequence(filePath2);
 
             // Assert
             result.Should().Be(expected);
@@ -242,7 +242,7 @@ namespace test.day9
             int expected = 889;
 
             // Act
-            int result = newSensor.CalcFinalBackwards(filePath2);
+            int result = newSensor.GetNextNumberInTheSequenceBackwards(filePath2);
 
             // Assert
             result.Should().Be(expected);

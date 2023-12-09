@@ -21,11 +21,10 @@
                     break;
                 }
             }
-
             return storage;
         }
 
-        public int AddStepsToAsALastElement(List<List<int>> input)
+        public int Extrapolate(List<List<int>> input)
         {
             input[^1].Add(0);
 
@@ -34,11 +33,10 @@
                 int lastElement = input[i].Last();
                 input[i - 1].Add(input[i - 1].Last() + lastElement);
             }
-
             return input[0][^1];
         }
 
-        public int ReverseHistory(List<List<int>> input)
+        public int ExtrapolateBackwards(List<List<int>> input)
         {
             input[^1].Add(0);
 
@@ -47,12 +45,11 @@
                 int lastElement = input[i].Last();
                 input[i - 1].Add(input[i - 1].First() - lastElement);
             }
-
             return input[0][^1];
         }
 
 
-        public int CalcFinal(string filePath)
+        public int GetNextNumberInTheSequence(string filePath)
         {
             List<List<int>> data = newExtractor(filePath);
 
@@ -60,13 +57,12 @@
 
             foreach (List<int> row in data)
             {
-                result += AddStepsToAsALastElement(GetAllDifferencesForThatRow(row));
+                result += Extrapolate(GetAllDifferencesForThatRow(row));
             }
-
             return result;
         }
 
-        public int CalcFinalBackwards(string filePath)
+        public int GetNextNumberInTheSequenceBackwards(string filePath)
         {
             List<List<int>> data = newExtractor(filePath);
 
@@ -74,9 +70,8 @@
 
             foreach (List<int> row in data)
             {
-                result += ReverseHistory(GetAllDifferencesForThatRow(row));
+                result += ExtrapolateBackwards(GetAllDifferencesForThatRow(row));
             }
-
             return result;
         }
 
@@ -90,12 +85,9 @@
 
         static List<List<int>> ReadFile(string filePath)
         {
-            return File.ReadAllLines(filePath)
-                       .Select(line => line.Split(' ')
+            return File.ReadAllLines(filePath).Select(line => line.Split(' ')
                                             .Select(value => int.TryParse(value, out int intValue) ? intValue : 0)
-                                            .ToList())
-                       .ToList();
+                                            .ToList()).ToList();
         }
-
     }
 }
