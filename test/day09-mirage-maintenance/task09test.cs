@@ -8,12 +8,13 @@ namespace test.day9
     {
         Sensor newSensor = CreateSensor();
 
-        string filePath1 = "C:\\Users\\htotbagi\\source\\repos\\aoc\\aoc\\day09\\data\\exampleFile.txt";
-        string filePath2 = "C:\\Users\\htotbagi\\source\\repos\\aoc\\aoc\\day09\\data\\realFile.txt";
+        string filePath1 = "C:\\Users\\htotbagi\\source\\repos\\aoc\\aoc\\day09-mirage-maintenance\\data\\exampleFile.txt";
+        string filePath2 = "C:\\Users\\htotbagi\\source\\repos\\aoc\\aoc\\day09-mirage-maintenance\\data\\realFile.txt";
 
         [Fact]
         public void Should_read_in_file()
         {
+            // Arrange
             List<List<int>> expected = new List<List<int>>
             {
                 new List<int> { 0, 3, 6, 9, 12, 15 },
@@ -78,6 +79,7 @@ namespace test.day9
         [Fact]
         public void Should_get_all_differences_for_specific_row1()
         {
+            // Arrange
             var input = newSensor.newExtractor(filePath1)[1];
 
             List<List<int>> expected = new List<List<int>>
@@ -88,14 +90,17 @@ namespace test.day9
                 new List<int>{ 0, 0, 0 },
             };
 
+            // Act
             List<List<int>> result = newSensor.GetAllDifferencesForThatRow(input);
 
+            // Assert
             result.Should().BeEquivalentTo(expected);
         }
 
         [Fact]
         public void Should_get_all_differences_for_specific_row2()
         {
+            // Arrange
             var input = newSensor.newExtractor(filePath1)[2];
 
             List<List<int>> expected = new List<List<int>>
@@ -107,8 +112,10 @@ namespace test.day9
                 new List<int>{ 0, 0 },
             };
 
+            // Act
             List<List<int>> result = newSensor.GetAllDifferencesForThatRow(input);
 
+            // Assert
             result.Should().BeEquivalentTo(expected);
         }
 
@@ -157,26 +164,29 @@ namespace test.day9
             result.Should().Be(expected);
         }
 
-        [Theory]
-        [InlineData("exampleFile.txt")]
-        public void TestCalcFinal(string fileName)
+        [Fact]
+        public void Should_return_sum_of_extrapolated_values_for_example_data()
         {
-            var filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "../../../../aoc/day09/data/", fileName);
-
+            // Arrange
             int expected = 114;
 
-            int result = newSensor.CalcFinal(filePath);
+            // Act
+            int result = newSensor.CalcFinal(filePath1);
 
+            // Assert
             result.Should().Be(expected);
         }
 
         [Fact]
-        public void Should_return_sum_of_extrapolated_values()
+        public void Should_return_sum_of_extrapolated_values_for_real_data()
         {
+            // Arrange
             int expected = 1581679977;
 
+            // Act
             int result = newSensor.CalcFinal(filePath2);
 
+            // Assert
             result.Should().Be(expected);
         }
 
