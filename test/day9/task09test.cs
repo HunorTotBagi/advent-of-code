@@ -8,13 +8,12 @@ namespace test.day9
     {
         Sensor newSensor = CreateSensor();
 
-        [Theory]
-        [InlineData("exampleFile.txt")]
-        public void Should_read_in_fie(string fileName)
-        {
-            // Arrange
-            var filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "../../../../aoc/day09/data/", fileName);
+        string filePath1 = "C:\\Users\\htotbagi\\source\\repos\\aoc\\aoc\\day09\\data\\exampleFile.txt";
+        string filePath2 = "C:\\Users\\htotbagi\\source\\repos\\aoc\\aoc\\day09\\data\\realFile.txt";
 
+        [Fact]
+        public void Should_read_in_file()
+        {
             List<List<int>> expected = new List<List<int>>
             {
                 new List<int> { 0, 3, 6, 9, 12, 15 },
@@ -23,7 +22,7 @@ namespace test.day9
             };
 
             // Act
-            List<List<int>> result = newSensor.newExtractor(filePath);
+            List<List<int>> result = newSensor.newExtractor(filePath1);
 
             // Assert
             result.Should().BeEquivalentTo(expected);
@@ -57,15 +56,11 @@ namespace test.day9
             result.Should().BeEquivalentTo(expected);
         }
 
-
-        [Theory]
-        [InlineData("exampleFile.txt")]
-        public void Get_next_number_for_specific_row(string fileName)
+        [Fact]
+        public void Should_get_all_differences_for_specific_row0()
         {
-            var filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "../../../../aoc/day09/data/", fileName);
-
-            var input = newSensor.newExtractor(filePath)[0];
-
+            // Arrange
+            var input = newSensor.newExtractor(filePath1)[0];
             List<List<int>> expected = new List<List<int>>
             {
                 new List<int>{ 0, 3, 6, 9, 12, 15 },
@@ -73,18 +68,17 @@ namespace test.day9
                 new List<int>{ 0, 0, 0, 0 },
             };
 
-            List<List<int>> result = newSensor.GetAllDifferencesForThatRow(filePath, input);
+            // Act
+            List<List<int>> result = newSensor.GetAllDifferencesForThatRow(input);
 
+            // Assert
             result.Should().BeEquivalentTo(expected);
         }
 
-        [Theory]
-        [InlineData("exampleFile.txt")]
-        public void Get_next_number_for_specific_row1(string fileName)
+        [Fact]
+        public void Should_get_all_differences_for_specific_row1()
         {
-            var filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "../../../../aoc/day09/data/", fileName);
-
-            var input = newSensor.newExtractor(filePath)[1];
+            var input = newSensor.newExtractor(filePath1)[1];
 
             List<List<int>> expected = new List<List<int>>
             {
@@ -94,18 +88,15 @@ namespace test.day9
                 new List<int>{ 0, 0, 0 },
             };
 
-            List<List<int>> result = newSensor.GetAllDifferencesForThatRow(filePath, input);
+            List<List<int>> result = newSensor.GetAllDifferencesForThatRow(input);
 
             result.Should().BeEquivalentTo(expected);
         }
 
-        [Theory]
-        [InlineData("exampleFile.txt")]
-        public void Get_next_number_for_specific_row2(string fileName)
+        [Fact]
+        public void Should_get_all_differences_for_specific_row2()
         {
-            var filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "../../../../aoc/day09/data/", fileName);
-
-            var input = newSensor.newExtractor(filePath)[2];
+            var input = newSensor.newExtractor(filePath1)[2];
 
             List<List<int>> expected = new List<List<int>>
             {
@@ -116,95 +107,78 @@ namespace test.day9
                 new List<int>{ 0, 0 },
             };
 
-            List<List<int>> result = newSensor.GetAllDifferencesForThatRow(filePath, input);
+            List<List<int>> result = newSensor.GetAllDifferencesForThatRow(input);
 
             result.Should().BeEquivalentTo(expected);
         }
 
-        //[Theory]
-        //[InlineData("exampleFile.txt")]
-        //public void Get_next_number_for_specific_row2(string fileName)
-        //{
-        //    var filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "../../../../aoc/day09/data/", fileName);
-        //    int index = 1;
+        [Fact]
+        public void Should_add_correct_step0()
+        {
+            // Arrange
+            var firstRow = newSensor.newExtractor(filePath1)[0];
+            List<List<int>> input = newSensor.GetAllDifferencesForThatRow(firstRow);
+            int expected = 18;
 
-        //    List<List<int>> expected = new List<List<int>>
-        //    {
-        //        new List<int>{ 1,   3 ,  6  ,10,  15 , 21},
-        //        new List<int>{ 2 ,  3 ,  4,   5  , 6 },
-        //        new List<int>{ 1 ,  1 ,  1,   1 },
-        //        new List<int>{ 0  , 0  , 0 }
-        //    };
+            // Act
+            int result = newSensor.AddStepsToAsALastElement(input);
 
-        //    List<List<int>> result = newSensor.GetAllDifferencesForThatRow(filePath, index);
+            // Assert
+            result.Should().Be(expected);
+        }
 
-        //    result.Should().BeEquivalentTo(expected);
-        //}
+        [Fact]
+        public void Should_add_correct_step1()
+        {
+            // Arrange
+            var firstRow = newSensor.newExtractor(filePath1)[1];
+            List<List<int>> input = newSensor.GetAllDifferencesForThatRow(firstRow);
+            int expected = 28;
 
-        //[Theory]
-        //[InlineData("exampleFile.txt")]
-        //public void aaaaaaaaaaaa(string fileName)
-        //{
-        //    var filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "../../../../aoc/day09/data/", fileName);
+            // Act
+            int result = newSensor.AddStepsToAsALastElement(input);
 
-        //    List<List<int>> input = newSensor.GetAllDifferencesForThatRow(filePath, 0);
+            // Assert
+            result.Should().Be(expected);
+        }
 
-        //    int expected = 18;
+        [Fact]
+        public void Should_add_correct_step2()
+        {
+            // Arrange
+            var firstRow = newSensor.newExtractor(filePath1)[2];
+            List<List<int>> input = newSensor.GetAllDifferencesForThatRow(firstRow);
+            int expected = 68;
 
-        //    int result = newSensor.AddStepsToAsALastElement(input);
+            // Act
+            int result = newSensor.AddStepsToAsALastElement(input);
 
-        //    result.Should().Be(expected);
-        //}
+            // Assert
+            result.Should().Be(expected);
+        }
 
-        //[Theory]
-        //[InlineData("exampleFile.txt")]
-        //public void TestCalcFinal(string fileName)
-        //{
-        //    // Assuming `newSensor` is an instance of the class you want to test
+        [Theory]
+        [InlineData("exampleFile.txt")]
+        public void TestCalcFinal(string fileName)
+        {
+            var filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "../../../../aoc/day09/data/", fileName);
 
-        //    // Construct the full path to the file
-        //    var filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "../../../../aoc/day09/data/", fileName);
+            int expected = 114;
 
-        //    // Set the expected result
-        //    int expected = 114;
+            int result = newSensor.CalcFinal(filePath);
 
-        //    // Call the method under test
-        //    int result = newSensor.CalcFinal(filePath);
+            result.Should().Be(expected);
+        }
 
-        //    // Assert the result using FluentAssertions
-        //    result.Should().Be(expected);
-        //}
+        [Fact]
+        public void Should_return_sum_of_extrapolated_values()
+        {
+            int expected = 1581679977;
 
-        //[Theory]
-        //[InlineData("realFile.txt")]
-        //public void asdawdwd(string fileName)
-        //{
-        //    var filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "../../../../aoc/day09/data/", fileName);
+            int result = newSensor.CalcFinal(filePath2);
 
-        //    int expected = 114;
-
-        //    int result = newSensor.CalcFinal(filePath);
-
-        //    result.Should().Be(expected);
-        //}
-
-        //[Theory]
-        //[InlineData("exampleFile.txt")]
-        //public void test_file_read(string fileName)
-        //{
-        //    var filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "../../../../aoc/day09/data/", fileName);
-
-        //    List<List<int>> asd = new List<List<int>>
-        //    {
-        //        new List<int>  { 1 ,2 ,3},
-        //        new List<int>  { 1 ,2 ,3},
-        //        new List<int>  { 1 ,2 ,3},
-        //    };
-
-        //    List<List<int>> result = newSensor.newExtractor(filePath);
-
-        //    result.Should().BeEquivalentTo(asd);
-        //}
+            result.Should().Be(expected);
+        }
 
         private static Sensor CreateSensor()
         {
