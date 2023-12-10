@@ -369,7 +369,7 @@
 
             for (int k = j; k < columns; k++)
             {
-                if (matrixWithNumbers[i][j] != 0)
+                if (matrixWithNumbers[i][k] != 0)
                 {
                     if (realMatrix[i][k] == '|' || realMatrix[i][k] == 'J' || realMatrix[i][k] == 'L')
                     {
