@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace src.day10
+﻿namespace src.day10
 {
     public class Pipe
     {
@@ -122,7 +120,7 @@ namespace src.day10
 
         private static void AddLeft(int currentIteration, List<List<int>> inputMatrix, List<List<char>> matrix, int i, int j, char pipe)
         {
-            if (IndexesInMatrixBound(matrix, i, j-1))
+            if (IndexesInMatrixBound(matrix, i, j - 1))
             {
                 if (matrix[i][j - 1] == pipe && inputMatrix[i][j - 1] == 0)
                 {
@@ -133,7 +131,7 @@ namespace src.day10
 
         private static void AddRight(int currentIteration, List<List<int>> inputMatrix, List<List<char>> matrix, int i, int j, char pipe)
         {
-            if (IndexesInMatrixBound(matrix, i, j+1))
+            if (IndexesInMatrixBound(matrix, i, j + 1))
             {
                 if (matrix[i][j + 1] == pipe && inputMatrix[i][j + 1] == 0)
                 {
@@ -145,7 +143,7 @@ namespace src.day10
 
         private static void AddTop(int currentIteration, List<List<int>> inputMatrix, List<List<char>> matrix, int i, int j, char pipe)
         {
-            if (IndexesInMatrixBound(matrix, i-1, j))
+            if (IndexesInMatrixBound(matrix, i - 1, j))
             {
                 if (matrix[i - 1][j] == pipe && inputMatrix[i - 1][j] == 0)
                 {
@@ -156,7 +154,7 @@ namespace src.day10
 
         private static void AddDown(int currentIteration, List<List<int>> inputMatrix, List<List<char>> matrix, int i, int j, char pipe)
         {
-            if (IndexesInMatrixBound(matrix, i+1, j))
+            if (IndexesInMatrixBound(matrix, i + 1, j))
             {
                 if (matrix[i + 1][j] == pipe && inputMatrix[i + 1][j] == 0)
                 {
@@ -220,7 +218,7 @@ namespace src.day10
 
                         if (matrix[i][j] == '|')
                         {
-                            if (IndexesInMatrixBound(matrix, i-1, j))
+                            if (IndexesInMatrixBound(matrix, i - 1, j))
                             {
                                 if ((matrix[i - 1][j] == '7' || matrix[i - 1][j] == 'F' || matrix[i - 1][j] == '|') && inputMatrix[i - 1][j] == 0)
                                 {
@@ -231,7 +229,7 @@ namespace src.day10
 
 
                             // Down
-                            if (IndexesInMatrixBound(matrix, i+1, j))
+                            if (IndexesInMatrixBound(matrix, i + 1, j))
                             {
                                 if ((matrix[i + 1][j] == 'J' || matrix[i + 1][j] == 'L' || matrix[i + 1][j] == '|') && inputMatrix[i + 1][j] == 0)
                                 {
@@ -245,7 +243,7 @@ namespace src.day10
                         if (matrix[i][j] == '-')
                         {
                             // Left
-                            if (IndexesInMatrixBound(matrix, i, j-1))
+                            if (IndexesInMatrixBound(matrix, i, j - 1))
                             {
                                 if ((matrix[i][j - 1] == 'L' || matrix[i][j - 1] == 'F' || matrix[i][j - 1] == '-') && inputMatrix[i][j - 1] == 0)
                                 {
@@ -254,14 +252,14 @@ namespace src.day10
                             }
 
                             // Right
-                            if (IndexesInMatrixBound(matrix, i, j+1))
+                            if (IndexesInMatrixBound(matrix, i, j + 1))
                             {
                                 if ((matrix[i][j + 1] == 'J' || matrix[i][j + 1] == '7' || matrix[i][j + 1] == '-') && inputMatrix[i][j + 1] == 0)
                                 {
                                     inputMatrix[i][j + 1] = currentIteration + 1;
                                 }
                             }
-                            
+
 
                         }
                     }
@@ -293,6 +291,28 @@ namespace src.day10
             return currentIteration;
         }
 
+        public List<List<int>> GetTraversedPath(string filePath)
+        {
+            List<List<int>> zeroMatrix = CreateZeroMatrixForPipe(filePath);
+
+            int currentIteration = 0;
+            List<List<int>> inputMatrix = CallForS(currentIteration, zeroMatrix, filePath);
+
+            currentIteration += 1;
+            while (true)
+            {
+                if (ThatNumberIsNotInMatrix(inputMatrix, currentIteration))
+                {
+                    break;
+                }
+                inputMatrix = CallEveryPipeCheck(inputMatrix, currentIteration, filePath);
+                currentIteration += 1;
+
+
+            }
+            return inputMatrix;
+        }
+
         public bool ThatNumberIsNotInMatrix(List<List<int>> inputMatrix, int currentIteration)
         {
             int row = inputMatrix.Count;
@@ -316,6 +336,53 @@ namespace src.day10
                 return true;
             }
             return false;
+        }
+
+        public int GetNumberOfTilesEnclosed(string realFilePath)
+        {
+            List<List<int>> matrixWithNumbers = GetTraversedPath(realFilePath);
+            List<List<char>> realMatrix = ReadTextFile(realFilePath);
+
+            int row = matrixWithNumbers.Count;
+            int columns = matrixWithNumbers[0].Count;
+
+            int numberOfPointsEnclosed = 0;
+
+            for (int i = 0; i < row; i++)
+            {
+                for (int j = 0; j < columns; j++)
+                {
+                    if (matrixWithNumbers[i][j] == 0)
+                    {
+                        numberOfPointsEnclosed += CheckIfPointIsInside(realMatrix, matrixWithNumbers, i, j);
+                    }
+                }
+            }
+            return numberOfPointsEnclosed;
+        }
+
+        private int CheckIfPointIsInside(List<List<char>> realMatrix, List<List<int>> matrixWithNumbers, int i, int j)
+        {
+            int columns = realMatrix[0].Count;
+
+            int numberOfCrossings = 0;
+
+            for (int k = j; k < columns; k++)
+            {
+                if (matrixWithNumbers[i][j] != 0)
+                {
+                    if (realMatrix[i][k] == '|' || realMatrix[i][k] == 'J' || realMatrix[i][k] == 'L')
+                    {
+                        numberOfCrossings += 1;
+                    }
+                }
+            }
+
+            if (numberOfCrossings % 2 == 0)
+            {
+                return 0;
+            }
+            return 1;
         }
     }
 }

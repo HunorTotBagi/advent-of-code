@@ -11,7 +11,10 @@ namespace test.day10
 
         string filePath = "C:\\Users\\htotbagi\\source\\repos\\aoc\\aoc\\day10\\data\\exampleData.txt";
         string filePath1 = "C:\\Users\\htotbagi\\source\\repos\\aoc\\aoc\\day10\\data\\exampleData1.txt";
+        string filePath2 = "C:\\Users\\htotbagi\\source\\repos\\aoc\\aoc\\day10\\data\\exampleData2.txt";
+        string filePath3 = "C:\\Users\\htotbagi\\source\\repos\\aoc\\aoc\\day10\\data\\exampleData3.txt";
         string realFilePath = "C:\\Users\\htotbagi\\source\\repos\\aoc\\aoc\\day10\\data\\realData.txt";
+        string realFilePath1 = "C:\\Users\\htotbagi\\source\\repos\\aoc\\aoc\\day10\\data\\realDataWithCorrectS.txt";
 
         [Fact]
         public void First()
@@ -220,10 +223,36 @@ namespace test.day10
         public void Should_retur_number_of_steps_realData()
         {
             // Arrange
-            int expected = 8;
+            int expected = 6831;
 
             // Act
             int result = newPipe.GetNumberOfSteps(realFilePath);
+
+            // Assert
+            result.Should().Be(expected);
+        }
+
+        [Fact]
+        public void Should_retur_number_of_tiles_enclosed_by_loops_example_data2()
+        {
+            // Arrange
+            int expected = 4;
+
+            // Act
+            int result = newPipe.GetNumberOfTilesEnclosed(filePath3);
+
+            // Assert
+            result.Should().Be(expected);
+        }
+
+        [Fact]
+        public void Should_retur_number_of_tiles_enclosed_by_loops()
+        {
+            // Arrange
+            int expected = 1;
+
+            // Act
+            int result = newPipe.GetNumberOfTilesEnclosed(realFilePath);
 
             // Assert
             result.Should().Be(expected);
