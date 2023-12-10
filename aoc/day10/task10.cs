@@ -2,56 +2,27 @@
 {
     public class Pipe
     {
-        public List<int> GetIndexOfStartingPosition(string filePath)
-        {
-            List<List<char>> matrix = ReadTextFile(filePath);
-
-            for (int i = 0; i < matrix.Count; i++)
-            {
-                for (int j = 0; j < matrix[0].Count; j++)
-                {
-                    if (matrix[i][j] == 'S')
-                    {
-                        return new List<int> { i, j };
-                    }
-                }
-            }
-            return new List<int> { -1, -1 };
-        }
-
         public List<List<char>> ReadTextFile(string filePath)
         {
             List<List<char>> grid = new List<List<char>>();
 
-            try
-            {
-                // Read all lines from the file
-                string[] lines = File.ReadAllLines(filePath);
+            string[] lines = File.ReadAllLines(filePath);
 
-                foreach (string line in lines)
+            foreach (string line in lines)
+            {
+                List<char> row = new List<char>();
+
+                foreach (char symbol in line)
                 {
-                    // Create a list to hold characters in each line
-                    List<char> row = new List<char>();
-
-                    // Iterate through characters in the line and add them to the list
-                    foreach (char symbol in line)
-                    {
-                        row.Add(symbol);
-                    }
-
-                    // Add the list of characters to the grid
-                    grid.Add(row);
+                    row.Add(symbol);
                 }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"An error occurred: {ex.Message}");
+                grid.Add(row);
             }
 
             return grid;
         }
 
-        public List<List<int>> CreateZeroMatrixForPipe(string filePath)
+        public List<List<int>> CreateMatrixWithAllZeros(string filePath)
         {
             List<List<char>> data = ReadTextFile(filePath);
             List<List<int>> matrix = new List<List<int>>();
@@ -79,6 +50,8 @@
                 {
                     if (matrix[i][j] == 'S')
                     {
+                        // TODO: fix this
+
                         AddLeft(currentIteration, inputMatrix, matrix, i, j, 'F');
                         AddRight(currentIteration, inputMatrix, matrix, i, j, '-');
                         //AddTop(currentIteration, inputMatrix, matrix, i, j, '|');
@@ -90,20 +63,14 @@
             return inputMatrix;
         }
 
-        private static bool IndexesInMatrixBound(List<List<char>> matrix, int i, int j)
+        private static bool IndexesAreWithinMatrixBounds(List<List<char>> matrix, int i, int j)
         {
-            int rows = matrix.Count;
-            int columns = matrix[0].Count;
-            if (0 <= i && i < rows && 0 <= j && j < columns)
-            {
-                return true;
-            }
-            return false;
+            return 0 <= i && i < matrix.Count && 0 <= j && j < matrix[0].Count;
         }
 
         private static void AddLeft(int currentIteration, List<List<int>> inputMatrix, List<List<char>> matrix, int i, int j, char pipe)
         {
-            if (IndexesInMatrixBound(matrix, i, j - 1))
+            if (IndexesAreWithinMatrixBounds(matrix, i, j - 1))
             {
                 if (matrix[i][j - 1] == pipe && inputMatrix[i][j - 1] == 0)
                 {
@@ -114,7 +81,7 @@
 
         private static void AddRight(int currentIteration, List<List<int>> inputMatrix, List<List<char>> matrix, int i, int j, char pipe)
         {
-            if (IndexesInMatrixBound(matrix, i, j + 1))
+            if (IndexesAreWithinMatrixBounds(matrix, i, j + 1))
             {
                 if (matrix[i][j + 1] == pipe && inputMatrix[i][j + 1] == 0)
                 {
@@ -125,7 +92,7 @@
 
         private static void AddTop(int currentIteration, List<List<int>> inputMatrix, List<List<char>> matrix, int i, int j, char pipe)
         {
-            if (IndexesInMatrixBound(matrix, i - 1, j))
+            if (IndexesAreWithinMatrixBounds(matrix, i - 1, j))
             {
                 if (matrix[i - 1][j] == pipe && inputMatrix[i - 1][j] == 0)
                 {
@@ -136,7 +103,7 @@
 
         private static void AddDown(int currentIteration, List<List<int>> inputMatrix, List<List<char>> matrix, int i, int j, char pipe)
         {
-            if (IndexesInMatrixBound(matrix, i + 1, j))
+            if (IndexesAreWithinMatrixBounds(matrix, i + 1, j))
             {
                 if (matrix[i + 1][j] == pipe && inputMatrix[i + 1][j] == 0)
                 {
@@ -149,12 +116,9 @@
         {
             List<List<char>> matrix = ReadTextFile(filePath);
 
-            int rows = matrix.Count;
-            int columns = matrix[0].Count;
-
-            for (int i = 0; i < rows; i++)
+            for (int i = 0; i < matrix.Count; i++)
             {
-                for (int j = 0; j < columns; j++)
+                for (int j = 0; j < matrix[0].Count; j++)
                 {
                     if (inputMatrix[i][j] == currentIteration)
                     {
@@ -163,6 +127,7 @@
                             AddRight(currentIteration, inputMatrix, matrix, i, j, '-');
                             AddRight(currentIteration, inputMatrix, matrix, i, j, 'J');
                             AddRight(currentIteration, inputMatrix, matrix, i, j, '7');
+
                             AddTop(currentIteration, inputMatrix, matrix, i, j, '|');
                             AddTop(currentIteration, inputMatrix, matrix, i, j, '7');
                             AddTop(currentIteration, inputMatrix, matrix, i, j, 'F');
@@ -173,6 +138,7 @@
                             AddLeft(currentIteration, inputMatrix, matrix, i, j, '-');
                             AddLeft(currentIteration, inputMatrix, matrix, i, j, 'L');
                             AddLeft(currentIteration, inputMatrix, matrix, i, j, 'F');
+
                             AddTop(currentIteration, inputMatrix, matrix, i, j, '|');
                             AddTop(currentIteration, inputMatrix, matrix, i, j, '7');
                             AddTop(currentIteration, inputMatrix, matrix, i, j, 'F');
@@ -183,6 +149,7 @@
                             AddLeft(currentIteration, inputMatrix, matrix, i, j, '-');
                             AddLeft(currentIteration, inputMatrix, matrix, i, j, 'L');
                             AddLeft(currentIteration, inputMatrix, matrix, i, j, 'F');
+
                             AddDown(currentIteration, inputMatrix, matrix, i, j, '|');
                             AddDown(currentIteration, inputMatrix, matrix, i, j, 'J');
                             AddDown(currentIteration, inputMatrix, matrix, i, j, 'L');
@@ -193,6 +160,7 @@
                             AddRight(currentIteration, inputMatrix, matrix, i, j, '-');
                             AddRight(currentIteration, inputMatrix, matrix, i, j, 'J');
                             AddRight(currentIteration, inputMatrix, matrix, i, j, '7');
+
                             AddDown(currentIteration, inputMatrix, matrix, i, j, '|');
                             AddDown(currentIteration, inputMatrix, matrix, i, j, 'J');
                             AddDown(currentIteration, inputMatrix, matrix, i, j, 'L');
@@ -200,60 +168,68 @@
 
                         if (matrix[i][j] == '|')
                         {
-                            if (IndexesInMatrixBound(matrix, i - 1, j))
-                            {
-                                if ((matrix[i - 1][j] == '7' || matrix[i - 1][j] == 'F' || matrix[i - 1][j] == '|') && inputMatrix[i - 1][j] == 0)
-                                {
-                                    inputMatrix[i - 1][j] = currentIteration + 1;
-                                }
-                            }
-                            // Top
-
-
-                            // Down
-                            if (IndexesInMatrixBound(matrix, i + 1, j))
-                            {
-                                if ((matrix[i + 1][j] == 'J' || matrix[i + 1][j] == 'L' || matrix[i + 1][j] == '|') && inputMatrix[i + 1][j] == 0)
-                                {
-                                    inputMatrix[i + 1][j] = currentIteration + 1;
-                                }
-                            }
-
-
+                            AddTopForVerticalPipe(inputMatrix, currentIteration, matrix, i, j);
+                            AddDownForVerticalPipe(inputMatrix, currentIteration, matrix, i, j);
                         }
 
                         if (matrix[i][j] == '-')
                         {
-                            // Left
-                            if (IndexesInMatrixBound(matrix, i, j - 1))
-                            {
-                                if ((matrix[i][j - 1] == 'L' || matrix[i][j - 1] == 'F' || matrix[i][j - 1] == '-') && inputMatrix[i][j - 1] == 0)
-                                {
-                                    inputMatrix[i][j - 1] = currentIteration + 1;
-                                }
-                            }
-
-                            // Right
-                            if (IndexesInMatrixBound(matrix, i, j + 1))
-                            {
-                                if ((matrix[i][j + 1] == 'J' || matrix[i][j + 1] == '7' || matrix[i][j + 1] == '-') && inputMatrix[i][j + 1] == 0)
-                                {
-                                    inputMatrix[i][j + 1] = currentIteration + 1;
-                                }
-                            }
-
-
+                            AddLeftForHorizontalPipe(inputMatrix, currentIteration, matrix, i, j);
+                            AddRightForHorizontalPipe(inputMatrix, currentIteration, matrix, i, j);
                         }
                     }
                 }
             }
-
             return inputMatrix;
+        }
+
+        private static void AddRightForHorizontalPipe(List<List<int>> inputMatrix, int currentIteration, List<List<char>> matrix, int i, int j)
+        {
+            if (IndexesAreWithinMatrixBounds(matrix, i, j + 1))
+            {
+                if ((matrix[i][j + 1] == 'J' || matrix[i][j + 1] == '7' || matrix[i][j + 1] == '-') && inputMatrix[i][j + 1] == 0)
+                {
+                    inputMatrix[i][j + 1] = currentIteration + 1;
+                }
+            }
+        }
+
+        private static void AddLeftForHorizontalPipe(List<List<int>> inputMatrix, int currentIteration, List<List<char>> matrix, int i, int j)
+        {
+            if (IndexesAreWithinMatrixBounds(matrix, i, j - 1))
+            {
+                if ((matrix[i][j - 1] == 'L' || matrix[i][j - 1] == 'F' || matrix[i][j - 1] == '-') && inputMatrix[i][j - 1] == 0)
+                {
+                    inputMatrix[i][j - 1] = currentIteration + 1;
+                }
+            }
+        }
+
+        private static void AddDownForVerticalPipe(List<List<int>> inputMatrix, int currentIteration, List<List<char>> matrix, int i, int j)
+        {
+            if (IndexesAreWithinMatrixBounds(matrix, i + 1, j))
+            {
+                if ((matrix[i + 1][j] == 'J' || matrix[i + 1][j] == 'L' || matrix[i + 1][j] == '|') && inputMatrix[i + 1][j] == 0)
+                {
+                    inputMatrix[i + 1][j] = currentIteration + 1;
+                }
+            }
+        }
+
+        private static void AddTopForVerticalPipe(List<List<int>> inputMatrix, int currentIteration, List<List<char>> matrix, int i, int j)
+        {
+            if (IndexesAreWithinMatrixBounds(matrix, i - 1, j))
+            {
+                if ((matrix[i - 1][j] == '7' || matrix[i - 1][j] == 'F' || matrix[i - 1][j] == '|') && inputMatrix[i - 1][j] == 0)
+                {
+                    inputMatrix[i - 1][j] = currentIteration + 1;
+                }
+            }
         }
 
         public int GetNumberOfSteps(string filePath)
         {
-            List<List<int>> zeroMatrix = CreateZeroMatrixForPipe(filePath);
+            List<List<int>> zeroMatrix = CreateMatrixWithAllZeros(filePath);
 
             int currentIteration = 0;
             List<List<int>> inputMatrix = CallForS(currentIteration, zeroMatrix, filePath);
@@ -275,7 +251,7 @@
 
         public List<List<int>> GetTraversedPath(string filePath)
         {
-            List<List<int>> zeroMatrix = CreateZeroMatrixForPipe(filePath);
+            List<List<int>> zeroMatrix = CreateMatrixWithAllZeros(filePath);
 
             int currentIteration = 0;
             List<List<int>> inputMatrix = CallForS(currentIteration, zeroMatrix, filePath);
