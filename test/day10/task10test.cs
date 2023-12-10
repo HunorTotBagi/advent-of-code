@@ -65,6 +65,35 @@ namespace test.day10
             result.Should().BeEquivalentTo(expected);
         }
 
+        [Fact]
+        public void Should_add_one_S()
+        {
+            // Arrange
+            List<List<int>> inputMatrix = new List<List<int>>
+            {
+                new List<int> { 0, 0, 0, 0, 0},
+                new List<int> { 0, 0, 0, 0, 0},
+                new List<int> { 0, 0, 0, 0, 0},
+                new List<int> { 0, 0, 0, 0, 0},
+                new List<int> { 0, 0, 0, 0, 0},
+            };
+
+            List<List<int>> expected = new List<List<int>>
+            {
+                new List<int> { 0, 0, 0, 0, 0},
+                new List<int> { 0, 0, 1, 0, 0},
+                new List<int> { 0, 1, 0, 0, 0},
+                new List<int> { 0, 0, 0, 0, 0},
+                new List<int> { 0, 0, 0, 0, 0},
+            };
+
+            // Act
+            List<List<int>> result = newPipe.CallForS(inputMatrix, filePath);
+
+            // Assert
+            result.Should().BeEquivalentTo(expected);
+        }
+
         private static Pipe CreatePipe()
         {
             return new Pipe();
