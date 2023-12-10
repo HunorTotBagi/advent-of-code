@@ -10,6 +10,18 @@ namespace test.day11
         string filePath2 = "C:\\Users\\htotbagi\\source\\repos\\aoc\\aoc\\day11\\data\\exampleData2.txt";
         string realFilePath = "C:\\Users\\htotbagi\\source\\repos\\aoc\\aoc\\day11\\data\\realData.txt";
 
+        [Theory]
+        [InlineData("asd")]
+        public void Should1(string fileName)
+        {
+            // Arrange
+            var filePath = AppDomain.CurrentDomain.BaseDirectory + "../../../../aoc/day11/data/" + fileName;
+
+            // Act
+
+            // Assert
+        }
+
         [Fact]
         public void Should()
         {
