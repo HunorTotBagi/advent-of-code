@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Diagnostics.Metrics;
-
-namespace src.day10
+﻿namespace src.day10
 {
     public class Pipe
     {
@@ -99,6 +96,7 @@ namespace src.day10
                 {
                     if (matrix[i][j] == 'S')
                     {
+
                         AddLeft(currentIteration, inputMatrix, matrix, i, j, '-');
                         AddRight(currentIteration, inputMatrix, matrix, i, j, '-');
                         AddTop(currentIteration, inputMatrix, matrix, i, j, '|');
@@ -110,35 +108,59 @@ namespace src.day10
             return inputMatrix;
         }
 
+        private static bool IndexesInMatrixBound(List<List<char>> matrix, int i, int j)
+        {
+            int rows = matrix.Count;
+            int columns = matrix[0].Count;
+            if (0 <= i && i < rows && 0 <= j && j < columns)
+            {
+                return true;
+            }
+            return false;
+        }
+
         private static void AddLeft(int currentIteration, List<List<int>> inputMatrix, List<List<char>> matrix, int i, int j, char pipe)
         {
-            if (matrix[i][j - 1] == pipe && inputMatrix[i][j - 1] == 0)
+            if (IndexesInMatrixBound(matrix, i, j-1))
             {
-                inputMatrix[i][j - 1] = currentIteration + 1;
+                if (matrix[i][j - 1] == pipe && inputMatrix[i][j - 1] == 0)
+                {
+                    inputMatrix[i][j - 1] = currentIteration + 1;
+                }
             }
         }
 
         private static void AddRight(int currentIteration, List<List<int>> inputMatrix, List<List<char>> matrix, int i, int j, char pipe)
         {
-            if (matrix[i][j + 1] == pipe && inputMatrix[i][j + 1] == 0)
+            if (IndexesInMatrixBound(matrix, i, j+1))
             {
-                inputMatrix[i][j + 1] = currentIteration + 1;
+                if (matrix[i][j + 1] == pipe && inputMatrix[i][j + 1] == 0)
+                {
+                    inputMatrix[i][j + 1] = currentIteration + 1;
+                }
             }
+
         }
 
         private static void AddTop(int currentIteration, List<List<int>> inputMatrix, List<List<char>> matrix, int i, int j, char pipe)
         {
-            if (matrix[i - 1][j] == pipe && inputMatrix[i- 1][j] == 0)
+            if (IndexesInMatrixBound(matrix, i-1, j))
             {
-                inputMatrix[i - 1][j] = currentIteration + 1;
+                if (matrix[i - 1][j] == pipe && inputMatrix[i - 1][j] == 0)
+                {
+                    inputMatrix[i - 1][j] = currentIteration + 1;
+                }
             }
         }
 
         private static void AddDown(int currentIteration, List<List<int>> inputMatrix, List<List<char>> matrix, int i, int j, char pipe)
         {
-            if (matrix[i + 1][j] == pipe && inputMatrix[i +1 ][j] == 0)
+            if (IndexesInMatrixBound(matrix, i+1, j))
             {
-                inputMatrix[i + 1][j] = currentIteration + 1;
+                if (matrix[i + 1][j] == pipe && inputMatrix[i + 1][j] == 0)
+                {
+                    inputMatrix[i + 1][j] = currentIteration + 1;
+                }
             }
         }
 
@@ -181,33 +203,49 @@ namespace src.day10
 
                         if (matrix[i][j] == '|')
                         {
-                            // Top
-                            if ((matrix[i - 1][j] == '7' || matrix[i - 1][j] == 'F') && inputMatrix[i - 1][j] == 0)
+                            if (IndexesInMatrixBound(matrix, i-1, j))
                             {
-                                inputMatrix[i - 1][j] = currentIteration + 1;
+                                if ((matrix[i - 1][j] == '7' || matrix[i - 1][j] == 'F') && inputMatrix[i - 1][j] == 0)
+                                {
+                                    inputMatrix[i - 1][j] = currentIteration + 1;
+                                }
                             }
+                            // Top
+
 
                             // Down
-                            if ((matrix[i + 1][j] == 'J' || matrix[i + 1][j] == 'L') && inputMatrix[i + 1][j] == 0)
+                            if (IndexesInMatrixBound(matrix, i+1, j))
                             {
-                                inputMatrix[i + 1][j] = currentIteration + 1;
+                                if ((matrix[i + 1][j] == 'J' || matrix[i + 1][j] == 'L') && inputMatrix[i + 1][j] == 0)
+                                {
+                                    inputMatrix[i + 1][j] = currentIteration + 1;
+                                }
                             }
+
 
                         }
 
                         if (matrix[i][j] == '-')
                         {
                             // Left
-                            if ((matrix[i][j - 1] == 'L' || matrix[i][j - 1] == 'F') && inputMatrix[i][j - 1] == 0)
+                            if (IndexesInMatrixBound(matrix, i, j-1))
                             {
-                                inputMatrix[i][j - 1] = currentIteration + 1;
+                                if ((matrix[i][j - 1] == 'L' || matrix[i][j - 1] == 'F') && inputMatrix[i][j - 1] == 0)
+                                {
+                                    inputMatrix[i][j - 1] = currentIteration + 1;
+                                }
                             }
 
-                            // Right
-                            if ((matrix[i][j + 1] == 'J' || matrix[i][j + 1] == '7') && inputMatrix[i][j + 1] == 0)
+
+                            if (IndexesInMatrixBound(matrix, i, j+1))
                             {
-                                inputMatrix[i][j + 1] = currentIteration + 1;
+                                if ((matrix[i][j + 1] == 'J' || matrix[i][j + 1] == '7') && inputMatrix[i][j + 1] == 0)
+                                {
+                                    inputMatrix[i][j + 1] = currentIteration + 1;
+                                }
                             }
+                            // Right
+
                         }
                     }
                 }
@@ -233,7 +271,7 @@ namespace src.day10
                     break;
                 }
             }
-            return currentIteration +1;
+            return currentIteration + 1;
         }
 
         public bool ThatNumberIsNotInMatrix(List<List<int>> inputMatrix, int currentIteration)
