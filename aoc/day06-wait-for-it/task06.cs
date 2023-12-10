@@ -2,21 +2,21 @@
 {
     public class Race
     {
-        public List<ulong> GetTimes(string filePath)
+        public List<ulong> GetRaceTimesFromFile(string filePath)
         {
             string startsWith = "Time:";
-            List<ulong> timeValues = ExtractTimeValues(filePath, startsWith);
+            List<ulong> timeValues = ExtractRaceTimeValues(filePath, startsWith);
             return timeValues;
         }
 
-        public List<ulong> GetDistances(string filePath)
+        public List<ulong> GetRaceDistancesFromFile(string filePath)
         {
             string startsWith = "Distance:";
-            List<ulong> timeValues = ExtractTimeValues(filePath, startsWith);
+            List<ulong> timeValues = ExtractRaceTimeValues(filePath, startsWith);
             return timeValues;
         }
 
-        public List<ulong> ExtractTimeValues(string filePath, string startsWith)
+        public List<ulong> ExtractRaceTimeValues(string filePath, string startsWith)
         {
             List<ulong> timeValues = new List<ulong>();
 
@@ -37,14 +37,13 @@
 
                 }
             }
-
             return timeValues;
         }
 
-        public ulong CalculateDifferentWaysForSpecificRace(string filePath, int raceNumber)
+        public ulong CalculateWaysToBeatRecordForRace(string filePath, int raceNumber)
         {
-            List<ulong> times = GetTimes(filePath);
-            List<ulong> distances = GetDistances(filePath);
+            List<ulong> times = GetRaceTimesFromFile(filePath);
+            List<ulong> distances = GetRaceDistancesFromFile(filePath);
 
             List<ulong> result = new List<ulong>();
 
@@ -60,21 +59,19 @@
                 }
                 counter -= 1;
             }
-
             return (ulong)result.Count();
         }
 
-        public ulong GetMarginError(string filePath)
+        public ulong CalculateMarginOfError(string filePath)
         {
-            List<ulong> times = GetTimes(filePath);
+            List<ulong> times = GetRaceTimesFromFile(filePath);
 
             ulong result = 1;
 
             for (ulong i = 0; i < (ulong)times.Count; i++)
             {
-                result *= CalculateDifferentWaysForSpecificRace(filePath, (int)i);
+                result *= CalculateWaysToBeatRecordForRace(filePath, (int)i);
             }
-
             return result;
         }
     }
