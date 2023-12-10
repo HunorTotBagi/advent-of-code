@@ -233,18 +233,15 @@
 
             int currentIteration = 0;
             List<List<int>> inputMatrix = CallForS(currentIteration, zeroMatrix, filePath);
-
             currentIteration += 1;
+
             while (true)
             {
-                if (ThatNumberIsNotInMatrix(inputMatrix, currentIteration))
-                {
+                if (ThatNumberOccursOnlyOneTime(inputMatrix, currentIteration))
                     break;
-                }
+
                 inputMatrix = CallEveryPipeCheck(inputMatrix, currentIteration, filePath);
                 currentIteration += 1;
-
-
             }
             return currentIteration;
         }
@@ -259,28 +256,22 @@
             currentIteration += 1;
             while (true)
             {
-                if (ThatNumberIsNotInMatrix(inputMatrix, currentIteration))
-                {
+                if (ThatNumberOccursOnlyOneTime(inputMatrix, currentIteration))
                     break;
-                }
+
                 inputMatrix = CallEveryPipeCheck(inputMatrix, currentIteration, filePath);
                 currentIteration += 1;
-
-
             }
             return inputMatrix;
         }
 
-        public bool ThatNumberIsNotInMatrix(List<List<int>> inputMatrix, int currentIteration)
+        public bool ThatNumberOccursOnlyOneTime(List<List<int>> inputMatrix, int currentIteration)
         {
-            int row = inputMatrix.Count;
-            int column = inputMatrix[0].Count;
-
             int counter = 0;
 
-            for (int i = 0; i < row; i++)
+            for (int i = 0; i < inputMatrix.Count; i++)
             {
-                for (int j = 0; j < column; j++)
+                for (int j = 0; j < inputMatrix[0].Count; j++)
                 {
                     if (inputMatrix[i][j] == currentIteration)
                     {
@@ -289,10 +280,8 @@
                 }
             }
 
-            if (counter == 1)
-            {
-                return true;
-            }
+            if (counter == 1) return true;
+
             return false;
         }
 
@@ -330,16 +319,12 @@
                 if (matrixWithNumbers[i][k] != 0)
                 {
                     if (realMatrix[i][k] == '|' || realMatrix[i][k] == 'J' || realMatrix[i][k] == 'L')
-                    {
                         numberOfCrossings += 1;
-                    }
                 }
             }
 
-            if (numberOfCrossings % 2 == 0)
-            {
-                return 0;
-            }
+            if (numberOfCrossings % 2 == 0) return 0;
+
             return 1;
         }
     }
