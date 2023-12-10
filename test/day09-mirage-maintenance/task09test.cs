@@ -6,7 +6,7 @@ namespace test.day09
 {
     public class task09test
     {
-        Sensor newSensor = CreateSensor();
+        task09 newSensor = CreateSensor();
 
         string filePath = "C:\\Users\\htotbagi\\source\\repos\\aoc\\aoc\\day09-mirage-maintenance\\data\\exampleFile.txt";
         string realFilePath = "C:\\Users\\htotbagi\\source\\repos\\aoc\\aoc\\day09-mirage-maintenance\\data\\realFile.txt";
@@ -248,9 +248,9 @@ namespace test.day09
             result.Should().Be(expected);
         }
 
-        private static Sensor CreateSensor()
+        private static task09 CreateSensor()
         {
-            return new Sensor();
+            return new task09();
         }
     }
 }

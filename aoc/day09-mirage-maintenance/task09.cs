@@ -1,6 +1,6 @@
 ﻿namespace src.day09
 {
-    public class Sensor
+    public class task09
     {
         public List<int> GetNextRowCalculation(List<int> stringRow)
         {
