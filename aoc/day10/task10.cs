@@ -51,47 +51,31 @@
             return grid;
         }
 
-        static List<List<int>> CreateZeroMatrix(int rows, int columns)
+        public List<List<int>> CreateZeroMatrixForPipe(string filePath)
         {
+            List<List<char>> data = ReadTextFile(filePath);
             List<List<int>> matrix = new List<List<int>>();
 
-            for (int i = 0; i < rows; i++)
+            for (int i = 0; i < data.Count; i++)
             {
                 List<int> row = new List<int>();
 
-                for (int j = 0; j < columns; j++)
+                for (int j = 0; j < data[0].Count; j++)
                 {
-                    // Add zero to each element in the row
                     row.Add(0);
                 }
-
-                // Add the row to the matrix
                 matrix.Add(row);
             }
-
             return matrix;
-        }
-
-        public List<List<int>> CreateZeroMatrixForPipe(string filePath)
-        {
-            List<List<char>> matrix = ReadTextFile(filePath);
-
-            int rows = matrix.Count;
-            int columns = matrix[0].Count;
-
-            return CreateZeroMatrix(rows, columns);
         }
 
         public List<List<int>> CallForS(int currentIteration, List<List<int>> inputMatrix, string filePath)
         {
             List<List<char>> matrix = ReadTextFile(filePath);
 
-            int rows = matrix.Count;
-            int columns = matrix[0].Count;
-
-            for (int i = 0; i < rows; i++)
+            for (int i = 0; i < matrix.Count; i++)
             {
-                for (int j = 0; j < columns; j++)
+                for (int j = 0; j < matrix[0].Count; j++)
                 {
                     if (matrix[i][j] == 'S')
                     {
@@ -103,7 +87,6 @@
                     }
                 }
             }
-
             return inputMatrix;
         }
 
@@ -138,7 +121,6 @@
                     inputMatrix[i][j + 1] = currentIteration + 1;
                 }
             }
-
         }
 
         private static void AddTop(int currentIteration, List<List<int>> inputMatrix, List<List<char>> matrix, int i, int j, char pipe)
@@ -352,7 +334,7 @@
             {
                 for (int j = 0; j < columns; j++)
                 {
-                    if (matrixWithNumbers[i][j] == 0)
+                    if (matrixWithNumbers[i][j] == 0 && realMatrix[i][j] != 'S')
                     {
                         numberOfPointsEnclosed += CheckIfPointIsInside(realMatrix, matrixWithNumbers, i, j);
                     }

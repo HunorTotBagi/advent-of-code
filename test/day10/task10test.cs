@@ -1,5 +1,4 @@
-﻿using System.ComponentModel;
-using FluentAssertions;
+﻿using FluentAssertions;
 using src.day10;
 using Xunit;
 
@@ -9,7 +8,7 @@ namespace test.day10
     {
         Pipe newPipe = CreatePipe();
 
-        string filePath = "C:\\Users\\htotbagi\\source\\repos\\aoc\\aoc\\day10\\data\\exampleData.txt";
+        string filePath0 = "C:\\Users\\htotbagi\\source\\repos\\aoc\\aoc\\day10\\data\\exampleData0.txt";
         string filePath1 = "C:\\Users\\htotbagi\\source\\repos\\aoc\\aoc\\day10\\data\\exampleData1.txt";
         string filePath2 = "C:\\Users\\htotbagi\\source\\repos\\aoc\\aoc\\day10\\data\\exampleData2.txt";
         string filePath3 = "C:\\Users\\htotbagi\\source\\repos\\aoc\\aoc\\day10\\data\\exampleData3.txt";
@@ -17,7 +16,7 @@ namespace test.day10
         string realFilePath1 = "C:\\Users\\htotbagi\\source\\repos\\aoc\\aoc\\day10\\data\\realDataWithCorrectS.txt";
 
         [Fact]
-        public void First()
+        public void Should_read_text_file()
         {
             // Arrange
             List<List<char>> expected = new List<List<char>>
@@ -30,23 +29,23 @@ namespace test.day10
             };
 
             // Act
-            List<List<char>> result = newPipe.ReadTextFile(filePath);
+            List<List<char>> result = newPipe.ReadTextFile(filePath0);
 
             // Assert
             result.Should().BeEquivalentTo(expected);
         }
 
         [Fact]
-        public void Should_find_the_index_of_S()
+        public void Should_find_index_of_starting_position()
         {
             // Arrange
             List<int> expected = new List<int> { 1, 1 };
 
             // Act
-            List<int> indexOfS = newPipe.GetIndexOfStartingPosition(filePath);
+            List<int> result = newPipe.GetIndexOfStartingPosition(filePath0);
 
             // Assert
-            indexOfS.Should().BeEquivalentTo(expected);
+            result.Should().BeEquivalentTo(expected);
         }
 
         [Fact]
@@ -63,14 +62,14 @@ namespace test.day10
             };
 
             // Act
-            List<List<int>> result = newPipe.CreateZeroMatrixForPipe(filePath);
+            List<List<int>> result = newPipe.CreateZeroMatrixForPipe(filePath0);
 
             // Assert
             result.Should().BeEquivalentTo(expected);
         }
 
         [Fact]
-        public void Should_add_one_S()
+        public void Should_mark_where_is_the_next_pipe_in_first_iteration()
         {
             // Arrange
             List<List<int>> inputMatrix = new List<List<int>>
@@ -94,14 +93,14 @@ namespace test.day10
             int currentIteration = 0;
 
             // Act
-            List<List<int>> result = newPipe.CallForS(currentIteration, inputMatrix, filePath);
+            List<List<int>> result = newPipe.CallForS(currentIteration, inputMatrix, filePath0);
 
             // Assert
             result.Should().BeEquivalentTo(expected);
         }
 
-        [Fact]  
-        public void Should_add_two_for_random_pipe()
+        [Fact]
+        public void Should_mark_where_is_the_next_pipe_in_second_iteration()
         {
             // Arrange
             List<List<int>> inputMatrix = new List<List<int>>
@@ -125,14 +124,14 @@ namespace test.day10
             int currentIteration = 1;
 
             // Act
-            List<List<int>> result = newPipe.CallEveryPipeCheck(inputMatrix, currentIteration, filePath);
+            List<List<int>> result = newPipe.CallEveryPipeCheck(inputMatrix, currentIteration, filePath0);
 
             // Assert
             result.Should().BeEquivalentTo(expected);
         }
 
         [Fact]
-        public void Should_add_three_for_random_pipe()
+        public void Should_mark_where_is_the_next_pipe_in_third_iteration()
         {
             // Arrange
             List<List<int>> inputMatrix = new List<List<int>>
@@ -156,14 +155,14 @@ namespace test.day10
             int currentIteration = 2;
 
             // Act
-            List<List<int>> result = newPipe.CallEveryPipeCheck(inputMatrix, currentIteration, filePath);
+            List<List<int>> result = newPipe.CallEveryPipeCheck(inputMatrix, currentIteration, filePath0);
 
             // Assert
             result.Should().BeEquivalentTo(expected);
         }
 
         [Fact]
-        public void Should_add_four_for_random_pipe()
+        public void Should_mark_where_is_the_next_pipe_in_fourth_iteration()
         {
             // Arrange
             List<List<int>> inputMatrix = new List<List<int>>
@@ -187,20 +186,33 @@ namespace test.day10
             int currentIteration = 3;
 
             // Act
-            List<List<int>> result = newPipe.CallEveryPipeCheck(inputMatrix, currentIteration, filePath);
+            List<List<int>> result = newPipe.CallEveryPipeCheck(inputMatrix, currentIteration, filePath0);
 
             // Assert
             result.Should().BeEquivalentTo(expected);
         }
 
         [Fact]
-        public void Should_retur_number_of_steps_exampleData()
+        public void Should_retur_number_of_steps_exampleData0()
         {
             // Arrange
             int expected = 4;
 
             // Act
-            int result = newPipe.GetNumberOfSteps(filePath);
+            int result = newPipe.GetNumberOfSteps(filePath0);
+
+            // Assert
+            result.Should().Be(expected);
+        }
+
+        [Fact]
+        public void Should_retur_number_of_tiles_enclosed_by_loops_exampleData0()
+        {
+            // Arrange
+            int expected = 1;
+
+            // Act
+            int result = newPipe.GetNumberOfTilesEnclosed(filePath0);
 
             // Assert
             result.Should().Be(expected);
@@ -220,6 +232,19 @@ namespace test.day10
         }
 
         [Fact]
+        public void Should_retur_number_of_tiles_enclosed_by_loops_exampleData1()
+        {
+            // Arrange
+            int expected = 1;
+
+            // Act
+            int result = newPipe.GetNumberOfTilesEnclosed(filePath1);
+
+            // Assert
+            result.Should().Be(expected);
+        }
+
+        [Fact]
         public void Should_retur_number_of_steps_realData()
         {
             // Arrange
@@ -233,23 +258,10 @@ namespace test.day10
         }
 
         [Fact]
-        public void Should_retur_number_of_tiles_enclosed_by_loops_example_data2()
-        {
-            // Arrange
-            int expected = 4;
-
-            // Act
-            int result = newPipe.GetNumberOfTilesEnclosed(filePath3);
-
-            // Assert
-            result.Should().Be(expected);
-        }
-
-        [Fact]
         public void Should_retur_number_of_tiles_enclosed_by_loops()
         {
             // Arrange
-            int expected = 1;
+            int expected = 305;
 
             // Act
             int result = newPipe.GetNumberOfTilesEnclosed(realFilePath);
