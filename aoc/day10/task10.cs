@@ -1,4 +1,6 @@
-﻿namespace src.day10
+﻿using System.Collections.Generic;
+
+namespace src.day10
 {
     public class Pipe
     {
@@ -89,18 +91,17 @@
             int rows = matrix.Count;
             int columns = matrix[0].Count;
 
-
             for (int i = 0; i < rows; i++)
             {
                 for (int j = 0; j < columns; j++)
                 {
                     if (matrix[i][j] == 'S')
                     {
-
                         AddLeft(currentIteration, inputMatrix, matrix, i, j, '-');
                         AddRight(currentIteration, inputMatrix, matrix, i, j, '-');
                         AddTop(currentIteration, inputMatrix, matrix, i, j, '|');
                         AddDown(currentIteration, inputMatrix, matrix, i, j, '|');
+                        break;
                     }
                 }
             }
@@ -256,20 +257,22 @@
 
         public int GetNumberOfSteps(string filePath)
         {
-            List<List<int>> startMatrix = CreateZeroMatrixForPipe(filePath);
+            List<List<int>> zeroMatrix = CreateZeroMatrixForPipe(filePath);
 
             int currentIteration = 0;
-            List<List<int>> inputMatrix = CallForS(currentIteration, startMatrix, filePath);
+            List<List<int>> inputMatrix = CallForS(currentIteration, zeroMatrix, filePath);
 
+            currentIteration += 1;
             while (true)
             {
-                inputMatrix = CallEveryPipeCheck(inputMatrix, currentIteration, filePath);
-                currentIteration += 1;
-
                 if (ThatNumberIsNotInMatrix(inputMatrix, currentIteration))
                 {
                     break;
                 }
+                inputMatrix = CallEveryPipeCheck(inputMatrix, currentIteration, filePath);
+                currentIteration += 1;
+
+
             }
             return currentIteration + 1;
         }
