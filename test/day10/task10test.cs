@@ -87,8 +87,72 @@ namespace test.day10
                 new List<int> { 0, 0, 0, 0, 0},
             };
 
+            int currentIteration = 0;
+
             // Act
-            List<List<int>> result = newPipe.CallForS(inputMatrix, filePath);
+            List<List<int>> result = newPipe.CallForS(currentIteration, inputMatrix, filePath);
+
+            // Assert
+            result.Should().BeEquivalentTo(expected);
+        }
+
+        [Fact]  
+        public void Should_add_two_for_random_pipe()
+        {
+            // Arrange
+            List<List<int>> inputMatrix = new List<List<int>>
+            {
+                new List<int> { 0, 0, 0, 0, 0},
+                new List<int> { 0, 0, 1, 0, 0},
+                new List<int> { 0, 1, 0, 0, 0},
+                new List<int> { 0, 0, 0, 0, 0},
+                new List<int> { 0, 0, 0, 0, 0},
+            };
+
+            List<List<int>> expected = new List<List<int>>
+            {
+                new List<int> { 0, 0, 0, 0, 0},
+                new List<int> { 0, 0, 1, 2, 0},
+                new List<int> { 0, 1, 0, 0, 0},
+                new List<int> { 0, 2, 0, 0, 0},
+                new List<int> { 0, 0, 0, 0, 0},
+            };
+
+            int currentIteration = 1;
+
+            // Act
+            List<List<int>> result = newPipe.CallEveryPipeCheck(inputMatrix, currentIteration, filePath);
+
+            // Assert
+            result.Should().BeEquivalentTo(expected);
+        }
+
+        [Fact]
+        public void Should_add_three_for_random_pipe()
+        {
+            // Arrange
+            List<List<int>> inputMatrix = new List<List<int>>
+            {
+                new List<int> { 0, 0, 0, 0, 0},
+                new List<int> { 0, 0, 1, 2, 0},
+                new List<int> { 0, 1, 0, 0, 0},
+                new List<int> { 0, 2, 0, 0, 0},
+                new List<int> { 0, 0, 0, 0, 0},
+            };
+
+            List<List<int>> expected = new List<List<int>>
+            {
+                new List<int> { 0, 0, 0, 0, 0},
+                new List<int> { 0, 0, 1, 2, 0},
+                new List<int> { 0, 1, 0, 3, 0},
+                new List<int> { 0, 2, 3, 0, 0},
+                new List<int> { 0, 0, 0, 0, 0},
+            };
+
+            int currentIteration = 2;
+
+            // Act
+            List<List<int>> result = newPipe.CallEveryPipeCheck(inputMatrix, currentIteration, filePath);
 
             // Assert
             result.Should().BeEquivalentTo(expected);

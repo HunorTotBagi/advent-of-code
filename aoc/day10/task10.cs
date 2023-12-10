@@ -82,7 +82,64 @@
             return CreateZeroMatrix(rows, columns);
         }
 
-        public List<List<int>> CallForS(List<List<int>> inputMatrix, string filePath)
+        public List<List<int>> CallForS(int currentIteration, List<List<int>> inputMatrix, string filePath)
+        {
+            List<List<char>> matrix = ReadTextFile(filePath);
+
+            int rows = matrix.Count;
+            int columns = matrix[0].Count;
+
+
+            for (int i = 0; i < rows; i++)
+            {
+                for (int j = 0; j < columns; j++)
+                {
+                    if (matrix[i][j] == 'S')
+                    {
+                        AddLeft(currentIteration, inputMatrix, matrix, i, j, '-');
+                        AddRight(currentIteration, inputMatrix, matrix, i, j, '-');
+                        AddTop(currentIteration, inputMatrix, matrix, i, j, '|');
+                        AddDown(currentIteration, inputMatrix, matrix, i, j, '|');
+                    }
+                }
+            }
+
+            return inputMatrix;
+        }
+
+        private static void AddLeft(int currentIteration, List<List<int>> inputMatrix, List<List<char>> matrix, int i, int j, char pipe)
+        {
+            if (matrix[i][j - 1] == pipe && inputMatrix[i][j - 1] == 0)
+            {
+                inputMatrix[i][j - 1] = currentIteration + 1;
+            }
+        }
+
+        private static void AddRight(int currentIteration, List<List<int>> inputMatrix, List<List<char>> matrix, int i, int j, char pipe)
+        {
+            if (matrix[i][j + 1] == pipe && inputMatrix[i][j + 1] == 0)
+            {
+                inputMatrix[i][j + 1] = currentIteration + 1;
+            }
+        }
+
+        private static void AddTop(int currentIteration, List<List<int>> inputMatrix, List<List<char>> matrix, int i, int j, char pipe)
+        {
+            if (matrix[i - 1][j] == pipe && inputMatrix[i- 1][j] == 0)
+            {
+                inputMatrix[i - 1][j] = currentIteration + 1;
+            }
+        }
+
+        private static void AddDown(int currentIteration, List<List<int>> inputMatrix, List<List<char>> matrix, int i, int j, char pipe)
+        {
+            if (matrix[i + 1][j] == pipe && inputMatrix[i +1 ][j] == 0)
+            {
+                inputMatrix[i + 1][j] = currentIteration + 1;
+            }
+        }
+
+        public List<List<int>> CallEveryPipeCheck(List<List<int>> inputMatrix, int currentIteration, string filePath)
         {
             List<List<char>> matrix = ReadTextFile(filePath);
 
@@ -93,49 +150,67 @@
             {
                 for (int j = 0; j < columns; j++)
                 {
-                    if (matrix[i][j] == 'S')
+                    if (inputMatrix[i][j] == currentIteration)
                     {
-                        AddLeft(inputMatrix, matrix, i, j, '-');
-                        AddRight(inputMatrix, matrix, i, j, '-');
-                        AddTop(inputMatrix, matrix, i, j, '|');
-                        AddDown(inputMatrix, matrix, i, j, '|');
+                        if (matrix[i][j] == 'L')
+                        {
+                            AddRight(currentIteration, inputMatrix, matrix, i, j, '-');
+                            AddTop(currentIteration, inputMatrix, matrix, i, j, '|');
+                        }
+
+                        if (matrix[i][j] == 'J')
+                        {
+                            AddLeft(currentIteration, inputMatrix, matrix, i, j, '-');
+                            AddTop(currentIteration, inputMatrix, matrix, i, j, '|');
+                        }
+
+                        if (matrix[i][j] == '7')
+                        {
+                            AddLeft(currentIteration, inputMatrix, matrix, i, j, '-');
+                            AddDown(currentIteration, inputMatrix, matrix, i, j, '|');
+                        }
+
+                        if (matrix[i][j] == 'F')
+                        {
+                            AddRight(currentIteration, inputMatrix, matrix, i, j, '-');
+                            AddDown(currentIteration, inputMatrix, matrix, i, j, '|');
+                        }
+
+                        if (matrix[i][j] == '|')
+                        {
+                            // Top
+                            if ((matrix[i - 1][j] == '7' || matrix[i - 1][j] == 'F') && inputMatrix[i - 1][j] == 0)
+                            {
+                                inputMatrix[i - 1][j] = currentIteration + 1;
+                            }
+
+                            // Down
+                            if ((matrix[i + 1][j] == 'J' || matrix[i + 1][j] == 'L') && inputMatrix[i + 1][j] == 0)
+                            {
+                                inputMatrix[i + 1][j] = currentIteration + 1;
+                            }
+
+                        }
+
+                        if (matrix[i][j] == '-')
+                        {
+                            // Left
+                            if ((matrix[i][j - 1] == 'L' || matrix[i][j - 1] == 'F') && inputMatrix[i][j - 1] == 0)
+                            {
+                                inputMatrix[i][j - 1] = currentIteration + 1;
+                            }
+
+                            // Right
+                            if ((matrix[i][j + 1] == 'J' || matrix[i][j + 1] == '7') && inputMatrix[i][j + 1] == 0)
+                            {
+                                inputMatrix[i][j + 1] = currentIteration + 1;
+                            }
+                        }
                     }
                 }
             }
 
             return inputMatrix;
-        }
-
-        private static void AddLeft(List<List<int>> inputMatrix, List<List<char>> matrix, int i, int j, char pipe)
-        {
-            if (matrix[i][j - 1] == pipe)
-            {
-                inputMatrix[i][j - 1] += 1;
-            }
-        }
-
-        private static void AddRight(List<List<int>> inputMatrix, List<List<char>> matrix, int i, int j, char pipe)
-        {
-            if (matrix[i][j + 1] == pipe)
-            {
-                inputMatrix[i][j + 1] += 1;
-            }
-        }
-
-        private static void AddTop(List<List<int>> inputMatrix, List<List<char>> matrix, int i, int j, char pipe)
-        {
-            if (matrix[i - 1][j] == pipe)
-            {
-                inputMatrix[i - 1][j] += 1;
-            }
-        }
-
-        private static void AddDown(List<List<int>> inputMatrix, List<List<char>> matrix, int i, int j, char pipe)
-        {
-            if (matrix[i + 1][j] == pipe)
-            {
-                inputMatrix[i + 1][j] += 1;
-            }
         }
     }
 }
