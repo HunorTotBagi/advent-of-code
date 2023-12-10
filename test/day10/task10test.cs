@@ -191,7 +191,7 @@ namespace test.day10
         }
 
         [Fact]
-        public void Should_retur_number_of_steps()
+        public void Should_retur_number_of_steps_exampleData()
         {
             // Arrange
             int expected = 4;
@@ -201,7 +201,32 @@ namespace test.day10
 
             // Assert
             result.Should().Be(expected);
+        }
 
+        [Fact]
+        public void Should_retur_number_of_steps_exampleData1()
+        {
+            // Arrange
+            int expected = 8;
+
+            // Act
+            int result = newPipe.GetNumberOfSteps(filePath1);
+
+            // Assert
+            result.Should().Be(expected);
+        }
+
+        [Fact]
+        public void Should_retur_number_of_steps_realData()
+        {
+            // Arrange
+            int expected = 8;
+
+            // Act
+            int result = newPipe.GetNumberOfSteps(realFilePath);
+
+            // Assert
+            result.Should().Be(expected);
         }
 
         private static Pipe CreatePipe()
