@@ -2,7 +2,7 @@
 using src.day09;
 using Xunit;
 
-namespace test.day9
+namespace test.day09
 {
     public class task09test
     {
