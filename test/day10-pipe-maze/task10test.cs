@@ -47,7 +47,7 @@ namespace test.day10
             };
 
             // Act
-            List<List<int>> result = newPipe.CreateMatrixWithAllZeros(filePath0);
+            List<List<int>> result = newPipe.CreateMatrixWithZeros(filePath0);
 
             // Assert
             result.Should().BeEquivalentTo(expected);
@@ -109,7 +109,7 @@ namespace test.day10
             int currentIteration = 1;
 
             // Act
-            List<List<int>> result = newPipe.CallEveryPipeCheck(inputMatrix, currentIteration, filePath0);
+            List<List<int>> result = newPipe.ProcessEveryPipeCheck(inputMatrix, currentIteration, filePath0);
 
             // Assert
             result.Should().BeEquivalentTo(expected);
@@ -140,7 +140,7 @@ namespace test.day10
             int currentIteration = 2;
 
             // Act
-            List<List<int>> result = newPipe.CallEveryPipeCheck(inputMatrix, currentIteration, filePath0);
+            List<List<int>> result = newPipe.ProcessEveryPipeCheck(inputMatrix, currentIteration, filePath0);
 
             // Assert
             result.Should().BeEquivalentTo(expected);
@@ -171,7 +171,7 @@ namespace test.day10
             int currentIteration = 3;
 
             // Act
-            List<List<int>> result = newPipe.CallEveryPipeCheck(inputMatrix, currentIteration, filePath0);
+            List<List<int>> result = newPipe.ProcessEveryPipeCheck(inputMatrix, currentIteration, filePath0);
 
             // Assert
             result.Should().BeEquivalentTo(expected);
