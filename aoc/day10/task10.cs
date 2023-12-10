@@ -1,4 +1,7 @@
-﻿namespace src.day10
+﻿using System.Collections.Generic;
+using System.Diagnostics.Metrics;
+
+namespace src.day10
 {
     public class Pipe
     {
@@ -211,6 +214,51 @@
             }
 
             return inputMatrix;
+        }
+
+        public int GetNumberOfSteps(string filePath)
+        {
+            List<List<int>> startMatrix = CreateZeroMatrixForPipe(filePath);
+
+            int currentIteration = 0;
+            List<List<int>> inputMatrix = CallForS(currentIteration, startMatrix, filePath);
+
+            while (true)
+            {
+                inputMatrix = CallEveryPipeCheck(inputMatrix, currentIteration, filePath);
+                currentIteration += 1;
+
+                if (ThatNumberIsNotInMatrix(inputMatrix, currentIteration))
+                {
+                    break;
+                }
+            }
+            return currentIteration +1;
+        }
+
+        public bool ThatNumberIsNotInMatrix(List<List<int>> inputMatrix, int currentIteration)
+        {
+            int row = inputMatrix.Count;
+            int column = inputMatrix[0].Count;
+
+            int counter = 0;
+
+            for (int i = 0; i < row; i++)
+            {
+                for (int j = 0; j < column; j++)
+                {
+                    if (inputMatrix[i][j] == currentIteration)
+                    {
+                        counter += 1;
+                    }
+                }
+            }
+
+            if (counter == 0)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

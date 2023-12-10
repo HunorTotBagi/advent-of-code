@@ -10,6 +10,7 @@ namespace test.day10
         Pipe newPipe = CreatePipe();
 
         string filePath = "C:\\Users\\htotbagi\\source\\repos\\aoc\\aoc\\day10\\data\\exampleData.txt";
+        string filePath1 = "C:\\Users\\htotbagi\\source\\repos\\aoc\\aoc\\day10\\data\\exampleData1.txt";
         string realFilePath = "C:\\Users\\htotbagi\\source\\repos\\aoc\\aoc\\day10\\data\\realData.txt";
 
         [Fact]
@@ -156,6 +157,51 @@ namespace test.day10
 
             // Assert
             result.Should().BeEquivalentTo(expected);
+        }
+
+        [Fact]
+        public void Should_add_four_for_random_pipe()
+        {
+            // Arrange
+            List<List<int>> inputMatrix = new List<List<int>>
+            {
+                new List<int> { 0, 0, 0, 0, 0},
+                new List<int> { 0, 0, 1, 2, 0},
+                new List<int> { 0, 1, 0, 3, 0},
+                new List<int> { 0, 2, 3, 0, 0},
+                new List<int> { 0, 0, 0, 0, 0},
+            };
+
+            List<List<int>> expected = new List<List<int>>
+            {
+                new List<int> { 0, 0, 0, 0, 0},
+                new List<int> { 0, 0, 1, 2, 0},
+                new List<int> { 0, 1, 0, 3, 0},
+                new List<int> { 0, 2, 3, 4, 0},
+                new List<int> { 0, 0, 0, 0, 0},
+            };
+
+            int currentIteration = 3;
+
+            // Act
+            List<List<int>> result = newPipe.CallEveryPipeCheck(inputMatrix, currentIteration, filePath);
+
+            // Assert
+            result.Should().BeEquivalentTo(expected);
+        }
+
+        [Fact]
+        public void Should_retur_number_of_steps()
+        {
+            // Arrange
+            int expected = 4;
+
+            // Act
+            int result = newPipe.GetNumberOfSteps(filePath);
+
+            // Assert
+            result.Should().Be(expected);
+
         }
 
         private static Pipe CreatePipe()
