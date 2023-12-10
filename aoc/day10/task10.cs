@@ -97,10 +97,10 @@ namespace src.day10
                 {
                     if (matrix[i][j] == 'S')
                     {
-                        AddLeft(currentIteration, inputMatrix, matrix, i, j, '-');
+                        AddLeft(currentIteration, inputMatrix, matrix, i, j, 'F');
                         AddRight(currentIteration, inputMatrix, matrix, i, j, '-');
-                        AddTop(currentIteration, inputMatrix, matrix, i, j, '|');
-                        AddDown(currentIteration, inputMatrix, matrix, i, j, '|');
+                        //AddTop(currentIteration, inputMatrix, matrix, i, j, '|');
+                        //AddDown(currentIteration, inputMatrix, matrix, i, j, '|');
                         break;
                     }
                 }
@@ -181,32 +181,48 @@ namespace src.day10
                         if (matrix[i][j] == 'L')
                         {
                             AddRight(currentIteration, inputMatrix, matrix, i, j, '-');
+                            AddRight(currentIteration, inputMatrix, matrix, i, j, 'J');
+                            AddRight(currentIteration, inputMatrix, matrix, i, j, '7');
                             AddTop(currentIteration, inputMatrix, matrix, i, j, '|');
+                            AddTop(currentIteration, inputMatrix, matrix, i, j, '7');
+                            AddTop(currentIteration, inputMatrix, matrix, i, j, 'F');
                         }
 
                         if (matrix[i][j] == 'J')
                         {
                             AddLeft(currentIteration, inputMatrix, matrix, i, j, '-');
+                            AddLeft(currentIteration, inputMatrix, matrix, i, j, 'L');
+                            AddLeft(currentIteration, inputMatrix, matrix, i, j, 'F');
                             AddTop(currentIteration, inputMatrix, matrix, i, j, '|');
+                            AddTop(currentIteration, inputMatrix, matrix, i, j, '7');
+                            AddTop(currentIteration, inputMatrix, matrix, i, j, 'F');
                         }
 
                         if (matrix[i][j] == '7')
                         {
                             AddLeft(currentIteration, inputMatrix, matrix, i, j, '-');
+                            AddLeft(currentIteration, inputMatrix, matrix, i, j, 'L');
+                            AddLeft(currentIteration, inputMatrix, matrix, i, j, 'F');
                             AddDown(currentIteration, inputMatrix, matrix, i, j, '|');
+                            AddDown(currentIteration, inputMatrix, matrix, i, j, 'J');
+                            AddDown(currentIteration, inputMatrix, matrix, i, j, 'L');
                         }
 
                         if (matrix[i][j] == 'F')
                         {
                             AddRight(currentIteration, inputMatrix, matrix, i, j, '-');
+                            AddRight(currentIteration, inputMatrix, matrix, i, j, 'J');
+                            AddRight(currentIteration, inputMatrix, matrix, i, j, '7');
                             AddDown(currentIteration, inputMatrix, matrix, i, j, '|');
+                            AddDown(currentIteration, inputMatrix, matrix, i, j, 'J');
+                            AddDown(currentIteration, inputMatrix, matrix, i, j, 'L');
                         }
 
                         if (matrix[i][j] == '|')
                         {
                             if (IndexesInMatrixBound(matrix, i-1, j))
                             {
-                                if ((matrix[i - 1][j] == '7' || matrix[i - 1][j] == 'F') && inputMatrix[i - 1][j] == 0)
+                                if ((matrix[i - 1][j] == '7' || matrix[i - 1][j] == 'F' || matrix[i - 1][j] == '|') && inputMatrix[i - 1][j] == 0)
                                 {
                                     inputMatrix[i - 1][j] = currentIteration + 1;
                                 }
@@ -217,7 +233,7 @@ namespace src.day10
                             // Down
                             if (IndexesInMatrixBound(matrix, i+1, j))
                             {
-                                if ((matrix[i + 1][j] == 'J' || matrix[i + 1][j] == 'L') && inputMatrix[i + 1][j] == 0)
+                                if ((matrix[i + 1][j] == 'J' || matrix[i + 1][j] == 'L' || matrix[i + 1][j] == '|') && inputMatrix[i + 1][j] == 0)
                                 {
                                     inputMatrix[i + 1][j] = currentIteration + 1;
                                 }
@@ -231,21 +247,21 @@ namespace src.day10
                             // Left
                             if (IndexesInMatrixBound(matrix, i, j-1))
                             {
-                                if ((matrix[i][j - 1] == 'L' || matrix[i][j - 1] == 'F') && inputMatrix[i][j - 1] == 0)
+                                if ((matrix[i][j - 1] == 'L' || matrix[i][j - 1] == 'F' || matrix[i][j - 1] == '-') && inputMatrix[i][j - 1] == 0)
                                 {
                                     inputMatrix[i][j - 1] = currentIteration + 1;
                                 }
                             }
 
-
+                            // Right
                             if (IndexesInMatrixBound(matrix, i, j+1))
                             {
-                                if ((matrix[i][j + 1] == 'J' || matrix[i][j + 1] == '7') && inputMatrix[i][j + 1] == 0)
+                                if ((matrix[i][j + 1] == 'J' || matrix[i][j + 1] == '7' || matrix[i][j + 1] == '-') && inputMatrix[i][j + 1] == 0)
                                 {
                                     inputMatrix[i][j + 1] = currentIteration + 1;
                                 }
                             }
-                            // Right
+                            
 
                         }
                     }
@@ -274,7 +290,7 @@ namespace src.day10
 
 
             }
-            return currentIteration + 1;
+            return currentIteration;
         }
 
         public bool ThatNumberIsNotInMatrix(List<List<int>> inputMatrix, int currentIteration)
@@ -295,7 +311,7 @@ namespace src.day10
                 }
             }
 
-            if (counter == 0)
+            if (counter == 1)
             {
                 return true;
             }
