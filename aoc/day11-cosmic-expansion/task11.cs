@@ -1,13 +1,14 @@
 ﻿namespace src.day11
 {
-    public class Galaxy
+    public class Universe
     {
         private List<List<char>> galaxy;
 
-        public Galaxy()
+        public Universe()
         {
             galaxy = ReadFileToGrid("C:\\Users\\htotbagi\\source\\repos\\aoc\\aoc\\day11-cosmic-expansion\\data\\inputExample.txt");
         }
+
         public List<List<ulong>> GetCoordinates()
         {
             List<List<ulong>> coordinates = new List<List<ulong>>();
@@ -25,19 +26,19 @@
             return coordinates;
         }
 
-        public bool EmptyRow(ulong rowIndex)
+        public bool RowIsEmpty(ulong rowIndex)
         {
             int rowIndexInt = (int)rowIndex;
             return galaxy[rowIndexInt].All(cell => cell == '.');
         }
 
-        public bool EmptyCol(ulong colIndex)
+        public bool ColISEmpty(ulong colIndex)
         {
             int colIndexInt = (int)colIndex;
             return galaxy.All(row => row[colIndexInt] == '.');
         }
 
-        public ulong GetDistanceBetweenTwoPoints(List<ulong> firstPoint, List<ulong> secondPoint, ulong expansion)
+        public ulong GetDistanceBetweenGalaxies(List<ulong> firstPoint, List<ulong> secondPoint, ulong orderOfExpansion)
         {
             ulong x1 = firstPoint[0], y1 = firstPoint[1];
             ulong x2 = secondPoint[0], y2 = secondPoint[1];
@@ -49,23 +50,23 @@
             for (ulong i = x1; i < x2; i++)
             {
                 result += 1;
-                if (EmptyRow(i))
+                if (RowIsEmpty(i))
                 {
-                    result += expansion - 1;
+                    result += orderOfExpansion - 1;
                 }
             }
             for (ulong j = y1; j < y2; j++)
             {
                 result += 1;
-                if (EmptyCol(j))
+                if (ColISEmpty(j))
                 {
-                    result += expansion - 1;
+                    result += orderOfExpansion - 1;
                 }
             }
             return result;
         }
 
-        public ulong GetFinal(ulong expansion)
+        public ulong GetTotalDistance(ulong orderOfExpansion)
         {
             ulong result = 0;
 
@@ -75,10 +76,9 @@
             {
                 for (int j = i + 1; j < coordinates.Count; j++)
                 {
-                    result = result + GetDistanceBetweenTwoPoints(coordinates[i], coordinates[j], expansion);
+                    result = result + GetDistanceBetweenGalaxies(coordinates[i], coordinates[j], orderOfExpansion);
                 }
             }
-
             return result;
         }
 
@@ -95,7 +95,6 @@
                     grid.Add(row);
                 }
             }
-
             return grid;
         }
     }

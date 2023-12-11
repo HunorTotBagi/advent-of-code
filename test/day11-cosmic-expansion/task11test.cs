@@ -6,10 +6,10 @@ namespace test.day11
 {
     public class task11test
     {
-        Galaxy newGalaxy = CreateGalaxy();
+        Universe newUniverse = CreateUniverse();
 
         [Fact]
-        public void Should_Get_coordinates()
+        public void Should_get_coordinates()
         {
             // Arrange
             List<List<ulong>> expected = new List<List<ulong>>
@@ -20,7 +20,7 @@ namespace test.day11
             };
 
             // Act
-            List<List<ulong>> result = newGalaxy.GetCoordinates();
+            List<List<ulong>> result = newUniverse.GetCoordinates();
 
             // Assert
             result.Should().BeEquivalentTo(expected);
@@ -31,8 +31,10 @@ namespace test.day11
         [InlineData(7)]
         public void Should_return_bool_on_index_row(ulong row)
         {
-            bool result = newGalaxy.EmptyRow(row);
+            // Act
+            bool result = newUniverse.RowIsEmpty(row);
 
+            // Assert
             result.Should().BeTrue();
         }
 
@@ -40,36 +42,46 @@ namespace test.day11
         [InlineData(2)]
         [InlineData(5)]
         [InlineData(8)]
-        public void Should_return_bool_on_index_col(ulong col)
+        public void Should_return_bool_on_index_column(ulong col)
         {
-            bool result = newGalaxy.EmptyCol(col);
+            // Act
+            bool result = newUniverse.ColISEmpty(col);
 
+            // Assert
             result.Should().BeTrue();
         }
 
         [Fact]
-        public void Should()
+        public void Should_get_distance_between_galaxies()
         {
-            List<ulong> first = new List<ulong> { 0,3};
+            // Arrange
+            ulong orderOfExpansion = 2;
+            List<ulong> first = new List<ulong> { 0, 3 };
             List<ulong> second = new List<ulong> { 1, 7 };
-            ulong expansion = 2;
 
-            ulong result = newGalaxy.GetDistanceBetweenTwoPoints(first, second, expansion);
+            // Act
+            ulong result = newUniverse.GetDistanceBetweenGalaxies(first, second, orderOfExpansion);
 
+            // Assert
             result.Should().Be(6);
         }
 
-        [Fact]
-        public void Final()
+        [Theory]
+        [InlineData(2, 374)]
+        [InlineData(10, 1030)]
+        [InlineData(100, 8410)]
+        public void Should_get_total_distance(ulong orderOfExpansion, ulong expected)
         {
-            ulong result = newGalaxy.GetFinal(2);
+            // Act
+            ulong result = newUniverse.GetTotalDistance(orderOfExpansion);
 
-            result.Should().Be(374);
+            // Assert
+            result.Should().Be(expected);
         }
 
-        private static Galaxy CreateGalaxy()
+        private static Universe CreateUniverse()
         {
-            return new Galaxy();
+            return new Universe();
         }
     }
 }
