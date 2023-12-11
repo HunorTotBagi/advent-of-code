@@ -2,6 +2,7 @@
 {
     public class Galaxy
     {
+
         public List<List<int>> GetCoordinates(string filePath)
         {
             List<List<char>> galaxy = ReadFileToGrid(filePath);
@@ -25,30 +26,16 @@
         {
             List<List<char>> galaxy = ReadFileToGrid(filePath);
 
-            int counter = 0;
-            for (int j = 0; j < galaxy[0].Count; j++)
-            {
-                if (galaxy[rowIndex][j] == '.')
-                {
-                    counter += 1;
-                }
-            }
-            return counter == galaxy[0].Count;
+            int count = galaxy[rowIndex].Count(cell => cell == '.');
+            return count == galaxy[rowIndex].Count;
         }
 
         public bool EmptyCol(string filePath, int colIndex)
         {
             List<List<char>> galaxy = ReadFileToGrid(filePath);
 
-            int counter = 0;
-            for (int i = 0; i < galaxy.Count; i++)
-            {
-                if (galaxy[i][colIndex] == '.')
-                {
-                    counter += 1;
-                }
-            }
-            return counter == galaxy.Count;
+            int count = galaxy.Count(row => row[colIndex] == '.');
+            return count == galaxy.Count;
         }
 
         public int GetDistanceBetweenTwoPoints(string filePath, List<int> a, List<int> b)
@@ -79,37 +66,25 @@
             return ans;
         }
 
+        public int GetFinal(string filePath)
+        {
+            int result = 0;
 
+            List<List<int>> coordinates = GetCoordinates(filePath);
 
-        //public bool EmptyCol(string filePath, int colIndex)
-        //{
-        //    List<List<char>> galaxy = ReadFileToGrid(filePath);
+            for (int i = 0; i < coordinates.Count; i++)
+            {
+                for (int j = 0; j < coordinates.Count; j++)
+                {
+                    if (j < i)
+                    {
+                        result += GetDistanceBetweenTwoPoints(filePath, coordinates[i], coordinates[j]);
+                    }
+                }
+            }
 
-        //    int counter = 0;
-        //    for (int i = 0; i < galaxy.Count; i++)
-        //    {
-        //        if (galaxy[i][colIndex] == '.')
-        //        {
-        //            counter += 1;
-        //        }
-        //    }
-        //    return counter == galaxy.Count;
-        //}
-
-        //public int Final()
-        //{
-        //    int ans = 0;
-
-        //    for (int idx1 = 0; idx1 < N; idx1++)
-        //    {
-        //        for (int idx2 = idx1 + 1; idx2 < N; idx2++)
-        //        {
-        //            int d = Dist(GetCoordinates[idx1], GetCoordinates[idx2]);
-        //            ans += d;
-        //        }
-        //    }
-        //    return ans;
-        //}
+            return result;
+        }
 
         public List<List<char>> ReadFileToGrid(string filePath)
         {
@@ -134,5 +109,7 @@
 
             return grid;
         }
+
+
     }
 }

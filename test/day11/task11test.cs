@@ -56,6 +56,22 @@ namespace test.day11
             result.Should().Be(6);
         }
 
+        [Fact]
+        public void Final()
+        {
+            int result = newGalaxy.GetFinal(filePath);
+
+            result.Should().Be(374);
+        }
+
+        [Fact]
+        public void Final1()
+        {
+            int result = newGalaxy.GetFinal(realFilePath);
+
+            result.Should().Be(9545480);
+        }
+
         private static Galaxy CreateGalaxy()
         {
             return new Galaxy();
