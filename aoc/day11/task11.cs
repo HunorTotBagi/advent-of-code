@@ -74,12 +74,9 @@
 
             for (int i = 0; i < coordinates.Count; i++)
             {
-                for (int j = 0; j < coordinates.Count; j++)
+                for (int j = i + 1; j < coordinates.Count; j++)
                 {
-                    if (j < i)
-                    {
-                        result += GetDistanceBetweenTwoPoints(filePath, coordinates[i], coordinates[j]);
-                    }
+                    result += GetDistanceBetweenTwoPoints(filePath, coordinates[i], coordinates[j]);
                 }
             }
 
