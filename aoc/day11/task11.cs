@@ -2,85 +2,11 @@
 {
     public class Galaxy
     {
+        private List<List<char>> galaxy;
 
-        public List<List<int>> GetCoordinates(string filePath)
+        public Galaxy()
         {
-            List<List<char>> galaxy = ReadFileToGrid(filePath);
-
-            List<List<int>> coordinates = new();
-
-            for (int i = 0; i < galaxy.Count; i++)
-            {
-                for (int j = 0; j < galaxy[0].Count; j++)
-                {
-                    if (galaxy[i][j] == '#')
-                    {
-                        coordinates.Add(new List<int> { i, j });
-                    }
-                }
-            }
-            return coordinates;
-        }
-
-        public bool EmptyRow(string filePath, int rowIndex)
-        {
-            List<List<char>> galaxy = ReadFileToGrid(filePath);
-
-            int count = galaxy[rowIndex].Count(cell => cell == '.');
-            return count == galaxy[rowIndex].Count;
-        }
-
-        public bool EmptyCol(string filePath, int colIndex)
-        {
-            List<List<char>> galaxy = ReadFileToGrid(filePath);
-
-            int count = galaxy.Count(row => row[colIndex] == '.');
-            return count == galaxy.Count;
-        }
-
-        public int GetDistanceBetweenTwoPoints(string filePath, List<int> a, List<int> b)
-        {
-            int i1 = a[0], j1 = a[1];
-            int i2 = b[0], j2 = b[1];
-
-            (i1, i2) = (Math.Min(i1, i2), Math.Max(i1, i2));
-            (j1, j2) = (Math.Min(j1, j2), Math.Max(j1, j2));
-
-            int ans = 0;
-            for (int i = i1; i < i2; i++)
-            {
-                ans += 1;
-                if (EmptyRow(filePath, i))
-                {
-                    ans += 1;
-                }
-            }
-            for (int j = j1; j < j2; j++)
-            {
-                ans += 1;
-                if (EmptyCol(filePath, j))
-                {
-                    ans += 1;
-                }
-            }
-            return ans;
-        }
-
-        public int GetFinal(string filePath)
-        {
-            int result = 0;
-
-            List<List<int>> coordinates = GetCoordinates(filePath);
-
-            for (int i = 0; i < coordinates.Count; i++)
-            {
-                for (int j = i + 1; j < coordinates.Count; j++)
-                {
-                    result += GetDistanceBetweenTwoPoints(filePath, coordinates[i], coordinates[j]);
-                }
-            }
-
-            return result;
+            galaxy = ReadFileToGrid("C:\\Users\\htotbagi\\source\\repos\\aoc\\aoc\\day11\\data\\realData.txt");
         }
 
         public List<List<char>> ReadFileToGrid(string filePath)
@@ -107,6 +33,78 @@
             return grid;
         }
 
+        public bool EmptyRow(ulong rowIndex)
+        {
+            int rowIndexInt = (int)rowIndex;
+            return galaxy[rowIndexInt].All(cell => cell == '.');
+        }
 
+        public bool EmptyCol(ulong colIndex)
+        {
+            int colIndexInt = (int)colIndex;
+            return galaxy.All(row => row[colIndexInt] == '.');
+        }
+
+        public ulong GetDistanceBetweenTwoPoints(List<ulong> a, List<ulong> b)
+        {
+            ulong i1 = a[0], j1 = a[1];
+            ulong i2 = b[0], j2 = b[1];
+
+            (i1, i2) = (Math.Min(i1, i2), Math.Max(i1, i2));
+            (j1, j2) = (Math.Min(j1, j2), Math.Max(j1, j2));
+
+            ulong ans = 0;
+            for (ulong i = i1; i < i2; i++)
+            {
+                ans += 1;
+                if (EmptyRow(i))
+                {
+                    ans += 1;
+                }
+            }
+            for (ulong j = j1; j < j2; j++)
+            {
+                ans += 1;
+                if (EmptyCol(j))
+                {
+                    ans += 1;
+                }
+            }
+            return ans;
+        }
+
+        public ulong GetFinal()
+        {
+            ulong result = 0;
+
+            List<List<ulong>> coordinates = GetCoordinates();
+
+            for (int i = 0; i < coordinates.Count; i++)
+            {
+                for (int j = i + 1; j < coordinates.Count; j++)
+                {
+                    result = result + GetDistanceBetweenTwoPoints(coordinates[i], coordinates[j]);
+                }
+            }
+
+            return result;
+        }
+
+        public List<List<ulong>> GetCoordinates()
+        {
+            List<List<ulong>> coordinates = new List<List<ulong>>();
+
+            for (int i = 0; i < galaxy.Count; i++)
+            {
+                for (int j = 0; j < galaxy[0].Count; j++)
+                {
+                    if (galaxy[i][j] == '#')
+                    {
+                        coordinates.Add(new List<ulong> { (ulong)i, (ulong)j });
+                    }
+                }
+            }
+            return coordinates;
+        }
     }
 }

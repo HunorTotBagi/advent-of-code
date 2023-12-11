@@ -6,19 +6,16 @@ namespace test.day11
 {
     public class task11test
     {
-        string filePath = "C:\\Users\\htotbagi\\source\\repos\\aoc\\aoc\\day11\\data\\exampleData0.txt";
-        string realFilePath = "C:\\Users\\htotbagi\\source\\repos\\aoc\\aoc\\day11\\data\\realData.txt";
-
         Galaxy newGalaxy = new Galaxy();
 
         [Fact]
         public void Should_Get_coordinates()
         {
             // Arrange
-            List<List<int>> exp = new List<List<int>>();
+            List<List<ulong>> exp = new List<List<ulong>>();
 
             // Act
-            List<List<int>> result = newGalaxy.GetCoordinates(filePath);
+            List<List<ulong>> result = newGalaxy.GetCoordinates();
 
             // Assert
             result.Should().BeEquivalentTo(exp);
@@ -27,9 +24,9 @@ namespace test.day11
         [Theory]
         [InlineData(3)]
         [InlineData(7)]
-        public void Should_return_bool_on_index_row(int row)
+        public void Should_return_bool_on_index_row(ulong row)
         {
-            bool result = newGalaxy.EmptyRow(filePath, row);
+            bool result = newGalaxy.EmptyRow(row);
 
             result.Should().BeTrue();
         }
@@ -38,9 +35,9 @@ namespace test.day11
         [InlineData(2)]
         [InlineData(5)]
         [InlineData(8)]
-        public void Should_return_bool_on_index_col(int col)
+        public void Should_return_bool_on_index_col(ulong col)
         {
-            bool result = newGalaxy.EmptyCol(filePath, col);
+            bool result = newGalaxy.EmptyCol(col);
 
             result.Should().BeTrue();
         }
@@ -48,10 +45,10 @@ namespace test.day11
         [Fact]
         public void Should()
         {
-            List<int> first = new List<int> { 0,3};
-            List<int> second = new List<int> { 1, 7 };
+            List<ulong> first = new List<ulong> { 0,3};
+            List<ulong> second = new List<ulong> { 1, 7 };
 
-            int result = newGalaxy.GetDistanceBetweenTwoPoints(filePath, first, second);
+            ulong result = newGalaxy.GetDistanceBetweenTwoPoints(first, second);
 
             result.Should().Be(6);
         }
@@ -59,18 +56,11 @@ namespace test.day11
         [Fact]
         public void Final()
         {
-            int result = newGalaxy.GetFinal(filePath);
+            ulong result = newGalaxy.GetFinal();
 
             result.Should().Be(374);
         }
 
-        [Fact]
-        public void Final1()
-        {
-            int result = newGalaxy.GetFinal(realFilePath);
-
-            result.Should().Be(9545480);
-        }
 
         private static Galaxy CreateGalaxy()
         {
