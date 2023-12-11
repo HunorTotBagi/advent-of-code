@@ -2,7 +2,7 @@
 using src.day06_wait_for_it;
 using Xunit;
 
-namespace test.day06_wait_for_it
+namespace Day06_Wait_for_it
 {
     public class RaceTests
     {

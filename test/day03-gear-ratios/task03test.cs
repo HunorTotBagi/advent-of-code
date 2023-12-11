@@ -1,7 +1,7 @@
 ﻿using FluentAssertions;
 using Xunit;
 
-namespace test.day03_gear_ratios
+namespace Day03_Gear_ratios
 {
     public class task03test
     {

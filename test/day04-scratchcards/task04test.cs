@@ -2,7 +2,7 @@
 using src.day04_scratchcards;
 using Xunit;
 
-namespace test.day04_scratchcards
+namespace Day04_Scratchcards
 {
     public class task04test
     {

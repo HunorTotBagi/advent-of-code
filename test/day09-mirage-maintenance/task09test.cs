@@ -2,7 +2,7 @@
 using src.day09;
 using Xunit;
 
-namespace test.day09
+namespace Day09_Mirage_maintenance
 {
     public class task09test
     {

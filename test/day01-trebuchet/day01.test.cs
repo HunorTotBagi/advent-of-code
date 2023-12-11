@@ -2,7 +2,7 @@ using aoc;
 using FluentAssertions;
 using Xunit;
 
-namespace test.day01_trebuhet
+namespace Day01_Trebuhet
 {
     public class Day01Test
     {

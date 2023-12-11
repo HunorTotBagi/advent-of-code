@@ -2,7 +2,7 @@
 using src.day10;
 using Xunit;
 
-namespace test.day10
+namespace Day10_Pipe_maze
 {
     public class task10test
     {

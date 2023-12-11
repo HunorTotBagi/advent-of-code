@@ -2,7 +2,7 @@
 using src.day07;
 using Xunit;
 
-namespace test.day07
+namespace Day07_Camel_cards
 {
     public class task07test
     {

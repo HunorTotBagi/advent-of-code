@@ -2,7 +2,7 @@
 using src.day11;
 using Xunit;
 
-namespace test.day11
+namespace Day11_Cosmis_expansion
 {
     public class task11test
     {

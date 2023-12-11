@@ -2,7 +2,7 @@
 using src.day02_cube_conundrum;
 using Xunit;
 
-namespace test.day02_cube_conundrum
+namespace Day02_Cube_conundrum
 {
     public class task02test
     {

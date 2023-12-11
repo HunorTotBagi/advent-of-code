@@ -2,7 +2,7 @@
 using src.day08_haunted_wasteland;
 using Xunit;
 
-namespace test.day08_haunted_wasteland
+namespace Day08_Haunted_wasteland
 {
     public class day08test
     {
