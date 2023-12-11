@@ -103,6 +103,35 @@
 
             return grid;
         }
+
+        public int GetShortestPath(int[] start, int[] end)
+        {
+            return Math.Abs(start[0] - end[0]) + Math.Abs(start[1] - end[1]);
+        }
+
+        public List<List<int>> GetAllCoordinates(string filePath0)
+        {
+            List<List<char>> galaxy = ExpanGalaxy(filePath0);
+
+            List<List<int>> result = new();
+
+            for (int i = 0; i < galaxy.Count; i++)
+            {
+                for (int j = 0; j < galaxy[0].Count; j++)
+                {
+                    if (galaxy[i][j] == '#')
+                    {
+                        result.Add(new List<int> { i, j });
+                    }
+                }
+            }
+            return result;
+        }
+
+        public int GetSum(string filePath0)
+        {
+            List<List<int>> GetAllCoordinates(string filePath0)
+        }
     }
 
 

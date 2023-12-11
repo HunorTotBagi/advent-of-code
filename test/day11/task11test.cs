@@ -37,6 +37,46 @@ namespace test.day11
             result.Should().BeEquivalentTo(expected);
         }
 
+        [Theory]
+        [InlineData(new[] { 6, 1 }, new[] { 11, 5 }, 9)]
+        [InlineData(new[] { 0, 0 }, new[] { 2 , 2 }, 4)]
+        [InlineData(new[] { 2, 0 }, new[] { 0 , 4 }, 6)]
+        public void Should_return_shortest_path(int[] start, int[] end, int expected)
+        {
+            // Arrange
+
+            // Act
+            int result = newGalaxy.GetShortestPath(start, end);
+
+            // Assert
+            result.Should().Be(expected);
+        }
+
+        [Fact]
+        public void Should_return_all_points()
+        {
+            // Act
+            List<List<int>> expected = new();
+
+            List<List<int>> result = newGalaxy.GetAllCoordinates(filePath0);
+
+            // Assert
+            result.Should().BeEquivalentTo(expected);
+        }
+
+        public void Should_return_summ_of_all_distances()
+        {
+            // Act
+            int expected = 374;
+
+            // Act
+            int result = newGalaxy.GetSum(filePath0);
+
+            // Assert
+            result.Should().Be(expected);
+        }
+
+
 
 
 
