@@ -64,5 +64,45 @@
 
             return 1;
         }
+
+        public int CompareHands(string hand1, string hand2)
+        {
+            int type1 = GetCardType(hand1);
+            int type2 = GetCardType(hand2);
+
+            if (type1 != type2)
+            {
+                return type2.CompareTo(type1);
+            }
+            else
+            {
+                for (int i = 0; i < hand1.Length; i++)
+                {
+                    if (hand1[i] != hand2[i])
+                    {
+                        return hand2[i].CompareTo(hand1[i]);
+                    }
+                }
+                return 0;
+            }
+        }
+
+        public int CalculateWinnings(string filePath)
+        {
+            var handsAndBids = ReadFile(filePath);
+
+            var orderedHands = handsAndBids.Keys.OrderByDescending(hand => GetCardType(hand));
+
+            int totalWinnings = 0;
+            int rank = 1;
+
+            foreach (var hand in orderedHands)
+            {
+                totalWinnings += handsAndBids[hand] * rank;
+                rank++;
+            }
+
+            return totalWinnings;
+        }
     }
 }

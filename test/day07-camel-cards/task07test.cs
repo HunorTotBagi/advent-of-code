@@ -12,7 +12,7 @@ namespace Day07_Camel_cards
         public void Should_read_in_file()
         {
             // Arrange
-            var filePath = AppDomain.CurrentDomain.BaseDirectory + "../../../../aoc/day11/data/exampleData0.txt";
+            string filePath = AppDomain.CurrentDomain.BaseDirectory + "../../../../aoc/day11/data/exampleData0.txt";
             Dictionary<string, int> expected = new Dictionary<string, int>
             {
                 { "32T3K" , 765 },
@@ -40,11 +40,7 @@ namespace Day07_Camel_cards
         public void CountOccurences_ShouldReturnExpectedResult(string card, char[] expectedChars, int[] expectedCounts)
         {
             // Arrange
-            Dictionary<char, int> expected = new Dictionary<char, int>();
-            for (int i = 0; i < expectedChars.Length; i++)
-            {
-                expected[expectedChars[i]] = expectedCounts[i];
-            }
+            Dictionary<char, int> expected = CreateDictionary(expectedChars, expectedCounts);
 
             // Act
             Dictionary<char, int> result = newHand.CountOccurences(card);
@@ -68,6 +64,40 @@ namespace Day07_Camel_cards
 
             // Assert
             result.Should().Be(expected);
+        }
+
+        [Theory]
+        [InlineData("KK677", "KTJJT", 4)]
+        public void Should_compare_hands(string firstHand, string secondHand, int expected)
+        {
+
+            var result = newHand.CompareHands(firstHand, secondHand);
+
+            result.Should().Be(expected);
+        }
+
+        [Fact]
+        public void Should_calculate_winnings()
+        {
+            // Arrange
+            string filePath = AppDomain.CurrentDomain.BaseDirectory + "../../../../aoc/day11/data/exampleData0.txt";
+
+            // Act
+            int result = newHand.CalculateWinnings(filePath);
+
+            // Assert
+            result.Should().Be(4);
+        }
+
+        public static Dictionary<char, int> CreateDictionary(char[] expectedChars, int[] expectedCounts)
+        {
+            Dictionary<char, int> expected = new Dictionary<char, int>();
+            for (int i = 0; i < expectedChars.Length; i++)
+            {
+                expected[expectedChars[i]] = expectedCounts[i];
+            }
+
+            return expected;
         }
 
         private static Hand CreateHand()
