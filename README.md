@@ -21,3 +21,5 @@ Day 08: [Haunted Wasteland](https://adventofcode.com/2023/day/8)
 Day 09: [Mirage Maintenance](https://adventofcode.com/2023/day/9)
 
 Day 10: [Pipe Maze](https://adventofcode.com/2023/day/10)
+
+Day 11: [Cosmic Expansion](https://adventofcode.com/2023/day/11)
