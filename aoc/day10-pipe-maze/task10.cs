@@ -1,4 +1,4 @@
-﻿namespace src.day10
+﻿namespace src.day10_pipe_maze
 {
     public class Pipe
     {

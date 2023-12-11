@@ -1,7 +1,4 @@
-﻿
-using System.Reflection.Metadata;
-
-namespace src.day07
+﻿namespace src.day07
 {
     //var lines = File.ReadAllLines("data/exampleData0.txt");
     public class Hand
@@ -18,7 +15,7 @@ namespace src.day07
             foreach (var line in lines)
             {
                 var parts = line.Split(' ');
-                data[parts[0]] = int.Parse(parts[1]);   
+                data[parts[0]] = int.Parse(parts[1]);
             }
             return data;
         }

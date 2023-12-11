@@ -4,7 +4,7 @@ using Xunit;
 
 namespace Day05_If_you_give_a_seed_a_fertilizer
 {
-    public class task05test
+    public class AlamacTests
     {
         public string filePath = AppDomain.CurrentDomain.BaseDirectory + "../../../../Day05Src/data/exampleAlamac.txt";
         Alamac newAlamac = CreateAlamac();

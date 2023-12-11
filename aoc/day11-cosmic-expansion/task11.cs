@@ -1,4 +1,4 @@
-﻿namespace src.day11
+﻿namespace src.day11_cosmic_expansion
 {
     public class Universe
     {

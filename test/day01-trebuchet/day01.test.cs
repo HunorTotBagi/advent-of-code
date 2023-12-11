@@ -1,10 +1,10 @@
-using aoc;
+using src.day01_trebuchet;
 using FluentAssertions;
 using Xunit;
 
 namespace Day01_Trebuhet
 {
-    public class Day01Test
+    public class DocumentTests
     {
         Document newDocument = CreateCalculator();
 

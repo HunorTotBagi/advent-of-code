@@ -1,9 +1,10 @@
 ﻿using FluentAssertions;
+using test.day03_gear_ratios;
 using Xunit;
 
 namespace Day03_Gear_ratios
 {
-    public class task03test
+    public class SchematicTests
     {
         Schematic newSchematic = CreateSchematic();
 

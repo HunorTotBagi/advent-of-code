@@ -1,6 +1,6 @@
-﻿namespace src.day09
+﻿namespace src.day09_mirage_maintenance
 {
-    public class task09
+    public class Sensor
     {
         public List<int> GetNextRowCalculation(List<int> stringRow)
         {

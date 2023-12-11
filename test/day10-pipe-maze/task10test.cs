@@ -1,10 +1,10 @@
 ﻿using FluentAssertions;
-using src.day10;
+using src.day10_pipe_maze;
 using Xunit;
 
 namespace Day10_Pipe_maze
 {
-    public class task10test
+    public class PipeTests
     {
         Pipe newPipe = CreatePipe();
 

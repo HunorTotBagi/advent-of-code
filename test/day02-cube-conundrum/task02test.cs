@@ -4,7 +4,7 @@ using Xunit;
 
 namespace Day02_Cube_conundrum
 {
-    public class task02test
+    public class BagTests
     {
         Bag newBag = CreateBag();
 

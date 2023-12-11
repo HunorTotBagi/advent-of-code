@@ -4,7 +4,7 @@ using Xunit;
 
 namespace Day08_Haunted_wasteland
 {
-    public class day08test
+    public class NetworkTests
     {
         Network newNetwork = CreateNetwork();
 

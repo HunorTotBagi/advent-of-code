@@ -4,7 +4,7 @@ using Xunit;
 
 namespace Day04_Scratchcards
 {
-    public class task04test
+    public class ScratchcardTests
     {
         Scratchcard card = CreateScratchcard();
 

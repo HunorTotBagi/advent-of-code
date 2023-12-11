@@ -1,10 +1,10 @@
 ﻿using FluentAssertions;
-using src.day11;
+using src.day11_cosmic_expansion;
 using Xunit;
 
 namespace Day11_Cosmis_expansion
 {
-    public class task11test
+    public class UniverseTests
     {
         Universe newUniverse = CreateUniverse();
 

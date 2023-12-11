@@ -4,7 +4,7 @@ using Xunit;
 
 namespace Day07_Camel_cards
 {
-    public class task07test
+    public class HandTests
     {
         Hand newHand = CreateHand();
 

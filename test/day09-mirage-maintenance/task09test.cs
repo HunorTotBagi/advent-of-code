@@ -1,12 +1,12 @@
 ﻿using FluentAssertions;
-using src.day09;
+using src.day09_mirage_maintenance;
 using Xunit;
 
 namespace Day09_Mirage_maintenance
 {
-    public class task09test
+    public class SensorTests
     {
-        task09 newSensor = CreateSensor();
+        Sensor newSensor = CreateSensor();
 
         string filePath = "C:\\Users\\htotbagi\\source\\repos\\aoc\\aoc\\day09-mirage-maintenance\\data\\exampleFile.txt";
         string realFilePath = "C:\\Users\\htotbagi\\source\\repos\\aoc\\aoc\\day09-mirage-maintenance\\data\\realFile.txt";
@@ -248,9 +248,9 @@ namespace Day09_Mirage_maintenance
             result.Should().Be(expected);
         }
 
-        private static task09 CreateSensor()
+        private static Sensor CreateSensor()
         {
-            return new task09();
+            return new Sensor();
         }
     }
 }

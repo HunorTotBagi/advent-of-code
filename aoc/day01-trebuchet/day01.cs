@@ -1,4 +1,4 @@
-﻿namespace aoc
+﻿namespace src.day01_trebuchet
 {
     public class Document
     {
