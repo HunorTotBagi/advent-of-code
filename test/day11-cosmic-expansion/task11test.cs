@@ -4,12 +4,12 @@ using Xunit;
 
 namespace Day11_Cosmis_expansion
 {
-    public class UniverseTests
+    public class GalacticUniverseTests
     {
-        Universe newUniverse = CreateUniverse();
+        GalacticUniverse newUniverse = CreateUniverse();
 
         [Fact]
-        public void Should_get_coordinates()
+        public void Should_get_galaxy_coordinates()
         {
             // Arrange
             List<List<ulong>> expected = new List<List<ulong>>
@@ -20,7 +20,7 @@ namespace Day11_Cosmis_expansion
             };
 
             // Act
-            List<List<ulong>> result = newUniverse.GetCoordinates();
+            List<List<ulong>> result = newUniverse.GetGalaxyCoordinates();
 
             // Assert
             result.Should().BeEquivalentTo(expected);
@@ -29,10 +29,10 @@ namespace Day11_Cosmis_expansion
         [Theory]
         [InlineData(3)]
         [InlineData(7)]
-        public void Should_return_bool_on_index_row(ulong row)
+        public void IsRowEmpty_should_return_true(ulong row)
         {
             // Act
-            bool result = newUniverse.RowIsEmpty(row);
+            bool result = newUniverse.IsRowEmpty(row);
 
             // Assert
             result.Should().BeTrue();
@@ -42,17 +42,17 @@ namespace Day11_Cosmis_expansion
         [InlineData(2)]
         [InlineData(5)]
         [InlineData(8)]
-        public void Should_return_bool_on_index_column(ulong col)
+        public void IsColumnEmpty_should_return_true(ulong col)
         {
             // Act
-            bool result = newUniverse.ColISEmpty(col);
+            bool result = newUniverse.IsColumnEmpty(col);
 
             // Assert
             result.Should().BeTrue();
         }
 
         [Fact]
-        public void Should_get_distance_between_galaxies()
+        public void Should_return_distance_between_galaxies()
         {
             // Arrange
             ulong orderOfExpansion = 2;
@@ -60,7 +60,7 @@ namespace Day11_Cosmis_expansion
             List<ulong> second = new List<ulong> { 1, 7 };
 
             // Act
-            ulong result = newUniverse.GetDistanceBetweenGalaxies(first, second, orderOfExpansion);
+            ulong result = newUniverse.CalculateDistanceBetweenGalaxies(first, second, orderOfExpansion);
 
             // Assert
             result.Should().Be(6);
@@ -70,18 +70,18 @@ namespace Day11_Cosmis_expansion
         [InlineData(2, 374)]
         [InlineData(10, 1030)]
         [InlineData(100, 8410)]
-        public void Should_get_total_distance(ulong orderOfExpansion, ulong expected)
+        public void Should_return_total_distance(ulong orderOfExpansion, ulong expected)
         {
             // Act
-            ulong result = newUniverse.GetTotalDistance(orderOfExpansion);
+            ulong result = newUniverse.CalculateTotalDistance(orderOfExpansion);
 
             // Assert
             result.Should().Be(expected);
         }
 
-        private static Universe CreateUniverse()
+        private static GalacticUniverse CreateUniverse()
         {
-            return new Universe();
+            return new GalacticUniverse();
         }
     }
 }
