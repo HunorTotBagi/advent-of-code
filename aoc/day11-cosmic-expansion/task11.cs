@@ -84,7 +84,8 @@
 
         public GalacticUniverse()
         {
-            galacticGrid = ReadFileToGalacticGrid("C:\\Users\\htotbagi\\source\\repos\\aoc\\aoc\\day11-cosmic-expansion\\data\\inputExample.txt");
+            var filePath = AppDomain.CurrentDomain.BaseDirectory + "../../../../aoc/day11-cosmic-expansion/data/inputExample.txt";
+            galacticGrid = ReadFileToGalacticGrid(filePath);
         }
     }
 }
