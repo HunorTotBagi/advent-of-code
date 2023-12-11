@@ -20,7 +20,7 @@ namespace test.day11
             List<List<char>> expected = newGalaxy.ReadFileToGrid(filePath1);
 
             // Act
-            List<List<char>> result = newGalaxy.ExpandRows(filePath0);
+            List<List<char>> result = newGalaxy.ExpandRows(filePath0, 2);
             // Assert
             result.Should().BeEquivalentTo(expected);
         }
@@ -32,7 +32,7 @@ namespace test.day11
             List<List<char>> expected = newGalaxy.ReadFileToGrid(filePath2);
 
             // Act
-            List<List<char>> result = newGalaxy.ExpanGalaxy(filePath0);
+            List<List<char>> result = newGalaxy.ExpanGalaxy(filePath0, 2);
             // Assert
             result.Should().BeEquivalentTo(expected);
         }
@@ -59,7 +59,7 @@ namespace test.day11
             ulong expected = 374;
 
             // Act
-            ulong result = newGalaxy.GetSum(filePath0);
+            ulong result = newGalaxy.GetSum(filePath0, 2);
 
             // Assert
             result.Should().Be(expected);
@@ -72,28 +72,25 @@ namespace test.day11
             ulong expected = 9545480;
 
             // Act
-            ulong result = newGalaxy.GetSum(realFilePath);
+            ulong result = newGalaxy.GetSum(realFilePath, 2);
 
             // Assert
             result.Should().Be(expected);
         }
 
+        [Fact]
+        public void Should_return_summ_of_all_distancesONE_MILLION()
+        {
+            // Act
+            ulong expected = 9545480;
 
+            // Act
+            ulong result = newGalaxy.GetSum(realFilePath, 1000000);
 
+            // Assert
+            result.Should().Be(expected);
+        }
 
-
-
-        //[Theory]
-        //[InlineData("asd")]
-        //public void Should1(string fileName)
-        //{
-        //    // Arrange
-        //    var filePath = AppDomain.CurrentDomain.BaseDirectory + "../../../../aoc/day11/data/" + fileName;
-
-        //    // Act
-
-        //    // Assert
-        //}
 
 
 

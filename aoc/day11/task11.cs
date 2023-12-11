@@ -2,9 +2,9 @@
 {
     public class Hunor
     {
-        public List<List<char>> ExpanGalaxy(string filePath0)
+        public List<List<char>> ExpanGalaxy(string filePath0, int multiple)
         {
-            List<List<char>> matrix = ExpandRows(filePath0);
+            List<List<char>> matrix = ExpandRows(filePath0, multiple);
 
             List<List<char>> result = new List<List<char>>();
 
@@ -27,8 +27,10 @@
                 {
                     for (int i = 0; i < matrix.Count; i++)
                     {
-                        result[i].Add('.');
-                        result[i].Add('.');
+                        for (int k = 0; k < multiple; k++)
+                        {
+                            result[i].Add('.');
+                        }
                     }
                 }
                 else
@@ -43,7 +45,7 @@
             return result; // Added return statement
         }
 
-        public List<List<char>> ExpandRows(string filePath0)
+        public List<List<char>> ExpandRows(string filePath0, int multiple)
         {
             List<List<char>> matrix = ReadFileToGrid(filePath0);
 
@@ -68,8 +70,10 @@
                 }
                 if (counter == matrix[0].Count)
                 {
-                    result.Add(madeUpRows);
-                    result.Add(madeUpRows);
+                    for (int k = 0; k < multiple; k++)
+                    {
+                        result.Add(madeUpRows);
+                    }
                 }
                 else
                 {
@@ -110,9 +114,9 @@
         }
 
 
-        public List<List<int>> GetAllCoordinates(string filePath0)
+        public List<List<int>> GetAllCoordinates(string filePath0, int multiple)
         {
-            List<List<char>> galaxy = ExpanGalaxy(filePath0);
+            List<List<char>> galaxy = ExpanGalaxy(filePath0, multiple);
 
             List<List<int>> result = new();
 
@@ -129,9 +133,9 @@
             return result;
         }
 
-        public ulong GetSum(string filePath0)
+        public ulong GetSum(string filePath0, int multiple)
         {
-            List<List<int>> coordinates = GetAllCoordinates(filePath0);
+            List<List<int>> coordinates = GetAllCoordinates(filePath0, multiple);
 
             ulong result = 0;
             for (int i = 0; i < coordinates.Count; i++)
