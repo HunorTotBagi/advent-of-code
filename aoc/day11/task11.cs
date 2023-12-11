@@ -104,10 +104,11 @@
             return grid;
         }
 
-        public int GetShortestPath(int[] start, int[] end)
+        public ulong GetShortestPath(List<ulong> start, List<ulong> end)
         {
-            return Math.Abs(start[0] - end[0]) + Math.Abs(start[1] - end[1]);
+            return (ulong)Math.Abs((decimal)start[0] - (decimal)end[0]) + (ulong)Math.Abs((decimal)start[1] - (decimal)end[1]);
         }
+
 
         public List<List<int>> GetAllCoordinates(string filePath0)
         {
@@ -128,11 +129,26 @@
             return result;
         }
 
-        public int GetSum(string filePath0)
+        public ulong GetSum(string filePath0)
         {
-            List<List<int>> GetAllCoordinates(string filePath0)
+            List<List<int>> coordinates = GetAllCoordinates(filePath0);
+
+            ulong result = 0;
+            for (int i = 0; i < coordinates.Count; i++)
+            {
+                for (int j = 0; j < coordinates.Count; j++)
+                {
+                    if (j < i)
+                    {
+                        List<ulong> ulongCoordinatesI = coordinates[i].ConvertAll(Convert.ToUInt64);
+                        List<ulong> ulongCoordinatesJ = coordinates[j].ConvertAll(Convert.ToUInt64);
+
+                        result += GetShortestPath(ulongCoordinatesI, ulongCoordinatesJ);
+                    }
+                }
+            }
+
+            return result;
         }
     }
-
-
 }

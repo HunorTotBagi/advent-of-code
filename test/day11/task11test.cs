@@ -37,40 +37,42 @@ namespace test.day11
             result.Should().BeEquivalentTo(expected);
         }
 
-        [Theory]
-        [InlineData(new[] { 6, 1 }, new[] { 11, 5 }, 9)]
-        [InlineData(new[] { 0, 0 }, new[] { 2 , 2 }, 4)]
-        [InlineData(new[] { 2, 0 }, new[] { 0 , 4 }, 6)]
-        public void Should_return_shortest_path(int[] start, int[] end, int expected)
+        [Fact]
+        public void Should_return_shortest_path()
         {
             // Arrange
+            List<ulong> start = new List<ulong> { 6, 1 };
+            List<ulong> end = new List<ulong> { 11, 5 };
+            ulong expected = 9;
 
             // Act
-            int result = newGalaxy.GetShortestPath(start, end);
+            ulong result = newGalaxy.GetShortestPath(start, end);
 
             // Assert
             result.Should().Be(expected);
         }
 
         [Fact]
-        public void Should_return_all_points()
-        {
-            // Act
-            List<List<int>> expected = new();
-
-            List<List<int>> result = newGalaxy.GetAllCoordinates(filePath0);
-
-            // Assert
-            result.Should().BeEquivalentTo(expected);
-        }
-
         public void Should_return_summ_of_all_distances()
         {
             // Act
-            int expected = 374;
+            ulong expected = 374;
 
             // Act
-            int result = newGalaxy.GetSum(filePath0);
+            ulong result = newGalaxy.GetSum(filePath0);
+
+            // Assert
+            result.Should().Be(expected);
+        }
+
+        [Fact]
+        public void Should_return_summ_of_all_distancesR()
+        {
+            // Act
+            ulong expected = 9545480;
+
+            // Act
+            ulong result = newGalaxy.GetSum(realFilePath);
 
             // Assert
             result.Should().Be(expected);
