@@ -6,97 +6,59 @@ namespace test.day11
 {
     public class task11test
     {
-        string filePath0 = "C:\\Users\\htotbagi\\source\\repos\\aoc\\aoc\\day11\\data\\exampleData0.txt";
-        string filePath1 = "C:\\Users\\htotbagi\\source\\repos\\aoc\\aoc\\day11\\data\\expandedGalaxyRows.txt";
-        string filePath2 = "C:\\Users\\htotbagi\\source\\repos\\aoc\\aoc\\day11\\data\\exampleData2.txt";
+        string filePath = "C:\\Users\\htotbagi\\source\\repos\\aoc\\aoc\\day11\\data\\exampleData0.txt";
         string realFilePath = "C:\\Users\\htotbagi\\source\\repos\\aoc\\aoc\\day11\\data\\realData.txt";
 
-        Hunor newGalaxy = new Hunor();
+        Galaxy newGalaxy = new Galaxy();
 
         [Fact]
-        public void Should_expand_the_galaxy_rows()
+        public void Should_Get_coordinates()
         {
             // Arrange
-            List<List<char>> expected = newGalaxy.ReadFileToGrid(filePath1);
+            List<List<int>> exp = new List<List<int>>();
 
             // Act
-            List<List<char>> result = newGalaxy.ExpandRows(filePath0, 2);
+            List<List<int>> result = newGalaxy.GetCoordinates(filePath);
+
             // Assert
-            result.Should().BeEquivalentTo(expected);
+            result.Should().BeEquivalentTo(exp);
+        }
+
+        [Theory]
+        [InlineData(3)]
+        [InlineData(7)]
+        public void Should_return_bool_on_index_row(int row)
+        {
+            bool result = newGalaxy.EmptyRow(filePath, row);
+
+            result.Should().BeTrue();
+        }
+
+        [Theory]
+        [InlineData(2)]
+        [InlineData(5)]
+        [InlineData(8)]
+        public void Should_return_bool_on_index_col(int col)
+        {
+            bool result = newGalaxy.EmptyCol(filePath, col);
+
+            result.Should().BeTrue();
         }
 
         [Fact]
-        public void Should_expand_the_galaxy_columns()
+        public void Should()
         {
-            // Arrange
-            List<List<char>> expected = newGalaxy.ReadFileToGrid(filePath2);
+            List<int> first = new List<int> { 0,3};
+            List<int> second = new List<int> { 1, 7 };
 
-            // Act
-            List<List<char>> result = newGalaxy.ExpanGalaxy(filePath0, 2);
-            // Assert
-            result.Should().BeEquivalentTo(expected);
+            int result = newGalaxy.GetDistanceBetweenTwoPoints(filePath, first, second);
+
+            result.Should().Be(6);
         }
 
-        [Fact]
-        public void Should_return_shortest_path()
+        private static Galaxy CreateGalaxy()
         {
-            // Arrange
-            List<ulong> start = new List<ulong> { 6, 1 };
-            List<ulong> end = new List<ulong> { 11, 5 };
-            ulong expected = 9;
-
-            // Act
-            ulong result = newGalaxy.GetShortestPath(start, end);
-
-            // Assert
-            result.Should().Be(expected);
-        }
-
-        [Fact]
-        public void Should_return_summ_of_all_distances()
-        {
-            // Act
-            ulong expected = 374;
-
-            // Act
-            ulong result = newGalaxy.GetSum(filePath0, 2);
-
-            // Assert
-            result.Should().Be(expected);
-        }
-
-        [Fact]
-        public void Should_return_summ_of_all_distancesR()
-        {
-            // Act
-            ulong expected = 9545480;
-
-            // Act
-            ulong result = newGalaxy.GetSum(realFilePath, 2);
-
-            // Assert
-            result.Should().Be(expected);
-        }
-
-        [Fact]
-        public void Should_return_summ_of_all_distancesONE_MILLION()
-        {
-            // Act
-            ulong expected = 9545480;
-
-            // Act
-            ulong result = newGalaxy.GetSum(realFilePath, 1000000);
-
-            // Assert
-            result.Should().Be(expected);
-        }
-
-
-
-
-        private static Hunor Create()
-        {
-            return new Hunor();
+            return new Galaxy();
         }
     }
 }

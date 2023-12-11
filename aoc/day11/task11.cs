@@ -1,88 +1,115 @@
 ﻿namespace src.day11
 {
-    public class Hunor
+    public class Galaxy
     {
-        public List<List<char>> ExpanGalaxy(string filePath0, int multiple)
+        public List<List<int>> GetCoordinates(string filePath)
         {
-            List<List<char>> matrix = ExpandRows(filePath0, multiple);
+            List<List<char>> galaxy = ReadFileToGrid(filePath);
 
-            List<List<char>> result = new List<List<char>>();
+            List<List<int>> coordinates = new();
 
-            for (int i = 0; i < matrix.Count; i++)
+            for (int i = 0; i < galaxy.Count; i++)
             {
-                result.Add(new List<char>());
-            }
-
-            for (int j = 0; j < matrix[0].Count; j++)
-            {
-                int counter = 0;
-                for (int i = 0; i < matrix.Count; i++)
+                for (int j = 0; j < galaxy[0].Count; j++)
                 {
-                    if (matrix[i][j] == '.')
+                    if (galaxy[i][j] == '#')
                     {
-                        counter++;
-                    }
-                }
-                if (counter == matrix.Count)
-                {
-                    for (int i = 0; i < matrix.Count; i++)
-                    {
-                        for (int k = 0; k < multiple; k++)
-                        {
-                            result[i].Add('.');
-                        }
-                    }
-                }
-                else
-                {
-                    for (int i = 0; i < matrix.Count; i++)
-                    {
-                        result[i].Add(matrix[i][j]);
+                        coordinates.Add(new List<int> { i, j });
                     }
                 }
             }
-
-            return result; // Added return statement
+            return coordinates;
         }
 
-        public List<List<char>> ExpandRows(string filePath0, int multiple)
+        public bool EmptyRow(string filePath, int rowIndex)
         {
-            List<List<char>> matrix = ReadFileToGrid(filePath0);
+            List<List<char>> galaxy = ReadFileToGrid(filePath);
 
-            List<List<char>> result = new();
-
-            List<char> madeUpRows = new();
-
-            for (int i = 0; i < matrix.Count; i++)
+            int counter = 0;
+            for (int j = 0; j < galaxy[0].Count; j++)
             {
-                madeUpRows.Add('.');
-            }
-
-            for (int i = 0; i < matrix.Count; i++)
-            {
-                int counter = 0;
-                for (int j = 0; j < matrix[0].Count; j++)
+                if (galaxy[rowIndex][j] == '.')
                 {
-                    if (matrix[i][j] == '.')
-                    {
-                        counter++;
-                    }
-                }
-                if (counter == matrix[0].Count)
-                {
-                    for (int k = 0; k < multiple; k++)
-                    {
-                        result.Add(madeUpRows);
-                    }
-                }
-                else
-                {
-                    result.Add(matrix[i]);
+                    counter += 1;
                 }
             }
-
-            return result;
+            return counter == galaxy[0].Count;
         }
+
+        public bool EmptyCol(string filePath, int colIndex)
+        {
+            List<List<char>> galaxy = ReadFileToGrid(filePath);
+
+            int counter = 0;
+            for (int i = 0; i < galaxy.Count; i++)
+            {
+                if (galaxy[i][colIndex] == '.')
+                {
+                    counter += 1;
+                }
+            }
+            return counter == galaxy.Count;
+        }
+
+        public int GetDistanceBetweenTwoPoints(string filePath, List<int> a, List<int> b)
+        {
+            int i1 = a[0], j1 = a[1];
+            int i2 = b[0], j2 = b[1];
+
+            (i1, i2) = (Math.Min(i1, i2), Math.Max(i1, i2));
+            (j1, j2) = (Math.Min(j1, j2), Math.Max(j1, j2));
+
+            int ans = 0;
+            for (int i = i1; i < i2; i++)
+            {
+                ans += 1;
+                if (EmptyRow(filePath, i))
+                {
+                    ans += 1;
+                }
+            }
+            for (int j = j1; j < j2; j++)
+            {
+                ans += 1;
+                if (EmptyCol(filePath, j))
+                {
+                    ans += 1;
+                }
+            }
+            return ans;
+        }
+
+
+
+        //public bool EmptyCol(string filePath, int colIndex)
+        //{
+        //    List<List<char>> galaxy = ReadFileToGrid(filePath);
+
+        //    int counter = 0;
+        //    for (int i = 0; i < galaxy.Count; i++)
+        //    {
+        //        if (galaxy[i][colIndex] == '.')
+        //        {
+        //            counter += 1;
+        //        }
+        //    }
+        //    return counter == galaxy.Count;
+        //}
+
+        //public int Final()
+        //{
+        //    int ans = 0;
+
+        //    for (int idx1 = 0; idx1 < N; idx1++)
+        //    {
+        //        for (int idx2 = idx1 + 1; idx2 < N; idx2++)
+        //        {
+        //            int d = Dist(GetCoordinates[idx1], GetCoordinates[idx2]);
+        //            ans += d;
+        //        }
+        //    }
+        //    return ans;
+        //}
 
         public List<List<char>> ReadFileToGrid(string filePath)
         {
@@ -106,53 +133,6 @@
             }
 
             return grid;
-        }
-
-        public ulong GetShortestPath(List<ulong> start, List<ulong> end)
-        {
-            return (ulong)Math.Abs((decimal)start[0] - (decimal)end[0]) + (ulong)Math.Abs((decimal)start[1] - (decimal)end[1]);
-        }
-
-
-        public List<List<int>> GetAllCoordinates(string filePath0, int multiple)
-        {
-            List<List<char>> galaxy = ExpanGalaxy(filePath0, multiple);
-
-            List<List<int>> result = new();
-
-            for (int i = 0; i < galaxy.Count; i++)
-            {
-                for (int j = 0; j < galaxy[0].Count; j++)
-                {
-                    if (galaxy[i][j] == '#')
-                    {
-                        result.Add(new List<int> { i, j });
-                    }
-                }
-            }
-            return result;
-        }
-
-        public ulong GetSum(string filePath0, int multiple)
-        {
-            List<List<int>> coordinates = GetAllCoordinates(filePath0, multiple);
-
-            ulong result = 0;
-            for (int i = 0; i < coordinates.Count; i++)
-            {
-                for (int j = 0; j < coordinates.Count; j++)
-                {
-                    if (j < i)
-                    {
-                        List<ulong> ulongCoordinatesI = coordinates[i].ConvertAll(Convert.ToUInt64);
-                        List<ulong> ulongCoordinatesJ = coordinates[j].ConvertAll(Convert.ToUInt64);
-
-                        result += GetShortestPath(ulongCoordinatesI, ulongCoordinatesJ);
-                    }
-                }
-            }
-
-            return result;
         }
     }
 }
