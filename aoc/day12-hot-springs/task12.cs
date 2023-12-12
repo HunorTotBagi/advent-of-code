@@ -1,4 +1,10 @@
-﻿namespace src.day12_hot_springs
+﻿
+using System;
+using System.Diagnostics.Metrics;
+using System.Globalization;
+using Microsoft.VisualBasic;
+
+namespace src.day12_hot_springs
 {
     public class HotSpring
     {
@@ -107,5 +113,58 @@
 
             return FindMatchingStrings(inputString, result);
         }
+
+        static List<string> FindValid(List<string> strings, int[] condition)
+        {
+            List<string> result = new List<string>();
+            foreach (string dobar in strings)
+            {
+                if (IsValid(dobar, condition))
+                {
+                    result.Add(dobar);
+                }
+            }
+
+            return result;
+        }
+
+        private static bool IsValid(string dobar, int[] condition)
+        {
+            List<int> lista = new List<int>();
+            int counter = 0;
+            foreach (char c in dobar)
+            {
+                if (c == '.')
+                {
+                    if (counter != 0)
+                    {
+                        lista.Add(counter);
+                    }
+                    counter = 0;
+                }
+                else
+                {
+                    counter++;
+                }
+            }
+
+            if (lista.ToList().SequenceEqual(condition))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public int FinalComibinations(string input, int[] numbers)
+        {
+            List<string> help = SelectStringsWithMatching(input, numbers.ToList());
+            List<string> result = FindValid(help, numbers);
+
+            return result.Count;  // Return the count of valid combinations, not the filtered list count
+        }
+
     }
 }

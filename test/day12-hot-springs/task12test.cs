@@ -66,6 +66,20 @@ namespace Day12_Hot_springs
             result.Should().BeEquivalentTo(expected);
         }
 
+        [Theory]
+        [InlineData("???.###", new int[] { 1, 1, 3 }, 1)]
+        [InlineData(".??..??...?##.", new int[] { 1, 1, 3 }, 4)]
+        [InlineData("?#?#?#?#?#?#?#?", new int[] { 1, 3, 1, 6 }, 1)]
+        [InlineData("????.#...#...", new int[] { 4, 1, 1 }, 1)]
+        [InlineData("????.######..#####.", new int[] { 1, 6, 5 }, 4)]
+        [InlineData("?###????????", new int[] { 3, 2, 1 }, 10)]
+        public void Should_general_test(string input, int[] numbers, int expected)
+        {
+            int result = newRecord.FinalComibinations(input, numbers);
+
+            result.Should().Be(expected);
+        }
+
 
 
 
