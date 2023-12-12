@@ -81,6 +81,17 @@ namespace Day12_Hot_springs
         }
 
 
+        [Fact]
+        public void Should_get_final_result()
+        {
+            // Act
+            int result = newRecord.GetFinalAnswer(filePath);
+
+            // Assert
+            result.Should().Be(21);
+        }
+
+
 
 
         private static HotSpring CreateHotSpring()

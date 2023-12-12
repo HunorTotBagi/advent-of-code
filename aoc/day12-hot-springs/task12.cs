@@ -171,5 +171,17 @@ namespace src.day12_hot_springs
             return result.Count;  // Return the count of valid combinations, not the filtered list count
         }
 
+        public int GetFinalAnswer(string filePath)
+        {
+            int result = 0;
+            (List<string> stringResult, List<List<int>> intResult) = ReadFile(filePath);
+
+            for (int i = 0; i < stringResult.Count; i++)
+            {
+                result += FinalComibinations(stringResult[i], intResult[i].ToArray());
+            }
+
+            return result;
+        }
     }
 }
