@@ -134,7 +134,11 @@ namespace src.day12_hot_springs
             int counter = 0;
             foreach (char c in dobar)
             {
-                if (c == '.')
+                if (c == '#')
+                {
+                    counter++;
+                }
+                else
                 {
                     if (counter != 0)
                     {
@@ -142,10 +146,11 @@ namespace src.day12_hot_springs
                     }
                     counter = 0;
                 }
-                else
-                {
-                    counter++;
-                }
+            }
+
+            if (counter != 0 )
+            {
+                lista.Add(counter);
             }
 
             if (lista.ToList().SequenceEqual(condition))
