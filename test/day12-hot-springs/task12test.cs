@@ -38,6 +38,33 @@ namespace Day12_Hot_springs
             intResult.Should().BeEquivalentTo(integers);
         }
 
+        [Fact]
+        public void Should()
+        {
+            // Arrange
+            (List<string> stringResult, List<List<int>> intResult) = newRecord.ReadFile(filePath);
+            List<string> expected = new List<string>{".##.###", "#.#.###", "##..###"};
+
+            // Act
+            List<string> result = newRecord.SelectStringsWithMatching(stringResult[0] ,intResult[0]);
+
+            // Assert
+            result.Should().BeEquivalentTo(expected);
+        }
+
+        [Fact]
+        public void Should1()
+        {
+            // Arrange
+            (List<string> stringResult, List<List<int>> intResult) = newRecord.ReadFile(filePath);
+            List<string> expected = new List<string> { ".##.###", "#.#.###", "##..###" };
+
+            // Act
+            List<string> result = newRecord.SelectStringsWithMatching(stringResult[1], intResult[1]);
+
+            // Assert
+            result.Should().BeEquivalentTo(expected);
+        }
 
 
 

@@ -17,5 +17,95 @@
             }
             return (stringsList, intsList);
         }
+
+        static List<string> GenerateCombinations(int n)
+        {
+            List<string> result = new List<string>();
+            char[] combination = new char[n];
+            GenerateCombinationHelper(combination, 0, result);
+            return result;
+        }
+
+        static void GenerateCombinationHelper(char[] combination, int index, List<string> result)
+        {
+            if (index == combination.Length)
+            {
+                result.Add(new string(combination));
+                return;
+            }
+
+            combination[index] = '.';
+            GenerateCombinationHelper(combination, index + 1, result);
+
+            combination[index] = '#';
+            GenerateCombinationHelper(combination, index + 1, result);
+        }
+
+        static int CountOccurrences(string input, char target)
+        {
+            int count = 0;
+
+            foreach (char c in input)
+            {
+                if (c == target)
+                {
+                    count++;
+                }
+            }
+
+            return count;
+        }
+
+        static List<string> FindMatchingStrings(string pattern, List<string> stringsToCheck)
+        {
+            List<string> matchingStrings = new List<string>();
+
+            foreach (var str in stringsToCheck)
+            {
+                if (IsMatchingPattern(pattern, str))
+                {
+                    matchingStrings.Add(str);
+                }
+            }
+
+            return matchingStrings;
+        }
+
+        static bool IsMatchingPattern(string pattern, string str)
+        {
+            if (pattern.Length != str.Length)
+            {
+                return false;
+            }
+
+            for (int i = 0; i < pattern.Length; i++)
+            {
+                if (pattern[i] != '?' && pattern[i] != str[i])
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        public List<string> SelectStringsWithMatching(string inputString, List<int> numbers)
+        {
+            var result = new List<string>();
+
+            List<string> input = GenerateCombinations(inputString.Length);
+
+            int count = numbers.Sum();
+
+            foreach (string s in input)
+            {
+                if (CountOccurrences(s, '#') == count)
+                {
+                    result.Add(s);
+                }
+            }
+
+            return FindMatchingStrings(inputString, result);
+        }
     }
 }
