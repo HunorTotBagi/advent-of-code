@@ -20,29 +20,29 @@
         {
             var result = new List<string>();
 
-            List<string> input = GenerateCombinations(inputString.Length);
+            List<string> input = GenerateHotSpringConfigurations(inputString.Length);
 
             int count = numbers.Sum();
 
             foreach (string s in input)
             {
-                if (CountOccurrences(s, '#') == count)
+                if (CountDamagedSprings(s, '#') == count)
                 {
                     result.Add(s);
                 }
             }
-            return FindMatchingStrings(inputString, result);
+            return FindMatchingConfigurations(inputString, result);
         }
 
-        static List<string> GenerateCombinations(int n)
+        static List<string> GenerateHotSpringConfigurations(int n)
         {
             List<string> result = new List<string>();
             char[] combination = new char[n];
-            GenerateCombinationHelper(combination, 0, result);
+            GenerateConfigurationHelper(combination, 0, result);
             return result;
         }
 
-        static void GenerateCombinationHelper(char[] combination, int index, List<string> result)
+        static void GenerateConfigurationHelper(char[] combination, int index, List<string> result)
         {
             if (index == combination.Length)
             {
@@ -51,18 +51,18 @@
             }
 
             combination[index] = '.';
-            GenerateCombinationHelper(combination, index + 1, result);
+            GenerateConfigurationHelper(combination, index + 1, result);
 
             combination[index] = '#';
-            GenerateCombinationHelper(combination, index + 1, result);
+            GenerateConfigurationHelper(combination, index + 1, result);
         }
 
-        static int CountOccurrences(string input, char target)
+        static int CountDamagedSprings(string input, char target)
         {
             return input.Count(c => c == target);
         }
 
-        static List<string> FindMatchingStrings(string pattern, List<string> stringsToCheck)
+        static List<string> FindMatchingConfigurations(string pattern, List<string> stringsToCheck)
         {
             return stringsToCheck.Where(str => IsMatchingPattern(pattern, str)).ToList();
         }
@@ -84,12 +84,12 @@
             return true;
         }
 
-        static List<string> FindValid(List<string> strings, int[] condition)
+        static List<string> FindValidConfigurations(List<string> strings, int[] condition)
         {
             List<string> result = new List<string>();
             foreach (string dobar in strings)
             {
-                if (IsValid(dobar, condition))
+                if (IsValidConfiguration(dobar, condition))
                 {
                     result.Add(dobar);
                 }
@@ -97,7 +97,7 @@
             return result;
         }
 
-        private static bool IsValid(string dobar, int[] condition)
+        private static bool IsValidConfiguration(string dobar, int[] condition)
         {
             List<int> lista = new List<int>();
             int counter = 0;
@@ -121,22 +121,22 @@
             return lista.SequenceEqual(condition);
         }
 
-        public int FinalComibinations(string input, int[] numbers)
+        public int CalculateFinalCombinations(string input, int[] numbers)
         {
             List<string> help = SelectStringsWithMatching(input, numbers.ToList());
-            List<string> result = FindValid(help, numbers);
+            List<string> result = FindValidConfigurations(help, numbers);
 
             return result.Count;
         }
 
-        public int GetFinalAnswer(string filePath)
+        public int GetFinalArrangementCount(string filePath)
         {
             int result = 0;
             (List<string> stringResult, List<List<int>> intResult) = ReadFile(filePath);
 
             for (int i = 0; i < stringResult.Count; i++)
             {
-                result += FinalComibinations(stringResult[i], intResult[i].ToArray());
+                result += CalculateFinalCombinations(stringResult[i], intResult[i].ToArray());
             }
 
             return result;
