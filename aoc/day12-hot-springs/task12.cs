@@ -1,27 +1,37 @@
-﻿
-using System;
-using System.Diagnostics.Metrics;
-using System.Globalization;
-using Microsoft.VisualBasic;
-
-namespace src.day12_hot_springs
+﻿namespace src.day12_hot_springs
 {
     public class HotSpring
     {
         public (List<string>, List<List<int>>) ReadFile(string filePath)
         {
-            List<string> stringsList = new List<string>();
-            List<List<int>> intsList = new List<List<int>>();
-            string[] lines = File.ReadAllLines(filePath);
+            var stringsList = new List<string>();
+            var intsList = new List<List<int>>();
 
-            foreach (var line in lines)
+            foreach (var line in File.ReadLines(Path.Combine(filePath)))
             {
                 var parts = line.Split(' ');
                 stringsList.Add(parts[0]);
-                List<int> intValues = parts[1].Split(',').Select(int.Parse).ToList();
-                intsList.Add(intValues);
+                intsList.Add(parts[1].Split(',').Select(int.Parse).ToList());
             }
             return (stringsList, intsList);
+        }
+
+        public List<string> SelectStringsWithMatching(string inputString, List<int> numbers)
+        {
+            var result = new List<string>();
+
+            List<string> input = GenerateCombinations(inputString.Length);
+
+            int count = numbers.Sum();
+
+            foreach (string s in input)
+            {
+                if (CountOccurrences(s, '#') == count)
+                {
+                    result.Add(s);
+                }
+            }
+            return FindMatchingStrings(inputString, result);
         }
 
         static List<string> GenerateCombinations(int n)
@@ -49,32 +59,12 @@ namespace src.day12_hot_springs
 
         static int CountOccurrences(string input, char target)
         {
-            int count = 0;
-
-            foreach (char c in input)
-            {
-                if (c == target)
-                {
-                    count++;
-                }
-            }
-
-            return count;
+            return input.Count(c => c == target);
         }
 
         static List<string> FindMatchingStrings(string pattern, List<string> stringsToCheck)
         {
-            List<string> matchingStrings = new List<string>();
-
-            foreach (var str in stringsToCheck)
-            {
-                if (IsMatchingPattern(pattern, str))
-                {
-                    matchingStrings.Add(str);
-                }
-            }
-
-            return matchingStrings;
+            return stringsToCheck.Where(str => IsMatchingPattern(pattern, str)).ToList();
         }
 
         static bool IsMatchingPattern(string pattern, string str)
@@ -91,27 +81,7 @@ namespace src.day12_hot_springs
                     return false;
                 }
             }
-
             return true;
-        }
-
-        public List<string> SelectStringsWithMatching(string inputString, List<int> numbers)
-        {
-            var result = new List<string>();
-
-            List<string> input = GenerateCombinations(inputString.Length);
-
-            int count = numbers.Sum();
-
-            foreach (string s in input)
-            {
-                if (CountOccurrences(s, '#') == count)
-                {
-                    result.Add(s);
-                }
-            }
-
-            return FindMatchingStrings(inputString, result);
         }
 
         static List<string> FindValid(List<string> strings, int[] condition)
@@ -124,7 +94,6 @@ namespace src.day12_hot_springs
                     result.Add(dobar);
                 }
             }
-
             return result;
         }
 
@@ -132,35 +101,24 @@ namespace src.day12_hot_springs
         {
             List<int> lista = new List<int>();
             int counter = 0;
+
             foreach (char c in dobar)
             {
                 if (c == '#')
                 {
                     counter++;
                 }
-                else
+                else if (counter != 0)
                 {
-                    if (counter != 0)
-                    {
-                        lista.Add(counter);
-                    }
+                    lista.Add(counter);
                     counter = 0;
                 }
             }
 
-            if (counter != 0 )
-            {
+            if (counter != 0)
                 lista.Add(counter);
-            }
 
-            if (lista.ToList().SequenceEqual(condition))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return lista.SequenceEqual(condition);
         }
 
         public int FinalComibinations(string input, int[] numbers)
@@ -168,7 +126,7 @@ namespace src.day12_hot_springs
             List<string> help = SelectStringsWithMatching(input, numbers.ToList());
             List<string> result = FindValid(help, numbers);
 
-            return result.Count;  // Return the count of valid combinations, not the filtered list count
+            return result.Count;
         }
 
         public int GetFinalAnswer(string filePath)
