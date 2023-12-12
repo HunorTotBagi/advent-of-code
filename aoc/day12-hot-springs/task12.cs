@@ -99,7 +99,7 @@
 
         private static bool IsValidConfiguration(string dobar, int[] condition)
         {
-            List<int> lista = new List<int>();
+            int index = 0;
             int counter = 0;
 
             foreach (char c in dobar)
@@ -110,16 +110,26 @@
                 }
                 else if (counter != 0)
                 {
-                    lista.Add(counter);
+                    if (index >= condition.Length || condition[index] != counter)
+                    {
+                        return false;
+                    }
+                    index++;
                     counter = 0;
                 }
             }
 
             if (counter != 0)
-                lista.Add(counter);
-
-            return lista.SequenceEqual(condition);
+            {
+                if (index >= condition.Length || condition[index] != counter)
+                {
+                    return false;
+                }
+                index++;
+            }
+            return index == condition.Length;
         }
+
 
         public int CalculateFinalCombinations(string input, int[] numbers)
         {
