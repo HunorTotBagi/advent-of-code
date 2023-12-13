@@ -30,9 +30,28 @@ namespace test.day13
         {
             List<List<List<char>>> matrix = newHunor.ReadFileIntoBlocks(testData);
 
-            int result = newHunor.GetReflectionIndex(matrix[0]);
+            int result = newHunor.GetReflectionRow(matrix[0]);
 
             result.Should().Be(expected);
+        }
+
+        [Theory]
+        [InlineData(8)]
+        public void Should_return_slice_COL(int expected)
+        {
+            List<List<List<char>>> matrix = newHunor.ReadFileIntoBlocks(testData);
+
+            int result = newHunor.GetColumnsReflection(matrix[0]);
+
+            result.Should().Be(expected);
+        }
+
+        [Fact]
+        public void Should_return_result()
+        {
+            int result = newHunor.Final(realData);
+
+            result.Should().Be(123);
         }
 
         private static Hunor CreateHunor()
