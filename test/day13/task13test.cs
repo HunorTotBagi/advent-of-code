@@ -6,23 +6,34 @@ namespace test.day13
 {
     public class task13test
     {
-        string filePath = "C:\\Users\\htotbagi\\source\\repos\\aoc\\aoc\\day13\\data\\inputData.txt";
-        string filePath0 = "C:\\Users\\htotbagi\\source\\repos\\aoc\\aoc\\day13\\data\\inputData1.txt";
-        string filePath1 = "C:\\Users\\htotbagi\\source\\repos\\aoc\\aoc\\day13\\data\\inputData2.txt";
-        string realFilePath = "C:\\Users\\htotbagi\\source\\repos\\aoc\\aoc\\day13\\data\\realData.txt";
+        string realData = "C:\\Users\\htotbagi\\source\\repos\\aoc\\aoc\\day13\\data\\realData.txt";
+        string testData = "C:\\Users\\htotbagi\\source\\repos\\aoc\\aoc\\day13\\data\\testData.txt";
 
         Hunor newHunor = CreateHunor();
 
         [Fact]
-        public void Should()
+        public void Should_read_in()
         {
             // Arrange
+            List<List<List<char>>> exp = new();
 
             // Act
+            List<List<List<char>>> result = newHunor.ReadFileIntoBlocks(testData);
 
             // Assert
+            result.Should().BeEquivalentTo(exp);
         }
 
+        [Theory]
+        [InlineData(4)]
+        public void Should_return_slice_ROW(int expected)
+        {
+            List<List<List<char>>> matrix = newHunor.ReadFileIntoBlocks(testData);
+
+            int result = newHunor.GetReflectionIndex(matrix[0]);
+
+            result.Should().Be(expected);
+        }
 
         private static Hunor CreateHunor()
         {
