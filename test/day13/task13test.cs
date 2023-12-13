@@ -11,47 +11,52 @@ namespace test.day13
 
         Hunor newHunor = CreateHunor();
 
-        [Fact]
-        public void Should_read_in()
-        {
-            // Arrange
-            List<List<List<char>>> exp = new();
-
-            // Act
-            List<List<List<char>>> result = newHunor.ReadFileIntoBlocks(testData);
-
-            // Assert
-            result.Should().BeEquivalentTo(exp);
-        }
-
         [Theory]
-        [InlineData(4)]
+        [InlineData(0)]
         public void Should_return_slice_ROW(int expected)
         {
+            // Arrange
             List<List<List<char>>> matrix = newHunor.ReadFileIntoBlocks(testData);
 
+            // Act
             int result = newHunor.GetReflectionRow(matrix[0]);
 
+            // Assert
             result.Should().Be(expected);
         }
 
         [Theory]
-        [InlineData(8)]
+        [InlineData(5)]
         public void Should_return_slice_COL(int expected)
         {
+            // Arrange
             List<List<List<char>>> matrix = newHunor.ReadFileIntoBlocks(testData);
 
+            // Act
             int result = newHunor.GetColumnsReflection(matrix[0]);
 
+            // Assert
             result.Should().Be(expected);
+        }
+
+        [Fact]
+        public void Should_return_result_test()
+        {
+            // Act
+            int result = newHunor.Final(testData);
+
+            // Assert
+            result.Should().Be(405);
         }
 
         [Fact]
         public void Should_return_result()
         {
+            // Act
             int result = newHunor.Final(realData);
 
-            result.Should().Be(123);
+            // Assert
+            result.Should().Be(33520);
         }
 
         private static Hunor CreateHunor()
