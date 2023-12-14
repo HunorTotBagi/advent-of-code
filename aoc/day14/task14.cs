@@ -1,5 +1,6 @@
 ﻿
 
+
 namespace src.day14
 {
     public class Hunor
@@ -7,13 +8,13 @@ namespace src.day14
         public int Calculate(List<List<char>> matrix)
         {
             for (int i = 0; i < matrix[0].Count; i++)
-            { 
+            {
                 matrix = MoveOneRowNorth(matrix, i);
             }
 
             int total = 0;
 
-            int len  = matrix.Count;
+            int len = matrix.Count;
 
 
 
@@ -41,18 +42,20 @@ namespace src.day14
                 }
                 if (matrix[i][column] == 'O')
                 {
-                    for (int j = i-1; j >= limit; j--)
+                    for (int j = i - 1; j >= limit; j--)
                     {
                         if (matrix[j][column] == '.')
                         {
                             matrix[j][column] = 'O';
-                            matrix[j+1][column] = '.';
+                            matrix[j + 1][column] = '.';
                         }
                     }
                 }
             }
             return matrix;
         }
+
+
 
         public List<List<char>> ReadFileIntoList(string filePath)
         {
@@ -69,6 +72,57 @@ namespace src.day14
             }
 
             return grid;
+        }
+
+        static List<List<char>> RotateMatrix90Degrees(List<List<char>> matrix)
+        {
+            int rows = matrix.Count;
+            int cols = matrix[0].Count;
+            List<List<char>> rotated = new List<List<char>>();
+
+            for (int j = 0; j < cols; j++)
+            {
+                List<char> newRow = new List<char>();
+                for (int i = rows - 1; i >= 0; i--)
+                {
+                    newRow.Add(matrix[i][j]);
+                }
+                rotated.Add(newRow);
+            }
+
+            return rotated;
+        }
+
+        public List<List<char>> CycleRotate(List<List<char>> matrix, int numberOfCycles)
+        {
+            for(int i = 0; i < numberOfCycles; i++)
+            {
+                for (int j = 0; j < matrix[0].Count; j++)
+                {
+                    matrix = MoveOneRowNorth(matrix, j);
+                }
+
+                matrix = RotateMatrix90Degrees(matrix);
+                for (int j = 0 ; j < matrix[0].Count; j++)
+                {
+                    matrix = MoveOneRowNorth(matrix, j);
+                }
+
+                matrix = RotateMatrix90Degrees(matrix);
+                for (int j = 0; j < matrix[0].Count; j++)
+                {
+                    matrix = MoveOneRowNorth(matrix, j);
+                }
+
+                matrix = RotateMatrix90Degrees(matrix);
+                for (int j = 0; j < matrix[0].Count; j++)
+                {
+                    matrix = MoveOneRowNorth(matrix, j);
+                }
+                matrix = RotateMatrix90Degrees(matrix);
+
+            }
+            return matrix;
         }
     }
 }
