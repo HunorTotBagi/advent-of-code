@@ -1,59 +1,58 @@
 ﻿namespace src.day13
 {
-    public class Hunor
+    public class MirrorReflectionAnalyzer
     {
-        public int GetColumnsReflection(List<List<char>> matrix)
+        public int CalculateVerticalReflectionScore(List<List<char>> matrix)
         {
-            return GetReflectionRow(Transpose(matrix));
+            return CalculateHorizontalReflectionScore(TransposeMatrix(matrix));
         }
 
-        public int GetReflectionRow(List<List<char>> grid)
+        public int CalculateHorizontalReflectionScore(List<List<char>> grid)
         {
-            for (int r = 1; r < grid.Count; r++)
+            for (int rowIndex = 1; rowIndex < grid.Count; rowIndex++)
             {
-                List<string> above = grid.Take(r).Select(chars => new string(chars.ToArray())).Reverse().ToList();
-                List<string> below = grid.Skip(r).Select(chars => new string(chars.ToArray())).ToList();
+                List<string> topHalf = grid.Take(rowIndex).Select(chars => new string(chars.ToArray())).Reverse().ToList();
+                List<string> bottomHalf = grid.Skip(rowIndex).Select(chars => new string(chars.ToArray())).ToList();
 
-                int minLength = Math.Min(above.Count, below.Count);
-                above = above.Take(minLength).ToList();
-                below = below.Take(minLength).ToList();
+                int shortestHalfLength = Math.Min(topHalf.Count, bottomHalf.Count);
+                topHalf = topHalf.Take(shortestHalfLength).ToList();
+                bottomHalf = bottomHalf.Take(shortestHalfLength).ToList();
 
-                if (Enumerable.SequenceEqual(above, below))
-                    return r;
+                if (Enumerable.SequenceEqual(topHalf, bottomHalf))
+                    return rowIndex;
             }
 
             return 0;
         }
 
-        public static List<List<char>> Transpose(List<List<char>> matrix)
+        public static List<List<char>> TransposeMatrix(List<List<char>> matrix)
         {
             if (matrix == null || matrix.Count == 0 || matrix[0].Count == 0)
                 return new List<List<char>>();
 
             int rowCount = matrix.Count;
-            int colCount = matrix[0].Count;
+            int columnCount = matrix[0].Count;
 
-            var transposed = new List<List<char>>(colCount);
-            for (int i = 0; i < colCount; i++)
+            var transposedMatrix = new List<List<char>>(columnCount);
+            for (int i = 0; i < columnCount; i++)
             {
-                transposed.Add(new List<char>(rowCount));
+                transposedMatrix.Add(new List<char>(rowCount));
             }
 
             for (int row = 0; row < rowCount; row++)
             {
-                for (int col = 0; col < colCount; col++)
+                for (int col = 0; col < columnCount; col++)
                 {
-                    transposed[col].Add(matrix[row][col]);
+                    transposedMatrix[col].Add(matrix[row][col]);
                 }
             }
 
-            return transposed;
+            return transposedMatrix;
         }
 
-
-        public List<List<List<char>>> ReadFileIntoBlocks(string filePath)
+        public List<List<List<char>>> ConvertFileToMatrixBlocks(string filePath)
         {
-            var blocks = new List<List<List<char>>>();
+            var matrixBlocks = new List<List<List<char>>>();
             var currentBlock = new List<List<char>>();
 
             foreach (var line in File.ReadLines(filePath))
@@ -62,7 +61,7 @@
                 {
                     if (currentBlock.Count > 0)
                     {
-                        blocks.Add(currentBlock);
+                        matrixBlocks.Add(currentBlock);
                         currentBlock = new List<List<char>>();
                     }
                 }
@@ -75,28 +74,27 @@
 
             if (currentBlock.Count > 0)
             {
-                blocks.Add(currentBlock);
+                matrixBlocks.Add(currentBlock);
             }
 
-            return blocks;
+            return matrixBlocks;
         }
 
-        public int Final(string realData)
+        public int CalculateReflectionScore(string filePath)
         {
-            List<List<List<char>>> matrix = ReadFileIntoBlocks(realData);
+            List<List<List<char>>> matrices = ConvertFileToMatrixBlocks(filePath);
 
-            int result = 0;
+            int totalScore = 0;
 
-            for (int row = 0; row < matrix.Count; row++)
+            foreach (var matrix in matrices)
             {
-                int colRes = GetColumnsReflection(matrix[row]);
-                int rowRes = GetReflectionRow(matrix[row]);
+                int verticalScore = CalculateVerticalReflectionScore(matrix);
+                int horizontalScore = CalculateHorizontalReflectionScore(matrix);
 
-                result += colRes + 100 * rowRes;
+                totalScore += verticalScore + 100 * horizontalScore;
             }
 
-            return result;
-
+            return totalScore;
         }
     }
 }
