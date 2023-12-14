@@ -64,7 +64,6 @@ namespace test.day14
             List<List<char>> expected = newHunor.ReadFileIntoList(filePath);
 
             // Act
-            //List<List<char>> result1 = newHunor.CycleRotate(matrix, 1);
             List<List<char>> result = newHunor.CycleRotate(matrix, numberOfCycles);
 
             // Assert
@@ -76,10 +75,9 @@ namespace test.day14
         {
             List<List<char>> matrix = newHunor.ReadFileIntoList(testData);
 
-            (int res1, int res2) = newHunor.OnWhichCycleItRepeats(matrix);
+            int res = newHunor.OnWhichCycleItRepeats(matrix);
 
-            res1.Should().Be(5);
-            //res2.Should().Be(5);
+            res.Should().Be(64);
         }
 
         private static Hunor CreateHunor()

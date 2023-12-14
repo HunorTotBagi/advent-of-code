@@ -143,33 +143,66 @@ namespace src.day14
             return (66,66);
         }
 
-        public (int a, int b) OnWhichCycleItRepeats(List<List<char>> matrix)
+        public int OnWhichCycleItRepeats(List<List<char>> matrix)
         {
-            HashSet<List<List<char>>> numbers = new HashSet<List<List<char>>>();
+            List<List<List<char>>> seen = new List<List<List<char>>>();
+            List<List<List<char>>> array = new List<List<List<char>>>();
 
             int iter = 0;
+            List<List<char>> grid = new List<List<char>>();
 
-            List<List<char>> storage = new List<List<char>>();
-
-            List<List<List<char>>> array = new List<List<List<char>>>();
+            array.Add(grid);
 
             while (true)
             {
-                
-                storage = CycleRotate(matrix, iter);
-                if (numbers.Contains(storage))
+                iter++;
+                grid = CycleRotate(matrix, iter);
+
+                if (GridIsInSeen(seen, grid))
                 {
                     break;
                 }
-                numbers.Add(storage);
-                array.Add(storage);
-                iter++;
+                seen.Add(grid);
+                array.Add(grid);
+                
             }
 
-            int first = 0;
-            first = array.IndexOf(storage);
+            //int first = GetFirstindex(array, grid);
+            //grid = array[(1000000000 - first) % (iter - first) + first];
 
-            return (first, iter);
+            //return Calculate(grid);
+
+            return iter;
         }
+
+        private static bool GridIsInSeen(List<List<List<char>>> seen, List<List<char>> grid)
+        {
+            for (int i = 0; i < seen.Count; i++) 
+            {
+                if (seen[i] == grid)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private static int GetFirstindex(List<List<List<char>>> array, List<List<char>> grid)
+        {
+            for (int i = 0; i < array.Count; i++)
+            {
+                if (array[i] == grid)
+                {
+                    return i;
+                }
+            }
+            return -5;
+        }
+
+        //private string ConvertGridToString(List<List<char>> grid)
+        //{
+        //    return string.Join("\n", grid.Select(row => new string(row.ToArray())));
+        //}
+
     }
 }
