@@ -2,6 +2,8 @@
 
 
 
+using System.Collections.Generic;
+
 namespace src.day14
 {
     public class Hunor
@@ -143,14 +145,31 @@ namespace src.day14
 
         public (int a, int b) OnWhichCycleItRepeats(List<List<char>> matrix)
         {
-            List<List<List<char>>> storage = new List<List<List<char>>>();
+            HashSet<List<List<char>>> numbers = new HashSet<List<List<char>>>();
 
-            for (int i = 0; i < 10; i++)
+            int iter = 0;
+
+            List<List<char>> storage = new List<List<char>>();
+
+            List<List<List<char>>> array = new List<List<List<char>>>();
+
+            while (true)
             {
-                storage.Add(CycleRotate(matrix, i));
+                
+                storage = CycleRotate(matrix, iter);
+                if (numbers.Contains(storage))
+                {
+                    break;
+                }
+                numbers.Add(storage);
+                array.Add(storage);
+                iter++;
             }
 
-            return CheckForEquivalentElements(storage);
+            int first = 0;
+            first = array.IndexOf(storage);
+
+            return (first, iter);
         }
     }
 }
