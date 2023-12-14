@@ -1,6 +1,7 @@
 ﻿
 
 
+
 namespace src.day14
 {
     public class Hunor
@@ -123,6 +124,33 @@ namespace src.day14
 
             }
             return matrix;
+        }
+
+        static (int i, int j) CheckForEquivalentElements(List<List<List<char>>> outerList)
+        {
+            for (int i = 0; i < outerList.Count; i++)
+            {
+                for (int j = i + 1; j < outerList.Count; j++)
+                {
+                    if (outerList[i].Equals(outerList[j]))
+                    {
+                        return (i,j);
+                    }
+                }
+            }
+            return (66,66);
+        }
+
+        public (int a, int b) OnWhichCycleItRepeats(List<List<char>> matrix)
+        {
+            List<List<List<char>>> storage = new List<List<List<char>>>();
+
+            for (int i = 0; i < 10; i++)
+            {
+                storage.Add(CycleRotate(matrix, i));
+            }
+
+            return CheckForEquivalentElements(storage);
         }
     }
 }

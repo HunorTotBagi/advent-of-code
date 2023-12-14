@@ -71,6 +71,17 @@ namespace test.day14
             result.Should().BeEquivalentTo(expected);
         }
 
+        [Fact]
+        public void Should_return_moduo_of_cycles()
+        {
+            List<List<char>> matrix = newHunor.ReadFileIntoList(testData);
+
+            (int res1, int res2) = newHunor.OnWhichCycleItRepeats(matrix);
+
+            res1.Should().Be(5);
+            //res2.Should().Be(5);
+        }
+
         private static Hunor CreateHunor()
         {
             return new Hunor();
