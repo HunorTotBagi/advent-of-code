@@ -20,7 +20,7 @@ namespace TestProject1
             // Arrange
 
             // Act
-            int result = newLensLibrary.ConvertToAscii(inputCharacter);
+            int result = newLensLibrary.GetAsciiValue(inputCharacter);
 
             // Assert
             result.Should().Be(ASCIICode);
@@ -36,7 +36,7 @@ namespace TestProject1
             // Arrange
 
             // Act
-            int result = newLensLibrary.HASHAlgorithm(input);
+            int result = newLensLibrary.GetHashValue(input);
 
             // Assert
             result.Should().Be(expected);
@@ -46,10 +46,10 @@ namespace TestProject1
         public void Should_return_result_for_puzzle_1_test_data()
         {
             // Arrange
-            List<string> input = newLensLibrary.ReadFile(testData);
+            List<string> input = newLensLibrary.ReadInitializationSequence(testData);
 
             // Act
-            int result = newLensLibrary.Final(input);
+            int result = newLensLibrary.SumOfHashValues(input);
 
             // Assert
             result.Should().Be(1320);
@@ -59,10 +59,10 @@ namespace TestProject1
         public void Should_return_result_for_puzzle_1_real_data()
         {
             // Arrange
-            List<string> input = newLensLibrary.ReadFile(realData);
+            List<string> input = newLensLibrary.ReadInitializationSequence(realData);
 
             // Act
-            int result = newLensLibrary.Final(input);
+            int result = newLensLibrary.SumOfHashValues(input);
 
             // Assert
             result.Should().Be(512950);
@@ -93,7 +93,7 @@ namespace TestProject1
             // Arrange
 
             // Act
-            bool result = newLensLibrary.StringContainsEqualSymbol(input);
+            bool result = newLensLibrary.ContainsEqualSymbol(input);
 
             // Assert
             result.Should().Be(exp);
@@ -108,7 +108,7 @@ namespace TestProject1
             // Arrange
 
             // Act
-            bool result = newLensLibrary.StringContainsMinusSymbol(input);
+            bool result = newLensLibrary.ContainsMinusSymbol(input);
 
             // Assert
             result.Should().Be(exp);
@@ -133,10 +133,10 @@ namespace TestProject1
         public void Should_return_result_for_puzzle_2_test_data()
         {
             // Arrange
-            List<string> input = newLensLibrary.ReadFile(testData);
+            List<string> input = newLensLibrary.ReadInitializationSequence(testData);
             
             // Act
-            int result = newLensLibrary.GetFocusingPower(input);
+            int result = newLensLibrary.CalculateTotalFocusingPower(input);
 
             // Assert
             result.Should().Be(145);  
@@ -146,10 +146,10 @@ namespace TestProject1
         public void Should_return_result_for_puzzle_2_real_data()
         {
             // Arrange
-            List<string> input = newLensLibrary.ReadFile(realData);
+            List<string> input = newLensLibrary.ReadInitializationSequence(realData);
 
             // Act
-            int result = newLensLibrary.GetFocusingPower(input);
+            int result = newLensLibrary.CalculateTotalFocusingPower(input);
 
             // Assert
             result.Should().Be(247153);

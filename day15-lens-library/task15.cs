@@ -1,109 +1,68 @@
-
-
 using System.Text.RegularExpressions;
 
 namespace advent_of_code_LATEST
 {
-    public class Hunor
+    public class LensLibrary
     {
-        public int ConvertToAscii(char input)
+        public int GetAsciiValue(char inputCharacter)
         {
-            int asciiCode = Convert.ToInt32(input);
-            return asciiCode;
+            return Convert.ToInt32(inputCharacter);
         }
 
-        public int Final(List<string> input)
+        public int SumOfHashValues(List<string> input)
         {
             int result = 0;
-            foreach (string s in input)
+            foreach (string sequence in input)
             {
-                result += HASHAlgo(s);
+                result += GetHashValue(sequence);
             }
             return result;
         }
 
-        public static string ExtractUpToSign(string input)
-        {
-            if (string.IsNullOrEmpty(input))
-            {
-                return input;
-            }
-
-            int indexOfEqual = input.IndexOf('=');
-            int indexOfDash = input.IndexOf('-');
-
-            // Check if neither '=' nor '-' is found
-            if (indexOfEqual == -1 && indexOfDash == -1)
-            {
-                return input;
-            }
-
-            // If one of them is not found, use the other
-            if (indexOfEqual == -1)
-            {
-                return input.Substring(0, indexOfDash);
-            }
-            if (indexOfDash == -1)
-            {
-                return input.Substring(0, indexOfEqual);
-            }
-
-            // If both are found, use the smallest index
-            int minIndex = Math.Min(indexOfEqual, indexOfDash);
-            return input.Substring(0, minIndex);
-        }
-
         public int GetBoxIndex(string input)
         {
-            return HASHAlgo(ExtractUpToSign(input));
+            return GetHashValue(ExtractStringUpToSymbol(input));
         }
 
-        public int HASHAlgo(string input)
+        public string ExtractStringUpToSymbol(string input)
+        {
+            int indexOfSymbol = 0;
+
+            if (ContainsEqualSymbol(input))
+                indexOfSymbol = input.IndexOf('=');
+
+            else if (ContainsMinusSymbol(input))
+                indexOfSymbol = input.IndexOf('-');
+
+            return input.Substring(0, indexOfSymbol);
+        }
+
+        public int GetHashValue(string input)
         {
             int currentValue = 0;
             foreach (char c in input)
             {
-                currentValue += ConvertToAscii(c);
+                currentValue += GetAsciiValue(c);
                 currentValue *= 17;
-                currentValue = currentValue % 256;
+                currentValue %= 256;
             }
-
             return currentValue;
         }
 
-        public List<string> ReadFile(string testData0)
+        public bool ContainsEqualSymbol(string input)
         {
-            string text = File.ReadAllText(testData0);
-            List<string> resultList = new List<string>(text.Split(','));
-
-            return resultList;
-        }
-
-        public bool HaveEqual(string input)
-        {
-            if (input == null)
-            {
-                throw new ArgumentNullException(nameof(input));
-            }
-
             return input.Contains('=');
         }
 
-        public bool HaveMinus(string input)
+        public bool ContainsMinusSymbol(string input)
         {
-            if (input == null)
-            {
-                throw new ArgumentNullException(nameof(input));
-            }
-
             return input.Contains('-');
         }
 
-        public List<List<string>> CreateEmptyBox()
+        public List<List<string>> InitializeEmptyBoxes()
         {
             List<List<string>> mainList = new List<List<string>>();
 
-            // Initialize each index from 0 to 255
             for (int i = 0; i < 256; i++)
             {
                 mainList.Add(new List<string>());
@@ -112,49 +71,61 @@ namespace advent_of_code_LATEST
             return mainList;
         }
 
-        public List<List<string>> PutInBox(List<string> input)
+        public List<List<string>> ArrangeLensesInBoxes(List<string> input)
         {
-            List<List<string>> box = CreateEmptyBox();
+            List<List<string>> lensBoxes = InitializeEmptyBoxes();
 
-            foreach (string inputItem in input)
+            foreach (string stepCommand in input)
             {
-                int boxIndex = GetBoxIndex(inputItem);
-                if (HaveEqual(inputItem))
+                int boxIndex = GetBoxIndex(stepCommand);
+                if (ContainsEqualSymbol(stepCommand))
                 {
                     bool noLens = true;
-                    for (int i = 0; i < box[boxIndex].Count; i++)
+                    for (int i = 0; i < lensBoxes[boxIndex].Count; i++)
                     {
-                        if (ExtractUpToSign(box[boxIndex][i]) == ExtractUpToSign(inputItem))
+                        if (ExtractStringUpToSymbol(lensBoxes[boxIndex][i]) == ExtractStringUpToSymbol(stepCommand))
                         {
-                            box[boxIndex][i] = inputItem;
+                            lensBoxes[boxIndex][i] = stepCommand;
                             noLens = false;
                         }
                     }
                     if (noLens)
                     {
-                        box[boxIndex].Add(inputItem);
+                        lensBoxes[boxIndex].Add(stepCommand);
                     }
 
                 }
-                if (HaveMinus(inputItem))
+                if (ContainsMinusSymbol(stepCommand))
                 {
-                    foreach (string item in box[boxIndex])
+                    foreach (string item in lensBoxes[boxIndex])
                     {
-                        if (ExtractUpToSign(item) == ExtractUpToSign(inputItem))
+                        if (ExtractStringUpToSymbol(item) == ExtractStringUpToSymbol(stepCommand))
                         {
-                            box[boxIndex].Remove(item);
+                            lensBoxes[boxIndex].Remove(item);
                             break;
                         }
                     }
                 }
             }
-
-            return box;
+            return lensBoxes;
         }
 
-        public int FinalResult(List<string> input)
+        public int ExtractNumber(string input)
         {
-            List<List<string>> box = PutInBox(input);
+            string pattern = @"[-=](\d+)";
+
+            string number = "";
+            Match match = Regex.Match(input, pattern);
+            if (match.Success)
+            {
+                number = match.Groups[1].Value;
+            }
+            return int.Parse(number);
+        }
+
+        public int CalculateTotalFocusingPower(List<string> input)
+        {
+            List<List<string>> box = ArrangeLensesInBoxes(input);
 
             int total = 0;
 
@@ -169,22 +140,15 @@ namespace advent_of_code_LATEST
                     total += realBoxIndex * slot * focalLength;
                 }
             }
-
             return total;
         }
 
-        public int ExtractNumber(string input)
+        public List<string> ReadInitializationSequence(string testData0)
         {
-            string pattern = @"[-=](\d+)";
+            string text = File.ReadAllText(testData0);
+            List<string> resultList = new List<string>(text.Split(','));
 
-            string number = "";
-            Match match = Regex.Match(input, pattern);
-            if (match.Success)
-            {
-                number = match.Groups[1].Value;
-            }
-
-            return int.Parse(number);
+            return resultList;
         }
     }
 }
