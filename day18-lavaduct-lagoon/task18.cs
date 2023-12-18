@@ -13,7 +13,7 @@ namespace AdventOfCode2023.Day18
                 totalRight += coordinateY[i] * coordinateX[i + 1];
             }
 
-            return (Math.Abs(totalLeft - totalRight) / 2);
+            return Math.Abs(totalLeft - totalRight) / 2;
         }
 
         public (List<long> cordX, List<long> cordY) ParseCoordinatesFromDigPlan(List<char> directions, List<long> numbers)
@@ -49,17 +49,17 @@ namespace AdventOfCode2023.Day18
 
         public long CalculateTotalBoundaryLength(string filePath)
         {
-            var (directions, numbers, colorCodes) = ParseDigPlanFromFile(filePath);
+            var (_, numbers, _) = ParseDigPlanFromFile(filePath);
 
             return numbers.Sum();
         }
 
         public long CalculateTotalLagoonArea(List<char> directions, List<long> numbers)
         {
-            var (cordX, cordY) = ParseCoordinatesFromDigPlan(directions, numbers);
+            var (cordinateX, cordinateY) = ParseCoordinatesFromDigPlan(directions, numbers);
 
             long result;
-            long area = CalculateAreaUsingShoelaceFormula(cordX, cordY);
+            long area = CalculateAreaUsingShoelaceFormula(cordinateX, cordinateY);
             long numberOfPointsOnBoundary = numbers.Sum();
 
             result = area - numberOfPointsOnBoundary / 2 + 1;
@@ -86,7 +86,7 @@ namespace AdventOfCode2023.Day18
 
         public (List<char> newDirections, List<long> newNumbers) ParseRevisedDigPlan(string filePath)
         {
-            var (directions, numbers, colorCodes) = ParseDigPlanFromFile(filePath);
+            var (_, _, colorCodes) = ParseDigPlanFromFile(filePath);
 
             var newNumbers = new List<long>(colorCodes.Count);
             var newDirections = new List<char>(colorCodes.Count);

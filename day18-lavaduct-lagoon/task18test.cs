@@ -5,10 +5,10 @@ namespace AdventOfCode2023.Day18.Tests
 {
     public class LavaductLagoonCalculatorTests
     {
-        string realData = "C:\\Users\\htotbagi\\source\\repos\\advent-of-code-LATEST\\advent-of-code-LATEST\\day18\\data\\realData.txt";
-        string testData0 = "C:\\Users\\htotbagi\\source\\repos\\advent-of-code-LATEST\\advent-of-code-LATEST\\day18\\data\\testData0.txt";
-        string testData1 = "C:\\Users\\htotbagi\\source\\repos\\advent-of-code-LATEST\\advent-of-code-LATEST\\day18\\data\\testData1.txt";
-        string testData2 = "C:\\Users\\htotbagi\\source\\repos\\advent-of-code-LATEST\\advent-of-code-LATEST\\day18\\data\\testData2.txt";
+        string realData = AppDomain.CurrentDomain.BaseDirectory + "../../../../advent-of-code-LATEST/day18-lavaduct-lagoon/data/realData.txt";
+        string testData0 = AppDomain.CurrentDomain.BaseDirectory + "../../../../advent-of-code-LATEST/day18-lavaduct-lagoon/data/testData0.txt";
+        string testData1 = AppDomain.CurrentDomain.BaseDirectory + "../../../../advent-of-code-LATEST/day18-lavaduct-lagoon/data/testData1.txt";
+        string testData2 = AppDomain.CurrentDomain.BaseDirectory + "../../../../advent-of-code-LATEST/day18-lavaduct-lagoon/data/testData2.txt";
 
         LavaductLagoonCalculator lagoonCalculator = CreateLavaductLagoonCalculator();
 
