@@ -1,13 +1,11 @@
-
-
 namespace AdventOfCode2023.Day18
 {
     public class LavaductLagoonCalculator
     {
-        public double CalculateAreaUsingShoelaceFormula(List<int> coordinateX, List<int> coordinateY)
+        public long CalculateAreaUsingShoelaceFormula(List<long> coordinateX, List<long> coordinateY)
         {
-            double totalLeft = 0;
-            double totalRight = 0;
+            long totalLeft = 0;
+            long totalRight = 0;
 
             for (int i = 0; i < coordinateX.Count - 1; i++)
             {
@@ -18,15 +16,13 @@ namespace AdventOfCode2023.Day18
             return (Math.Abs(totalLeft - totalRight) / 2);
         }
 
-        public (List<int> cordX, List<int> cordY) ParseCoordinatesFromDigPlan(string filePath)
+        public (List<long> cordX, List<long> cordY) ParseCoordinatesFromDigPlan(List<char> directions, List<long> numbers)
         {
-            (List<char> directions, List<int> numbers, List<string> colorCodes) = ParseDigPlanFromFile(filePath);
+            long currentX = 0;
+            long currentY = 0;
 
-            int currentX = 0;
-            int currentY = 0;
-
-            List<int> resultX = new List<int> { currentX };
-            List<int> resultY = new List<int> { currentY };
+            var resultX = new List<long> { currentX };
+            var resultY = new List<long> { currentY };
 
             for (int i = 0; i < directions.Count; i++)
             {
@@ -51,30 +47,30 @@ namespace AdventOfCode2023.Day18
             return (resultX, resultY);
         }
 
-        public double CalculateTotalBoundaryLength(string filePath)
+        public long CalculateTotalBoundaryLength(string filePath)
         {
-            (List<char> directions, List<int> numbers, List<string> colorCodes) = ParseDigPlanFromFile(filePath);
+            var (directions, numbers, colorCodes) = ParseDigPlanFromFile(filePath);
 
-            return numbers.Sum();   
+            return numbers.Sum();
         }
 
-        public double CalculateTotalLagoonArea(string filePath)
+        public long CalculateTotalLagoonArea(List<char> directions, List<long> numbers)
         {
-            (List<int> cordX, List<int> cordY) = ParseCoordinatesFromDigPlan(filePath);
+            var (cordX, cordY) = ParseCoordinatesFromDigPlan(directions, numbers);
 
-            double result;
-            double area = CalculateAreaUsingShoelaceFormula(cordX, cordY);
-            double numberOfPointsOnBoundary = CalculateTotalBoundaryLength(filePath);
-            
+            long result;
+            long area = CalculateAreaUsingShoelaceFormula(cordX, cordY);
+            long numberOfPointsOnBoundary = numbers.Sum();
+
             result = area - numberOfPointsOnBoundary / 2 + 1;
 
             return result + numberOfPointsOnBoundary;
         }
 
-        public (List<char> directions, List<int> numbers, List<string> colorCodes) ParseDigPlanFromFile(string filePath)
+        public (List<char> directions, List<long> numbers, List<string> colorCodes) ParseDigPlanFromFile(string filePath)
         {
             var directions = new List<char>();
-            var numbers = new List<int>();
+            var numbers = new List<long>();
             var colorCodes = new List<string>();
 
             foreach (var line in File.ReadLines(filePath))
@@ -82,10 +78,44 @@ namespace AdventOfCode2023.Day18
                 var parts = line.Split(' ');
 
                 directions.Add(char.Parse(parts[0]));
-                numbers.Add(int.Parse(parts[1]));
+                numbers.Add(long.Parse(parts[1]));
                 colorCodes.Add(parts[2]);
             }
             return (directions, numbers, colorCodes);
+        }
+
+        public (List<char> newDirections, List<long> newNumbers) ParseRevisedDigPlan(string filePath)
+        {
+            var (directions, numbers, colorCodes) = ParseDigPlanFromFile(filePath);
+
+            var newNumbers = new List<long>(colorCodes.Count);
+            var newDirections = new List<char>(colorCodes.Count);
+
+            foreach (var colorCode in colorCodes)
+            {
+                switch (colorCode[7])
+                {
+                    case '0':
+                        newDirections.Add('R');
+                        break;
+                    case '1':
+                        newDirections.Add('D');
+                        break;
+                    case '2':
+                        newDirections.Add('L');
+                        break;
+                    case '3':
+                        newDirections.Add('U');
+                        break;
+                }
+                newNumbers.Add(HexToDecimal(colorCode.Substring(2, 5)));
+            }
+            return (newDirections, newNumbers);
+        }
+
+        private long HexToDecimal(string hexValue)
+        {
+            return Convert.ToInt32(hexValue, 16);
         }
     }
 }
