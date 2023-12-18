@@ -5,10 +5,10 @@ namespace AdventOfCode2023.Day18.Tests
 {
     public class LavaductLagoonCalculatorTests
     {
-        string realData = AppDomain.CurrentDomain.BaseDirectory + "../../../../advent-of-code-LATEST/day18-lavaduct-lagoon/data/realData.txt";
-        string testData0 = AppDomain.CurrentDomain.BaseDirectory + "../../../../advent-of-code-LATEST/day18-lavaduct-lagoon/data/testData0.txt";
-        string testData1 = AppDomain.CurrentDomain.BaseDirectory + "../../../../advent-of-code-LATEST/day18-lavaduct-lagoon/data/testData1.txt";
-        string testData2 = AppDomain.CurrentDomain.BaseDirectory + "../../../../advent-of-code-LATEST/day18-lavaduct-lagoon/data/testData2.txt";
+        readonly string realData = AppDomain.CurrentDomain.BaseDirectory + "../../../../advent-of-code-LATEST/day18-lavaduct-lagoon/data/realData.txt";
+        readonly string testData0 = AppDomain.CurrentDomain.BaseDirectory + "../../../../advent-of-code-LATEST/day18-lavaduct-lagoon/data/testData0.txt";
+        readonly string testData1 = AppDomain.CurrentDomain.BaseDirectory + "../../../../advent-of-code-LATEST/day18-lavaduct-lagoon/data/testData1.txt";
+        readonly string testData2 = AppDomain.CurrentDomain.BaseDirectory + "../../../../advent-of-code-LATEST/day18-lavaduct-lagoon/data/testData2.txt";
 
         LavaductLagoonCalculator lagoonCalculator = CreateLavaductLagoonCalculator();
 
@@ -49,7 +49,7 @@ namespace AdventOfCode2023.Day18.Tests
             // Arrange
             var expectedX = new List<long> { 0, 0, 5, 5, 7, 7, 9, 9, 7, 7, 5, 5, 2, 2, 0 };
             var expectedY = new List<long> { 0, 6, 6, 4, 4, 6, 6, 1, 1, 0, 0, 2, 2, 0, 0 };
-            var (directions, numbers, colorCodes) = lagoonCalculator.ParseDigPlanFromFile(testData0);
+            var (directions, numbers, _) = lagoonCalculator.ParseDigPlanFromFile(testData0);
 
             // Act
             var (cordX, cordY) = lagoonCalculator.ParseCoordinatesFromDigPlan(directions, numbers);
@@ -64,7 +64,7 @@ namespace AdventOfCode2023.Day18.Tests
         {
             // Arrange
             var expected = 62;
-            var (directions, numbers, colorCodes) = lagoonCalculator.ParseDigPlanFromFile(testData0);
+            var (directions, numbers, _) = lagoonCalculator.ParseDigPlanFromFile(testData0);
 
             // Act
             var result = lagoonCalculator.CalculateTotalLagoonArea(directions, numbers);
@@ -78,7 +78,7 @@ namespace AdventOfCode2023.Day18.Tests
         {
             // Arrange
             var expected = 28911;
-            var (directions, numbers, colorCodes) = lagoonCalculator.ParseDigPlanFromFile(realData);
+            var (directions, numbers, _) = lagoonCalculator.ParseDigPlanFromFile(realData);
 
             // Act
             var result = lagoonCalculator.CalculateTotalLagoonArea(directions, numbers);

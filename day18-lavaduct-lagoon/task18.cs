@@ -47,13 +47,6 @@ namespace AdventOfCode2023.Day18
             return (resultX, resultY);
         }
 
-        public long CalculateTotalBoundaryLength(string filePath)
-        {
-            var (_, numbers, _) = ParseDigPlanFromFile(filePath);
-
-            return numbers.Sum();
-        }
-
         public long CalculateTotalLagoonArea(List<char> directions, List<long> numbers)
         {
             var (cordinateX, cordinateY) = ParseCoordinatesFromDigPlan(directions, numbers);
