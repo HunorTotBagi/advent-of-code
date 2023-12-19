@@ -3,11 +3,11 @@ using Xunit;
 
 namespace AdventOfCode2023.Day19.Tests
 {
-    public class HunorTest
+    public class WorkflowProcessorTest
     {
-        readonly string realData = AppDomain.CurrentDomain.BaseDirectory + "../../../../advent-of-code-LATEST/day19/data/realData.txt";
-        readonly string testData0 = AppDomain.CurrentDomain.BaseDirectory + "../../../../advent-of-code-LATEST/day19/data/testData0.txt";
-        readonly string testData1 = AppDomain.CurrentDomain.BaseDirectory + "../../../../advent-of-code-LATEST/day19/data/testData1.txt";
+        readonly string realData = AppDomain.CurrentDomain.BaseDirectory + "../../../../advent-of-code-LATEST/day19-aplenty/data/realData.txt";
+        readonly string testData0 = AppDomain.CurrentDomain.BaseDirectory + "../../../../advent-of-code-LATEST/day19-aplenty/data/testData0.txt";
+        readonly string testData1 = AppDomain.CurrentDomain.BaseDirectory + "../../../../advent-of-code-LATEST/day19-aplenty/data/testData1.txt";
 
         WorkflowProcessor workflowProcessor = CreateWorkflowProcessor();
 
