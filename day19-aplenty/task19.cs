@@ -2,9 +2,9 @@ using System.Text.RegularExpressions;
 
 namespace AdventOfCode2023.Day19
 {
-    public class Hunor
+    public class WorkflowProcessor
     {
-        public (string key, List<string> comparisons) ExtractInfo(string input)
+        public (string key, List<string> comparisons) ExtractWorkflowRules(string input)
         {
             var startIndex = input.IndexOf('{');
             var key = input[..startIndex];
@@ -16,7 +16,7 @@ namespace AdventOfCode2023.Day19
             return (key, comparisons);
         }
 
-        public List<int> CreateListNumbers(string input)
+        public List<int> ExtractRatingNumbers(string input)
         {
             var cleanedInput = Regex.Replace(input, "[{}xmas=]", "");
             var numberStrings = cleanedInput.Split(',');
@@ -29,7 +29,7 @@ namespace AdventOfCode2023.Day19
             return numbers;
         }
 
-        public (List<string> keys, List<List<string>> comparisons) CreateBig(string input)
+        public (List<string> keys, List<List<string>> comparisons) CreateWorkflowMappings(string input)
         {
             var (road, _) = ReadFileIn(input);
 
@@ -38,7 +38,7 @@ namespace AdventOfCode2023.Day19
 
             foreach (var item in road)
             {
-                var (key, comparison) = ExtractInfo(item);
+                var (key, comparison) = ExtractWorkflowRules(item);
 
                 keys.Add(key);
                 comparisons.Add(comparison);
@@ -46,7 +46,7 @@ namespace AdventOfCode2023.Day19
             return (keys, comparisons);
         }
 
-        public (string first, char second, int numbers, string nextPath) GetResultFromComparisons(string input)
+        public (string first, char second, int numbers, string nextPath) ProcessComparisonRule(string input)
         {
             var splitChar = input.Contains('<') ? '<' : '>';
             var firstSplit = input.Split(splitChar);
@@ -60,7 +60,7 @@ namespace AdventOfCode2023.Day19
             return (partBeforeSplit, splitChar, numberPart, stringAfterColon);
         }
 
-        public string MainLogic(List<string> inputLogic, List<int> inputNumbers)
+        public string MainLogic(List<string> workflowRules, List<int> partRatings)
         {
             var xmasIndices = new Dictionary<string, int>
                 {
@@ -70,17 +70,17 @@ namespace AdventOfCode2023.Day19
                     { "s", 3 }
                 };
 
-            foreach (var logic in inputLogic)
+            foreach (var logic in workflowRules)
             {
                 if (!logic.Contains(':'))
                 {
                     return logic;
                 }
 
-                var (xmas, sign, number, nextPath) = GetResultFromComparisons(logic);
+                var (categoryIndices, sign, number, nextPath) = ProcessComparisonRule(logic);
 
-                var index = xmasIndices[xmas];
-                bool condition = sign == '<' ? inputNumbers[index] < number : inputNumbers[index] > number;
+                var index = xmasIndices[categoryIndices];
+                bool condition = sign == '<' ? partRatings[index] < number : partRatings[index] > number;
 
                 if (condition)
                 {
@@ -90,7 +90,7 @@ namespace AdventOfCode2023.Day19
             return "not possible";
         }
 
-        public string InputNumberGetAorR(List<int> inputNumbers, List<string> keys, List<List<string>> comparisons)
+        public string DeterminePartOutcome(List<int> inputNumbers, List<string> keys, List<List<string>> comparisons)
         {
             var start = "in";
 
@@ -112,21 +112,21 @@ namespace AdventOfCode2023.Day19
             return start;
         }
 
-        public int FinalCalc(string testData0)
+        public int ComputeAcceptedPartsSum(string testData0)
         {
-            var total = 0;
+            var acceptedPartsSum = 0;
             var (_, parts) = ReadFileIn(testData0);
-            var (keys, comparisons) = CreateBig(testData0);
+            var (keys, comparisons) = CreateWorkflowMappings(testData0);
 
             foreach (var numbers in parts)
             {
-                var inputNumbers = CreateListNumbers(numbers);
-                var result = InputNumberGetAorR(inputNumbers, keys, comparisons);
+                var inputNumbers = ExtractRatingNumbers(numbers);
+                var result = DeterminePartOutcome(inputNumbers, keys, comparisons);
 
                 if (result == "A")
-                    total += inputNumbers.Sum();
+                    acceptedPartsSum += inputNumbers.Sum();
             }
-            return total;
+            return acceptedPartsSum;
         }
 
         public (List<string> road, List<string> parts) ReadFileIn(string filePath)

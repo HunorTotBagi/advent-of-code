@@ -5,22 +5,22 @@ namespace AdventOfCode2023.Day19.Tests
 {
     public class HunorTest
     {
-        string realData = AppDomain.CurrentDomain.BaseDirectory + "../../../../advent-of-code-LATEST/day19/data/realData.txt";
-        string testData0 = AppDomain.CurrentDomain.BaseDirectory + "../../../../advent-of-code-LATEST/day19/data/testData0.txt";
-        string testData1 = AppDomain.CurrentDomain.BaseDirectory + "../../../../advent-of-code-LATEST/day19/data/testData1.txt";
+        readonly string realData = AppDomain.CurrentDomain.BaseDirectory + "../../../../advent-of-code-LATEST/day19/data/realData.txt";
+        readonly string testData0 = AppDomain.CurrentDomain.BaseDirectory + "../../../../advent-of-code-LATEST/day19/data/testData0.txt";
+        readonly string testData1 = AppDomain.CurrentDomain.BaseDirectory + "../../../../advent-of-code-LATEST/day19/data/testData1.txt";
 
-        Hunor newHunor = CreateHunor();
+        WorkflowProcessor workflowProcessor = CreateWorkflowProcessor();
 
         [Fact]
-        public void Should_get_workflowname_and_workflows()
+        public void Should_extract_workflow_rules()
         {
             // Arrange
             var expectedWorkflowName = "px";
-            var (workflow, _) = newHunor.ReadFileIn(testData0);
+            var (workflow, _) = workflowProcessor.ReadFileIn(testData0);
             var expectedWorkflows = new List<string> { "a<2006:qkq", "m>2090:A", "rfg" };
 
             // Act
-            var (workflowName, workflows) = newHunor.ExtractInfo(workflow[0]);
+            var (workflowName, workflows) = workflowProcessor.ExtractWorkflowRules(workflow[0]);
 
             // Assert
             workflowName.Should().Be(expectedWorkflowName);
@@ -28,21 +28,21 @@ namespace AdventOfCode2023.Day19.Tests
         }
 
         [Fact]
-        public void Should_extract_numbers()
+        public void Should_extract_rating_numbers()
         {
             // Arrange
-            var (_, parts) = newHunor.ReadFileIn(testData0);
+            var (_, parts) = workflowProcessor.ReadFileIn(testData0);
             var expected = new List<int> { 787, 2655, 1222, 2876 };
 
             // Act
-            var result = newHunor.CreateListNumbers(parts[0]);
+            var result = workflowProcessor.ExtractRatingNumbers(parts[0]);
 
             // Assert
             result.Should().BeEquivalentTo(expected);
         }
 
         [Fact]
-        public void Should_reate_overal_list_for_seacrgin()
+        public void Should_create_workflow_mappings()
         {
             // Arrange
             var expectedKeys = new List<string> { "px", "pv", "lnx" };
@@ -54,7 +54,7 @@ namespace AdventOfCode2023.Day19.Tests
             };
 
             // Act
-            var (keys, comparisons) = newHunor.CreateBig(testData1);
+            var (keys, comparisons) = workflowProcessor.CreateWorkflowMappings(testData1);
 
             // Assert
             keys.Should().BeEquivalentTo(expectedKeys);
@@ -62,7 +62,7 @@ namespace AdventOfCode2023.Day19.Tests
         }
 
         [Fact]
-        public void Should_get_logic_values()
+        public void Should_process_comparison_rule()
         {
             // Arrange
             var expectedFirst = "s";
@@ -72,14 +72,13 @@ namespace AdventOfCode2023.Day19.Tests
             var input = "s<1351:px";
 
             // Act
-            var (xmas, sign, number, nextPath) = newHunor.GetResultFromComparisons(input);
+            var (xmas, sign, number, nextPath) = workflowProcessor.ProcessComparisonRule(input);
 
             // Assert
             xmas.Should().Be(expectedFirst);
             sign.Should().Be(expectedSecond);
             number.Should().Be(expectedNumber);
             nextPath.Should().Be(expectedNextPath);
-
         }
 
         [Theory]
@@ -87,64 +86,63 @@ namespace AdventOfCode2023.Day19.Tests
         [InlineData("qs", new string[] { "s>2770:qs", "m<1801:hdj", "R" }, new int[] { 787, 2655, 1222, 2876 })]
         [InlineData("lnx", new string[] { "s>3448:A", "lnx" }, new int[] { 787, 2655, 1222, 2876 })]
         [InlineData("A", new string[] { "m>1548:A", "A" }, new int[] { 787, 2655, 1222, 2876 })]
-        public void Should_return_MainLogic_Theory(string expected, string[] inputLogicArray, int[] inputNumbersArray)
+        public void Should_check_main_logic_functionality(string expected, string[] inputLogicArray, int[] inputNumbersArray)
         {
             // Arrange
             var inputLogic = new List<string>(inputLogicArray);
             var inputNumbers = new List<int>(inputNumbersArray);
 
             // Act
-            var result = newHunor.MainLogic(inputLogic, inputNumbers);
+            var result = workflowProcessor.MainLogic(inputLogic, inputNumbers);
 
             // Assert
             result.Should().Be(expected);
         }
 
-
         [Fact]
-        public void Should_first_iteration()
+        public void Should_determine_part_outcome()
         {
             // Arrange
             var expected = "A";
             var inputNumbers = new List<int> { 787, 2655, 1222, 2876 };
-            var (keys, comparisons) = newHunor.CreateBig(testData0);
+            var (keys, comparisons) = workflowProcessor.CreateWorkflowMappings(testData0);
 
             // Act
-            var result = newHunor.InputNumberGetAorR(inputNumbers, keys, comparisons);
+            var result = workflowProcessor.DeterminePartOutcome(inputNumbers, keys, comparisons);
 
             // Assert
             result.Should().Be(expected);
         }
 
         [Fact]
-        public void Should_final_res()
+        public void Should_compute_accepted_parts_sum_for_test_data()
         {
             // Arrange
             var expected = 19114;
 
             // Act
-            var result = newHunor.FinalCalc(testData0);
+            var result = workflowProcessor.ComputeAcceptedPartsSum(testData0);
 
             // Assert
             result.Should().Be(expected);
         }
 
         [Fact]
-        public void Should_final_res_real_data()
+        public void Should_compute_accepted_parts_sum_for_real_data()
         {
             // Arrange
             var expected = 575412;
 
             // Act
-            var result = newHunor.FinalCalc(realData);
+            var result = workflowProcessor.ComputeAcceptedPartsSum(realData);
 
             // Assert
             result.Should().Be(expected);
         }
 
-        private static Hunor CreateHunor()
+        private static WorkflowProcessor CreateWorkflowProcessor()
         {
-            return new Hunor();
+            return new WorkflowProcessor();
         }
     }
 }
