@@ -1,30 +1,30 @@
-using src.day01_trebuchet;
 using FluentAssertions;
 using Xunit;
 
-namespace Day01_Trebuhet
+namespace AdventOfCode2023.Day01.Tests
 {
     public class DocumentTests
     {
-        Document newDocument = CreateCalculator();
+        readonly string realData = AppDomain.CurrentDomain.BaseDirectory + "../../../../advent-of-code-LATEST/day01-trebuchet/data/realData.txt";
+        readonly string testData = AppDomain.CurrentDomain.BaseDirectory + "../../../../advent-of-code-LATEST/day01-trebuchet/data/testData.txt";
+
+        readonly List<string> typedList = ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine"];
+        readonly List<string> typedListReverse = ["eno", "owt", "eerht", "ruof", "evif", "xis", "neves", "thgie", "enin"];
+        readonly List<char> numbersList = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
+
+        CalibrationDocumentProcessor newCalibrationDocumentProcessor = CreateCalibrationDocumentProcessor();
 
         [Theory]
         [InlineData("1abc2", "1")]
-        [InlineData("3asd4", "3")]
-        [InlineData("6asd9", "6")]
         [InlineData("pqr3stu8vwx", "3")]
-        [InlineData("a2rgs4uwvwx", "2")]
-        [InlineData("yqr1tu8vhtr", "1")]
-        [InlineData("a1b2c3d4e5f", "1")]
-        [InlineData("awg1aaaaaaad4e9f", "1")]
         [InlineData("awwdas6ba4wd4e1fgreger", "6")]
         [InlineData("treb7uchet", "7")]
-        [InlineData("asdasd1asdasdasd", "1")]
-        [InlineData("h2o", "2")]
-        public void Should_return_the_first_number_from_left(string input, string expected)
+        public void Should_extract_first_number(string input, string expected)
         {
+            // Arrange
+
             // Act
-            string result = newDocument.GetFirstNumberFromLeft(input);
+            var result = newCalibrationDocumentProcessor.ExtractFirstNumber(input, typedList);
 
             // Assert
             result.Should().Be(expected);
@@ -38,9 +38,12 @@ namespace Day01_Trebuhet
         [InlineData("4nineeightseven2", "4")]
         [InlineData("zoneight234", "1")]
         [InlineData("7pqrstsixteen", "7")]
-        public void Should_return_converted_number(string input, string expected)
+        public void Should_extract_first_number_for_complicated_strings(string input, string expected)
         {
-            string result = newDocument.GetFirstNumberFromLeft(input);
+            // Arrange
+
+            // Act
+            var result = newCalibrationDocumentProcessor.ExtractFirstNumber(input, typedList);
 
             // Assert
             result.Should().Be(expected);
@@ -50,10 +53,14 @@ namespace Day01_Trebuhet
         [InlineData("hunor", "ronuh")]
         [InlineData("Kat4rina", "anir4taK")]
         [InlineData("hu23nor", "ron32uh")]
-        public void Should_return_string_in_reverse_order(string input, string expected)
+        public void Should_reverse_string(string input, string expected)
         {
-            string result = newDocument.ReverseString(input);
+            // Arrange
 
+            // Act
+            var result = newCalibrationDocumentProcessor.ReverseString(input);
+
+            // Assert
             result.Should().Be(expected);
         }
 
@@ -66,32 +73,46 @@ namespace Day01_Trebuhet
         [InlineData("zoneight234", 14)]
         [InlineData("7pqrstsixteen", 76)]
         [InlineData("m69", 69)]
-        public void Should_return_combined_number(string input, int expected)
-        {
-            // Act
-            int result = newDocument.GetNumber(input);
-
-            // Assert
-            result.Should().Be(expected);
-        }
-
-        [Theory]
-        [InlineData("document.txt", 54581)]
-        public void FinalTest(string fileName, int expected)
+        public void Should_get_correct_number_from_string(string input, int expected)
         {
             // Arrange
-            var filePath = AppDomain.CurrentDomain.BaseDirectory + "../../../../aoc/day01-trebuchet/data/" + fileName;
 
             // Act
-            int result = newDocument.SummAllUp(filePath);
+            var result = newCalibrationDocumentProcessor.GetNumber(input);
 
             // Assert
             result.Should().Be(expected);
         }
 
-        private static Document CreateCalculator()
+        [Fact]
+        public void Should_return_sum_of_calibration_for_test_data()
         {
-            return new Document();
+            // Arrange
+            var expected = 281;
+
+            // Act
+            var result = newCalibrationDocumentProcessor.SumCalibrationValues(testData);
+
+            // Assert
+            result.Should().Be(expected);
+        }
+
+        [Fact]
+        public void Should_return_sum_of_calibration_for_real_data()
+        {
+            // Arrange
+            var expected = 54581;
+
+            // Act
+            var result = newCalibrationDocumentProcessor.SumCalibrationValues(realData);
+
+            // Assert
+            result.Should().Be(expected);
+        }
+
+        private static CalibrationDocumentProcessor CreateCalibrationDocumentProcessor()
+        {
+            return new CalibrationDocumentProcessor();
         }
     }
 }

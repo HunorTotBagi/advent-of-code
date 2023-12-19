@@ -1,120 +1,62 @@
-﻿namespace src.day01_trebuchet
+﻿namespace AdventOfCode2023.Day01
 {
-    public class Document
+    public class CalibrationDocumentProcessor
     {
-        public List<string> typedList = new List<string> { "one", "two", "three", "four", "five", "six", "seven", "eight", "nine" };
+        public List<string> wordNumberList = ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine"];
+        public List<string> reversedWordNumberList = ["eno", "owt", "eerht", "ruof", "evif", "xis", "neves", "thgie", "enin"];
+        public List<char> digitCharList = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
 
-        public List<string> typedListReverse = new List<string> { "eno", "owt", "eerht", "ruof", "evif", "xis", "neves", "thgie", "enin" };
-
-        public List<char> numbersList = new List<char> { '1', '2', '3', '4', '5', '6', '7', '8', '9' };
-
-        public string GetFirstNumberFromLeft(string input)
+        public string ExtractFirstNumber(string line, List<string> numberWords)
         {
-            for (int i = 0; i < input.Length; i++)
+            for (int i = 0; i < line.Length; i++)
             {
-                if (char.IsDigit(input[i]))
+                if (char.IsDigit(line[i]))
                 {
-                    for (int j = 0; j < numbersList.Count; j++)
-                    {
-                        if (input[i] == numbersList[j])
-                        {
-                            return input[i].ToString();
-                        }
-                    }
+                    return line[i].ToString();
                 }
                 else
                 {
-                    for (int j = 0; j < typedList.Count; j++)
+                    foreach (var typedValue in numberWords)
                     {
-                        int length = typedList[j].Length;
-
-                        if (input.Length - i >= typedList[j].Length)
+                        if (line.Length - i >= typedValue.Length && line.Substring(i, typedValue.Length) == typedValue)
                         {
-                            if (input.Substring(i, length) == typedList[j])
-                            {
-                                return numbersList[j].ToString();
-                            }
+                            var index = numberWords.IndexOf(typedValue);
+                            return digitCharList[index].ToString();
                         }
-
                     }
                 }
             }
-
-            return "error";
-        }
-
-        public string CalculateFirstReverse(string input)
-        {
-            for (int i = 0; i < input.Length; i++)
-            {
-                if (char.IsDigit(input[i]))
-                {
-                    for (int j = 0; j < numbersList.Count; j++)
-                    {
-                        if (input[i] == numbersList[j])
-                        {
-                            return input[i].ToString();
-                        }
-                    }
-                }
-                else
-                {
-                    for (int j = 0; j < typedListReverse.Count; j++)
-                    {
-                        int length = typedListReverse[j].Length;
-
-                        if (input.Length - i >= typedListReverse[j].Length)
-                        {
-                            if (input.Substring(i, length) == typedListReverse[j])
-                            {
-                                return numbersList[j].ToString();
-                            }
-                        }
-
-                    }
-                }
-            }
-
             return "error";
         }
 
         public string ReverseString(string inputString)
         {
-            char[] charArray = inputString.ToCharArray();
-            Array.Reverse(charArray);
-            return new string(charArray);
+            return new string(inputString.ToCharArray().Reverse().ToArray());
         }
 
         public int GetNumber(string input)
         {
-            string first = GetFirstNumberFromLeft(input);
-            string last = CalculateFirstReverse(ReverseString(input));
+            var first = ExtractFirstNumber(input, wordNumberList);
+            var last = ExtractFirstNumber(ReverseString(input), reversedWordNumberList);
 
             return int.Parse(first + last);
         }
 
-        public int SummAllUp(string filePath)
+        public int SumCalibrationValues(string filePath)
         {
-            List<string> data = ReadFileToList(filePath);
-
-            int result = 0;
+            var totalSum = 0;
+            var data = ReadLinesFromFile(filePath);
 
             foreach (string line in data)
             {
-                result += GetNumber(line);
+                totalSum += GetNumber(line);
             }
-
-            return result;
+            return totalSum;
         }
 
-        public List<string> ReadFileToList(string filePath)
+        public List<string> ReadLinesFromFile(string filePath)
         {
-            List<string> linesList = new List<string>();
-
-            string[] lines = File.ReadAllLines(filePath);
-            linesList.AddRange(lines);
-
-            return linesList;
+            return File.ReadAllLines(filePath).ToList();
         }
     }
 }
