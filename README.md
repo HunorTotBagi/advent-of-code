@@ -32,6 +32,8 @@ Day 14: [Parabolic Reflector Dish](https://adventofcode.com/2023/day/14)
 
 Day 15: [Lens Library](https://adventofcode.com/2023/day/15)
 
+Day 16: [The Floor Will Be Lava](https://adventofcode.com/2023/day/16) - [BFS](https://en.wikipedia.org/wiki/Breadth-first_search) + [Flood fill](https://en.wikipedia.org/wiki/Flood_fill) + [Queue](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.queue-1?view=net-8.0) + [HashSet](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.hashset-1?view=net-8.0)
+
 Day 18: [Lavaduct Lagoon](https://adventofcode.com/2023/day/18) - [Shoelace formula](https://en.wikipedia.org/wiki/Shoelace_formula) + [Pick's theorem](https://en.wikipedia.org/wiki/Pick%27s_theorem)
 
 Day 19: [Aplenty](https://adventofcode.com/2023/day/19)
