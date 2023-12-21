@@ -35,3 +35,5 @@ Day 15: [Lens Library](https://adventofcode.com/2023/day/15)
 Day 18: [Lavaduct Lagoon](https://adventofcode.com/2023/day/18) - [Shoelace formula](https://en.wikipedia.org/wiki/Shoelace_formula) + [Pick's theorem](https://en.wikipedia.org/wiki/Pick%27s_theorem)
 
 Day 19: [Aplenty](https://adventofcode.com/2023/day/19)
+
+Day 21: [Step Counter](https://adventofcode.com/2023/day/21)
