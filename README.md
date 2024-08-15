@@ -2,6 +2,9 @@
 
 Advent of Code is an annual online programming competition and puzzle-solving event that takes place in December. It was created by Eric Wastl and first held in 2015. The event consists of a series of daily programming puzzles, one for each day leading up to Christmas. Participants solve these puzzles using their programming skills and submit their solutions online.
 
+<details>
+ <summary>Advent of Code 2023</summary>
+  
 Day 01: [Trebuchet?!](https://adventofcode.com/2023/day/1)
 
 Day 02: [Cube Conundrum](https://adventofcode.com/2023/day/2)
@@ -41,3 +44,10 @@ Day 18: [Lavaduct Lagoon](https://adventofcode.com/2023/day/18) - [Shoelace form
 Day 19: [Aplenty](https://adventofcode.com/2023/day/19)
 
 Day 21: [Step Counter](https://adventofcode.com/2023/day/21)
+
+</details>
+
+<details>
+ <summary>Advent of Code 2024</summary>
+  TBD
+ </details>
