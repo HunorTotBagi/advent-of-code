@@ -8,8 +8,8 @@ public class Test
         // Arrange
         var data = AppDomain.CurrentDomain.BaseDirectory + "../../../../Day01.Src/Data/file.txt";
 
-        // Assert
-
         // Act
+
+        // Assert
     }
 }
