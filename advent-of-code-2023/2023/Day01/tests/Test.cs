@@ -6,8 +6,8 @@ namespace tests;
 
 public class DocumentTests
 {
-    readonly string realData = AppDomain.CurrentDomain.BaseDirectory + "../../../../advent-of-code-LATEST/day01-trebuchet/data/realData.txt";
-    readonly string testData = AppDomain.CurrentDomain.BaseDirectory + "../../../../advent-of-code-LATEST/day01-trebuchet/data/testData.txt";
+    readonly string realData = AppDomain.CurrentDomain.BaseDirectory + "../../../../src/Data/realData.txt";
+    readonly string testData = AppDomain.CurrentDomain.BaseDirectory + "../../../../src/Data/testData.txt";
 
     readonly List<string> typedList = ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine"];
     readonly List<string> typedListReverse = ["eno", "owt", "eerht", "ruof", "evif", "xis", "neves", "thgie", "enin"];
