@@ -3,7 +3,7 @@ using FluentAssertions;
 
 namespace Day05.Test;
 
-public class AlamacTests
+public class Tests
 {
     public string filePath = AppDomain.CurrentDomain.BaseDirectory + "../../../../Day05.Src/Data/exampleAlamac.txt";
     Alamac newAlamac = CreateAlamac();
