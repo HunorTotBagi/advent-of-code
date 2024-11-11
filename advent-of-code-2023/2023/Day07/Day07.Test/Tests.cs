@@ -3,7 +3,7 @@ using FluentAssertions;
 
 namespace Day07.Test;
 
-public class HandTests
+public class Tests
 {
     Hand newHand = CreateHand();
 
