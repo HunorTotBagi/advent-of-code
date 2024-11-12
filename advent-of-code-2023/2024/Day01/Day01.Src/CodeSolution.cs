@@ -1,5 +1,5 @@
 ﻿namespace Day01.Src;
 
-public class Task
+public class CodeSolution
 {
 }
