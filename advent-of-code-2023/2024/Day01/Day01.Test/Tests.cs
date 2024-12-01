@@ -11,90 +11,85 @@ public class Tests
     private readonly CodeSolution _newCodeSolution = CreateCodeSolution();
 
     [Fact]
-    public void Test1()
+    public void Data_Is_Loaded_Correctly()
     {
         // Arrange
-        var (arr1, arr2) = _newCodeSolution.GetArraysFromFile();
-
-        var arr11 = new int[] {3, 4, 2, 1, 3, 3};
-        var arr22 = new int[] {4, 3, 5, 3, 9, 3 };
+        var expectedArray1 = new[] {3, 4, 2, 1, 3, 3};
+        var expectedArray2 = new[] {4, 3, 5, 3, 9, 3 };
 
         // Act
+        var (array1, array2) = _newCodeSolution.GetArraysFromFile();
 
         // Assert
-        arr1.Should().Equal(arr11);
-        arr2.Should().Equal(arr22);
+        array1.Should().Equal(expectedArray1);
+        array2.Should().Equal(expectedArray2);
     }
 
     [Fact]
-    public void Sorting()
+    public void Arrays_Are_Sorted()
     {
         // Arrange
-        var (arr1, arr2) = _newCodeSolution.GetArraysFromFile();
+        var (array1, array2) = _newCodeSolution.GetArraysFromFile();
 
-        var res1 = arr1.OrderBy(x => x).ToList();
-        var res2 = arr2.OrderBy(x => x).ToList();
-
-        var expected1 = new int[] { 1, 2, 3, 3, 3, 4 };
-        var expected2 = new int[] { 3, 3, 3, 4, 5, 9 };
+        var expectedArray1 = new[] { 1, 2, 3, 3, 3, 4 };
+        var expectedArray2 = new[] { 3, 3, 3, 4, 5, 9 };
 
         // Act
+        array1 = _newCodeSolution.SortTheArray(array1);
+        array2 = _newCodeSolution.SortTheArray(array2);
 
         // Assert
-        res1.Should().Equal(expected1);
-        res2.Should().Equal(expected2);
+        array1.Should().Equal(expectedArray1);
+        array2.Should().Equal(expectedArray2);
     }
 
     [Fact]
-    public void CalcDistance()
+    public void Calculate_Distance()
     {
         // Arrange
-        var (arr1, arr2) = _newCodeSolution.GetArraysFromFile();
+        var (array1, array2) = _newCodeSolution.GetArraysFromFile();
 
-        var res1 = arr1.OrderBy(x => x).ToArray();
-        var res2 = arr2.OrderBy(x => x).ToArray();
+        array1 = _newCodeSolution.SortTheArray(array1);
+        array2 = _newCodeSolution.SortTheArray(array2);
 
-        var checking = _newCodeSolution.CalculateDistance(res1, res2);
-
-        var expected = new int[] { 2, 1, 0, 1, 2, 5 };
+        var expected = new[] { 2, 1, 0, 1, 2, 5 };
 
         // Act
+        var distance = _newCodeSolution.CalculateDistance(array1, array2);
 
         // Assert
-        checking.Should().Equal(expected);
+        distance.Should().Equal(expected);
     }
 
     [Fact]
-    public void Finalnaswer()
+    public void Total_Distance()
     {
         // Arrange
-        var (arr1, arr2) = _newCodeSolution.GetArraysFromFile();
+        var (array1, array2) = _newCodeSolution.GetArraysFromFile();
 
-        var res1 = arr1.OrderBy(x => x).ToArray();
-        var res2 = arr2.OrderBy(x => x).ToArray();
+        array1 = _newCodeSolution.SortTheArray(array1);
+        array2 = _newCodeSolution.SortTheArray(array2);
 
-        var checking = _newCodeSolution.CalculateDistance(res1, res2);
-
-        var final = _newCodeSolution.SummItUp(checking);
+        var distance = _newCodeSolution.CalculateDistance(array1, array2);
 
         // Act
+        var totalDistance = _newCodeSolution.SumItUp(distance);
 
         // Assert
-        final.Should().Be(11);
+        totalDistance.Should().Be(11);
     }
 
     [Fact]
-    public void SecondPart()
+    public void Calculate_Similarity_Score()
     {
         // Arrange
-        var (arr1, arr2) = _newCodeSolution.GetArraysFromFile();
-
-        var result = _newCodeSolution.GetSimilarityScore(arr1, arr2);
+        var (array1, array2) = _newCodeSolution.GetArraysFromFile();
 
         // Act
+        var similarityScore = _newCodeSolution.GetSimilarityScore(array1, array2);
 
         // Assert
-        result.Should().Be(31);
+        similarityScore.Should().Be(31);
     }
 
     public static CodeSolution CreateCodeSolution()
