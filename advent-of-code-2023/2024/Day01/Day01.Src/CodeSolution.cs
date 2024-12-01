@@ -42,7 +42,7 @@ public class CodeSolution
         return distances.Sum();
     }
 
-    public object CalculateSimilarityScore(int[] array1, int[] array2)
+    public int CalculateSimilarityScore(int[] array1, int[] array2)
     {
         var similarityScore = 0;
 
