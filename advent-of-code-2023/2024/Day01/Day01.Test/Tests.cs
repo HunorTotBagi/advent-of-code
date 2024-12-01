@@ -14,7 +14,7 @@ public class Tests
     public void Data_Is_Loaded_Correctly()
     {
         // Arrange
-        var expectedArray1 = new[] {3, 4, 2, 1, 3, 3};
+        var expectedArray1 = new[] {3, 4, 2, 1, 3, 3 };
         var expectedArray2 = new[] {4, 3, 5, 3, 9, 3 };
 
         // Act
