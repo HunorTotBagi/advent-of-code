@@ -2,22 +2,17 @@
 
 public class CodeSolution
 {
-    public (int[] arr1, int[] arr2) GetArraysFromFile()
+    public (int[] array1, int[] array2) GetArraysFromFile(string filePath)
     {
-        var filePath = "C:\\Users\\htotbagi\\Downloads\\advent-of-code\\advent-of-code-2023\\2024\\Day01\\Day01.Src\\Data\\testData.txt";
         var lines = File.ReadAllLines(filePath);
 
-        // Create the arrays
-        int[] leftNumbers = new int[lines.Length];
-        int[] rightNumbers = new int[lines.Length];
+        var leftNumbers = new int[lines.Length];
+        var rightNumbers = new int[lines.Length];
 
-        // Process each line
-        for (int i = 0; i < lines.Length; i++)
+        for (var i = 0; i < lines.Length; i++)
         {
-            // Split the line into two parts
-            string[] parts = lines[i].Split(new[] { ' ', '\t' }, StringSplitOptions.RemoveEmptyEntries);
+            var parts = lines[i].Split([' ', '\t'], StringSplitOptions.RemoveEmptyEntries);
 
-            // Parse the numbers and assign to the arrays
             leftNumbers[i] = int.Parse(parts[0]);
             rightNumbers[i] = int.Parse(parts[1]);
         }
@@ -51,10 +46,10 @@ public class CodeSolution
     {
         var result = 0;
 
-        for (var i = 0; i < array1.Length; i++)
+        foreach (var number in array1)
         {
-            var occurrence = array2.Count(x => x == array1[i]);
-            result += array1[i] * occurrence;
+            var occurrence = array2.Count(x => x == number);
+            result += number * occurrence;
         }
 
         return result;

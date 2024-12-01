@@ -18,7 +18,7 @@ public class Tests
         var expectedArray2 = new[] {4, 3, 5, 3, 9, 3 };
 
         // Act
-        var (array1, array2) = _newCodeSolution.GetArraysFromFile();
+        var (array1, array2) = _newCodeSolution.GetArraysFromFile(_testData);
 
         // Assert
         array1.Should().Equal(expectedArray1);
@@ -29,7 +29,7 @@ public class Tests
     public void Arrays_Are_Sorted()
     {
         // Arrange
-        var (array1, array2) = _newCodeSolution.GetArraysFromFile();
+        var (array1, array2) = _newCodeSolution.GetArraysFromFile(_testData);
 
         var expectedArray1 = new[] { 1, 2, 3, 3, 3, 4 };
         var expectedArray2 = new[] { 3, 3, 3, 4, 5, 9 };
@@ -47,7 +47,7 @@ public class Tests
     public void Calculate_Distance()
     {
         // Arrange
-        var (array1, array2) = _newCodeSolution.GetArraysFromFile();
+        var (array1, array2) = _newCodeSolution.GetArraysFromFile(_testData);
 
         array1 = _newCodeSolution.SortTheArray(array1);
         array2 = _newCodeSolution.SortTheArray(array2);
@@ -62,10 +62,10 @@ public class Tests
     }
 
     [Fact]
-    public void Total_Distance()
+    public void Total_Distance_Test_Data()
     {
         // Arrange
-        var (array1, array2) = _newCodeSolution.GetArraysFromFile();
+        var (array1, array2) = _newCodeSolution.GetArraysFromFile(_testData);
 
         array1 = _newCodeSolution.SortTheArray(array1);
         array2 = _newCodeSolution.SortTheArray(array2);
@@ -80,16 +80,47 @@ public class Tests
     }
 
     [Fact]
-    public void Calculate_Similarity_Score()
+    public void Total_Distance_Real_Data()
     {
         // Arrange
-        var (array1, array2) = _newCodeSolution.GetArraysFromFile();
+        var (array1, array2) = _newCodeSolution.GetArraysFromFile(_realData);
+
+        array1 = _newCodeSolution.SortTheArray(array1);
+        array2 = _newCodeSolution.SortTheArray(array2);
+
+        var distance = _newCodeSolution.CalculateDistance(array1, array2);
+
+        // Act
+        var totalDistance = _newCodeSolution.SumItUp(distance);
+
+        // Assert
+        totalDistance.Should().Be(1873376);
+    }
+
+    [Fact]
+    public void Calculate_Similarity_Score_Test_Data()
+    {
+        // Arrange
+        var (array1, array2) = _newCodeSolution.GetArraysFromFile(_testData);
 
         // Act
         var similarityScore = _newCodeSolution.GetSimilarityScore(array1, array2);
 
         // Assert
         similarityScore.Should().Be(31);
+    }
+
+    [Fact]
+    public void Calculate_Similarity_Score_Real_Data()
+    {
+        // Arrange
+        var (array1, array2) = _newCodeSolution.GetArraysFromFile(_realData);
+
+        // Act
+        var similarityScore = _newCodeSolution.GetSimilarityScore(array1, array2);
+
+        // Assert
+        similarityScore.Should().Be(18997088);
     }
 
     public static CodeSolution CreateCodeSolution()
