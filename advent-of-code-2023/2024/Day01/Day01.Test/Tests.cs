@@ -18,7 +18,7 @@ public class Tests
         var expectedArray2 = new[] {4, 3, 5, 3, 9, 3 };
 
         // Act
-        var (array1, array2) = _newCodeSolution.GetArraysFromFile(_testData);
+        var (array1, array2) = _newCodeSolution.ReadLocationIdsFromFile(_testData);
 
         // Assert
         array1.Should().Equal(expectedArray1);
@@ -29,14 +29,14 @@ public class Tests
     public void Arrays_Are_Sorted()
     {
         // Arrange
-        var (array1, array2) = _newCodeSolution.GetArraysFromFile(_testData);
+        var (array1, array2) = _newCodeSolution.ReadLocationIdsFromFile(_testData);
 
         var expectedArray1 = new[] { 1, 2, 3, 3, 3, 4 };
         var expectedArray2 = new[] { 3, 3, 3, 4, 5, 9 };
 
         // Act
-        array1 = _newCodeSolution.SortTheArray(array1);
-        array2 = _newCodeSolution.SortTheArray(array2);
+        array1 = _newCodeSolution.SortLocationIds(array1);
+        array2 = _newCodeSolution.SortLocationIds(array2);
 
         // Assert
         array1.Should().Equal(expectedArray1);
@@ -47,15 +47,15 @@ public class Tests
     public void Calculate_Distance()
     {
         // Arrange
-        var (array1, array2) = _newCodeSolution.GetArraysFromFile(_testData);
+        var (array1, array2) = _newCodeSolution.ReadLocationIdsFromFile(_testData);
 
-        array1 = _newCodeSolution.SortTheArray(array1);
-        array2 = _newCodeSolution.SortTheArray(array2);
+        array1 = _newCodeSolution.SortLocationIds(array1);
+        array2 = _newCodeSolution.SortLocationIds(array2);
 
         var expected = new[] { 2, 1, 0, 1, 2, 5 };
 
         // Act
-        var distance = _newCodeSolution.CalculateDistance(array1, array2);
+        var distance = _newCodeSolution.CalculateLocationDistance(array1, array2);
 
         // Assert
         distance.Should().Equal(expected);
@@ -65,15 +65,15 @@ public class Tests
     public void Total_Distance_Test_Data()
     {
         // Arrange
-        var (array1, array2) = _newCodeSolution.GetArraysFromFile(_testData);
+        var (array1, array2) = _newCodeSolution.ReadLocationIdsFromFile(_testData);
 
-        array1 = _newCodeSolution.SortTheArray(array1);
-        array2 = _newCodeSolution.SortTheArray(array2);
+        array1 = _newCodeSolution.SortLocationIds(array1);
+        array2 = _newCodeSolution.SortLocationIds(array2);
 
-        var distance = _newCodeSolution.CalculateDistance(array1, array2);
+        var distance = _newCodeSolution.CalculateLocationDistance(array1, array2);
 
         // Act
-        var totalDistance = _newCodeSolution.SumItUp(distance);
+        var totalDistance = _newCodeSolution.SumLocationDistances(distance);
 
         // Assert
         totalDistance.Should().Be(11);
@@ -83,15 +83,15 @@ public class Tests
     public void Total_Distance_Real_Data()
     {
         // Arrange
-        var (array1, array2) = _newCodeSolution.GetArraysFromFile(_realData);
+        var (array1, array2) = _newCodeSolution.ReadLocationIdsFromFile(_realData);
 
-        array1 = _newCodeSolution.SortTheArray(array1);
-        array2 = _newCodeSolution.SortTheArray(array2);
+        array1 = _newCodeSolution.SortLocationIds(array1);
+        array2 = _newCodeSolution.SortLocationIds(array2);
 
-        var distance = _newCodeSolution.CalculateDistance(array1, array2);
+        var distance = _newCodeSolution.CalculateLocationDistance(array1, array2);
 
         // Act
-        var totalDistance = _newCodeSolution.SumItUp(distance);
+        var totalDistance = _newCodeSolution.SumLocationDistances(distance);
 
         // Assert
         totalDistance.Should().Be(1873376);
@@ -101,10 +101,10 @@ public class Tests
     public void Calculate_Similarity_Score_Test_Data()
     {
         // Arrange
-        var (array1, array2) = _newCodeSolution.GetArraysFromFile(_testData);
+        var (array1, array2) = _newCodeSolution.ReadLocationIdsFromFile(_testData);
 
         // Act
-        var similarityScore = _newCodeSolution.GetSimilarityScore(array1, array2);
+        var similarityScore = _newCodeSolution.CalculateSimilarityScore(array1, array2);
 
         // Assert
         similarityScore.Should().Be(31);
@@ -114,10 +114,10 @@ public class Tests
     public void Calculate_Similarity_Score_Real_Data()
     {
         // Arrange
-        var (array1, array2) = _newCodeSolution.GetArraysFromFile(_realData);
+        var (array1, array2) = _newCodeSolution.ReadLocationIdsFromFile(_realData);
 
         // Act
-        var similarityScore = _newCodeSolution.GetSimilarityScore(array1, array2);
+        var similarityScore = _newCodeSolution.CalculateSimilarityScore(array1, array2);
 
         // Assert
         similarityScore.Should().Be(18997088);

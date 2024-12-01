@@ -2,7 +2,7 @@
 
 public class CodeSolution
 {
-    public (int[] array1, int[] array2) GetArraysFromFile(string filePath)
+    public (int[] array1, int[] array2) ReadLocationIdsFromFile(string filePath)
     {
         var lines = File.ReadAllLines(filePath);
 
@@ -20,12 +20,12 @@ public class CodeSolution
         return (leftNumbers, rightNumbers);
     }
 
-    public int[] SortTheArray(int[] array)
+    public int[] SortLocationIds(int[] array)
     {
        return array.OrderBy(x => x).ToArray();
     }
 
-    public int[] CalculateDistance(int[] arr1, int[] arr2)
+    public int[] CalculateLocationDistance(int[] arr1, int[] arr2)
     {
         var result = new int[arr1.Length];
 
@@ -37,21 +37,21 @@ public class CodeSolution
         return result;
     }
 
-    public int SumItUp(int[] arr)
+    public int SumLocationDistances(int[] distances)
     {
-        return arr.Sum();
+        return distances.Sum();
     }
 
-    public object GetSimilarityScore(int[] array1, int[] array2)
+    public object CalculateSimilarityScore(int[] array1, int[] array2)
     {
-        var result = 0;
+        var similarityScore = 0;
 
-        foreach (var number in array1)
+        foreach (var locationId in array1)
         {
-            var occurrence = array2.Count(x => x == number);
-            result += number * occurrence;
+            var locationIdCount = array2.Count(x => x == locationId);
+            similarityScore += locationId * locationIdCount;
         }
 
-        return result;
+        return similarityScore;
     }
 }
