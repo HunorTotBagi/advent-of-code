@@ -5,14 +5,11 @@ public class CodeSolution
     public static List<List<int>> ReadFile(string filePath)
     {
         var lines = File.ReadAllLines(filePath);
+        var listOfLists = new List<List<int>>();
 
-        List<List<int>> listOfLists = new List<List<int>>();
-
-        foreach (string line in lines)
+        foreach (var line in lines)
         {
-            List<int> row = line.Split(' ')
-                .Select(int.Parse)
-                .ToList();
+            var row = line.Split(' ').Select(int.Parse).ToList();
             listOfLists.Add(row);
         }
 
@@ -69,6 +66,7 @@ public class CodeSolution
     public static int TotalSafeReportsWithOneRemoval(List<List<int>> input)
     {
         var counter = 0;
+
         foreach (var list in input)
         {
             if (IsSafeWithOneRemoval(list))
