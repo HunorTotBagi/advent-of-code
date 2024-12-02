@@ -79,7 +79,7 @@ namespace Day02.Test
         }
 
         [Fact]
-        public void IsSafeWithRemoval()
+        public void Is_Safe_With_Removal()
         {
             // Arrange
             var matrix = CodeSolution.ReadFile(_testData);
