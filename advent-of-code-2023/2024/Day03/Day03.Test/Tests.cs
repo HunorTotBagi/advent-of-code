@@ -1,3 +1,6 @@
+using Day03.Src;
+using FluentAssertions;
+
 namespace Day03.Test
 {
     public class Tests
@@ -9,6 +12,7 @@ namespace Day03.Test
         public void Test1()
         {
             // Arrange
+            var data = CodeSolution.ReadFile(_testData);
 
             // Act
 
