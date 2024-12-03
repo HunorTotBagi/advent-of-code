@@ -22,29 +22,29 @@ public class CodeSolution
         return result;
     }
 
-    public static (List<int> x, List<int> y) GetNumbers(List<string> input)
+    public static (List<int> firstList, List<int> secondList) GetNumbers(List<string> input)
     {
         var pattern = @"mul\((\d+),(\d+)\)";
 
-        var array1 = new List<int>();
-        var array2 = new List<int>();
+        var firstList = new List<int>();
+        var secondList = new List<int>();
 
         foreach (var mul in input)
         {
             var match = Regex.Match(mul, pattern);
-            array1.Add(int.Parse(match.Groups[1].Value));
-            array2.Add(int.Parse(match.Groups[2].Value));
+            firstList.Add(int.Parse(match.Groups[1].Value));
+            secondList.Add(int.Parse(match.Groups[2].Value));
         }
 
-        return (array1, array2);
+        return (firstList, secondList);
     }
 
-    public static int Calculate(List<int> first, List<int> second)
+    public static int Calculate(List<int> firstList, List<int> secondList)
     {
         var result = 0;
-        for (var i = 0; i < first.Count; i++)
+        for (var i = 0; i < firstList.Count; i++)
         {
-            result += first[i] * second[i];
+            result += firstList[i] * secondList[i];
         }
 
         return result;
