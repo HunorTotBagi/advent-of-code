@@ -2,53 +2,52 @@
 
 public class CodeSolution
 {
-    public (int[] array1, int[] array2) ReadLocationIdsFromFile(string filePath)
+    public static (List<int> firstList, List<int> secondList) ReadLocationIdsFromFile(string filePath)
     {
         var lines = File.ReadAllLines(filePath);
 
-        var leftNumbers = new int[lines.Length];
-        var rightNumbers = new int[lines.Length];
+        var leftList = new List<int>();
+        var rightList = new List<int>();
 
-        for (var i = 0; i < lines.Length; i++)
+        foreach (var line in lines)
         {
-            var parts = lines[i].Split([' ', '\t'], StringSplitOptions.RemoveEmptyEntries);
-
-            leftNumbers[i] = int.Parse(parts[0]);
-            rightNumbers[i] = int.Parse(parts[1]);
+            var parts = line.Split("   ");
+            leftList.Add(int.Parse(parts[0]));
+            rightList.Add(int.Parse(parts[1]));
         }
 
-        return (leftNumbers, rightNumbers);
+        return (leftList, rightList);
     }
 
-    public int[] SortLocationIds(int[] array)
+    public static List<int> SortLocationIds(List<int> list)
     {
-       return array.OrderBy(x => x).ToArray();
+       return list.OrderBy(x => x).ToList();
     }
 
-    public int[] CalculateLocationDistance(int[] arr1, int[] arr2)
+    public static List<int> CalculateLocationDistance(List<int> list1, List<int> list2)
     {
-        var result = new int[arr1.Length];
+        var result = new List<int>();
 
-        for (var i = 0; i < arr1.Length; i++)
+        for (var i = 0; i < list1.Count; i++)
         {
-            result[i] = Math.Abs(arr1[i] - arr2[i]);
+            result.Add(Math.Abs(list1[i] - list2[i]));
         }
 
         return result;
     }
 
-    public int SumLocationDistances(int[] distances)
+    public static int SumLocationDistances(List<int> distances)
     {
         return distances.Sum();
     }
 
-    public int CalculateSimilarityScore(int[] array1, int[] array2)
+    public static int CalculateSimilarityScore(List<int> list1, List<int> list2)
     {
         var similarityScore = 0;
 
-        foreach (var locationId in array1)
+        foreach (var locationId in list1)
         {
-            var locationIdCount = array2.Count(x => x == locationId);
+            var locationIdCount = list2.Count(x => x == locationId);
             similarityScore += locationId * locationIdCount;
         }
 
