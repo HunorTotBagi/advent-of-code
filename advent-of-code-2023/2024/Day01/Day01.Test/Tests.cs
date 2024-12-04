@@ -5,8 +5,7 @@ namespace Day01.Test;
 
 public class Tests
 {
-    private readonly string _testData = AppDomain.CurrentDomain.BaseDirectory + "../../../../Day01.Src/Data/testData.txt";
-    private readonly string _realData = AppDomain.CurrentDomain.BaseDirectory + "../../../../Day01.Src/Data/realData.txt";
+    private readonly string _testData = AppDomain.CurrentDomain.BaseDirectory + "../../../../Day01.Src/testData.txt";
 
     [Fact]
     public void Data_Is_Loaded_Correctly()
@@ -78,24 +77,6 @@ public class Tests
     }
 
     [Fact]
-    public void Total_Distance_Real_Data()
-    {
-        // Arrange
-        var (array1, array2) = CodeSolution.ReadLocationIdsFromFile(_realData);
-
-        array1 = CodeSolution.SortLocationIds(array1);
-        array2 = CodeSolution.SortLocationIds(array2);
-
-        var distance = CodeSolution.CalculateLocationDistance(array1, array2);
-
-        // Act
-        var totalDistance = CodeSolution.SumLocationDistances(distance);
-
-        // Assert
-        totalDistance.Should().Be(1873376);
-    }
-
-    [Fact]
     public void Calculate_Similarity_Score_Test_Data()
     {
         // Arrange
@@ -106,18 +87,5 @@ public class Tests
 
         // Assert
         similarityScore.Should().Be(31);
-    }
-
-    [Fact]
-    public void Calculate_Similarity_Score_Real_Data()
-    {
-        // Arrange
-        var (array1, array2) = CodeSolution.ReadLocationIdsFromFile(_realData);
-
-        // Act
-        var similarityScore = CodeSolution.CalculateSimilarityScore(array1, array2);
-
-        // Assert
-        similarityScore.Should().Be(18997088);
     }
 }

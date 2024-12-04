@@ -51,11 +51,10 @@ public class Tests
 
     [Theory]
     [InlineData("testData.txt", 13)]
-    [InlineData("realData.txt", 21959)]
     public void Should_calculate_total_number_of_points(string fileName, int expectedTotalPoints)
     {
         // Arrange
-        var filePath = AppDomain.CurrentDomain.BaseDirectory + "../../../../Day04.Src/Data/" + fileName;
+        var filePath = AppDomain.CurrentDomain.BaseDirectory + "../../../../Day04.Src/" + fileName;
         List<string> scratchboards = card.ReadFileToList(filePath);
 
         // Act
@@ -90,7 +89,7 @@ public class Tests
     public void Should_add_copies_of_duplicate_scratch_cards(int[] firstInput, int[] secondInput, int iteration)
     {
         // Arrange
-        string filePath = AppDomain.CurrentDomain.BaseDirectory + "../../../../Day04.Src/Data/testData.txt";
+        string filePath = AppDomain.CurrentDomain.BaseDirectory + "../../../../Day04.Src/testData.txt";
         List<string> scratchboards = card.ReadFileToList(filePath);
 
         List<int> previousCounter = new List<int>(firstInput);
@@ -105,11 +104,10 @@ public class Tests
 
     [Theory]
     [InlineData("testData.txt", 30)]
-    [InlineData("realData.txt", 5132675)]
     public void Should_count_all_duplicate_cards(string fileName, int expectedSum)
     {
         // Arrange
-        string filePath = AppDomain.CurrentDomain.BaseDirectory + "../../../../Day04.Src/Data/" + fileName;
+        string filePath = AppDomain.CurrentDomain.BaseDirectory + "../../../../Day04.Src/" + fileName;
         List<string> scratchboards = card.ReadFileToList(filePath);
         int totalCardNumber = scratchboards.Count;
         List<int> initialCardCounter = Enumerable.Repeat(1, totalCardNumber).ToList();

@@ -5,8 +5,7 @@ namespace Day13.Test;
 
 public class Tests
 {
-    string realData = AppDomain.CurrentDomain.BaseDirectory + "../../../../Day13.Src/Data/realData.txt";
-    string testData = AppDomain.CurrentDomain.BaseDirectory + "../../../../Day13.Src/Data/testData.txt";
+    string testData = AppDomain.CurrentDomain.BaseDirectory + "../../../../Day13.Src/testData.txt";
 
     MirrorReflectionAnalyzer newMirrorReflectionAnalyzer = CreateMirrorReflectionAnalyzer();
 
@@ -46,16 +45,6 @@ public class Tests
 
         // Assert
         result.Should().Be(405);
-    }
-
-    [Fact]
-    public void Should_return_result()
-    {
-        // Act
-        var result = newMirrorReflectionAnalyzer.CalculateReflectionScore(realData);
-
-        // Assert
-        result.Should().Be(33520);
     }
 
     private static MirrorReflectionAnalyzer CreateMirrorReflectionAnalyzer()

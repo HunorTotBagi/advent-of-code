@@ -115,7 +115,6 @@ public class Tests
 
     [Theory]
     [InlineData("engineSchematic.txt", 4361)]
-    [InlineData("realSchematics.txt", 544433)]
     public void Should_return_correct_sum(string fileName, int expected)
     {
         // Arrange

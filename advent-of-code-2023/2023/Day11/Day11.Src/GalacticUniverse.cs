@@ -84,7 +84,7 @@ public class GalacticUniverse
 
     public GalacticUniverse()
     {
-        var filePath = AppDomain.CurrentDomain.BaseDirectory + "../../../../Day11.Src/Data/inputExample.txt";
+        var filePath = AppDomain.CurrentDomain.BaseDirectory + "../../../../Day11.Src/testData.txt";
         galacticGrid = ReadFileToGalacticGrid(filePath);
     }
 }

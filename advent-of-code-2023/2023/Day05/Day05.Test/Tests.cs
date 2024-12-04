@@ -5,19 +5,16 @@ namespace Day05.Test;
 
 public class Tests
 {
-    public string filePath = AppDomain.CurrentDomain.BaseDirectory + "../../../../Day05.Src/Data/exampleAlamac.txt";
+    public string filePath = AppDomain.CurrentDomain.BaseDirectory + "../../../../Day05.Src/testData.txt";
+
     Alamac newAlamac = CreateAlamac();
 
     [Theory]
-    [InlineData("exampleAlamac.txt", new ulong[] { 79, 14, 55, 13 })]
-    [InlineData("realAlamac.txt", new ulong[] { 1514493331, 295250933, 3793791524, 105394212, 828589016,
-                                                    654882197 , 658370118 , 49359719 , 4055197159, 59237418,
-                                                    314462259 , 268880047 , 2249227634 , 74967914 , 2370414906 ,
-                                                    38444198 , 3291001718 ,  85800943 , 2102534948 , 5923540})]
+    [InlineData("testData.txt", new ulong[] { 79, 14, 55, 13 })]
     public void Should_return_all_seeds(string fileName, IEnumerable<ulong> expected)
     {
         // Arrange
-        string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "../../../../Day05.Src/Data/", fileName);
+        string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "../../../../Day05.Src/", fileName);
 
         // Act
         List<ulong> result = newAlamac.GetAllSeeds(filePath);
@@ -78,12 +75,11 @@ public class Tests
     }
 
     [Theory]
-    [InlineData("exampleAlamac.txt", 35)]
-    [InlineData("realAlamac.txt", 579439039)]
+    [InlineData("testData.txt", 35)]
     public void Should_return_lowest_location_number(string fileName, ulong expected)
     {
         // Arrange
-        string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "../../../../Day05.Src/Data/", fileName);
+        string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "../../../../Day05.Src/", fileName);
 
         // Act
         ulong result = newAlamac.GetLowestLocationNumber(filePath);

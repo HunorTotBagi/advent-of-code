@@ -5,10 +5,9 @@ namespace Day18.Test;
 
 public class LavaductLagoonCalculatorTests
 {
-    private readonly string _realData = AppDomain.CurrentDomain.BaseDirectory + "../../../../Day18.Src/Data/realData.txt";
-    private readonly string _testData0 = AppDomain.CurrentDomain.BaseDirectory + "../../../../Day18.Src/Data/testData0.txt";
-    private readonly string _testData1 = AppDomain.CurrentDomain.BaseDirectory + "../../../../Day18.Src/Data/testData1.txt";
-    private readonly string _testData2 = AppDomain.CurrentDomain.BaseDirectory + "../../../../Day18.Src/Data/testData2.txt";
+    private readonly string _testData0 = AppDomain.CurrentDomain.BaseDirectory + "../../../../Day18.Src/testData0.txt";
+    private readonly string _testData1 = AppDomain.CurrentDomain.BaseDirectory + "../../../../Day18.Src/testData1.txt";
+    private readonly string _testData2 = AppDomain.CurrentDomain.BaseDirectory + "../../../../Day18.Src/testData2.txt";
 
     LavaductLagoonCalculator lagoonCalculator = CreateLavaductLagoonCalculator();
 
@@ -74,20 +73,6 @@ public class LavaductLagoonCalculatorTests
     }
 
     [Fact]
-    public void Should_calculate_total_lagoon_area_for_real_data()
-    {
-        // Arrange
-        var expected = 28911;
-        var (directions, numbers, _) = lagoonCalculator.ParseDigPlanFromFile(_realData);
-
-        // Act
-        var result = lagoonCalculator.CalculateTotalLagoonArea(directions, numbers);
-
-        // Assert
-        result.Should().Be(expected);
-    }
-
-    [Fact]
     public void Should_parse_revisited_plan()
     {
         // Arrange
@@ -108,20 +93,6 @@ public class LavaductLagoonCalculatorTests
         // Arrange
         var expected = 952408144115;
         var (newDirections, newNumbers) = lagoonCalculator.ParseRevisedDigPlan(_testData0);
-
-        // Act
-        var result = lagoonCalculator.CalculateTotalLagoonArea(newDirections, newNumbers);
-
-        // Assert
-        result.Should().Be(expected);
-    }
-
-    [Fact]
-    public void Should_calculate_total_lagoon_area_part_two_for_real_data()
-    {
-        // Arrange
-        var expected = 77366737561114;
-        var (newDirections, newNumbers) = lagoonCalculator.ParseRevisedDigPlan(_realData);
 
         // Act
         var result = lagoonCalculator.CalculateTotalLagoonArea(newDirections, newNumbers);
