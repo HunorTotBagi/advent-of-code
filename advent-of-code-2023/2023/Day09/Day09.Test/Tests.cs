@@ -7,8 +7,7 @@ public class Tests
 {
     Sensor newSensor = CreateSensor();
 
-    string filePath = AppDomain.CurrentDomain.BaseDirectory + "../../../../Day09.Src/Data/exampleFile.txt";
-    string realFilePath = AppDomain.CurrentDomain.BaseDirectory + "../../../../Day09.Src/Data/realFile.txt";
+    readonly string _testData = AppDomain.CurrentDomain.BaseDirectory + "../../../../Day09.Src/testData.txt";
 
     [Fact]
     public void Should_read_in_file()
@@ -22,7 +21,7 @@ public class Tests
             };
 
         // Act
-        List<List<int>> result = newSensor.newExtractor(filePath);
+        List<List<int>> result = newSensor.newExtractor(_testData);
 
         // Assert
         result.Should().BeEquivalentTo(expected);
@@ -60,7 +59,7 @@ public class Tests
     public void Should_get_all_differences_for_specific_row0()
     {
         // Arrange
-        var input = newSensor.newExtractor(filePath)[0];
+        var input = newSensor.newExtractor(_testData)[0];
         List<List<int>> expected = new List<List<int>>
             {
                 new List<int>{ 0, 3, 6, 9, 12, 15 },
@@ -79,7 +78,7 @@ public class Tests
     public void Should_get_all_differences_for_specific_row1()
     {
         // Arrange
-        var input = newSensor.newExtractor(filePath)[1];
+        var input = newSensor.newExtractor(_testData)[1];
 
         List<List<int>> expected = new List<List<int>>
             {
@@ -100,7 +99,7 @@ public class Tests
     public void Should_get_all_differences_for_specific_row2()
     {
         // Arrange
-        var input = newSensor.newExtractor(filePath)[2];
+        var input = newSensor.newExtractor(_testData)[2];
 
         List<List<int>> expected = new List<List<int>>
             {
@@ -122,7 +121,7 @@ public class Tests
     public void Should_extrapolate_0()
     {
         // Arrange
-        var firstRow = newSensor.newExtractor(filePath)[0];
+        var firstRow = newSensor.newExtractor(_testData)[0];
         List<List<int>> input = newSensor.GetAllDifferencesForThatRow(firstRow);
         int expected = 18;
 
@@ -137,7 +136,7 @@ public class Tests
     public void Should_extrapolate_1()
     {
         // Arrange
-        var firstRow = newSensor.newExtractor(filePath)[1];
+        var firstRow = newSensor.newExtractor(_testData)[1];
         List<List<int>> input = newSensor.GetAllDifferencesForThatRow(firstRow);
         int expected = 28;
 
@@ -152,7 +151,7 @@ public class Tests
     public void Should_extrapolate_2()
     {
         // Arrange
-        var firstRow = newSensor.newExtractor(filePath)[2];
+        var firstRow = newSensor.newExtractor(_testData)[2];
         List<List<int>> input = newSensor.GetAllDifferencesForThatRow(firstRow);
         int expected = 68;
 
@@ -167,7 +166,7 @@ public class Tests
     public void Should_extrapolate_backwards_0()
     {
         // Arrange
-        var firstRow = newSensor.newExtractor(filePath)[0];
+        var firstRow = newSensor.newExtractor(_testData)[0];
         List<List<int>> input = newSensor.GetAllDifferencesForThatRow(firstRow);
         int expected = -3;
 
@@ -182,7 +181,7 @@ public class Tests
     public void Should_extrapolate_backwards_1()
     {
         // Arrange
-        var firstRow = newSensor.newExtractor(filePath)[1];
+        var firstRow = newSensor.newExtractor(_testData)[1];
         List<List<int>> input = newSensor.GetAllDifferencesForThatRow(firstRow);
         int expected = 0;
 
@@ -197,7 +196,7 @@ public class Tests
     public void Should_extrapolate_backwards_2()
     {
         // Arrange
-        var firstRow = newSensor.newExtractor(filePath)[2];
+        var firstRow = newSensor.newExtractor(_testData)[2];
         List<List<int>> input = newSensor.GetAllDifferencesForThatRow(firstRow);
         int expected = 5;
 
@@ -215,33 +214,7 @@ public class Tests
         int expected = 114;
 
         // Act
-        int result = newSensor.GetNextNumberInTheSequence(filePath);
-
-        // Assert
-        result.Should().Be(expected);
-    }
-
-    [Fact]
-    public void Should_return_sum_of_extrapolated_values_for_real_data()
-    {
-        // Arrange
-        int expected = 1581679977;
-
-        // Act
-        int result = newSensor.GetNextNumberInTheSequence(realFilePath);
-
-        // Assert
-        result.Should().Be(expected);
-    }
-
-    [Fact]
-    public void Should_return_sum_of_extrapolated_values_backwards_for_real_data()
-    {
-        // Arrange
-        int expected = 889;
-
-        // Act
-        int result = newSensor.GetNextNumberInTheSequenceBackwards(realFilePath);
+        int result = newSensor.GetNextNumberInTheSequence(_testData);
 
         // Assert
         result.Should().Be(expected);

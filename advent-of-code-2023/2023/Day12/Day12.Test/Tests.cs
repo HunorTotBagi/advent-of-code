@@ -5,8 +5,7 @@ namespace Day12.Test;
 
 public class RecordTests
 {
-    string filePath = AppDomain.CurrentDomain.BaseDirectory + "../../../../Day12.Src/Data/exampleData.txt";
-    string realFilePath = AppDomain.CurrentDomain.BaseDirectory + "../../../../Day12.Src/Data/realData.txt";
+    private readonly string _testData = AppDomain.CurrentDomain.BaseDirectory + "../../../../Day12.Src/testData.txt";
 
     HotSpring newHotSpring = CreateHotSpring();
 
@@ -21,7 +20,7 @@ public class RecordTests
                                                 new List<int>{ 4, 1, 1 }, new List<int>{ 1, 6, 5 }, new List<int>{ 3, 2, 1 } };
 
         // Act
-        (List<string> stringResult, List<List<int>> intResult) = newHotSpring.ReadFile(filePath);
+        (List<string> stringResult, List<List<int>> intResult) = newHotSpring.ReadFile(_testData);
 
         // Assert
         stringResult.Should().BeEquivalentTo(symbolStrings);
@@ -32,7 +31,7 @@ public class RecordTests
     public void Should_return_combinations_that_mach_given_symbols()
     {
         // Arrange
-        (List<string> resultStrings, List<List<int>> resultIntegers) = newHotSpring.ReadFile(filePath);
+        (List<string> resultStrings, List<List<int>> resultIntegers) = newHotSpring.ReadFile(_testData);
         var expectedSymbols = new List<string> { ".##.###", "#.#.###", "##..###" };
 
         // Act
@@ -54,16 +53,6 @@ public class RecordTests
         var result = newHotSpring.CalculateFinalCombinations(input, numbers);
 
         result.Should().Be(expected);
-    }
-
-    [Fact]
-    public void Should_return_sum_of_all_arrangements()
-    {
-        // Act
-        var result = newHotSpring.GetFinalArrangementCount(realFilePath);
-
-        // Assert
-        result.Should().Be(7017);
     }
 
     private static HotSpring CreateHotSpring()

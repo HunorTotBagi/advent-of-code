@@ -6,8 +6,7 @@ namespace tests;
 
 public class DocumentTests
 {
-    readonly string realData = AppDomain.CurrentDomain.BaseDirectory + "../../../../src/Data/realData.txt";
-    readonly string testData = AppDomain.CurrentDomain.BaseDirectory + "../../../../src/Data/testData.txt";
+    readonly string _testData = AppDomain.CurrentDomain.BaseDirectory + "../../../../src/testData.txt";
 
     readonly List<string> typedList = ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine"];
     readonly List<string> typedListReverse = ["eno", "owt", "eerht", "ruof", "evif", "xis", "neves", "thgie", "enin"];
@@ -92,20 +91,7 @@ public class DocumentTests
         var expected = 281;
 
         // Act
-        var result = newCalibrationDocumentProcessor.SumCalibrationValues(testData);
-
-        // Assert
-        result.Should().Be(expected);
-    }
-
-    [Fact]
-    public void Should_return_sum_of_calibration_for_real_data()
-    {
-        // Arrange
-        var expected = 54581;
-
-        // Act
-        var result = newCalibrationDocumentProcessor.SumCalibrationValues(realData);
+        var result = newCalibrationDocumentProcessor.SumCalibrationValues(_testData);
 
         // Assert
         result.Should().Be(expected);

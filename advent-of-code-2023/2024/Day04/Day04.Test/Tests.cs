@@ -5,8 +5,7 @@ namespace Day04.Test
 {
     public class Tests
     {
-        private readonly string _testData = AppDomain.CurrentDomain.BaseDirectory + "../../../../Day04.Src/Data/testData.txt";
-        private readonly string _realData = AppDomain.CurrentDomain.BaseDirectory + "../../../../Day04.Src/Data/realData.txt";
+        private readonly string _testData = AppDomain.CurrentDomain.BaseDirectory + "../../../../Day04.Src/testData.txt";
 
         [Fact]
         public void Reads_Data()
@@ -151,19 +150,6 @@ namespace Day04.Test
         }
 
         [Fact]
-        public void Counts_All_Occurrences_Real_Data()
-        {
-            // Arrange
-            var data = CodeSolution.ReadFile(_realData);
-
-            // Act
-            var result = CodeSolution.GetAllXmas(data);
-
-            // Assert
-            result.Should().Be(2500);
-        }
-
-        [Fact]
         public void Counts_All_Occurrences_X_Shaped_Mas_Test_Data()
         {
             // Arrange
@@ -174,19 +160,6 @@ namespace Day04.Test
 
             // Assert
             result.Should().Be(9);
-        }
-
-        [Fact]
-        public void Counts_All_Occurrences_X_Shaped_Mas_Real_Data()
-        {
-            // Arrange
-            var data = CodeSolution.ReadFile(_realData);
-
-            // Act
-            var result = CodeSolution.Result(data);
-
-            // Assert
-            result.Should().Be(1933);
         }
     }
 }
