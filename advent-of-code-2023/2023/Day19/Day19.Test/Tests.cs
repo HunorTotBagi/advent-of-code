@@ -5,9 +5,8 @@ namespace Day19.Test;
 
 public class Tests
 {
-    private readonly string _realData = AppDomain.CurrentDomain.BaseDirectory + "../../../../Day19.Src/Data/realData.txt";
-    private readonly string _testData0 = AppDomain.CurrentDomain.BaseDirectory + "../../../../Day19.Src/Data/testData0.txt";
-    private readonly string _testData1 = AppDomain.CurrentDomain.BaseDirectory + "../../../../Day19.Src/Data/testData1.txt";
+    private readonly string _testData0 = AppDomain.CurrentDomain.BaseDirectory + "../../../../Day19.Src/testData0.txt";
+    private readonly string _testData1 = AppDomain.CurrentDomain.BaseDirectory + "../../../../Day19.Src/testData1.txt";
 
     WorkflowProcessor workflowProcessor = CreateWorkflowProcessor();
 
@@ -122,19 +121,6 @@ public class Tests
 
         // Act
         var result = workflowProcessor.ComputeAcceptedPartsSum(_testData0);
-
-        // Assert
-        result.Should().Be(expected);
-    }
-
-    [Fact]
-    public void Should_compute_accepted_parts_sum_for_real_data()
-    {
-        // Arrange
-        var expected = 575412;
-
-        // Act
-        var result = workflowProcessor.ComputeAcceptedPartsSum(_realData);
 
         // Assert
         result.Should().Be(expected);

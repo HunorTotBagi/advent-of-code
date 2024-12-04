@@ -5,9 +5,8 @@ namespace Day03.Test
 {
     public class Tests
     {
-        private readonly string _testData = AppDomain.CurrentDomain.BaseDirectory + "../../../../Day03.Src/Data/testData.txt";
-        private readonly string _testData1 = AppDomain.CurrentDomain.BaseDirectory + "../../../../Day03.Src/Data/testData1.txt";
-        private readonly string _realData = AppDomain.CurrentDomain.BaseDirectory + "../../../../Day03.Src/Data/realData.txt";
+        private readonly string _testData0 = AppDomain.CurrentDomain.BaseDirectory + "../../../../Day03.Src/testData0.txt";
+        private readonly string _testData1 = AppDomain.CurrentDomain.BaseDirectory + "../../../../Day03.Src/testData1.txt";
 
         [Fact]
         public void Read_The_File()
@@ -16,7 +15,7 @@ namespace Day03.Test
             var expected = new List<string> { "mul(2,4)", "mul(5,5)", "mul(11,8)", "mul(8,5)" };
 
             // Act
-            var data = CodeSolution.ReadFile(_testData);
+            var data = CodeSolution.ReadFile(_testData0);
 
             // Assert
             data.Should().Equal(expected);
@@ -26,7 +25,7 @@ namespace Day03.Test
         public void Extract_The_Numbers()
         {
             // Arrange
-            var data = CodeSolution.ReadFile(_testData);
+            var data = CodeSolution.ReadFile(_testData0);
 
             var expected1 = new List<int> { 2, 5, 11, 8 };
             var expected2 = new List<int> { 4, 5, 8, 5 };
@@ -43,7 +42,7 @@ namespace Day03.Test
         public void Calculate_Test_Data()
         {
             // Arrange
-            var data = CodeSolution.ReadFile(_testData);
+            var data = CodeSolution.ReadFile(_testData0);
             var (list1, list2) = CodeSolution.GetNumbers(data);
 
             // Act
@@ -51,20 +50,6 @@ namespace Day03.Test
 
             // Assert
             result.Should().Be(161);
-        }
-
-        [Fact]
-        public void Calculate_Real_Data()
-        {
-            // Arrange
-            var data = CodeSolution.ReadFile(_realData);
-            var (list1, list2) = CodeSolution.GetNumbers(data);
-
-            // Act
-            var result = CodeSolution.Calculate(list1, list2);
-
-            // Assert
-            result.Should().Be(159833790);
         }
 
         [Fact]
@@ -107,21 +92,6 @@ namespace Day03.Test
 
             // Assert
             result.Should().Be(48);
-        }
-
-        [Fact]
-        public void Calculate_Corrupted_Real_Data()
-        {
-            // Arrange
-            var data = CodeSolution.ReadCorruptedFile(_realData);
-            var nonCorruptedData = CodeSolution.ScanList(data);
-            var (list1, list2) = CodeSolution.GetNumbers(nonCorruptedData);
-
-            // Act
-            var result = CodeSolution.Calculate(list1, list2);
-
-            // Assert
-            result.Should().Be(89349241);
         }
     }
 }

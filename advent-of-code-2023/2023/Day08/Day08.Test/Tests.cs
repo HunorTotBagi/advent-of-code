@@ -10,11 +10,10 @@ public class Tests
     [Theory]
     [InlineData("example1.txt", "RL")]
     [InlineData("example2.txt", "LLR")]
-    [InlineData("realNetwork.txt", "LRRLRRRLLRRRLRRRLLRRLRRRLRRLRRLRLRLRLRLRLLRRRLRRLRLRRRLRRRLRLRRRLRLRRLRRRLRRRLRLLRRRLRLLLRLRRRLRLRRLRRLLLLRRLRRLRLRLRRLRLRRLRRRLRRRLRLRLRRLLLLRRLRLRRLLRRRLRLRLRLRRRLRLLLRLRLRRRLRLRRRLRRRLRRRLLRRLRRRLRRRLRRRLRRRLRLLRRRLRLRRRLRLRLRRRLRRLRRLLRRRLRRRLRRRLRLRLRLRRLRRRLRRLRLRLRLRRRR")]
     public void Should_return_directions(string fileName, string expected)
     {
         // Arrange
-        var filePath = AppDomain.CurrentDomain.BaseDirectory + "../../../../Day08.Src/Data/" + fileName;
+        var filePath = AppDomain.CurrentDomain.BaseDirectory + "../../../../Day08.Src/" + fileName;
 
         // Act
         var result = newNetwork.GetDirections(filePath);
@@ -28,7 +27,7 @@ public class Tests
     public void Should_return_nodes(string fileName)
     {
         // Arrange
-        var filePath = AppDomain.CurrentDomain.BaseDirectory + "../../../../Day08.Src/Data/" + fileName;
+        var filePath = AppDomain.CurrentDomain.BaseDirectory + "../../../../Day08.Src/" + fileName;
 
         List<List<string>> expected = new List<List<string>>
             {
@@ -54,7 +53,7 @@ public class Tests
     public void Should_return_correct_way(string fileName, int index, string input, string expected)
     {
         // Arrange
-        var filePath = AppDomain.CurrentDomain.BaseDirectory + "../../../../Day08.Src/Data/" + fileName;
+        var filePath = AppDomain.CurrentDomain.BaseDirectory + "../../../../Day08.Src/" + fileName;
 
         // Act
         string result = newNetwork.GetNextDestionation(index, input, filePath);
@@ -71,7 +70,7 @@ public class Tests
     public void Should_return_correct_way2(string fileName, int index, string input, string expected)
     {
         // Arrange
-        var filePath = AppDomain.CurrentDomain.BaseDirectory + "../../../../Day08.Src/Data/" + fileName;
+        var filePath = AppDomain.CurrentDomain.BaseDirectory + "../../../../Day08.Src/" + fileName;
 
         // Act
         string result = newNetwork.GetNextDestionation(index, input, filePath);
@@ -87,7 +86,7 @@ public class Tests
     public void Should_return_final_path(string fileName, string nextIteration, string expected)
     {
         // Arrange
-        var filePath = AppDomain.CurrentDomain.BaseDirectory + "../../../../Day08.Src/Data/" + fileName;
+        var filePath = AppDomain.CurrentDomain.BaseDirectory + "../../../../Day08.Src/" + fileName;
 
         // Act
         string result = newNetwork.GetFinalLocation(nextIteration, filePath);
@@ -99,11 +98,10 @@ public class Tests
     [Theory]
     [InlineData("example1.txt", 2)]
     [InlineData("example2.txt", 6)]
-    [InlineData("realNetwork.txt", 16897)]
     public void Should_return_final_number_of_steps(string fileName, int expected)
     {
         // Arrange
-        var filePath = AppDomain.CurrentDomain.BaseDirectory + "../../../../Day08.Src/Data/" + fileName;
+        var filePath = AppDomain.CurrentDomain.BaseDirectory + "../../../../Day08.Src/" + fileName;
 
         // Act
         int result = newNetwork.GetNumberOfSteps(filePath);
@@ -137,50 +135,6 @@ public class Tests
 
         // Assert
         result.Should().Be(expected);
-    }
-
-    [Theory]
-    [InlineData("realNetwork.txt")]
-    public void Should_return_all_nodes_that_ends_with_A(string fileName)
-    {
-        // Arrange
-        var filePath = AppDomain.CurrentDomain.BaseDirectory + "../../../../Day08.Src/Data/" + fileName;
-        List<string> expected = new List<string> { "MCA", "AAA", "DCA", "LGA", "NLA", "VPA" };
-
-        // Act
-        List<string> result = newNetwork.GetNodesThatEndOnA(filePath);
-
-        // Assert
-        result.Should().BeEquivalentTo(expected);
-    }
-
-    [Theory]
-    [InlineData("realNetwork.txt")]
-    public void Should_return_result_for_all_nodes_that_end_with_A(string fileName)
-    {
-        // Arrange
-        var filePath = AppDomain.CurrentDomain.BaseDirectory + "../../../../Day08.Src/Data/" + fileName;
-        List<int> expected = new List<int> { 16343, 16897, 20221, 18559, 11911, 21883 };
-
-        // Act
-        List<int> result = newNetwork.GetIndividualNumbers(filePath);
-
-        // Assert
-        result.Should().BeEquivalentTo(expected);
-    }
-
-    [Theory]
-    [InlineData("realNetwork.txt")]
-    public void Should_for_puzzle2_lcm(string fileName)
-    {
-        // Arrange
-        var filePath = AppDomain.CurrentDomain.BaseDirectory + "../../../../Day08.Src/Data/" + fileName;
-
-        // Act
-        ulong result = newNetwork.GetLCMFinalAnswer(filePath);
-
-        // Assert
-        result.Should().Be(16563603485021);
     }
 
     private static Network CreateNetwork()

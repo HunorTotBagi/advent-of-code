@@ -5,8 +5,7 @@ namespace Day02.Test
 {
     public class Tests
     {
-        private readonly string _testData = AppDomain.CurrentDomain.BaseDirectory + "../../../../Day02.Src/Data/testData.txt";
-        private readonly string _realData = AppDomain.CurrentDomain.BaseDirectory + "../../../../Day02.Src/Data/realData.txt";
+        private readonly string _testData = AppDomain.CurrentDomain.BaseDirectory + "../../../../Day02.Src/testData.txt";
 
         [Fact]
         public void Reads_The_Data()
@@ -66,19 +65,6 @@ namespace Day02.Test
         }
 
         [Fact]
-        public void Count_Safe_Reports_For_Real_Data()
-        {
-            // Arrange
-            var matrix = CodeSolution.ReadFile(_realData);
-
-            // Act
-            var result = CodeSolution.TotalSafeReports(matrix);
-
-            // Assert
-            result.Should().Be(383);
-        }
-
-        [Fact]
         public void Is_Safe_With_Removal()
         {
             // Arrange
@@ -112,19 +98,6 @@ namespace Day02.Test
 
             //Assert
             result.Should().Be(4);
-        }
-
-        [Fact]
-        public void Count_Safe_Reports_With_One_Removal_For_Real_Data()
-        {
-            // Arrange
-            var matrix = CodeSolution.ReadFile(_realData);
-
-            // Act
-            var result = CodeSolution.TotalSafeReportsWithOneRemoval(matrix);
-
-            // Assert
-            result.Should().Be(436);
         }
     }
 }

@@ -7,10 +7,9 @@ public class PipeTests
 {
     Pipe newPipe = CreatePipe();
 
-    string filePath0 = AppDomain.CurrentDomain.BaseDirectory + "../../../../Day10.Src/Data/exampleData0.txt";
-    string filePath1 = AppDomain.CurrentDomain.BaseDirectory + "../../../../Day10.Src/Data/exampleData1.txt";
-    string filePath2 = AppDomain.CurrentDomain.BaseDirectory + "../../../../Day10.Src/Data/exampleData2.txt";
-    string realFilePath = AppDomain.CurrentDomain.BaseDirectory + "../../../../Day10.Src/Data/realData.txt";
+    readonly string _testData0 = AppDomain.CurrentDomain.BaseDirectory + "../../../../Day10.Src/testData0.txt";
+    readonly string _testData1 = AppDomain.CurrentDomain.BaseDirectory + "../../../../Day10.Src/testData1.txt";
+    readonly string _testData2 = AppDomain.CurrentDomain.BaseDirectory + "../../../../Day10.Src/testData2.txt";
 
     [Fact]
     public void Should_read_text_file()
@@ -26,7 +25,7 @@ public class PipeTests
             };
 
         // Act
-        List<List<char>> result = newPipe.ReadTextFile(filePath0);
+        List<List<char>> result = newPipe.ReadTextFile(_testData0);
 
         // Assert
         result.Should().BeEquivalentTo(expected);
@@ -46,7 +45,7 @@ public class PipeTests
             };
 
         // Act
-        List<List<int>> result = newPipe.CreateMatrixWithZeros(filePath0);
+        List<List<int>> result = newPipe.CreateMatrixWithZeros(_testData0);
 
         // Assert
         result.Should().BeEquivalentTo(expected);
@@ -77,7 +76,7 @@ public class PipeTests
         int currentIteration = 1;
 
         // Act
-        List<List<int>> result = newPipe.ProcessEveryPipeCheck(inputMatrix, currentIteration, filePath0);
+        List<List<int>> result = newPipe.ProcessEveryPipeCheck(inputMatrix, currentIteration, _testData0);
 
         // Assert
         result.Should().BeEquivalentTo(expected);
@@ -108,7 +107,7 @@ public class PipeTests
         int currentIteration = 2;
 
         // Act
-        List<List<int>> result = newPipe.ProcessEveryPipeCheck(inputMatrix, currentIteration, filePath0);
+        List<List<int>> result = newPipe.ProcessEveryPipeCheck(inputMatrix, currentIteration, _testData0);
 
         // Assert
         result.Should().BeEquivalentTo(expected);
@@ -139,36 +138,10 @@ public class PipeTests
         int currentIteration = 3;
 
         // Act
-        List<List<int>> result = newPipe.ProcessEveryPipeCheck(inputMatrix, currentIteration, filePath0);
+        List<List<int>> result = newPipe.ProcessEveryPipeCheck(inputMatrix, currentIteration, _testData0);
 
         // Assert
         result.Should().BeEquivalentTo(expected);
-    }
-
-    [Fact]
-    public void Should_retur_number_of_steps_realData()
-    {
-        // Arrange
-        int expected = 6831;
-
-        // Act
-        int result = newPipe.GetNumberOfSteps(realFilePath);
-
-        // Assert
-        result.Should().Be(expected);
-    }
-
-    [Fact]
-    public void Should_retur_number_of_tiles_enclosed_by_loops()
-    {
-        // Arrange
-        int expected = 305;
-
-        // Act
-        int result = newPipe.GetNumberOfTilesEnclosed(realFilePath);
-
-        // Assert
-        result.Should().Be(expected);
     }
 
     private static Pipe CreatePipe()
