@@ -18,7 +18,6 @@ public class CodeSolution
 
             listOfNumber.Add(numbers);
         }
-
         return listOfNumber;
     }
 
@@ -77,8 +76,7 @@ public class CodeSolution
         {
             if (IsRowCorrect(row, rules))
             {
-                var index = row.Count / 2;
-                sum += row[index];
+                sum += row[row.Count / 2];
             }
         }
         return sum;
@@ -100,7 +98,6 @@ public class CodeSolution
                 }
             }
         }
-
         return row;
     }
 
@@ -120,9 +117,7 @@ public class CodeSolution
                 }
             }
         }
-
-        var index = row.Count / 2;
-        return row[index];
+        return row[row.Count / 2];
     }
 
     public static int CountFalseSwappedRows(List<List<int>> rows, List<List<int>> rules)
