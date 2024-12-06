@@ -5,14 +5,12 @@ public class CodeSolution
     public static List<List<char>> ReadFile(string filePath)
     {
         var lines = File.ReadAllLines(filePath);
-
         var listOfChars = new List<List<char>>();
 
         foreach (var line in lines)
         {
             listOfChars.Add(new List<char>(line));
         }
-
         return listOfChars;
     }
 
@@ -31,27 +29,26 @@ public class CodeSolution
 
     public static int CountVisitedPlaces(int i, int j, List<List<char>> input)
     {
-        var directionRow = -1;
-        var directionColumn = 0;
-
+        var dirRow = -1;
+        var dirCol = 0;
         var seenPositions = new HashSet<Tuple<int, int>>();
 
         while (true)
         {
             seenPositions.Add(Tuple.Create(i, j));
-            if (i + directionRow < 0 || i + directionRow >= input.Count || j + directionColumn < 0 || j + directionColumn >= input[0].Count)
+            if (i + dirRow < 0 || i + dirRow >= input.Count || j + dirCol < 0 || j + dirCol >= input[0].Count)
                 break;
 
-            if (input[i + directionRow][j + directionColumn] == '#')
+            if (input[i + dirRow][j + dirCol] == '#')
             {
-                var temp = directionColumn;
-                directionColumn = -directionRow;
-                directionRow = temp;
+                var temp = dirCol;
+                dirCol = -dirRow;
+                dirRow = temp;
             }
             else
             {
-                i += directionRow;
-                j += directionColumn;
+                i += dirRow;
+                j += dirCol;
             }
         }
         return seenPositions.Count;
@@ -59,33 +56,31 @@ public class CodeSolution
 
     public static bool GuardIsLooping(int i, int j, List<List<char>> input)
     {
-        var directionRow = -1;
-        var directionColumn = 0;
-
+        var dirRow = -1;
+        var dirCol = 0;
         var seenPositions = new HashSet<Tuple<int, int, int, int>>();
 
         while (true)
         {
-            seenPositions.Add(Tuple.Create(i, j, directionRow, directionColumn));
-            if (i + directionRow < 0 || i + directionRow >= input.Count || j + directionColumn < 0 || j + directionColumn >= input[0].Count)
+            seenPositions.Add(Tuple.Create(i, j, dirRow, dirCol));
+            if (i + dirRow < 0 || i + dirRow >= input.Count || j + dirCol < 0 || j + dirCol >= input[0].Count)
                 break;
 
-            if (input[i + directionRow][j + directionColumn] == '#')
+            if (input[i + dirRow][j + dirCol] == '#')
             {
-                var temp = directionColumn;
-                directionColumn = -directionRow;
-                directionRow = temp;
+                var temp = dirCol;
+                dirCol = -dirRow;
+                dirRow = temp;
             }
             else
             {
-                i += directionRow;
-                j += directionColumn;
+                i += dirRow;
+                j += dirCol;
             }
 
-            if (seenPositions.Contains(Tuple.Create(i, j, directionRow, directionColumn)))
+            if (seenPositions.Contains(Tuple.Create(i, j, dirRow, dirCol)))
                 return true;
         }
-
         return false;
     }
 
