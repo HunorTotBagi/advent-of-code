@@ -8,21 +8,21 @@ namespace Day06.Test
         private readonly string _testData = AppDomain.CurrentDomain.BaseDirectory + "../../../../Day06.Src/testData.txt";
 
         [Fact]
-        public void Test1()
+        public void Read_Data()
         {
             // Arrange
             var expected = new List<List<char>>
             {
-                new List<char> { '.', '.', '.', '.', '#', '.', '.', '.', '.', '.' },
-                new List<char> { '.', '.', '.', '.', '.', '.', '.', '.', '.', '#' },
-                new List<char> { '.', '.', '.', '.', '.', '.', '.', '.', '.', '.' },
-                new List<char> { '.', '.', '#', '.', '.', '.', '.', '.', '.', '.' },
-                new List<char> { '.', '.', '.', '.', '.', '.', '#', '.', '.', '.' },
-                new List<char> { '.', '.', '.', '.', '.', '.', '.', '.', '.', '.' },
-                new List<char> { '.', '#', '.', '.', '^', '.', '.', '.', '.', '.' },
-                new List<char> { '.', '.', '.', '.', '.', '.', '.', '.', '#', '.' },
-                new List<char> { '#', '.', '.', '.', '.', '.', '.', '.', '.', '.' },
-                new List<char> { '.', '.', '.', '.', '.', '.', '#', '.', '.', '.' }
+                new() { '.', '.', '.', '.', '#', '.', '.', '.', '.', '.' },
+                new() { '.', '.', '.', '.', '.', '.', '.', '.', '.', '#' },
+                new() { '.', '.', '.', '.', '.', '.', '.', '.', '.', '.' },
+                new() { '.', '.', '#', '.', '.', '.', '.', '.', '.', '.' },
+                new() { '.', '.', '.', '.', '.', '.', '#', '.', '.', '.' },
+                new() { '.', '.', '.', '.', '.', '.', '.', '.', '.', '.' },
+                new() { '.', '#', '.', '.', '^', '.', '.', '.', '.', '.' },
+                new() { '.', '.', '.', '.', '.', '.', '.', '.', '#', '.' },
+                new() { '#', '.', '.', '.', '.', '.', '.', '.', '.', '.' },
+                new() { '.', '.', '.', '.', '.', '.', '#', '.', '.', '.' }
             };
 
             // Act
@@ -33,42 +33,42 @@ namespace Day06.Test
         }
 
         [Fact]
-        public void FindGuard()
+        public void Find_Guard_Position()
         {
             // Arrange
             var data = CodeSolution.ReadFile(_testData);
 
             // Act
-            var (firstIndex, secondIndex) = CodeSolution.FindGuardPosition(data);
+            var (positionX, positionY) = CodeSolution.FindGuardPosition(data);
 
             // Assert
-            firstIndex.Should().Be(6);
-            secondIndex.Should().Be(4);
+            positionX.Should().Be(6);
+            positionY.Should().Be(4);
         }
 
         [Fact]
-        public void Count()
+        public void Count_Visited_Places()
         {
             // Arrange
             var data = CodeSolution.ReadFile(_testData);
 
             // Act
-            var (firstIndex, secondIndex) = CodeSolution.FindGuardPosition(data);
-            var result = CodeSolution.Count(firstIndex, secondIndex, data);
+            var (positionX, positionY) = CodeSolution.FindGuardPosition(data);
+            var result = CodeSolution.CountVisitedPlaces(positionX, positionY, data);
 
             // Assert
             result.Should().Be(41);
         }
 
         [Fact]
-        public void Count1()
+        public void Count_Infinite_Loop_When_New_Obstacle_Is_Added()
         {
             // Arrange
             var data = CodeSolution.ReadFile(_testData);
 
             // Act
-            var (firstIndex, secondIndex) = CodeSolution.FindGuardPosition(data);
-            var result = CodeSolution.CountLoops(firstIndex, secondIndex, data);
+            var (positionX, positionY) = CodeSolution.FindGuardPosition(data);
+            var result = CodeSolution.CountInfiniteLoops(positionX, positionY, data);
 
             // Assert
             result.Should().Be(6);

@@ -31,7 +31,7 @@ public class CodeSolution
         return (-1, -1);
     }
 
-    public static int Count(int i, int j, List<List<char>> input)
+    public static int CountVisitedPlaces(int i, int j, List<List<char>> input)
     {
         var directionRow = -1;
         var directionColumn = 0;
@@ -92,7 +92,7 @@ public class CodeSolution
         return false;
     }
 
-    public static int CountLoops(int x, int y, List<List<char>> input)
+    public static int CountInfiniteLoops(int x, int y, List<List<char>> input)
     {
         var count = 0;
         var rows = input.Count;
