@@ -23,9 +23,7 @@ public class CodeSolution
             for (var j = 0; j < input[0].Count; j++)
             {
                 if (input[i][j] == '^' || input[i][j] == '<' || input[i][j] == 'v' || input[i][j] == '>')
-                {
                     return (i, j);
-                }
             }
         }
         return (-1, -1);
@@ -83,10 +81,9 @@ public class CodeSolution
                 i += directionRow;
                 j += directionColumn;
             }
+
             if (seenPositions.Contains(Tuple.Create(i, j, directionRow, directionColumn)))
-            {
                 return true;
-            }
         }
 
         return false;
@@ -95,12 +92,10 @@ public class CodeSolution
     public static int CountInfiniteLoops(int x, int y, List<List<char>> input)
     {
         var count = 0;
-        var rows = input.Count;
-        var cols = input[0].Count;
         
-        for (var i = 0; i < rows; i++)
+        for (var i = 0; i < input.Count; i++)
         {
-            for (var j = 0; j < cols; j++)
+            for (var j = 0; j < input[0].Count; j++)
             {
                 if (input[i][j] != '.') continue;
                 input[i][j] = '#';
