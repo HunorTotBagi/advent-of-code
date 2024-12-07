@@ -5,7 +5,6 @@ public class CodeSolution
     public static (List<long> first, List<List<long>> second) ReadFile(string filePath)
     {
         var lines = File.ReadAllLines(filePath);
-
         var number = new List<long>();
         var data = new List<List<long>>();
 
@@ -16,13 +15,11 @@ public class CodeSolution
 
             var newList = new List<long>();
             var newParts = parts[1].Split(" ");
+
             foreach (var element in newParts)
-            {
                 newList.Add(long.Parse(element));
-            }
             data.Add(newList);
         }
-
         return (number, data);
     }
 
@@ -71,11 +68,11 @@ public class CodeSolution
     public static long Calc(List<long> numbers, List<List<long>> inputs)
     {
         long result = 0;
+
         for (var i = 0; i < numbers.Count; i++)
-        {
             if (IsValid(numbers[i], inputs[i]))
                 result += numbers[i];
-        }
+
         return result;
     }
 
@@ -114,13 +111,13 @@ public class CodeSolution
 
                 if (combination[i] == '*')
                     answer *= input[i + 1];
+
                 if (combination[i] == '|')
                 {
                     long numberLength = input[i + 1].ToString().Length;
                     answer *= (long)Math.Pow(10, numberLength);
                     answer += input[i + 1];
                 }
-
             }
 
             if (answer == number)
@@ -132,11 +129,11 @@ public class CodeSolution
     public static long CalculateConcatenation(List<long> numbers, List<List<long>> inputs)
     {
         long result = 0;
+
         for (var i = 0; i < numbers.Count; i++)
-        {
             if (IsValidConcatenation(numbers[i], inputs[i]))
                 result += numbers[i];
-        }
+
         return result;
     }
 }
