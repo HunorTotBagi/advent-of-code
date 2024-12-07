@@ -2,7 +2,7 @@
 
 public class CodeSolution
 {
-    public static (List<long> first, List<List<long>> second) ReadFile(string filePath)
+    public static (List<long> first, List<List<long>> second) ReadCalibrationFile(string filePath)
     {
         var lines = File.ReadAllLines(filePath);
         var number = new List<long>();
@@ -23,14 +23,14 @@ public class CodeSolution
         return (number, data);
     }
 
-    public static List<string> GenerateCombinations(long n)
+    public static List<string> GenerateOperatorCombinations(long n)
     {
         var result = new List<string>();
-        GenerateCombinationsHelper("", n, result);
+        GenerateOperatorCombinationsHelper("", n, result);
         return result;
     }
 
-    public static void GenerateCombinationsHelper(string current, long remaining, List<string> result)
+    public static void GenerateOperatorCombinationsHelper(string current, long remaining, List<string> result)
     {
         if (remaining == 0)
         {
@@ -38,14 +38,14 @@ public class CodeSolution
             return;
         }
 
-        GenerateCombinationsHelper(current + "+", remaining - 1, result);
-        GenerateCombinationsHelper(current + "*", remaining - 1, result);
+        GenerateOperatorCombinationsHelper(current + "+", remaining - 1, result);
+        GenerateOperatorCombinationsHelper(current + "*", remaining - 1, result);
     }
 
-    public static bool IsValid(long number, List<long> input)
+    public static bool IsValidCalibration(long number, List<long> input)
     {
         var length = input.Count - 1;
-        var symbolCombinations = GenerateCombinations(length);
+        var symbolCombinations = GenerateOperatorCombinations(length);
 
         foreach (var combination in symbolCombinations)
         {
@@ -65,25 +65,25 @@ public class CodeSolution
         return false;
     }
 
-    public static long Calc(List<long> numbers, List<List<long>> inputs)
+    public static long CalculateCalibration(List<long> numbers, List<List<long>> inputs)
     {
         long result = 0;
 
         for (var i = 0; i < numbers.Count; i++)
-            if (IsValid(numbers[i], inputs[i]))
+            if (IsValidCalibration(numbers[i], inputs[i]))
                 result += numbers[i];
 
         return result;
     }
 
-    public static List<string> GenerateCombinationsConcat(long n)
+    public static List<string> GenerateOperatorCombinationsWithConcatenation(long n)
     {
         var result = new List<string>();
-        GenerateCombinationsHelperConcat("", n, result);
+        GenerateOperatorCombinationsHelperWithConcatenation("", n, result);
         return result;
     }
 
-    public static void GenerateCombinationsHelperConcat(string current, long remaining, List<string> result)
+    public static void GenerateOperatorCombinationsHelperWithConcatenation(string current, long remaining, List<string> result)
     {
         if (remaining == 0)
         {
@@ -91,15 +91,15 @@ public class CodeSolution
             return;
         }
 
-        GenerateCombinationsHelperConcat(current + "+", remaining - 1, result);
-        GenerateCombinationsHelperConcat(current + "*", remaining - 1, result);
-        GenerateCombinationsHelperConcat(current + "|", remaining - 1, result);
+        GenerateOperatorCombinationsHelperWithConcatenation(current + "+", remaining - 1, result);
+        GenerateOperatorCombinationsHelperWithConcatenation(current + "*", remaining - 1, result);
+        GenerateOperatorCombinationsHelperWithConcatenation(current + "|", remaining - 1, result);
     }
 
-    public static bool IsValidConcatenation(long number, List<long> input)
+    public static bool IsValidCalibrationWithConcatenation(long number, List<long> input)
     {
         var length = input.Count - 1;
-        var symbolCombinations = GenerateCombinationsConcat(length);
+        var symbolCombinations = GenerateOperatorCombinationsWithConcatenation(length);
 
         foreach (var combination in symbolCombinations)
         {
@@ -126,12 +126,12 @@ public class CodeSolution
         return false;
     }
 
-    public static long CalculateConcatenation(List<long> numbers, List<List<long>> inputs)
+    public static long CalculateCalibrationWithConcatenation(List<long> numbers, List<List<long>> inputs)
     {
         long result = 0;
 
         for (var i = 0; i < numbers.Count; i++)
-            if (IsValidConcatenation(numbers[i], inputs[i]))
+            if (IsValidCalibrationWithConcatenation(numbers[i], inputs[i]))
                 result += numbers[i];
 
         return result;
