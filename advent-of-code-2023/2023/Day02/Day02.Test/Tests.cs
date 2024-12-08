@@ -159,11 +159,11 @@ public class Tests
     }
 
     [Theory]
-    [InlineData("game.txt", 66016)]
+    [InlineData("testData.txt", 2286)]
     public void Should_return_power_of_the_cube_added_up(string fileName, int expected)
     {
         // Arrange
-        var filePath = AppDomain.CurrentDomain.BaseDirectory + "../../../../Day02.Src/Data/" + fileName;
+        var filePath = AppDomain.CurrentDomain.BaseDirectory + "../../../../Day02.Src/" + fileName;
 
         // Act
         int result = newBag.CalculateSumOfCubePowers(filePath);
