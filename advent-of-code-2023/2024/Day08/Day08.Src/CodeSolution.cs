@@ -5,7 +5,6 @@ public class CodeSolution
     public static List<List<char>> ReadGridFromFile(string filePath)
     {
         var lines = File.ReadAllLines(filePath);
-
         var grid = new List<List<char>>();
 
         foreach (var line in lines)
@@ -17,7 +16,6 @@ public class CodeSolution
             }
             grid.Add(lineChars);
         }
-
         return grid;
     }
 
@@ -103,7 +101,6 @@ public class CodeSolution
     {
         var left = Math.Abs(first[0] - second[0]);
         var right = Math.Abs(first[1] - second[1]);
-
         var res = new List<List<int>> { first, second };
 
         if (first[1] < second[1])
@@ -138,7 +135,6 @@ public class CodeSolution
                 res.Add([ first[0] - j*left, first[1] + j*right ]);
                 j++;
             }
-
         }
         return res;
     }
