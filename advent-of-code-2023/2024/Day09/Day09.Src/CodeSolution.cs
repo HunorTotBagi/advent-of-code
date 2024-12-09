@@ -5,22 +5,14 @@ public class CodeSolution
     public static List<ulong> ReadFile(string filePath)
     {
         var lines = File.ReadAllLines(filePath);
-        var grid1 = new List<ulong>();
+        var result = new List<ulong>();
 
-        foreach (var line in lines)
-        {
-            foreach (var c in line)
-            {
-                if (char.IsDigit(c))
-                {
-                    grid1.Add(ulong.Parse(c.ToString()));
-                }
-            }
-        }
-        return grid1;
+        foreach (var c in lines[0])
+            result.Add(ulong.Parse(c.ToString()));
+        return result;
     }
 
-    public static List<string> ConvertToDots(List<ulong> input)
+    public static List<string> ConvertToBlockOfFilesAndSpaces(List<ulong> input)
     {
         var result = new List<string>();
         var counter = 0;
@@ -42,39 +34,21 @@ public class CodeSolution
         return result;
     }
 
-    public static ulong CountTheDots(List<ulong> input)
-    {
-        var asd = ConvertToDots(input);
-        ulong result = 0;
-        foreach (var chara in asd)
-        {
-            if (chara == ".")
-                result++;
-        }
-        return result;
-    }
-
     public static List<string> SwapDots(List<ulong> input)
     {
-        var myString = ConvertToDots(input);
+        var myString = ConvertToBlockOfFilesAndSpaces(input);
 
         for (var j = myString.Count - 1; j > 0; j--)
         {
-            if (myString[j] != ".")
+            if (myString[j] == ".") continue;
+            for (var i = 0; i < j; i++)
             {
-                for (var i = 0; i < j; i++)
-                {
-                    if (myString[i] == ".")
-                    {
-                        myString[i] = myString[j];
-                        myString[j] = ".";
-                        break;
-                    }
-                }
-                
+                if (myString[i] != ".") continue;
+                myString[i] = myString[j];
+                myString[j] = ".";
+                break;
             }
         }
-
         return myString;
     }
 
