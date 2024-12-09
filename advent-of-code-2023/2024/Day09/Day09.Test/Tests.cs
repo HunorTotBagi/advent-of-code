@@ -6,7 +6,6 @@ namespace Day09.Test
     public class Tests
     {
         private readonly string _testData = AppDomain.CurrentDomain.BaseDirectory + "../../../../Day09.Src/testData.txt";
-        private readonly string _realData = AppDomain.CurrentDomain.BaseDirectory + "../../../../Day09.Src/realData.txt";
 
         [Fact]
         public void ReadFile()
@@ -66,7 +65,7 @@ namespace Day09.Test
         public void CalculatePartOne()
         {
             // Arrange
-            var data = CodeSolution.ReadFile(_realData);
+            var data = CodeSolution.ReadFile(_testData);
 
             // Act
             var result = CodeSolution.CalculatePartOne(data);
