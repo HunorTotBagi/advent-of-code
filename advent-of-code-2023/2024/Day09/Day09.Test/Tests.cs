@@ -21,20 +21,6 @@ namespace Day09.Test
         }
 
         [Fact]
-        public void ConvertToDots()
-        {
-            // Arrange
-            var expected = "00...111...2...333.44.5555.6666.777.888899";
-            var data = CodeSolution.ReadFile(_testData);
-
-            // Act
-            var result = CodeSolution.ConvertToDots(data);
-
-            // Assert
-            //result.Should().Be(expected);
-        }
-
-        [Fact]
         public void CountDOts()
         {
             // Arrange
@@ -45,20 +31,6 @@ namespace Day09.Test
 
             // Assert
             result.Should().Be(14);
-        }
-
-        [Fact]
-        public void SwapDots()
-        {
-            // Arrange
-            var expected = "0099811188827773336446555566..............";
-            var data = CodeSolution.ReadFile(_testData);
-
-            // Act
-            var result = CodeSolution.SwapDots(data);
-
-            // Assert
-            //result.Should().Be(expected);
         }
 
         [Fact]
@@ -74,17 +46,38 @@ namespace Day09.Test
             result.Should().Be(1928);
         }
 
-        //[Fact]
-        //public void CalculatePartTwo()
-        //{
-        //    // Arrange
-        //    var data = CodeSolution.ReadFile(_testData);
+        [Fact]
+        public void SwapChunks()
+        {
+            // Arrange
+            var expected = new List<string>()
+            {
+                "0", "0", "9", "9", "2", "1", "1", "1", "7", "7", "7",
+                ".", "4", "4", ".", "3", "3", "3", ".", ".", ".", ".",
+                "5", "5", "5", "5", ".", "6", "6", "6", "6", ".", ".", ".",
+                ".", ".", "8", "8", "8", "8", ".", "."
+            };
 
-        //    // Act
-        //    var result = CodeSolution.CalculatePartTwo(data);
+            var data = CodeSolution.ReadFile(_testData);
 
-        //    // Assert
-        //    result.Should().Be(5);
-        //}
+            // Act
+            var result = CodeSolution.SwapChunksCorrectLogic(data);
+
+            // Assert
+            result.Should().BeEquivalentTo(expected);
+        }
+
+        [Fact]
+        public void CalculatePartTwo_Real_Data()
+        {
+            // Arrange
+            var data = CodeSolution.ReadFile(_testData);
+
+            // Act
+            var result = CodeSolution.CalculatePartTwo(data);
+
+            // Assert
+            result.Should().Be(2858);
+        }
     }
 }
