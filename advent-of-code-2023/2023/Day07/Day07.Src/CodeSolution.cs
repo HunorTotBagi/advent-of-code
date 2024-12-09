@@ -1,10 +1,10 @@
 ﻿namespace Day07.Src;
 
-public class Hand
+public class CodeSolution
 {
-    public Dictionary<string, int> ReadFile(string filePath)
+    public static Dictionary<string, int> ReadFile(string filePath)
     {
-        var lines = File.ReadAllLines("C:\\Users\\htotbagi\\Downloads\\advent-of-code\\advent-of-code-2023\\2023\\Day07\\Day07.Src\\Data\\exampleData0.txt");
+        var lines = File.ReadAllLines(filePath);
 
         Dictionary<string, int> data = new();
 
@@ -17,7 +17,7 @@ public class Hand
     }
 
 
-    public Dictionary<char, int> CountOccurences(string card)
+    public static Dictionary<char, int> CountOccurences(string card)
     {
         Dictionary<char, int> result = new();
 
@@ -36,7 +36,7 @@ public class Hand
         return result;
     }
 
-    public int GetCardType(string card)
+    public static int GetCardType(string card)
     {
         Dictionary<char, int> counts = CountOccurences(card);
 
@@ -61,7 +61,7 @@ public class Hand
         return 1;
     }
 
-    public int CompareHands(string hand1, string hand2)
+    public static int CompareHands(string hand1, string hand2)
     {
         int type1 = GetCardType(hand1);
         int type2 = GetCardType(hand2);
@@ -83,21 +83,19 @@ public class Hand
         }
     }
 
-    public int CalculateWinnings(string filePath)
+    public static int CalculateWinnings(string filePath)
     {
+        var totalWinnings = 0;
+        var rank = 1;
+
         var handsAndBids = ReadFile(filePath);
-
         var orderedHands = handsAndBids.Keys.OrderByDescending(hand => GetCardType(hand));
-
-        int totalWinnings = 0;
-        int rank = 1;
 
         foreach (var hand in orderedHands)
         {
             totalWinnings += handsAndBids[hand] * rank;
             rank++;
         }
-
         return totalWinnings;
     }
 }
