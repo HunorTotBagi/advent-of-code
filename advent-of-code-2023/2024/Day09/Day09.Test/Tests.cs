@@ -5,7 +5,7 @@ namespace Day09.Test
 {
     public class Tests
     {
-        private readonly string _testData = AppDomain.CurrentDomain.BaseDirectory + "../../../../Day09.Src/testData.txt";
+        private readonly string _testData0 = AppDomain.CurrentDomain.BaseDirectory + "../../../../Day09.Src/testData0.txt";
 
         [Fact]
         public void ReadFile()
@@ -14,30 +14,53 @@ namespace Day09.Test
             var expected = new List<ulong> { 2, 3, 3, 3, 1, 3, 3, 1, 2, 1, 4, 1, 4, 1, 3, 1, 4, 0, 2 };
 
             // Act
-            var data = CodeSolution.ReadFile(_testData);
+            var data = CodeSolution.ReadFile(_testData0);
 
             // Assert
             data.Should().Equal(expected);
         }
 
-        [Fact]
-        public void CountDOts()
+        [Theory]
+        [InlineData("00...111...2...333.44.5555.6666.777.888899", "testData0.txt")]
+        [InlineData("0..111....22222", "testData1.txt")]
+        public void ConvertToDotsTheory(string expectedData, string fileName)
         {
             // Arrange
-            var data = CodeSolution.ReadFile(_testData);
+            var testData = AppDomain.CurrentDomain.BaseDirectory + "../../../../Day09.Src/" + fileName;
+
+            var expected = ConvertStringToStringList(expectedData);
+            var data = CodeSolution.ReadFile(testData);
 
             // Act
-            var result = CodeSolution.CountTheDots(data);
+            var result = CodeSolution.ConvertToBlockOfFilesAndSpaces(data);
 
             // Assert
-            result.Should().Be(14);
+            result.Should().Equal(expected);
+        }
+
+        [Theory]
+        [InlineData("0099811188827773336446555566..............", "testData0.txt")]
+        [InlineData("022111222......", "testData1.txt")]
+        public void SwapDots(string expectedData, string fileName)
+        {
+            // Arrange
+            var testData = AppDomain.CurrentDomain.BaseDirectory + "../../../../Day09.Src/" + fileName;
+
+            var expected = ConvertStringToStringList(expectedData);
+            var data = CodeSolution.ReadFile(testData);
+
+            // Act
+            var result = CodeSolution.SwapDots(data);
+
+            // Assert
+            result.Should().Equal(expected);
         }
 
         [Fact]
         public void CalculatePartOne()
         {
             // Arrange
-            var data = CodeSolution.ReadFile(_testData);
+            var data = CodeSolution.ReadFile(_testData0);
 
             // Act
             var result = CodeSolution.CalculatePartOne(data);
@@ -47,37 +70,26 @@ namespace Day09.Test
         }
 
         [Fact]
-        public void SwapChunks()
-        {
-            // Arrange
-            var expected = new List<string>()
-            {
-                "0", "0", "9", "9", "2", "1", "1", "1", "7", "7", "7",
-                ".", "4", "4", ".", "3", "3", "3", ".", ".", ".", ".",
-                "5", "5", "5", "5", ".", "6", "6", "6", "6", ".", ".", ".",
-                ".", ".", "8", "8", "8", "8", ".", "."
-            };
-
-            var data = CodeSolution.ReadFile(_testData);
-
-            // Act
-            var result = CodeSolution.SwapChunksCorrectLogic(data);
-
-            // Assert
-            result.Should().BeEquivalentTo(expected);
-        }
-
-        [Fact]
         public void CalculatePartTwo_Real_Data()
         {
             // Arrange
-            var data = CodeSolution.ReadFile(_testData);
+            var data = CodeSolution.ReadFile(_testData0);
 
             // Act
             var result = CodeSolution.CalculatePartTwo(data);
 
             // Assert
             result.Should().Be(2858);
+        }
+
+        private static List<string> ConvertStringToStringList(string v)
+        {
+            var result = new List<string>();
+
+            foreach (var c in v)
+                result.Add(c.ToString());
+
+            return result;
         }
     }
 }
