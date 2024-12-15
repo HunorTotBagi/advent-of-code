@@ -7,8 +7,6 @@ namespace Day12.Test
     {
         private readonly string _testData = AppDomain.CurrentDomain.BaseDirectory + "../../../../Day12.Src/testData.txt";
         private readonly string _testData1 = AppDomain.CurrentDomain.BaseDirectory + "../../../../Day12.Src/testData1.txt";
-        private readonly string _realData = AppDomain.CurrentDomain.BaseDirectory + "../../../../Day12.Src/realData.txt";
-
 
         [Fact]
         public void ReadFile()
@@ -50,7 +48,5 @@ namespace Day12.Test
             // Assert
             result.Should().BeEquivalentTo(expected);
         }
-
-
     }
 }
