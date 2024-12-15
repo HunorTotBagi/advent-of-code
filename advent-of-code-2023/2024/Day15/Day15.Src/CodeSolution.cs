@@ -2,39 +2,34 @@
 
 public class CodeSolution
 {
-    public static List<List<char>> ReadFile(string filePath)
+    public static List<List<char>> ReadMap(string filePath)
     {
         var lines = File.ReadAllLines(filePath);
-
-        var result2 = new List<List<char>>();
+        var result = new List<List<char>>();
 
         foreach (var line in lines)
         {
             var holder = new List<char>();
-            foreach (var c in line)
+            foreach (var character in line)
             {
-                holder.Add(c);
+                holder.Add(character);
             }
-            result2.Add(holder);
+            result.Add(holder);
         }
-        return result2;
+        return result;
     }
 
     public static List<char> ReadMoves(string filePath)
     {
         var lines = File.ReadAllLines(filePath);
-
-        var result2 = new List<char>();
+        var result = new List<char>();
 
         foreach (var line in lines)
         {
             foreach (var c in line)
-            {
-                result2.Add(c);
-            }
+                result.Add(c);
         }
-
-        return result2;
+        return result;
     }
 
     public static (int x, int y) FindAtSign(List<List<char>> map)
@@ -43,13 +38,9 @@ public class CodeSolution
         {
             for (var j = 0; j < map[0].Count; j++)
             {
-                if (map[i][j] == '@')
-                {
-                    return (i, j);
-                }
+                if (map[i][j] == '@') return (i, j);
             }
         }
-
         return (-1,-1);
     }
 
@@ -150,7 +141,6 @@ public class CodeSolution
                     map[x][y - 1] = '@';
                     map[x][y] = '.';
                     y--;
-
                     continue;
                 }
                     
@@ -208,7 +198,6 @@ public class CodeSolution
                     map[x][y + 1] = '@';
                     map[x][y] = '.';
                     y++;
-
                     continue;
                 }
                 
@@ -235,7 +224,6 @@ public class CodeSolution
                     map[x + 1][y] = '@';
                     map[x][y] = '.';
                     x++;
-
                     continue;
                 }
                 
@@ -255,21 +243,18 @@ public class CodeSolution
         return map;
     }
 
-    public static int CalculateGPS(List<List<char>> map)
+    public static int CalculateGps(List<List<char>> map)
     {
-        int sum = 0;
+        var sum = 0;
 
-        for (int i = 0; i < map.Count; i++)
+        for (var i = 0; i < map.Count; i++)
         {
-            for (int j = 0; j < map[i].Count; j++)
+            for (var j = 0; j < map[i].Count; j++)
             {
                 if (map[i][j] == 'O')
-                {
                     sum += i * 100 + j;
-                }
             }
         }
-
         return sum;
     }
 }
