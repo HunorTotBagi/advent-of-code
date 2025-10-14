@@ -5,7 +5,7 @@ namespace Day15.Test;
 
 public class Tests
 {
-    LensLibrary newLensLibrary = CreateLensLibrary();
+    Solution newLensLibrary = CreateLensLibrary();
 
     private readonly string _testData = AppDomain.CurrentDomain.BaseDirectory + "../../../../Day15.Src/testData.txt";
 
@@ -127,8 +127,8 @@ public class Tests
         result.Should().Be(145);
     }
 
-    private static LensLibrary CreateLensLibrary()
+    private static Solution CreateLensLibrary()
     {
-        return new LensLibrary();
+        return new Solution();
     }
 }

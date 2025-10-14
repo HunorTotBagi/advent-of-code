@@ -21,7 +21,7 @@ namespace Day10.Test
             };
 
             // Act
-            var data = CodeSolution.ReadFile(_testData0);
+            var data = Solution.ReadFile(_testData0);
 
             // Assert
             data.Should().BeEquivalentTo(expected);
@@ -31,10 +31,10 @@ namespace Day10.Test
         public void SumTrailheadScores()
         {
             // Arrange
-            var data = CodeSolution.ReadFile(_testData1);
+            var data = Solution.ReadFile(_testData1);
 
             // Act
-            var result = CodeSolution.SumTrailheadScores(data);
+            var result = Solution.SumTrailheadScores(data);
 
             // Assert
             result.Should().Be(36);
@@ -44,10 +44,10 @@ namespace Day10.Test
         public void SumTrailheadRatings()
         {
             // Arrange
-            var data = CodeSolution.ReadFile(_testData1);
+            var data = Solution.ReadFile(_testData1);
 
             // Act
-            var result = CodeSolution.SumTrailheadRatings(data);
+            var result = Solution.SumTrailheadRatings(data);
 
             // Assert
             result.Should().Be(81);

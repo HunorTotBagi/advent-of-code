@@ -22,7 +22,7 @@ namespace Day12.Test
             };
 
             // Act
-            var result = CodeSolution.ReadFile(_testData);
+            var result = Solution.ReadFile(_testData);
 
             // Assert
             result.Should().BeEquivalentTo(expected);
@@ -32,7 +32,7 @@ namespace Day12.Test
         public void GetRegions()
         {
             // Arrange
-            var data = CodeSolution.ReadFile(_testData);
+            var data = Solution.ReadFile(_testData);
             var expected = new List<List<char>>
             {
                 new() { 'A', 'A', 'A', 'A' },
@@ -43,7 +43,7 @@ namespace Day12.Test
             };
 
             // Act
-            var result = CodeSolution.FloodFill(data);
+            var result = Solution.FloodFill(data);
 
             // Assert
             result.Should().BeEquivalentTo(expected);

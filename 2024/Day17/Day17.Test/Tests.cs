@@ -18,7 +18,7 @@ namespace Day17.Test
             var expected = new List<int> {729, 0, 0};
 
             // Act
-            var result = CodeSolution.ReadFileRegister(_testData0);
+            var result = Solution.ReadFileRegister(_testData0);
 
             // Assert
             result.Should().BeEquivalentTo(expected);
@@ -31,7 +31,7 @@ namespace Day17.Test
             var expected = new List<int> { 0, 1, 5, 4, 3, 0 };
 
             // Act
-            var result = CodeSolution.ReadFileProgram(_testData1);
+            var result = Solution.ReadFileProgram(_testData1);
 
             // Assert
             result.Should().BeEquivalentTo(expected);
@@ -41,11 +41,11 @@ namespace Day17.Test
         public void Calc()
         {
             // Arrange
-            var program = CodeSolution.ReadFileProgram(_testData1);
-            var register = CodeSolution.ReadFileRegister(_testData0);
+            var program = Solution.ReadFileProgram(_testData1);
+            var register = Solution.ReadFileRegister(_testData0);
 
             // Act
-            var result = CodeSolution.CalcAll(register, program);
+            var result = Solution.CalcAll(register, program);
 
             // Assert
             result.Should().BeEquivalentTo("4635635210");
@@ -55,11 +55,11 @@ namespace Day17.Test
         public void CalcReal()
         {
             // Arrange
-            var program = CodeSolution.ReadFileProgram(_testDataReal1);
-            var register = CodeSolution.ReadFileRegister(_testDataReal0);
+            var program = Solution.ReadFileProgram(_testDataReal1);
+            var register = Solution.ReadFileRegister(_testDataReal0);
 
             // Act
-            var result = CodeSolution.CalcAll(register, program);
+            var result = Solution.CalcAll(register, program);
 
             // Assert
             result.Should().BeEquivalentTo("742514604");

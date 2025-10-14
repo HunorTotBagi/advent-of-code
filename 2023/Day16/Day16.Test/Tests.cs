@@ -7,7 +7,7 @@ public class ContraptionTest
 {
     private readonly string _testData = AppDomain.CurrentDomain.BaseDirectory + "../../../../Day16.Src/testData.txt";
 
-    Contraption newContraption = CreateContraption();
+    Solution newContraption = CreateContraption();
 
     [Fact]
     public void Should_calculate_answer_for_test_data()
@@ -22,8 +22,8 @@ public class ContraptionTest
         result.Should().Be(expected);
     }
 
-    private static Contraption CreateContraption()
+    private static Solution CreateContraption()
     {
-        return new Contraption();
+        return new Solution();
     }
 }

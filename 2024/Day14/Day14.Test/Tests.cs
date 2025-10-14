@@ -29,7 +29,7 @@ namespace Day14.Test
             };
 
             // Act
-            var (positions, velocities) = CodeSolution.ReadFile(_testData);
+            var (positions, velocities) = Solution.ReadFile(_testData);
 
             // Assert
             positions.Should().BeEquivalentTo(expectedPositions);
@@ -40,12 +40,12 @@ namespace Day14.Test
         public void GetResuls()
         {
             // Arrange
-            var (pos, vel) = CodeSolution.ReadFile(_testData);
-            var finalPos = CodeSolution.Calculate(100, 11, 7, pos, vel);
+            var (pos, vel) = Solution.ReadFile(_testData);
+            var finalPos = Solution.Calculate(100, 11, 7, pos, vel);
 
 
             // Act
-            var result = CodeSolution.Quadrants(11, 7, finalPos);
+            var result = Solution.Quadrants(11, 7, finalPos);
 
             // Assert
             result.Should().Be(12);

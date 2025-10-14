@@ -9,7 +9,7 @@ public class LavaductLagoonCalculatorTests
     private readonly string _testData1 = AppDomain.CurrentDomain.BaseDirectory + "../../../../Day18.Src/testData1.txt";
     private readonly string _testData2 = AppDomain.CurrentDomain.BaseDirectory + "../../../../Day18.Src/testData2.txt";
 
-    LavaductLagoonCalculator lagoonCalculator = CreateLavaductLagoonCalculator();
+    Solution lagoonCalculator = CreateLavaductLagoonCalculator();
 
     [Fact]
     public void Should_parse_dig_plan_from_file()
@@ -101,8 +101,8 @@ public class LavaductLagoonCalculatorTests
         result.Should().Be(expected);
     }
 
-    private static LavaductLagoonCalculator CreateLavaductLagoonCalculator()
+    private static Solution CreateLavaductLagoonCalculator()
     {
-        return new LavaductLagoonCalculator();
+        return new Solution();
     }
 }

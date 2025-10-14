@@ -7,7 +7,7 @@ public class Tests
 {
     public string filePath = AppDomain.CurrentDomain.BaseDirectory + "../../../../Day05.Src/testData.txt";
 
-    Alamac newAlamac = CreateAlamac();
+    Solution newAlamac = CreateAlamac();
 
     [Theory]
     [InlineData("testData.txt", new ulong[] { 79, 14, 55, 13 })]
@@ -88,8 +88,8 @@ public class Tests
         result.Should().Be(expected);
     }
 
-    private static Alamac CreateAlamac()
+    private static Solution CreateAlamac()
     {
-        return new Alamac();
+        return new Solution();
     }
 }

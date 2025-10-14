@@ -22,7 +22,7 @@ namespace Day02.Test
             ];
 
             // Act
-            var result = CodeSolution.ReadFile(_testData);
+            var result = Solution.ReadFile(_testData);
 
             // Assert
             result.Should().BeEquivalentTo(listOfLists);
@@ -32,15 +32,15 @@ namespace Day02.Test
         public void Report_Is_Safe()
         {
             // Arrange
-            var matrix = CodeSolution.ReadFile(_testData);
+            var matrix = Solution.ReadFile(_testData);
 
             // Act
-            var row0 = CodeSolution.ReportIsSafe(matrix[0]);
-            var row1 = CodeSolution.ReportIsSafe(matrix[1]);
-            var row2 = CodeSolution.ReportIsSafe(matrix[2]);
-            var row3 = CodeSolution.ReportIsSafe(matrix[3]);
-            var row4 = CodeSolution.ReportIsSafe(matrix[4]);
-            var row5 = CodeSolution.ReportIsSafe(matrix[5]);
+            var row0 = Solution.ReportIsSafe(matrix[0]);
+            var row1 = Solution.ReportIsSafe(matrix[1]);
+            var row2 = Solution.ReportIsSafe(matrix[2]);
+            var row3 = Solution.ReportIsSafe(matrix[3]);
+            var row4 = Solution.ReportIsSafe(matrix[4]);
+            var row5 = Solution.ReportIsSafe(matrix[5]);
 
             //Assert
             row0.Should().Be(true);
@@ -55,10 +55,10 @@ namespace Day02.Test
         public void Count_Safe_Reports_For_Test_Data()
         {
             // Arrange
-            var matrix = CodeSolution.ReadFile(_testData);
+            var matrix = Solution.ReadFile(_testData);
 
             // Act
-            var result = CodeSolution.TotalSafeReports(matrix);
+            var result = Solution.TotalSafeReports(matrix);
 
             //Assert
             result.Should().Be(2);
@@ -68,15 +68,15 @@ namespace Day02.Test
         public void Is_Safe_With_Removal()
         {
             // Arrange
-            var matrix = CodeSolution.ReadFile(_testData);
+            var matrix = Solution.ReadFile(_testData);
 
             // Act
-            var row0 = CodeSolution.IsSafeWithOneRemoval(matrix[0]);
-            var row1 = CodeSolution.IsSafeWithOneRemoval(matrix[1]);
-            var row2 = CodeSolution.IsSafeWithOneRemoval(matrix[2]);
-            var row3 = CodeSolution.IsSafeWithOneRemoval(matrix[3]);
-            var row4 = CodeSolution.IsSafeWithOneRemoval(matrix[4]);
-            var row5 = CodeSolution.IsSafeWithOneRemoval(matrix[5]);
+            var row0 = Solution.IsSafeWithOneRemoval(matrix[0]);
+            var row1 = Solution.IsSafeWithOneRemoval(matrix[1]);
+            var row2 = Solution.IsSafeWithOneRemoval(matrix[2]);
+            var row3 = Solution.IsSafeWithOneRemoval(matrix[3]);
+            var row4 = Solution.IsSafeWithOneRemoval(matrix[4]);
+            var row5 = Solution.IsSafeWithOneRemoval(matrix[5]);
 
             //Assert
             row0.Should().Be(true);
@@ -91,10 +91,10 @@ namespace Day02.Test
         public void Count_Safe_Reports_With_One_Removal_For_Test_Data()
         {
             // Arrange
-            var matrix = CodeSolution.ReadFile(_testData);
+            var matrix = Solution.ReadFile(_testData);
 
             // Act
-            var result = CodeSolution.TotalSafeReportsWithOneRemoval(matrix);
+            var result = Solution.TotalSafeReportsWithOneRemoval(matrix);
 
             //Assert
             result.Should().Be(4);

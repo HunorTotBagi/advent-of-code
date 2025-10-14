@@ -26,7 +26,7 @@ namespace Day06.Test
             };
 
             // Act
-            var data = CodeSolution.ReadFile(_testData);
+            var data = Solution.ReadFile(_testData);
 
             // Assert
             data.Should().BeEquivalentTo(expected);
@@ -36,10 +36,10 @@ namespace Day06.Test
         public void Find_Guard_Position()
         {
             // Arrange
-            var data = CodeSolution.ReadFile(_testData);
+            var data = Solution.ReadFile(_testData);
 
             // Act
-            var (positionX, positionY) = CodeSolution.FindGuardPosition(data);
+            var (positionX, positionY) = Solution.FindGuardPosition(data);
 
             // Assert
             positionX.Should().Be(6);
@@ -50,11 +50,11 @@ namespace Day06.Test
         public void Count_Visited_Places()
         {
             // Arrange
-            var data = CodeSolution.ReadFile(_testData);
+            var data = Solution.ReadFile(_testData);
 
             // Act
-            var (positionX, positionY) = CodeSolution.FindGuardPosition(data);
-            var result = CodeSolution.CountVisitedPlaces(positionX, positionY, data);
+            var (positionX, positionY) = Solution.FindGuardPosition(data);
+            var result = Solution.CountVisitedPlaces(positionX, positionY, data);
 
             // Assert
             result.Should().Be(41);
@@ -64,11 +64,11 @@ namespace Day06.Test
         public void Count_Infinite_Loop_When_New_Obstacle_Is_Added()
         {
             // Arrange
-            var data = CodeSolution.ReadFile(_testData);
+            var data = Solution.ReadFile(_testData);
 
             // Act
-            var (positionX, positionY) = CodeSolution.FindGuardPosition(data);
-            var result = CodeSolution.CountInfiniteLoops(positionX, positionY, data);
+            var (positionX, positionY) = Solution.FindGuardPosition(data);
+            var result = Solution.CountInfiniteLoops(positionX, positionY, data);
 
             // Assert
             result.Should().Be(6);

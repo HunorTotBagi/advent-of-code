@@ -5,7 +5,7 @@ namespace Day09.Test;
 
 public class Tests
 {
-    Sensor newSensor = CreateSensor();
+    Solution newSensor = CreateSensor();
 
     readonly string _testData = AppDomain.CurrentDomain.BaseDirectory + "../../../../Day09.Src/testData.txt";
 
@@ -220,8 +220,8 @@ public class Tests
         result.Should().Be(expected);
     }
 
-    private static Sensor CreateSensor()
+    private static Solution CreateSensor()
     {
-        return new Sensor();
+        return new Solution();
     }
 }

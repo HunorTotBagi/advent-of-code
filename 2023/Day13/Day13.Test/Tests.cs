@@ -7,7 +7,7 @@ public class Tests
 {
     string testData = AppDomain.CurrentDomain.BaseDirectory + "../../../../Day13.Src/testData.txt";
 
-    MirrorReflectionAnalyzer newMirrorReflectionAnalyzer = CreateMirrorReflectionAnalyzer();
+    Solution newMirrorReflectionAnalyzer = CreateMirrorReflectionAnalyzer();
 
     [Theory]
     [InlineData(0)]
@@ -47,8 +47,8 @@ public class Tests
         result.Should().Be(405);
     }
 
-    private static MirrorReflectionAnalyzer CreateMirrorReflectionAnalyzer()
+    private static Solution CreateMirrorReflectionAnalyzer()
     {
-        return new MirrorReflectionAnalyzer();
+        return new Solution();
     }
 }

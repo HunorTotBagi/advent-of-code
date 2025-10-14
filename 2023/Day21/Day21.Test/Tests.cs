@@ -11,7 +11,7 @@ public class Tests
     private readonly string _testData3 = AppDomain.CurrentDomain.BaseDirectory + "../../../../Day21.Src/testData3.txt";
     private readonly string _testData4 = AppDomain.CurrentDomain.BaseDirectory + "../../../../Day21.Src/testData4.txt";
 
-    StepCounterSolver newStepCounterSolver = CreateHunor();
+    Solution newStepCounterSolver = CreateHunor();
 
     [Fact]
     public void Should_find_starting_position()
@@ -98,8 +98,8 @@ public class Tests
         result.Should().Be(countO);
     }
 
-    private static StepCounterSolver CreateHunor()
+    private static Solution CreateHunor()
     {
-        return new StepCounterSolver();
+        return new Solution();
     }
 }

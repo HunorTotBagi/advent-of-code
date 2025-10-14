@@ -12,7 +12,7 @@ public class DocumentTests
     readonly List<string> typedListReverse = ["eno", "owt", "eerht", "ruof", "evif", "xis", "neves", "thgie", "enin"];
     readonly List<char> numbersList = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
 
-    CalibrationDocumentProcessor newCalibrationDocumentProcessor = CreateCalibrationDocumentProcessor();
+    Solution newCalibrationDocumentProcessor = CreateCalibrationDocumentProcessor();
 
     [Theory]
     [InlineData("1abc2", "1")]
@@ -97,8 +97,8 @@ public class DocumentTests
         result.Should().Be(expected);
     }
 
-    private static CalibrationDocumentProcessor CreateCalibrationDocumentProcessor()
+    private static Solution CreateCalibrationDocumentProcessor()
     {
-        return new CalibrationDocumentProcessor();
+        return new Solution();
     }
 }

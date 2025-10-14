@@ -14,7 +14,7 @@ namespace Day11.Test
             var expected = new List<int> { 125, 17 };
 
             // Act
-            var result = CodeSolution.ReadFile(_testData);
+            var result = Solution.ReadFile(_testData);
 
             // Assert
             result.Should().BeEquivalentTo(expected);
@@ -28,7 +28,7 @@ namespace Day11.Test
             // Arrange
 
             // Act
-            var (first, second) = CodeSolution.SplitEvenNumber(input);
+            var (first, second) = Solution.SplitEvenNumber(input);
 
             // Assert
             first.Should().Be(firstPartExpected);
@@ -45,7 +45,7 @@ namespace Day11.Test
             // Arrange
 
             // Act
-            var result = CodeSolution.RemoveLeadingZeros(input);
+            var result = Solution.RemoveLeadingZeros(input);
 
             // Assert
             result.Should().Be(expected);
@@ -57,10 +57,10 @@ namespace Day11.Test
         public void Calc(ulong numberOfBlinks, ulong expected)
         {
             // Arrange
-            var data = CodeSolution.ReadFile(_testData);
+            var data = Solution.ReadFile(_testData);
 
             // Act
-            var result = CodeSolution.CalculateStoneCountAfterBlinks(data, numberOfBlinks);
+            var result = Solution.CalculateStoneCountAfterBlinks(data, numberOfBlinks);
 
             // Assert
             result.Should().Be(expected);

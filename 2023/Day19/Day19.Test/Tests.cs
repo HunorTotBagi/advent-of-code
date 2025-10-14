@@ -8,7 +8,7 @@ public class Tests
     private readonly string _testData0 = AppDomain.CurrentDomain.BaseDirectory + "../../../../Day19.Src/testData0.txt";
     private readonly string _testData1 = AppDomain.CurrentDomain.BaseDirectory + "../../../../Day19.Src/testData1.txt";
 
-    WorkflowProcessor workflowProcessor = CreateWorkflowProcessor();
+    Solution workflowProcessor = CreateWorkflowProcessor();
 
     [Fact]
     public void Should_extract_workflow_rules()
@@ -126,8 +126,8 @@ public class Tests
         result.Should().Be(expected);
     }
 
-    private static WorkflowProcessor CreateWorkflowProcessor()
+    private static Solution CreateWorkflowProcessor()
     {
-        return new WorkflowProcessor();
+        return new Solution();
     }
 }

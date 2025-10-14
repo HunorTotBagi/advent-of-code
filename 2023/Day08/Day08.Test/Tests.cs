@@ -5,7 +5,7 @@ namespace Day08.Test;
 
 public class Tests
 {
-    Network newNetwork = CreateNetwork();
+    Solution newNetwork = CreateNetwork();
 
     [Theory]
     [InlineData("example1.txt", "RL")]
@@ -137,8 +137,8 @@ public class Tests
         result.Should().Be(expected);
     }
 
-    private static Network CreateNetwork()
+    private static Solution CreateNetwork()
     {
-        return new Network();
+        return new Solution();
     }
 }

@@ -7,7 +7,7 @@ public class RecordTests
 {
     private readonly string _testData = AppDomain.CurrentDomain.BaseDirectory + "../../../../Day12.Src/testData.txt";
 
-    HotSpring newHotSpring = CreateHotSpring();
+    Solution newHotSpring = CreateHotSpring();
 
     [Fact]
     public void Should_return_symbols_and_numbers_from_input_file()
@@ -55,8 +55,8 @@ public class RecordTests
         result.Should().Be(expected);
     }
 
-    private static HotSpring CreateHotSpring()
+    private static Solution CreateHotSpring()
     {
-        return new HotSpring();
+        return new Solution();
     }
 }

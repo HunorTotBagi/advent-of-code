@@ -5,7 +5,7 @@ namespace Day03.Test;
 
 public class Tests
 {
-    Schematic newSchematic = CreateSchematic();
+    Solution newSchematic = CreateSchematic();
 
     [Theory]
     [InlineData("singleDigit.txt", "singleDigitExtended.txt")]
@@ -127,8 +127,8 @@ public class Tests
         result.Should().Be(expected);
     }
 
-    private static Schematic CreateSchematic()
+    private static Solution CreateSchematic()
     {
-        return new Schematic();
+        return new Solution();
     }
 }

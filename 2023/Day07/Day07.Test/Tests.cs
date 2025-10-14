@@ -21,7 +21,7 @@ public class Tests
             };
 
         // Act
-        var result = CodeSolution.ReadFile(_testData);
+        var result = Solution.ReadFile(_testData);
 
         // Assert
         result.Should().BeEquivalentTo(expected);
@@ -41,7 +41,7 @@ public class Tests
         var expected = CreateDictionary(expectedChars, expectedCounts);
 
         // Act
-        var result = CodeSolution.CountOccurences(card);
+        var result = Solution.CountOccurences(card);
 
         // Assert
         result.Should().BeEquivalentTo(expected);
@@ -58,7 +58,7 @@ public class Tests
     public void Should_return_hand_type(string card, int expected)
     {
         // Act
-        var result = CodeSolution.GetCardType(card);
+        var result = Solution.GetCardType(card);
 
         // Assert
         result.Should().Be(expected);
@@ -68,7 +68,7 @@ public class Tests
     [InlineData("KK677", "KTJJT", 4)]
     public void Should_compare_hands(string firstHand, string secondHand, int expected)
     {
-        var result = CodeSolution.CompareHands(firstHand, secondHand);
+        var result = Solution.CompareHands(firstHand, secondHand);
 
         result.Should().Be(expected);
     }
@@ -79,7 +79,7 @@ public class Tests
         // Arrange
 
         // Act
-        var result = CodeSolution.CalculateWinnings(_testData);
+        var result = Solution.CalculateWinnings(_testData);
 
         // Assert
         result.Should().Be(6440);

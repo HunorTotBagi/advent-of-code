@@ -5,7 +5,7 @@ namespace Day10.Test;
 
 public class PipeTests
 {
-    Pipe newPipe = CreatePipe();
+    Solution newPipe = CreatePipe();
 
     readonly string _testData0 = AppDomain.CurrentDomain.BaseDirectory + "../../../../Day10.Src/testData0.txt";
     readonly string _testData1 = AppDomain.CurrentDomain.BaseDirectory + "../../../../Day10.Src/testData1.txt";
@@ -144,8 +144,8 @@ public class PipeTests
         result.Should().BeEquivalentTo(expected);
     }
 
-    private static Pipe CreatePipe()
+    private static Solution CreatePipe()
     {
-        return new Pipe();
+        return new Solution();
     }
 }

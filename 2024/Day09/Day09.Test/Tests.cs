@@ -14,7 +14,7 @@ namespace Day09.Test
             var expected = new List<ulong> { 2, 3, 3, 3, 1, 3, 3, 1, 2, 1, 4, 1, 4, 1, 3, 1, 4, 0, 2 };
 
             // Act
-            var data = CodeSolution.ReadFile(_testData0);
+            var data = Solution.ReadFile(_testData0);
 
             // Assert
             data.Should().Equal(expected);
@@ -29,10 +29,10 @@ namespace Day09.Test
             var testData = AppDomain.CurrentDomain.BaseDirectory + "../../../../Day09.Src/" + fileName;
 
             var expected = ConvertStringToStringList(expectedData);
-            var data = CodeSolution.ReadFile(testData);
+            var data = Solution.ReadFile(testData);
 
             // Act
-            var result = CodeSolution.ConvertToBlockOfFilesAndSpaces(data);
+            var result = Solution.ConvertToBlockOfFilesAndSpaces(data);
 
             // Assert
             result.Should().Equal(expected);
@@ -47,10 +47,10 @@ namespace Day09.Test
             var testData = AppDomain.CurrentDomain.BaseDirectory + "../../../../Day09.Src/" + fileName;
 
             var expected = ConvertStringToStringList(expectedData);
-            var data = CodeSolution.ReadFile(testData);
+            var data = Solution.ReadFile(testData);
 
             // Act
-            var result = CodeSolution.SwapDots(data);
+            var result = Solution.SwapDots(data);
 
             // Assert
             result.Should().Equal(expected);
@@ -60,10 +60,10 @@ namespace Day09.Test
         public void CalculatePartOne()
         {
             // Arrange
-            var data = CodeSolution.ReadFile(_testData0);
+            var data = Solution.ReadFile(_testData0);
 
             // Act
-            var result = CodeSolution.CalculatePartOne(data);
+            var result = Solution.CalculatePartOne(data);
 
             // Assert
             result.Should().Be(1928);
@@ -73,10 +73,10 @@ namespace Day09.Test
         public void CalculatePartTwo_Real_Data()
         {
             // Arrange
-            var data = CodeSolution.ReadFile(_testData0);
+            var data = Solution.ReadFile(_testData0);
 
             // Act
-            var result = CodeSolution.CalculatePartTwo(data);
+            var result = Solution.CalculatePartTwo(data);
 
             // Assert
             result.Should().Be(2858);

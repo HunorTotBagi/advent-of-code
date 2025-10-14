@@ -5,7 +5,7 @@ namespace Day11.Test;
 
 public class GalacticUniverseTests
 {
-    GalacticUniverse newUniverse = CreateUniverse();
+    Solution newUniverse = CreateUniverse();
 
     [Fact]
     public void Should_get_galaxy_coordinates()
@@ -78,8 +78,8 @@ public class GalacticUniverseTests
         result.Should().Be(expected);
     }
 
-    private static GalacticUniverse CreateUniverse()
+    private static Solution CreateUniverse()
     {
-        return new GalacticUniverse();
+        return new Solution();
     }
 }

@@ -5,7 +5,7 @@ namespace Day06.Test;
 
 public class Tests
 {
-    Race newRace = CreateRace();
+    Solution newRace = CreateRace();
 
     [Theory]
     [InlineData("exampleRace.txt", new ulong[] { 7, 15, 30 })]
@@ -68,8 +68,8 @@ public class Tests
         result.Should().Be(expected);
     }
 
-    private static Race CreateRace()
+    private static Solution CreateRace()
     {
-        return new Race();
+        return new Solution();
     }
 }

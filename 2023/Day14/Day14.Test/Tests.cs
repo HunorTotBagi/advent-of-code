@@ -18,11 +18,11 @@ public class Tests
     {
         // Arrange
         var filePath = AppDomain.CurrentDomain.BaseDirectory + "../../../../Day14.Src/Data/" + fileName;
-        var matrix = CodeSolution.LoadMatrixFromFile(_testData);
-        var expected = CodeSolution.LoadMatrixFromFile(filePath);
+        var matrix = Solution.LoadMatrixFromFile(_testData);
+        var expected = Solution.LoadMatrixFromFile(filePath);
 
         // Act
-        var result = CodeSolution.SlideRocksNorthInColumn(matrix, colIndex);
+        var result = Solution.SlideRocksNorthInColumn(matrix, colIndex);
 
         // Assert
         result.Should().BeEquivalentTo(expected);
@@ -32,10 +32,10 @@ public class Tests
     public void Should_return_sum()
     {
         // Arrange
-        var matrix = CodeSolution.LoadMatrixFromFile(_testData);
+        var matrix = Solution.LoadMatrixFromFile(_testData);
 
         // Act
-        var result = CodeSolution.CalculateTotalLoad(matrix);
+        var result = Solution.CalculateTotalLoad(matrix);
 
         // Assert
         result.Should().Be(136);

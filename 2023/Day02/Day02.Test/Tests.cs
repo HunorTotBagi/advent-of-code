@@ -6,7 +6,7 @@ namespace Day02.Test;
 
 public class Tests
 {
-    Bag newBag = CreateBag();
+    Solution newBag = CreateBag();
 
     Dictionary<string, int> availableCubes = new Dictionary<string, int>()
         {
@@ -172,8 +172,8 @@ public class Tests
         result.Should().Be(expected);
     }
 
-    private static Bag CreateBag()
+    private static Solution CreateBag()
     {
-        return new Bag();
+        return new Solution();
     }
 }

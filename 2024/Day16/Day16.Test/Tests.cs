@@ -12,10 +12,10 @@ namespace Day16.Test
         {
             // Arrange
             var fullPath = AppDomain.CurrentDomain.BaseDirectory + "../../../../Day16.Src/" + fileName;
-            var data = CodeSolution.ReadFile(fullPath);
+            var data = Solution.ReadFile(fullPath);
 
             // Act
-            var result = CodeSolution.FindLowestScore(data);
+            var result = Solution.FindLowestScore(data);
 
             // Assert
             result.Should().Be(expectedScore);
@@ -28,10 +28,10 @@ namespace Day16.Test
         {
             // Arrange
             var filePath = AppDomain.CurrentDomain.BaseDirectory + "../../../../Day16.Src/" + fileName;
-            var data = CodeSolution.ReadFile(filePath);
+            var data = Solution.ReadFile(filePath);
 
             // Act
-            var result = CodeSolution.FindBestPathTiles(data);
+            var result = Solution.FindBestPathTiles(data);
 
             // Assert
             result.Should().Be(expectedScore);

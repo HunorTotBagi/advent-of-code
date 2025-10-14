@@ -21,7 +21,7 @@ namespace Day07.Test
             };
 
             // Act
-            var (number, all) = CodeSolution.ReadCalibrationFile(_testData);
+            var (number, all) = Solution.ReadCalibrationFile(_testData);
 
             // Assert
             number.Should().BeEquivalentTo(leftNumbers);
@@ -37,7 +37,7 @@ namespace Day07.Test
             var expectedList = new List<string>(expected);
 
             // Act
-            var result = CodeSolution.GenerateOperatorCombinations(input);
+            var result = Solution.GenerateOperatorCombinations(input);
 
             // Assert
             result.Should().BeEquivalentTo(expectedList);
@@ -53,7 +53,7 @@ namespace Day07.Test
             var elementsList = new List<long>(elements);
 
             // Act
-            var result = CodeSolution.IsValidCalibration(target, elementsList);
+            var result = Solution.IsValidCalibration(target, elementsList);
 
             // Assert
             result.Should().Be(expected);
@@ -63,10 +63,10 @@ namespace Day07.Test
         public void Calculate_Sum_Of_Valid_Equations()
         {
             // Arrange
-            var (targetNumbers, elements) = CodeSolution.ReadCalibrationFile(_testData);
+            var (targetNumbers, elements) = Solution.ReadCalibrationFile(_testData);
 
             // Act
-            var result = CodeSolution.CalculateCalibration(targetNumbers, elements);
+            var result = Solution.CalculateCalibration(targetNumbers, elements);
 
             // Assert
             result.Should().Be(3749);
@@ -81,7 +81,7 @@ namespace Day07.Test
             var expectedList = new List<string>(expected);
 
             // Act
-            var result = CodeSolution.GenerateOperatorCombinationsWithConcatenation(input);
+            var result = Solution.GenerateOperatorCombinationsWithConcatenation(input);
 
             // Assert
             result.Should().BeEquivalentTo(expectedList);
@@ -97,7 +97,7 @@ namespace Day07.Test
             var elementsList = new List<long>(elements);
 
             // Act
-            var result = CodeSolution.IsValidCalibrationWithConcatenation(target, elementsList);
+            var result = Solution.IsValidCalibrationWithConcatenation(target, elementsList);
 
             // Assert
             result.Should().Be(expected);
@@ -107,10 +107,10 @@ namespace Day07.Test
         public void Calculate_Sum_Of_Valid_Equations_With_Concatenation()
         {
             // Arrange
-            var (targetNumbers, elements) = CodeSolution.ReadCalibrationFile(_testData);
+            var (targetNumbers, elements) = Solution.ReadCalibrationFile(_testData);
 
             // Act
-            var result = CodeSolution.CalculateCalibrationWithConcatenation(targetNumbers, elements);
+            var result = Solution.CalculateCalibrationWithConcatenation(targetNumbers, elements);
 
             // Assert
             result.Should().Be(11387);

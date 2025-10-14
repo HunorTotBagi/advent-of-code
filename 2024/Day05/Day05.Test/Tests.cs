@@ -38,7 +38,7 @@ namespace Day05.Test
             };
 
             // Act
-            var rules = CodeSolution.ReadFileRules(_testData0);
+            var rules = Solution.ReadFileRules(_testData0);
 
             // Assert
             rules.Should().BeEquivalentTo(expected);
@@ -59,7 +59,7 @@ namespace Day05.Test
             };
 
             // Act
-            var rows = CodeSolution.ReadFileRows(_testData1);
+            var rows = Solution.ReadFileRows(_testData1);
 
             // Assert
             rows.Should().BeEquivalentTo(expected);
@@ -69,10 +69,10 @@ namespace Day05.Test
         public void Is_Targeted_Pair_In_Rules()
         {
             // Arrange
-            var rules = CodeSolution.ReadFileRules(_testData0);
+            var rules = Solution.ReadFileRules(_testData0);
 
             // Act
-            var result = CodeSolution.IsPairInRules(75,53, rules);
+            var result = Solution.IsPairInRules(75,53, rules);
 
             // Assert
             result.Should().Be(true);
@@ -82,16 +82,16 @@ namespace Day05.Test
         public void Is_Targeted_Row_Correct_Or_Not()
         {
             // Arrange
-            var rules = CodeSolution.ReadFileRules(_testData0);
-            var rows = CodeSolution.ReadFileRows(_testData1);
+            var rules = Solution.ReadFileRules(_testData0);
+            var rows = Solution.ReadFileRows(_testData1);
 
             // Act
-            var result0 = CodeSolution.IsRowCorrect(rows[0], rules);
-            var result1 = CodeSolution.IsRowCorrect(rows[1], rules);
-            var result2 = CodeSolution.IsRowCorrect(rows[2], rules);
-            var result3 = CodeSolution.IsRowCorrect(rows[3], rules);
-            var result4 = CodeSolution.IsRowCorrect(rows[4], rules);
-            var result5 = CodeSolution.IsRowCorrect(rows[5], rules);
+            var result0 = Solution.IsRowCorrect(rows[0], rules);
+            var result1 = Solution.IsRowCorrect(rows[1], rules);
+            var result2 = Solution.IsRowCorrect(rows[2], rules);
+            var result3 = Solution.IsRowCorrect(rows[3], rules);
+            var result4 = Solution.IsRowCorrect(rows[4], rules);
+            var result5 = Solution.IsRowCorrect(rows[5], rules);
 
             // Assert
             result0.Should().Be(true);
@@ -106,11 +106,11 @@ namespace Day05.Test
         public void Count_All_Middle_Elements_Of_Correct_Rows()
         {
             // Arrange
-            var rules = CodeSolution.ReadFileRules(_testData0);
-            var rows = CodeSolution.ReadFileRows(_testData1);
+            var rules = Solution.ReadFileRules(_testData0);
+            var rows = Solution.ReadFileRows(_testData1);
 
             // Act
-            var result = CodeSolution.CountCorrectRows(rows, rules);
+            var result = Solution.CountCorrectRows(rows, rules);
 
             // Assert
             result.Should().Be(143);
@@ -120,17 +120,17 @@ namespace Day05.Test
         public void Swap_False_Rows_Until_Correct()
         {
             // Arrange
-            var rules = CodeSolution.ReadFileRules(_testData0);
-            var rows = CodeSolution.ReadFileRows(_testData1);
+            var rules = Solution.ReadFileRules(_testData0);
+            var rows = Solution.ReadFileRows(_testData1);
 
             var expected3 = new List<int> { 97, 75, 47, 61, 53 };
             var expected4 = new List<int> { 61, 29, 13 };
             var expected5 = new List<int> { 97, 75, 47, 29, 13 };
 
             // Act
-            var result3 = CodeSolution.SwapWhileNotFound(rows[3], rules);
-            var result4 = CodeSolution.SwapWhileNotFound(rows[4], rules);
-            var result5 = CodeSolution.SwapWhileNotFound(rows[5], rules);
+            var result3 = Solution.SwapWhileNotFound(rows[3], rules);
+            var result4 = Solution.SwapWhileNotFound(rows[4], rules);
+            var result5 = Solution.SwapWhileNotFound(rows[5], rules);
 
             // Assert
             result3.Should().Equal(expected3);
@@ -142,11 +142,11 @@ namespace Day05.Test
         public void Count_All_Middle_Elements_Of_False_Swapped_Rows()
         {
             // Arrange
-            var rules = CodeSolution.ReadFileRules(_testData0);
-            var data = CodeSolution.ReadFileRows(_testData1);
+            var rules = Solution.ReadFileRules(_testData0);
+            var data = Solution.ReadFileRows(_testData1);
 
             // Act
-            var result0 = CodeSolution.CountFalseSwappedRows(data, rules);
+            var result0 = Solution.CountFalseSwappedRows(data, rules);
 
             // Assert
             result0.Should().Be(123);

@@ -5,7 +5,7 @@ namespace Day04.Test;
 
 public class Tests
 {
-    Scratchcard card = CreateScratchcard();
+    Solution card = CreateScratchcard();
 
     [Theory]
     [InlineData("Card 1: 41 48 83 86 17 | 83 86  6 31 17  9 48 53", new int[] { 41, 48, 83, 86, 17 })]
@@ -119,8 +119,8 @@ public class Tests
         sum.Should().Be(expectedSum);
     }
 
-    private static Scratchcard CreateScratchcard()
+    private static Solution CreateScratchcard()
     {
-        return new Scratchcard();
+        return new Solution();
     }
 }

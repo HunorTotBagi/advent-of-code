@@ -13,13 +13,13 @@ namespace Day15.Test
         public void CalculateGPS()
         {
             // Arrange
-            var map = CodeSolution.ReadMap(_testDataLargeMap);
-            var moves = CodeSolution.ReadMoves(_testDataLargeMoves);
+            var map = Solution.ReadMap(_testDataLargeMap);
+            var moves = Solution.ReadMoves(_testDataLargeMoves);
 
-            var expected = CodeSolution.ApplyAllMoves(map, moves);
+            var expected = Solution.ApplyAllMoves(map, moves);
 
             // Act
-            var result = CodeSolution.CalculateGps(expected);
+            var result = Solution.CalculateGps(expected);
 
             // Assert
             result.Should().Be(10092);

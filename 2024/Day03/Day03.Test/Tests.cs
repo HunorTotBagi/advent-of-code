@@ -15,7 +15,7 @@ namespace Day03.Test
             var expected = new List<string> { "mul(2,4)", "mul(5,5)", "mul(11,8)", "mul(8,5)" };
 
             // Act
-            var data = CodeSolution.ReadFile(_testData0);
+            var data = Solution.ReadFile(_testData0);
 
             // Assert
             data.Should().Equal(expected);
@@ -25,13 +25,13 @@ namespace Day03.Test
         public void Extract_The_Numbers()
         {
             // Arrange
-            var data = CodeSolution.ReadFile(_testData0);
+            var data = Solution.ReadFile(_testData0);
 
             var expected1 = new List<int> { 2, 5, 11, 8 };
             var expected2 = new List<int> { 4, 5, 8, 5 };
 
             // Act
-            var (list1, list2) = CodeSolution.GetNumbers(data);
+            var (list1, list2) = Solution.GetNumbers(data);
 
             // Assert
             list1.Should().Equal(expected1);
@@ -42,11 +42,11 @@ namespace Day03.Test
         public void Calculate_Test_Data()
         {
             // Arrange
-            var data = CodeSolution.ReadFile(_testData0);
-            var (list1, list2) = CodeSolution.GetNumbers(data);
+            var data = Solution.ReadFile(_testData0);
+            var (list1, list2) = Solution.GetNumbers(data);
 
             // Act
-            var result = CodeSolution.Calculate(list1, list2);
+            var result = Solution.Calculate(list1, list2);
 
             // Assert
             result.Should().Be(161);
@@ -59,7 +59,7 @@ namespace Day03.Test
             var expected = new List<string> { "mul(2,4)", "don't()", "mul(5,5)", "mul(11,8)", "do()", "mul(8,5)" };
 
             // Act
-            var data = CodeSolution.ReadCorruptedFile(_testData1);
+            var data = Solution.ReadCorruptedFile(_testData1);
 
             // Assert
             data.Should().Equal(expected);
@@ -69,11 +69,11 @@ namespace Day03.Test
         public void Include_Only_Non_Corrupted_Data()
         {
             // Arrange
-            var data = CodeSolution.ReadCorruptedFile(_testData1);
+            var data = Solution.ReadCorruptedFile(_testData1);
             var expected = new List<string> { "mul(2,4)", "mul(8,5)" };
 
             // Act
-            var result = CodeSolution.ScanList(data);
+            var result = Solution.ScanList(data);
 
             // Assert
             result.Should().Equal(expected);
@@ -83,12 +83,12 @@ namespace Day03.Test
         public void Calculate_Corrupted_Test1_Data()
         {
             // Arrange
-            var data = CodeSolution.ReadCorruptedFile(_testData1);
-            var nonCorruptedData = CodeSolution.ScanList(data);
-            var (list1, list2) = CodeSolution.GetNumbers(nonCorruptedData);
+            var data = Solution.ReadCorruptedFile(_testData1);
+            var nonCorruptedData = Solution.ScanList(data);
+            var (list1, list2) = Solution.GetNumbers(nonCorruptedData);
 
             // Act
-            var result = CodeSolution.Calculate(list1, list2);
+            var result = Solution.Calculate(list1, list2);
 
             // Assert
             result.Should().Be(48);

@@ -26,7 +26,7 @@ namespace Day04.Test
             };
 
             // Act
-            var result = CodeSolution.ReadFile(_testData);
+            var result = Solution.ReadFile(_testData);
 
             // Assert
             result.Should().BeEquivalentTo(expected);
@@ -36,10 +36,10 @@ namespace Day04.Test
         public void Counts_Horizontal()
         {
             // Arrange
-            var data = CodeSolution.ReadFile(_testData);
+            var data = Solution.ReadFile(_testData);
 
             // Act
-            var result = CodeSolution.Horizontal(data);
+            var result = Solution.Horizontal(data);
 
             // Assert
             result.Should().Be(3);
@@ -49,10 +49,10 @@ namespace Day04.Test
         public void Counts_Horizontal_Backwards()
         {
             // Arrange
-            var data = CodeSolution.ReadFile(_testData);
+            var data = Solution.ReadFile(_testData);
 
             // Act
-            var result = CodeSolution.HorizontalBackwards(data);
+            var result = Solution.HorizontalBackwards(data);
 
             // Assert
             result.Should().Be(2);
@@ -62,10 +62,10 @@ namespace Day04.Test
         public void Counts_Vertical()
         {
             // Arrange
-            var data = CodeSolution.ReadFile(_testData);
+            var data = Solution.ReadFile(_testData);
 
             // Act
-            var result = CodeSolution.Vertical(data);
+            var result = Solution.Vertical(data);
 
             // Assert
             result.Should().Be(1);
@@ -75,10 +75,10 @@ namespace Day04.Test
         public void Counters_Vertical_Backwards()
         {
             // Arrange
-            var data = CodeSolution.ReadFile(_testData);
+            var data = Solution.ReadFile(_testData);
 
             // Act
-            var result = CodeSolution.VerticalBackwards(data);
+            var result = Solution.VerticalBackwards(data);
 
             // Assert
             result.Should().Be(2);
@@ -88,10 +88,10 @@ namespace Day04.Test
         public void Counts_Diagonal_1()
         {
             // Arrange
-            var data = CodeSolution.ReadFile(_testData);
+            var data = Solution.ReadFile(_testData);
 
             // Act
-            var result = CodeSolution.Diagonal1(data);
+            var result = Solution.Diagonal1(data);
 
             // Assert
             result.Should().Be(1);
@@ -101,10 +101,10 @@ namespace Day04.Test
         public void Counts_Diagonal_1_Backwards()
         {
             // Arrange
-            var data = CodeSolution.ReadFile(_testData);
+            var data = Solution.ReadFile(_testData);
 
             // Act
-            var result = CodeSolution.Diagonal1Backwards(data);
+            var result = Solution.Diagonal1Backwards(data);
 
             // Assert
             result.Should().Be(4);
@@ -114,10 +114,10 @@ namespace Day04.Test
         public void Counts_Diagonal_2()
         {
             // Arrange
-            var data = CodeSolution.ReadFile(_testData);
+            var data = Solution.ReadFile(_testData);
 
             // Act
-            var result = CodeSolution.Diagonal2(data);
+            var result = Solution.Diagonal2(data);
 
             // Assert
             result.Should().Be(4);
@@ -127,10 +127,10 @@ namespace Day04.Test
         public void Counts_Diagonal_2_Backwards()
         {
             // Arrange
-            var data = CodeSolution.ReadFile(_testData);
+            var data = Solution.ReadFile(_testData);
 
             // Act
-            var result = CodeSolution.Diagonal2Backwards(data);
+            var result = Solution.Diagonal2Backwards(data);
 
             // Assert
             result.Should().Be(1);
@@ -140,10 +140,10 @@ namespace Day04.Test
         public void Counts_All_Occurrences_Test_Data()
         {
             // Arrange
-            var data = CodeSolution.ReadFile(_testData);
+            var data = Solution.ReadFile(_testData);
 
             // Act
-            var result = CodeSolution.GetAllXmas(data);
+            var result = Solution.GetAllXmas(data);
 
             // Assert
             result.Should().Be(18);
@@ -153,10 +153,10 @@ namespace Day04.Test
         public void Counts_All_Occurrences_X_Shaped_Mas_Test_Data()
         {
             // Arrange
-            var data = CodeSolution.ReadFile(_testData);
+            var data = Solution.ReadFile(_testData);
 
             // Act
-            var result = CodeSolution.Result(data);
+            var result = Solution.Result(data);
 
             // Assert
             result.Should().Be(9);

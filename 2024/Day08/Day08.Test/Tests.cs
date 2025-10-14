@@ -28,7 +28,7 @@ namespace Day08.Test
             };
 
             // Act
-            var data = CodeSolution.ReadGridFromFile(_testData);
+            var data = Solution.ReadGridFromFile(_testData);
 
             // Assert
             data.Should().BeEquivalentTo(expected);
@@ -44,11 +44,11 @@ namespace Day08.Test
         public void Is_Point_In_Bounds(int x, int y, bool expectedResult)
         {
             // Arrange
-            var data = CodeSolution.ReadGridFromFile(_testData);
+            var data = Solution.ReadGridFromFile(_testData);
             var coordinate = new List<int> { x, y };
 
             // Act
-            var result = CodeSolution.IsPointInBounds(coordinate, data);
+            var result = Solution.IsPointInBounds(coordinate, data);
 
             // Assert
             result.Should().Be(expectedResult);
@@ -58,11 +58,11 @@ namespace Day08.Test
         public void Get_Unique_Antennas()
         {
             // Arrange
-            var data = CodeSolution.ReadGridFromFile(_testData);
+            var data = Solution.ReadGridFromFile(_testData);
             var expected = new HashSet<char> { '0', 'A' };
 
             // Act
-            var uniqueCharacters = CodeSolution.GetUniqueAntennas(data);
+            var uniqueCharacters = Solution.GetUniqueAntennas(data);
 
             // Assert
             uniqueCharacters.Should().BeEquivalentTo(expected);
@@ -72,7 +72,7 @@ namespace Day08.Test
         public void Find_All_Antenna_Positions()
         {
             // Arrange
-            var data = CodeSolution.ReadGridFromFile(_testData);
+            var data = Solution.ReadGridFromFile(_testData);
 
             var expected = new List<List<int>>
             {
@@ -83,7 +83,7 @@ namespace Day08.Test
             };
 
             // Act
-            var antennaPositions = CodeSolution.FindAllAntennaPositions('0', data);
+            var antennaPositions = Solution.FindAllAntennaPositions('0', data);
 
             // Assert
             antennaPositions.Should().BeEquivalentTo(expected);
@@ -105,7 +105,7 @@ namespace Day08.Test
             };
 
             // Act
-            var result = CodeSolution.GenerateAntinodePositions(first, second);
+            var result = Solution.GenerateAntinodePositions(first, second);
 
             // Assert
             result.Should().BeEquivalentTo(expected);
@@ -115,10 +115,10 @@ namespace Day08.Test
         public void Calculate()
         {
             // Arrange
-            var data = CodeSolution.ReadGridFromFile(_testData);
+            var data = Solution.ReadGridFromFile(_testData);
 
             // Act
-            var result = CodeSolution.Calculate(data);
+            var result = Solution.Calculate(data);
 
             // Assert
             result.Should().Be(14);
@@ -128,10 +128,10 @@ namespace Day08.Test
         public void Calculate_Overloaded()
         {
             // Arrange
-            var data = CodeSolution.ReadGridFromFile(_testData);
+            var data = Solution.ReadGridFromFile(_testData);
 
             // Act
-            var result = CodeSolution.CalculateAdvanced(data);
+            var result = Solution.CalculateAdvanced(data);
 
             // Assert
             result.Should().Be(34);
