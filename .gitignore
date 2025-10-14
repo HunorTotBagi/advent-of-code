@@ -361,26 +361,3 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
-/advent-of-code-2023/2023/Day01/src/Data/realData.txt
-/advent-of-code-2023/2023/Day02/Day02.Src/Data/game.txt
-/advent-of-code-2023/2023/Day03/Day03.Src/Data/realSchematics.txt
-/advent-of-code-2023/2023/Day04/Day04.Src/Data/realData.txt
-/advent-of-code-2023/2023/Day05/Day05.Src/Data/realAlamac.txt
-/advent-of-code-2023/2023/Day06/Day06.Src/Data/realRace.txt
-/advent-of-code-2023/2023/Day06/Day06.Src/Data/realRacePuzzle2.txt
-/advent-of-code-2023/2023/Day08/Day08.Src/Data/realNetwork.txt
-/advent-of-code-2023/2023/Day09/Day09.Src/Data/realFile.txt
-/advent-of-code-2023/2023/Day10/Day10.Src/Data/realData.txt
-/advent-of-code-2023/2023/Day11/Day11.Src/Data/inputReal.txt
-/advent-of-code-2023/2023/Day12/Day12.Src/Data/realData.txt
-/advent-of-code-2023/2023/Day13/Day13.Src/Data/realData.txt
-/advent-of-code-2023/2023/Day14/Day14.Src/Data/realData.txt
-/advent-of-code-2023/2023/Day15/Day15.Src/Data/realData.txt
-/advent-of-code-2023/2023/Day16/Day16.Src/Data/realData.txt
-/advent-of-code-2023/2023/Day18/Day18.Src/Data/realData.txt
-/advent-of-code-2023/2023/Day19/Day19.Src/Data/realData.txt
-/advent-of-code-2023/2023/Day21/Day21.Src/Data/realData.txt
-/advent-of-code-2023/2024/Day01/Day01.Src/Data/realData.txt
-/advent-of-code-2023/2024/Day02/Day02.Src/Data/realData.txt
-/advent-of-code-2023/2024/Day03/Day03.Src/Data/realData.txt
-/advent-of-code-2023/2024/Day04/Day04.Src/Data/realData.txt
