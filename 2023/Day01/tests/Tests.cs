@@ -1,8 +1,8 @@
-﻿using FluentAssertions;
-using src;
+﻿using Day01.Src;
+using FluentAssertions;
 using Xunit;
 
-namespace tests;
+namespace Day01.Test;
 
 public class DocumentTests
 {

@@ -1,4 +1,4 @@
-﻿namespace src;
+﻿namespace Day01.Src;
 
 public class CalibrationDocumentProcessor
 {
