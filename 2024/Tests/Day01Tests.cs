@@ -1,9 +1,9 @@
 using FluentAssertions;
 using Src.Day01;
 
-namespace Tests.Day01;
+namespace Tests;
 
-public class Tests
+public class Day01Tests
 {
     private readonly string _testData = AppDomain.CurrentDomain.BaseDirectory + "../../../../Src/Day01/testData.txt";
 
