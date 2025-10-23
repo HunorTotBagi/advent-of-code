@@ -11,13 +11,13 @@ public class SolutionP2
         {
             var inputLine = Splitter(line);
 
-            result += Ribbon(inputLine) + RibbonBow(inputLine);
+            result += CalculateRibbon(inputLine) + CalculateRibbonBow(inputLine);
         }
 
         return result;
     }
 
-    public static int Ribbon(int[] input)
+    public static int CalculateRibbon(int[] input)
     {
         var l = input[0];
         var w = input[1];
@@ -25,7 +25,7 @@ public class SolutionP2
         return l+l+w+w;
     }
 
-    public static int RibbonBow(int[] input)
+    public static int CalculateRibbonBow(int[] input)
     {
         var l = input[0];
         var w = input[1];
@@ -43,7 +43,6 @@ public class SolutionP2
         result[2] = int.Parse(numbers[2]);
 
         Array.Sort(result);
-
         return result;
     }
 }

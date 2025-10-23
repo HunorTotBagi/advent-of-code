@@ -7,7 +7,7 @@ namespace Tests;
 public class Day02Tests
 {
     [Fact]
-    public void Test1()
+    public void SplitterTest()
     {
         // Arrange
         var input = "2x3x4";
@@ -23,11 +23,11 @@ public class Day02Tests
     [Theory]
     [InlineData("2x3x4", 52)]
     [InlineData("1x1x10", 42)]
-    public void Test2(string input, int expected)
+    public void CalculateSquareFeetTest(string input, int expected)
     {
         // Act
         var numbers = SolutionP1.Splitter(input);
-        var result = SolutionP1.CalcSquareFeet(numbers);
+        var result = SolutionP1.CalculateSquareFeet(numbers);
 
         // Assert
         result.Should().Be(expected);
@@ -36,7 +36,7 @@ public class Day02Tests
     [Theory]
     [InlineData("2x3x4", 6)]
     [InlineData("1x1x10", 1)]
-    public void Test3(string input, int expected)
+    public void GetTheSmallestSideTest(string input, int expected)
     {
         // Act
         var numbers = SolutionP1.Splitter(input);
@@ -49,22 +49,11 @@ public class Day02Tests
     [Theory]
     [InlineData("2x3x4", 58)]
     [InlineData("1x1x10", 43)]
-    public void Test4(string input, int expected)
+    public void SquareFeetTest(string input, int expected)
     {
         // Act
         var numbers = SolutionP1.Splitter(input);
-        var result = SolutionP1.SqFeet(numbers);
-
-        // Assert
-        result.Should().Be(expected);
-    }
-
-    [Fact]
-    public void Test5()
-    {
-        // Act
-        var result = SolutionP1.CalculateAll(_testData);
-        var expected = 0;
+        var result = SolutionP1.SquareFeet(numbers);
 
         // Assert
         result.Should().Be(expected);
@@ -73,10 +62,10 @@ public class Day02Tests
     [Theory]
     [InlineData(new[] {2,3,4}, 10)]
     [InlineData(new[] {1,1,10}, 4)]
-    public void Test6(int[] input, int expected)
+    public void CalculateRibbonTest(int[] input, int expected)
     {
         // Act
-        var result = SolutionP2.Ribbon(input);
+        var result = SolutionP2.CalculateRibbon(input);
 
         // Assert
         result.Should().Be(expected);
@@ -85,21 +74,10 @@ public class Day02Tests
     [Theory]
     [InlineData(new[] { 2, 3, 4 }, 24)]
     [InlineData(new[] { 1, 1, 10 }, 10)]
-    public void Test7(int[] input, int expected)
+    public void CalculateRibbonBowTest(int[] input, int expected)
     {
         // Act
-        var result = SolutionP2.RibbonBow(input);
-
-        // Assert
-        result.Should().Be(expected);
-    }
-
-    [Fact]
-    public void Test8()
-    {
-        // Act
-        var result = SolutionP2.CalculateAll(_testData);
-        var expected = 0;
+        var result = SolutionP2.CalculateRibbonBow(input);
 
         // Assert
         result.Should().Be(expected);

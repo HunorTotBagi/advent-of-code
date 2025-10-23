@@ -9,13 +9,13 @@ public class SolutionP1
         var result = 0;
         foreach (var line in lines)
         {
-            result += SqFeet(Splitter(line));
+            result += SquareFeet(Splitter(line));
         }
 
         return result;
     }
 
-    public static int CalcSquareFeet(int[] input)
+    public static int CalculateSquareFeet(int[] input)
     {
         var l = input[0];
         var w = input[1];
@@ -43,8 +43,8 @@ public class SolutionP1
         return Math.Min(Math.Min(side1, side2), side3);
     }
 
-    public static int SqFeet(int[] input)
+    public static int SquareFeet(int[] input)
     {
-        return CalcSquareFeet(input) + GetTheSmallestSide(input);
+        return CalculateSquareFeet(input) + GetTheSmallestSide(input);
     }
 }
