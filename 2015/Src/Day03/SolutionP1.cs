@@ -16,20 +16,20 @@ public class SolutionP1
                 seen.Add((currX, currY));
             }
 
-            if (c == 'v')
+            else if (c == 'v')
             {
                 currY--;
                 seen.Add((currX, currY));
             }
 
-            if (c == '>')
+            else if (c == '>')
             {
                 currX++;
                 seen.Add((currX, currY));
             }
 
 
-            if (c == '<')
+            else if (c == '<')
             {
                 currX--;
                 seen.Add((currX, currY));

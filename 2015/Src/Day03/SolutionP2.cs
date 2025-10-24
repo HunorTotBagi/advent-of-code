@@ -24,20 +24,20 @@ public class SolutionP2
                     seen.Add((santaX, santaY));
                 }
 
-                if (charArray[i] == 'v')
+                else if (charArray[i] == 'v')
                 {
                     santaY--;
                     seen.Add((santaX, santaY));
                 }
 
-                if (charArray[i] == '>')
+                else if (charArray[i] == '>')
                 {
                     santaX++;
                     seen.Add((santaX, santaY));
                 }
 
 
-                if (charArray[i] == '<')
+                else if (charArray[i] == '<')
                 {
                     santaX--;
                     seen.Add((santaX, santaY));
@@ -51,20 +51,20 @@ public class SolutionP2
                     seen.Add((robotX, robotY));
                 }
 
-                if (charArray[i] == 'v')
+                else if (charArray[i] == 'v')
                 {
                     robotY--;
                     seen.Add((robotX, robotY));
                 }
 
-                if (charArray[i] == '>')
+                else if (charArray[i] == '>')
                 {
                     robotX++;
                     seen.Add((robotX, robotY));
                 }
 
 
-                if (charArray[i] == '<')
+                else if (charArray[i] == '<')
                 {
                     robotX--;
                     seen.Add((robotX, robotY));
