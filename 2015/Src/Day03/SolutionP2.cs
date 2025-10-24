@@ -12,7 +12,7 @@ public class SolutionP2
         var robotX = 0;
         var robotY = 0;
 
-        var seen = new HashSet<(int x, int y)> { (santaX, santaY), (robotX, robotY) };
+        var seen = new HashSet<(int x, int y)> { (0, 0) };
 
         for (var i = 0; i < charArray.Length; i++)
         {

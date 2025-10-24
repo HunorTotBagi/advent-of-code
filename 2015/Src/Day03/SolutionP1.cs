@@ -6,7 +6,7 @@ public class SolutionP1
     {
         var currX = 0;
         var currY = 0;
-        var seen = new HashSet<(int x, int y)> { (currX, currY) };
+        var seen = new HashSet<(int x, int y)> { (0, 0) };
 
         foreach (var c in s)
         {
