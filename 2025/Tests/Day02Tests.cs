@@ -7,7 +7,7 @@ public class Day02Tests
     private readonly string _testData = AppDomain.CurrentDomain.BaseDirectory + "../../../../Src/Day02/testData.txt";
 
     [Fact]
-    public void Test1()
+    public void ReadFileTest()
     {
         // Arrange
         var expected = new List<string>
@@ -37,7 +37,7 @@ public class Day02Tests
     [InlineData(11, true)]
     [InlineData(123, false)]
     [InlineData(351159, false)]
-    public void Test2(int number, bool expected)
+    public void IsValidDigitTest(int number, bool expected)
     {
         // Act
         var result = Src.Day02.SolutionP1.IsValidDigit(number);
@@ -47,16 +47,16 @@ public class Day02Tests
     }
 
     [Fact]
-    public void Test3()
+    public void SolveP1Test()
     {
         // Arrange
-        var expecetd = 1227775554;
+        var expected = 1227775554;
 
         // Act
         var result = Src.Day02.SolutionP1.Solve(_testData);
 
         // Assert
-        result.Should().Be(expecetd);
+        result.Should().Be(expected);
     }
 
     [Theory]
@@ -64,7 +64,7 @@ public class Day02Tests
     [InlineData(11, true)]
     [InlineData(123, false)]
     [InlineData(351159, false)]
-    public void Test4(int number, bool expected)
+    public void IsValidDigitAdvancedTest(int number, bool expected)
     {
         // Act
         var result = Src.Day02.SolutionP2.IsValidDigit(number);
@@ -74,7 +74,7 @@ public class Day02Tests
     }
 
     [Fact]
-    public void Test5()
+    public void SolveP2Test()
     {
         // Arrange
         var expecetd = 4174379265;
