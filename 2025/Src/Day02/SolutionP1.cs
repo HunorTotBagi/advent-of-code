@@ -5,12 +5,12 @@ public class SolutionP1
     public static long Solve(string filePath)
     {
         var input = ReadFile(filePath);
-        var result = 0;
+        long result = 0;
 
         foreach (var range in input)
         {
-            var start = int.Parse(range.Split('-')[0]);
-            var end = int.Parse(range.Split('-')[1]);
+            var start = long.Parse(range.Split('-')[0]);
+            var end = long.Parse(range.Split('-')[1]);
 
             for (var i=start; i<=end; i++)
                 if (IsValidDigit(i))
@@ -19,7 +19,7 @@ public class SolutionP1
 
         return result;
     }
-    public static bool IsValidDigit(int number)
+    public static bool IsValidDigit(long number)
     {
         var numberAsString = number.ToString();
 
