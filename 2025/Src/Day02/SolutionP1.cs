@@ -19,6 +19,7 @@ public class SolutionP1
 
         return result;
     }
+
     public static bool IsValidDigit(long number)
     {
         var numberAsString = number.ToString();
@@ -38,7 +39,6 @@ public class SolutionP1
     public static List<string> ReadFile(string filePath)
     {
         var line = File.ReadAllLines(filePath);
-
         var separated = line[0].Split(',');
 
         return separated.ToList();

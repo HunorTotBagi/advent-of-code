@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Src.Day02;
+﻿namespace Src.Day02;
 
 public class SolutionP2
 {
@@ -21,6 +19,7 @@ public class SolutionP2
 
         return result;
     }
+
     public static bool IsValidDigit(long number)
     {
         var numberAsString = number.ToString();
@@ -50,9 +49,7 @@ public class SolutionP2
         int partLength = input.Length / parts;
 
         for (int i = 0; i < parts; i++)
-        {
             yield return input.Substring(i * partLength, partLength);
-        }
     }
 
     public static List<string> ReadFile(string filePath)
