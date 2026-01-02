@@ -31,4 +31,18 @@ public class Day02Tests
         // Assert
         result.Should().BeEquivalentTo(expected);
     }
+
+    [Theory]
+    [InlineData(12341234, true)]
+    [InlineData(11, true)]
+    [InlineData(123, false)]
+    [InlineData(351159, false)]
+    public void Test2(int number, bool expected)
+    {
+        // Act
+        var result = Src.Day02.SolutionP1.IsValidDigit(number);
+
+        // Assert
+        result.Should().Be(expected);
+    }
 }
