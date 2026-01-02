@@ -45,4 +45,17 @@ public class Day02Tests
         // Assert
         result.Should().Be(expected);
     }
+
+    [Fact]
+    public void Test3()
+    {
+        // Arrange
+        var expecetd = 1227775554;
+
+        // Act
+        var result = Src.Day02.SolutionP1.Solve(_testData);
+
+        // Assert
+        result.Should().Be(expecetd);
+    }
 }

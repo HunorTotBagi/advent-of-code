@@ -2,6 +2,23 @@
 
 public class SolutionP1
 {
+    public static long Solve(string filePath)
+    {
+        var input = ReadFile(filePath);
+        var result = 0;
+
+        foreach (var range in input)
+        {
+            var start = int.Parse(range.Split('-')[0]);
+            var end = int.Parse(range.Split('-')[1]);
+
+            for (var i=start; i<=end; i++)
+                if (IsValidDigit(i))
+                    result+=i;
+        }
+
+        return result;
+    }
     public static bool IsValidDigit(int number)
     {
         var numberAsString = number.ToString();
